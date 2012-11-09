@@ -8,9 +8,9 @@
 %%% This template is vaguely based on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
 %%%
-%%% BUGS and SUGGETSIONS: please send email to "mpato@deq.isel.pt"
+%%% BUGS and SUGGESTIONS: please send email to "mpato@deq.isel.pt"
 %%%     or sumit a ticket in the the project web page at
-%%%     http://code.google.com/thesisisel/
+%%%     https://github.com/matpato/thesisisel
 %%%
 %%% CONTRIBUTERS are welcome. Please contact "mpato@deq.isel.pt"
 %%%
