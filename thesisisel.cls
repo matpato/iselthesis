@@ -406,7 +406,7 @@ de \@degree \\em \@majorfield}
 			\@theadviserstr[#1]:
 		\fi
 		&
-		\expandafter\csname @#1advisercat#2\endcsname 
+		\expandafter\csname @#1advisercat#2\endcsname\
 		\expandafter\csname @#1advisername#2\endcsname
 	\\
 	\fi
