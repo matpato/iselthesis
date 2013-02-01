@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Template for writing dissertations with ThesisMasterISEL
 %%
-%% Version 20121009 (Oct 2012)
+%% Version 20130201 (Feb 2013) v1.1
 %% 
 %% Instituto Superior de Engenharia de Lisboa
 %% Instituto Politécnico de Lisboa
@@ -76,31 +76,38 @@
 % by using the command \lstinputlisting{./code.R} to include the code from the file code.R which % is located in the same directory as the ‘LATEX’ source file.
 %
 \usepackage{listings}
-% --------------------------------------------------------------
+%====================================================================
+% == Color Definitions ===
+\definecolor{olivegreen}    {cmyk}{0.64, 0   , 0.95, 0.40}
+\definecolor{dkgreen}{rgb}{0,0.6,0}	
+\definecolor{midnightblue}  {cmyk}{0.98, 0.13, 0   , 0.43}
 %%             
 \lstset{ 
-language=R, 
-	basicstyle=\scriptsize\ttfamily, 
-	commentstyle=\ttfamily\color{gray}, 
-	numbers=left, 
-	numberstyle=\ttfamily\color{gray}\footnotesize, 
-	stepnumber=1, 
-	numbersep=5pt, 
-	backgroundcolor=\color{white}, 
-	showspaces=false, 
-	showstringspaces=false, 
-	showtabs=false, 
-	frame=single, 
-	tabsize=2, 
-	captionpos=b, 
-	breaklines=true, 
-	breakatwhitespace=false, 
-	title=\lstname, 
-	escapeinside={}, 
-	keywordstyle={}, 
+	language=R, 					% the language of the code
+	basicstyle=\scriptsize\ttfamily,  % the size of the fonts that are used for the code
+	commentstyle=\ttfamily\color{dkgreen}, % comment style
+    numbers=left,     % where to put the line-numbers; possible values are (none, left, right)
+   	numberstyle=\ttfamily\color{gray}, 
+	stepnumber=2,  % the step between two line-numbers. If it's 1, each line will be numbered
+    numbersep=5pt, 				% how far the line-numbers are from the code	
+    xleftmargin=\parindent,
+    backgroundcolor=\color{white},  % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	showspaces=false,   % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  	showstringspaces=false,  % underline spaces within strings only
+  	showtabs=false,               % show tabs within strings adding particular underscores
+	stringstyle=\ttfamily, 		 % typewriter type for strings
+	frame=single, 					 % adds a frame around the code
+	rulesepcolor=\color{black},
+	columns=fullflexible,
+   	tabsize=2,                       % sets default tabsize to 2 spaces
+   	captionpos=b, 				% sets the caption-position to bottom
+	breakatwhitespace=false,% sets if automatic breaks should only happen at whitespace
+  	breaklines=true,              % sets automatic line breaking
+   	title=\lstname                 % show the filename of files included with \lstinputlisting; also try caption instead of title
+    escapeinside={},         		% if you want to add LaTeX within your code
+    keywordstyle=\ttfamily\color{midnightblue}\itshape, % keyword style
 	morekeywords={} 
-	}
-	
+	}	
 
 % To aggregate multiple figures in a single one with subfigures
 \usepackage{subfigure}
@@ -113,18 +120,11 @@ language=R,
 \usepackage{wrapfig}
 \usepackage{float}						% Improves the interface for defining floating objects such as figures and tables
 %
-%
-%====================================================================
-% PACKAGE acronyum
-%====================================================================
-% This package is most usefull for acronyms. The package garantees that all acronyms definitions 
-% are given at the first usage. IMPORTANT: do not use acronyms in titles/captions; otherwise the 
-% definition will appear on the table of contents.
-\usepackage[printonlyused]{acronym}
-\usepackage{nomencl}
-\makenomenclature
-%
 
+%
+% Define the nomenclature command that prints the symbol/abbreviation and generates a list entry at the same time.
+\newcommand*{\nom}[2]{#1\nomenclature{#1}{#2}}
+%
 %====================================================================
 % Standard configuration for user included packages
 %====================================================================
@@ -216,12 +216,16 @@ language=R,
 % The List of Code Listings. Comment to omit.
 \printlistoflistings 
 
-
 % Text chapters
 % syntax: \chapterfile{file}
 \chapterfile{chapter1}
 \chapterfile{chapter2}
 \chapterfile{chapter3}
+
+% Glossary's file
+% Comment if not needed
+\makeglossaries
+\input{Chapters/glossary}
 
 
 % Text appendixes
@@ -269,6 +273,9 @@ language=R,
 \printabstract
 
 %%------------------------------------------------------------
+% The List of Symbols (Nomenclature). Comment to omit.
+\printnomenclature
+
 % Tables/lists of contents
 \tableofcontents 
 
@@ -279,12 +286,17 @@ language=R,
 %%------------------------------------------------------------
 % Print document chapters
 \printchapters
-%
+%%
 \cleardoublepage
 %%%------------------------------------------------------------
 %% Print the bibliography
 \bibliographystyle{plain}
 \bibliography{bibliography}
+%
+%%%------------------------------------------------------------
+%% Print the glossary
+\cleardoublepage
+\printglossaries
 %
 \cleardoublepage
 \setcounter{page}{1} \pagenumbering{roman}

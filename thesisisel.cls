@@ -181,6 +181,22 @@
 \ExplSyntaxOff
 
 \usepackage[square, comma, sort&compress, numbers]{natbib}
+
+%====================================================================
+% PACKAGE acronyum and nomencl
+%====================================================================
+% This package is most usefull for acronyms. The package garantees that all acronyms definitions 
+% are given at the first usage. IMPORTANT: do not use acronyms in titles/captions; otherwise the definition will appear on the table of contents.
+% Printing a list of abbreviations or symbols is one of these things (like so many) LaTeX provides a very simple and elegant solution for. 
+% The nomencl package implements a few basic commands to do that.
+% First load the package in the preamble. The makenomenclature command is required for the generation of the nomenclature file (.nlo). Commenting it out is a convenient way to “switch it off”.
+%
+\usepackage[printonlyused]{acronym}
+\usepackage{nomencl}
+\makenomenclature
+\usepackage[style=altlistgroup,toc,counter=page]{glossaries} % make a separate list of acronyms
+
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GENERAL PURPOSE MACROS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -272,7 +288,10 @@ de \@degree \\em \@majorfield}
   \gdef\acknowledgementsname{Agradecimentos}
   \def\lstlistlistingname{Listagens}
   \def\appendixname{Anexos}
-% English
+  \renewcommand*{\nomname}{Nomenclatura}
+    \addto{\captionsportuguese}{
+      \renewcommand{\glossaryname}{Glossário}
+    }% English
 \else\if\@language1
   \gdef\@notdefined{UNDEFINED}
   \gdef\acknowledgementsname{Acknowledgements}
@@ -661,7 +680,6 @@ de \@degree \\em \@majorfield}
 	\repeat
 	\endthesismainmatter
 }
-
 
 % Appendixes
 \newcount\@appxcount

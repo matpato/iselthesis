@@ -1,13 +1,17 @@
 \chapter{A Short \texttt{LaTeX} Tutorial with Examples}
 \label{cha:a_short_latex_tutorial_with_examples}
 
-This Chapter aims at exemplifying how to do common stuff with \texttt{LaTeX}. We also show some stuff which is not that common! ;)
+This Chapter aims at exemplifying how to do common stuff with \texttt{LaTeX}. We also show some stuff which is not that common! ;) 
 
 Please, use these examples as a starting point, but you should always consider using the \emph{Big Oracle} (aka, \href{http://www.google.com}{Google}, your best friend) to search for additional information or alternative ways for achieving similar results.
+
 
 \section{Document Structure} % (fold)
 \label{sec:document_structure}
 
+In engineering and science, a thesis or dissertation is the culmination of a master's or Ph.D. degree. A thesis or dissertation presents the research that the student performed for that degree. From the student's perspective, the primary purpose of a thesis or dissertation is to persuade the student's committee that he or she has performed and communicated research worthy of the degree. In other words, the main purpose of the thesis or dissertation is to help the student secure the degree. From the perspective of the engineering and scientific community, the primary purpose is to document the student's research. Although much research from theses and dissertations is also communicated in journal articles, theses and dissertations stand as detailed documents that allow others to see what the work was and how it was performed. For that reason, theses and dissertations are often read by other graduate students, especially those working in the research group of the authoring student. 
+	
+With a thesis or dissertation, the format also encompasses the names of the sections that are expected: \textbf{Abstract, Acknowledgments, Nomenclature, List of Figures, List of Tables, Introduction, Literature Review, Theoretical Analysis of Secondary Flows, Computational Methods, Experimental Design, Experimental and Computational Results, Conclusions and Future Work, References, Glossary and Appendix.}	
 % section document_structure (end)
 
 
@@ -22,12 +26,94 @@ Please, use these examples as a starting point, but you should always consider u
 
 % section inserting_tables (end)
 
+\section{Nomenclature/List of Symbols} % (fold)
+\label{sec:nomenclature}
+
+The Nomenclature includes abbreviations and terms found in the thesis that the writer uses frequently and does not define at each usage. The List of Symbols includes all special symbols used in the thesis that the writer does not define at each usage.
+
+Add abbreviations together with their description or long form to your document. Ideally, this is done immediately after an abbreviation is mentioned for the first time. Consider the following example:
+
+\textit{I want \nom{$\beta$}{The second letter of the greek alphabet} to be listed after \nom{$\alpha$}{The first letter of the greek alphabet}.}
+
+The example above was introduced with:
+
+ \lstset{language=TeX, numbers=none, morekeywords={\begin,\includegraphics,\caption}, caption=Nomenclature example, label=lst:nomen_example}
+ \begin{lstlisting}
+I want \nom{$\beta$}{The second letter of the greek alphabet} to be listed after \nom{$\alpha$}{The first letter of the greek alphabet}.
+ \end{lstlisting}
+ 
+Similar to a glossary or bibliography, the document is typesetted once (latex). Next, the nomenclature is generated using makeindex. Finally, the document is typesetted again, adding the nomenclature to it.
+
+\begin{verbatim}
+$ pdflatex template
+$	makeindex template.nlo -s nomencl.ist -o template.nls
+$	pdflatex template
+\end{verbatim}
+
+The makeindex command takes the nomenclature file (.nlo), the style file (nomencl.ist) and the name of the output file (.nls) as input arguments.
+
+After the Nomenclature and/or List of Symbols (if applicable) follow(s) the List of Figures. 
+
+\section{Glossary} % (fold)
+\label{sec:glossary}
+
+A glossary is a nice thing to have in a report and usually very helpful. As you probably can imaging, it is very easy to create in Latex. Nevertheless, there are a few things to be done, especially generating the glossary-files.
+
+First you have to tell Latex to use the glossary package and to create the glo-file containing all the glossar-entries in your document:
+
+\begin{verbatim}
+\usepackage{glossaries} 
+\makeglossaries
+\end{verbatim}
+
+Next you need to define the terms you want to appear in the glossary. Again, this must be done in the preamble. This is done using the command
+
+\verb!\newglossaryentry{<label>}{<key-val list>}! 
+
+The first argument \verb!<label>! is a unique label to allow you to refer to this entry in your document text. The entry will only appear in the glossary if you have referred to it in the document using one of the commands listed later. The second argument is a comma separated \verb!<key>=<value>! list.
+
+Inside the text you just need to use the command \verb!\gls{name}! or \verb!\glspl{name}! (plural name) to call it. For example, the following defines the term 'set' and assigns a brief description. The term is given the label set. This is the minimum amount of information you must give:
+
+\begin{verbatim}
+\newglossaryentry{set} % the label
+{name=set,            		% the term
+ description={a collection of objects} %a brief description
+}
+ \end{verbatim}
+
+Other example, now the glossary associated with a symbol, \gls{U}:
+
+\begin{verbatim}
+\newglossaryentry{U}   % the label
+{name={universal set}, % the term
+ description={the set of all things} % a brief description
+ symbol={\ensuremath{\mathcal{U}}}  % the associated symbol 
+}
+ \end{verbatim}
+
+The plural of the word ``\gls{matrix}'' is ``matrices'' not ``matrixs'', so the term needs the plural form set explicitly:
+
+ \begin{verbatim}
+\newglossaryentry{matrix}% the label
+{name=matrix, % the term
+ description={a rectangular table of elements}, 
+ plural=matrices % the plural
+}
+ \end{verbatim}
+ 
+ What you do first is generate your PDF once. An ist-file as well as a glossary file (*.glo) are generated. The glossary-file contains all the glossary entries found in the document in plain text. Next you type the following command in the command-line:
+ 
+ \begin{verbatim}
+$makeindex template.glo -s template.ist -t template.glg -o 
+template.gls
+ \end{verbatim}
+
+generating the two files with the extensions *.gls and *.glg. If entries are ignored or rejected, which can be seen either in the glg-file or directly in the output of the makeindex-command, you have to check your glossary entries. The important of the two files is the *.gls-file, as it is used by Latex for the actual glossary. You now need to re-generate the PDF and if everything works fine, your glossary should appear where you wanted it.
 
 \section{Importing Images} % (fold)
 \label{sec:importing_images}
 
 % section importing_images (end)
-
 
 \section{Floats, Figures and Captions} % (fold)
 \label{sec:floats_figures_and_captions}
@@ -50,7 +136,7 @@ Please, use these examples as a starting point, but you should always consider u
  \verb!\begin{wrapfigure}[lineheight]{alignment}{width}!
  \\
  Alignment can normally be either 'l' for left, or 'r' for right. Lowercase 'l' or 'r' forces the figure to start precisely where specified (and may cause it to run over page breaks), while capital 'L' or 'R' allows the figure to float. If you defined your document as twosided, the alignment can also be 'i' for inside or 'o' for outside, as well as 'I' or 'O'. The width is obviously the width of the figure. The example above was introduced with:
- \lstset{language=TeX, morekeywords={\begin,\includegraphics,\caption}, caption=Wrapfig example, label=lst:latex_example}
+ \lstset{language=TeX, numbers=none, morekeywords={begin,includegraphics,caption}, caption=Wrapfig example, label=lst:latex_example}
  \begin{lstlisting}
  	\begin{wrapfigure}{l}{2.5cm}
  	  \centering
@@ -215,7 +301,7 @@ There are two different ways to place two figures/tables side-by-side. The subfi
 Using the package listings you can add non-formatted text as you would do with \verb!\begin{verbatim}! but its main aim is to include the source code of any programming language within your document. If you wish to include pseudocode or algorithms see \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms_and_Pseudocode}{LaTeX/Algorithms\_ and\_Pseudocode}, as Listing ~\ref{code:test}.
 
 \begin{minipage}{\textwidth}
-\lstset{language=R}
+\lstset{language=R,numbers=left}
 \begin{lstlisting}[
     frame=trBL,escapechar=|,
     caption={R-Code (Test).},

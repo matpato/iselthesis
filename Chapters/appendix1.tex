@@ -1,120 +1,45 @@
-\chapter{Appendix 1} 
+\chapter{Applied Survival Analysis by Hosmer and Lemeshow} 
 \label{anexo1}
-\begin{flushleft}
-There are two basic approaches to the numerical approximation of solutions of differential equations. One is to represent an approximate solution by the sum of a finite number of independent functions, for example the first terms of an expansion in orthogonal functions. The second approach, the one we are going to use in this work, is the difference method. This solution is approximated by its value at a sequence of discrete points called the mesh points. We will assume that these points are equally spaced and call them $t_i=ih$, where $h$ is the spacing between adjacent points, and $i\in\mathbb{N}$. However, the mesh spacing, or step size $h$, will be seen affect the error introduced. A difference method is also called a step-by-step method and provides a rule for computing the approximation at step $i$ to $y(t_i)$ in terms of the values of $y(t_{i-1})$ and possibly preceding points. We will call this approximation $y_i$. The difference methods, also called discrete variable methods, are generally more suited for the automatic computation of general nonlinear problems, and are the methods most frequently used in common computer subroutines libraries. When we think of approximating a solution numerically, we naturally are concerned with how accurate we can make the numerical solution to the actual solution. Since as $h$ decreases the number of points and hence the amount of calculation increases, we would expect the effect of round-off errors to increase because there are more of them. Therefore, in defining convergence, we must require that the computation indicated in the method be performed exactly. In practice, this means that additional digits are carried in the computations as $h$ decreases.
+Stata Textbook Examples
+Applied Survival Analysis by Hosmer and Lemeshow \cite{newtest}
 
-We previously assured ourselves that the problem was well-posed so that the effect of errors are bounded. We also need to know that the small changes in initial values only produce bounded canges in the numerical approximations provided by the method - stability. We see that stability is related to a method as well-posed is related to a problem, which is different from convergence. The concepts of stability and convergence are concerned with the limiting process as $h\rightarrow0$. In practice, we must compute with a finite number of steps, we want to know if the errors we introduce at each step have a small or large effect on the answer.
- 
-For our two nonlinear ordinary differential equations (ODEs), two nonlinear ordinary differential equations (ODEs). In this appendix we only describe the algorithm for the dynamics of activation as approximation the 2nd-order Runge-Kutta method, the procedure of the contraction stretch ratio is equivalent, due this method is explicit. Regarding the backward Euler (implicit and unconditionally stable) method, we only describe the algorithm for the contraction stretch ratio, since for the dynamic activation is easier to apply.
+The data files used for the examples in this text can be downloaded in a zip file from the Wiley FTP website or the Stata Web site.
 
-The time-dependent activation process involves the contractile element and is caused by neural excitation. It is represented at the macroscopic level by the first-ODE: \[
-\dot{\alpha}(t)=\frac{1}{\tau_{\mathrm{rise}}}\left(1-\alpha(t)\right)u(t)+\frac{1}{\tau_{\mathrm{fall}}}\left(\alpha_{\min}-\alpha(t)\right)\left(1-u(t)\right)\]. In this equation the $\tau_{\mathrm{rise}}$ and $\tau_{\mathrm{fall}}$ are characteristic time constants for activation and deactivation of the muscle, and $\alpha_{\min}$ is the minimum value of activation. The function $u(t)$ ranges from 0 to 1, and represents the neural excitation, and is the input data for the model. We consider the value of the $u_{\max}$, the maximum neural excitation imposed. The activation $\alpha(t)$ ranges from $\alpha_{\min}\geq0$ to 1. The error tolerance for iterative solver is defined by $TOL$.
+\lstset{language=R,frame=none,numbers=left,escapechar=|,morekeywords={},caption=,label=code:newtest}
+\begin{lstlisting}    
+# The R package(s) needed for this chapter is the survival package. 
+# We currently use R 2.0.1 patched version. You may want to make sure 
+# that packages on your local machine are up to date. You can perform 
+# updating in R using update.packages() function.
 
-\subsubsection*{\label{tab:RungeKutta} Second order Runge-Kutta method - Mathematica 6.0 implementation}
-\textbf{input}: Time constants: $\tau_{\mathrm{rise}}$ and $\tau_{\mathrm{fall}}$, minimum value of activation: $\alpha_{\min}$ and neural excitation: $u(t)$. For the explicit method we consider $h=5\times10^{-4}$, $\gamma=1$ and $TOL=1\times10^{-6}$.\\
-\textbf{output}: Activation: $\alpha(t)\in[\alpha_{\min},1]$
-\begin{verbatim}
-1  BETA=1-GAMMA 
-2  ETA=1/(2*GAMMA)
-3  u=0.D00 
-4  ALPHA=ALPHA_{min} 
-\end{verbatim}
-\texttt{Obtain the ALPHA(u,$t_{i+1}$)} 
-\begin{verbatim}
-5  X[1]=ALPHA[1] 
-6   Do 
-7      t[i+1]=t[i]+h
-\end{verbatim}
-\texttt{Obtain the neural excitation in each time u[i]}
-\begin{verbatim}
-8       If t.LEQ.t_{min)
-9          Then
-10             u[i]=0
-11         Elseif t.LEQ.t_{max}
-12             Then
-13                 u[i]=u_{max}
-14             Else
-15                 u[i]=0
-16      End
-17     q_1=X[i]+ETA*h*NEWALPHA(X[i],u(t[i]))
-18     X[i+1]=X[i]+BETA*h*NEWALPHA(X[i],u(t[i]))+GAMMA*h*NEWALPHA(q_1,u(t[i+ETA h]))
-19      If ((X[i+1]-X[i]).LEQ.TOL) 
-20         Then 
-\end{verbatim}
-\texttt{Take ALPHA[i]=X[i+1] and iteration is stopped}
-\begin{verbatim}
-21 		ALPHA[i]=X[i+1]
-22              Break[ ]
-23         End
-24 	    ALPHA[i]=X[i+1]
-25	 End
-26 Return ALPHA
-27 End
-\end{verbatim}
+# url: http://www.ats.ucla.edu/stat/r/examples/
+# data set is hmohiv.csv.
+hmohiv<-read.table("http://www.ats.ucla.edu/stat/r/examples/asa/hmohiv.csv", sep=",", header = TRUE)
+attach(hmohiv)
+hmohiv
 
-Since the contractile stretch ratio, $\dot{\lambda}^{\mathrm{CE}}$ is defined by:
-\[\dot{\lambda}^{\mathrm{CE}}(\lambda_{f},\lambda^{\mathrm{CE}},\alpha,\dot{\lambda}_{f},u)=f_{V}^{\mathrm{CE}^{-1}}\left(\lambda_{f},\lambda^{\mathrm{CE}},\alpha,\dot{\lambda}_{f},u\right).\] To evaluate the value of $\lambda^{\mathrm{CE}}$, we need to know which is $alpha(u,u)$ and fibre stretch $\lambda_f$.
+# using the hmohiv data set. To control the type of symbol, a variable called psymbol is created. 
+# It takes value 1 and 2, so the symbol type will be 1 and 2. 
+psymbol<-censor+1
+table(psymbol)
 
-\subsubsection*{\label{tab:ImplicitEuler} Implicit Euler method - Fortran implementation} 
-\textbf{input}: Activation: $\alpha$ and the force-length curve $f_{L}^{\mathrm{CE}}$. For the implicit method we consider $h=5\times10^{-4}$, and $TOL=1\times10^{-6}$.\\
-\textbf{output}: Contractile stretch: $\lambda^{\mathrm{CE}}$
-\begin{verbatim}
-1   API=ACOS(-1.D00)
-\end{verbatim}
-\texttt{Evaluate the denominator, where FLCE and NEWALPHA are function in Fortran}
-\begin{verbatim}
-2   DEN=FLCE()*NEWALPHA()
-3   Goto 122
-4   ICONV=0
-5   If (ABS(DEN).GT.EPSILON(1.0D00))
-6          Then
-7              RESOLD=0.0D00
-8              Do 
-9                 IT = 1,400
-\end{verbatim}
-\texttt{Evaluate the residuo and the corresponding derivative function}
-\begin{verbatim}
-10                RES=RESIDUO(ALCEN)
-11                If (abs(RES).LEQ.TOL)
-12                     Then
-13                         ICONV=1
-14                         Exit
-15                Endif
-16                DRES=DRESIDUO(ALCEN)
-17                If IT.NEQ.1
-18                    Then
-19                        RESOLD=RES
-20                        STEPOLD=0.0D00
-21                        Do
-22                           JT=0,2
-23                           STEPN=0.5D00^(-4)
-24                           ALCEN=ALCEN-(STEPN-STEPOLD)*RESOLD/DRES
-25                           STEPOLD=STEPN
-26                           RES=RESIDUO(ALCEN)
-27                           IF (RES.LEQ.0.99D00*RESOLD) 
-28                               Then
-29                                Exit
-30                           Endif
-31                        Enddo
-32       Else
-33            ALCEN=ALCEN-RES/DRES
-34       Endif       
-35    Enddo
-36  Endif
-37 122 Continue
-38 If (abs(DEN).GEQ.EPSILON(1.0D00)) 
-39     Then
-40       Call BISSN(0.7D00,1.4D00,ALCE,TOL,IFE)
-41       ALCEN=ALCE
-42     Else
-43        Call derivlambdaf
-\end{verbatim}
-\texttt{The variable L correspond to the fibre stretch}
-\begin{verbatim}
-44         ALCEN=L
-45  Endif
-46  ALCENEW=ALCEN
-47  Return 
-48  End
-\end{verbatim}
-\end{flushleft}
+plot(age, time, pch=(psymbol))
+legend(40, 60, c("Censor=1", "Censor=0"), pch=(psymbol))
+
+age1<-1000/age
+plot(age1, time, pch=(psymbol))
+legend(40, 30, c("Censor=1", "Censor=0"), pch=(psymbol))
+
+# Package "survival" is needed for this analysis and for most of the analyses in the book.
+library(survival)
+test <- survreg( Surv(time, censor) ~ age, dist="exponential")
+summary(test)
+
+pred <- predict(test, type="response") 
+ord<-order(age)
+age_ord<-age[ord]
+pred_ord<-pred[ord]
+plot(age, time, pch=(psymbol))
+lines(age_ord, pred_ord)
+legend(40, 60, c("Censor=1", "Censor=0"), pch=(psymbol))
+\end{lstlisting}
