@@ -4,6 +4,7 @@
 %%%
 %%% By Matilde Pós-de-Mina Pato (mpato@deq.isel.pt)
 %%% Version of October 2012
+%%% Revision 1st: July 2013 
 %%%
 %%% This template is vaguely based on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
@@ -265,7 +266,7 @@
 \gdef\@manyjuryastr{Vogais}
 
 \gdef\@bscdissertationtstr{Relatório para obtenção do Grau 
-de \@degree \\em\@majorfield}
+de \@degree \\em \@majorfield}
 \gdef\@prepmscdissertationtstr{Relatório intermédio para obtenção do Grau 
 de \@degree \\em \@majorfield}
 \gdef\@mscdissertationtstr{Dissertação para obtenção do Grau 
@@ -453,7 +454,7 @@ de \@degree \\em \@majorfield}
 
 \def\@degree{%
   \if\@degreetype0
-    \thedegree{\ader}{bachelordegreestr}
+    \thedegree{\authorgender}{bachelordegreestr}
   \else\if\@degreetype1
     \thedegree{\authorgender}{mastersdegreestr}
   \else\if\@degreetype2
