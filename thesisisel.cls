@@ -1,10 +1,11 @@
+%ESTE!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% thesisisel.cls
 %%% ISEL/IPL Dissertation document class
 %%%
 %%% By Matilde Pós-de-Mina Pato (mpato@deq.isel.pt)
 %%% Version of October 2012
-%%% Revision 1st: July 2013 
+%%% version 1.1: July 2013 
 %%%
 %%% This template is vaguely based on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
@@ -285,19 +286,19 @@ de \@degree \\em \@majorfield}
 
 % Portuguese
 \if\@language0
-  \gdef\@notdefined{NÃO DEFINIDO}
-  \gdef\acknowledgementsname{Agradecimentos}
-  \def\lstlistlistingname{Listagens}
-  \def\appendixname{Anexos}
-  \renewcommand*{\nomname}{Nomenclatura}
-    \addto{\captionsportuguese}{
-      \renewcommand{\glossaryname}{Glossário}
+  	\gdef\@notdefined{NÃO DEFINIDO}
+  	\gdef\acknowledgementsname{Agradecimentos} 	
+  	\def\appendixname{Anexos}
+  	\renewcommand*{\nomname}{Nomenclatura}
+    	\addto{\captionsportuguese}{
+      	    \renewcommand{\glossaryname}{Glossário}
     }% English
 \else\if\@language1
-  \gdef\@notdefined{UNDEFINED}
-  \gdef\acknowledgementsname{Acknowledgements}
-  \def\appendixname{Appendix}
+  	\gdef\@notdefined{UNDEFINED}
+  	\gdef\acknowledgementsname{Acknowledgements}
+  	\def\appendixname{Appendix}
 \fi\fi
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -719,8 +720,10 @@ de \@degree \\em \@majorfield}
 \def\printotherlists{%
 	\@printlistoffigures
 	\@printlistoftables
-	\if\@language0   % Estamos a usar o Português
-		\def\lstlistlistingname{Listagens}
+	\if\@language0   % Portuguese language
+% Since the document class does not translate the Listings label in caption neither in index
+		\def\lstlistlistingname{Listagens}		
+		\renewcommand*{\lstlistingname}{Listagem}
 	\fi
 	\@printlistoflistings
 }
