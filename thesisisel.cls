@@ -183,7 +183,7 @@
 \ExplSyntaxOff
 
 \usepackage[square, comma, sort&compress, numbers]{natbib}
-
+%\usepackage{tocbibind}
 %====================================================================
 % PACKAGE acronyum and nomencl
 %====================================================================
@@ -547,7 +547,7 @@ de \@degree \\em \@majorfield}
 		label=,
 		pos=h,
 		maxwidth=1\linewidth,
-		center,
+		doinside=\hspace*{1.5cm},
 	]{rX}{}{
 	& \@jurystr: \\
  	\printthejuryp
@@ -797,7 +797,8 @@ de \@degree \\em \@majorfield}
 		label=,
 		pos=h,
 		maxwidth=1\linewidth,
-	]{rX}{}{
+		doinside=\hspace*{-0.1cm},
+	]{rX}{}{ 
 		\printadviser[]{1}
 		\printadviser[]{2}
 }
