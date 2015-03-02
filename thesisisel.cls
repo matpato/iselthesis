@@ -1,4 +1,3 @@
-%ESTE!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% thesisisel.cls
 %%% ISEL/IPL Dissertation document class
@@ -6,6 +5,7 @@
 %%% By Matilde Pós-de-Mina Pato (mpato@deq.isel.pt)
 %%% Version of October 2012
 %%% version 1.1: July 2013 
+%%% version 2.0: January 2015
 %%%
 %%% This template is vaguely based on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
@@ -18,7 +18,7 @@
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{thesisisel}[2012/10/09]
+\ProvidesClass{thesisisel}[2012/10/09 ISEL thesis template]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% OPTIONS 
@@ -49,7 +49,6 @@
 \DeclareOption{a4paper}{%
 	\PassOptionsToClass{a4paper}{book}}
 
-
 % == Font Size ===
 \PassOptionsToClass{12pt}{book} % Default point size
 
@@ -66,10 +65,13 @@
 \DeclareOption{utf8}{\let\@utf=1}
 
 % == Type of Document ===
+%
 % \@degreetype=0	BSc report
 % \@degreetype=1	MSc preliminary report
 % \@degreetype=2	MSc dissertation
-\let\@degreetype=3
+%
+
+%\let\@degreetype=3
 \DeclareOption{bsc}{
 	\let\@degreetype=0
 	\def\@degree{\@bachelordegree}
@@ -113,6 +115,7 @@
 % to put symbols in bold by using \boldsymbol (not \mathbf); defines additional 
 % fonts and symbols; adds the \eqref command for citing equations. I prefer the style
 % "(x.xx)" for referering to an equation than to use "equation x.xx".
+
 \usepackage{txfonts} 
   \let\iint\relax 
   \let\iiint\relax 
@@ -144,17 +147,28 @@
 
 \usepackage{ifpdf}		% This is now the recommended way for checking for PDFLaTeX:
 \ifpdf
-\RequirePackage[pdftex]{graphicx}
-\DeclareGraphicsExtensions{.pdf, .png, .jpg, .tif}
-\RequirePackage[pdftex,usenames]{color}
-\definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
-\RequirePackage[pdftex,breaklinks,colorlinks,pdfdisplaydoctitle,citecolor=mydarkblue,linkcolor=black,urlcolor=mydarkblue]{hyperref}
-\else
-\RequirePackage{graphicx}
-\DeclareGraphicsExtensions{.eps, .png, .jpg}
-\RequirePackage[usenames]{color}
-\definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
-\RequirePackage[breaklinks,colorlinks,pdfdisplaydoctitle,citecolor=mydarkblue,linkcolor=black,urlcolor=mydarkblue]{hyperref}
+	\RequirePackage[pdftex]{graphicx}
+	\DeclareGraphicsExtensions{.pdf, .png, .jpg, .tif}
+	\RequirePackage[pdftex,usenames]{color}
+	\definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
+	\RequirePackage[pdftex,
+		breaklinks,
+		colorlinks,
+		pdfdisplaydoctitle,
+		citecolor=mydarkblue,
+		linkcolor=black,
+		urlcolor=mydarkblue]{hyperref}
+	\else
+		\RequirePackage{graphicx}
+		\DeclareGraphicsExtensions{.eps, .png, .jpg}
+		\RequirePackage[usenames]{color}
+		\definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
+		\RequirePackage[breaklinks,
+			colorlinks,
+			pdfdisplaydoctitle,
+			citecolor=mydarkblue,
+			linkcolor=black,
+			urlcolor=mydarkblue]{hyperref}
 \fi
 
 %====================================================================
@@ -171,7 +185,10 @@
              pdfkeywords={ }
              }
 %
-\RequirePackage[top=3cm,bottom=3cm,inner=3.5cm,outer=2.5cm]{geometry}[2012/10/09]
+\RequirePackage[top=3cm,
+	bottom=3cm,
+	inner=3.5cm,
+	outer=2.5cm]{geometry}[2012/10/09]
 % \setlength{\marginparwidth}{2cm}
 
 \RequirePackage{ctable}
@@ -183,21 +200,39 @@
 \ExplSyntaxOff
 
 \usepackage[square, comma, sort&compress, numbers]{natbib}
-%\usepackage{tocbibind}
+\usepackage{tocbibind} % Add bibliography/index/contents to Table of Contents. Automatically adds the bibliography and/or the index and/or the contents, etc., to the Table of Contents.
+
 %====================================================================
-% PACKAGE acronyum and nomencl
+% PACKAGE acronym and nomencl
 %====================================================================
 % This package is most usefull for acronyms. The package garantees that all acronyms definitions 
-% are given at the first usage. IMPORTANT: do not use acronyms in titles/captions; otherwise the definition will appear on the table of contents.
+% are given at the first usage. 
+% IMPORTANT: do not use acronyms in titles/captions; otherwise the definition will appear on the table of contents.
 % Printing a list of abbreviations or symbols is one of these things (like so many) LaTeX provides a very simple and elegant solution for. 
 % The nomencl package implements a few basic commands to do that.
 % First load the package in the preamble. The makenomenclature command is required for the generation of the nomenclature file (.nlo). Commenting it out is a convenient way to “switch it off”.
 %
 \usepackage[printonlyused]{acronym}
-\usepackage{nomencl}
+\usepackage[
+	intoc]               % show listings as entries in table of contents      
+	{nomencl}
 \makenomenclature
-\usepackage[style=altlistgroup,toc,counter=page]{glossaries} % make a separate list of acronyms
+\usepackage[
+	translate=babel,
+	nonumberlist, % do not show page numbers
+	acronym,        % generate acronym listing
+	toc,                % show listings as entries in table of contents
+	section]          % use section level for toc entries
+	{glossaries}
+\glsdisablehyper
+\makenoidxglossaries
 
+%====================================================================
+% PACKAGE pdfpages and pdflscape
+%====================================================================
+\usepackage{pdfpages} % include pdf file
+% The pdflscape package adds PDF support to the landscape environment of package lscape, by setting the PDF/Rotate page attribute.
+\usepackage{pdflscape}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GENERAL PURPOSE MACROS
@@ -287,12 +322,23 @@ de \@degree \\em \@majorfield}
 % Portuguese
 \if\@language0
   	\gdef\@notdefined{NÃO DEFINIDO}
-  	\gdef\acknowledgementsname{Agradecimentos} 	
+  	\gdef\acknowledgementsname{Agradecimentos} 
+  	
+  	\addto{\captionsportuguese}{%	
+  		\renewcommand{\contentsname}{Índice}
+  	}
   	\def\appendixname{Anexos}
-  	\renewcommand*{\nomname}{Nomenclatura}
-    	\addto{\captionsportuguese}{
-      	    \renewcommand{\glossaryname}{Glossário}
-    }% English
+  	\addto{\captionsportuguese}{%
+  		\renewcommand{\bibname}{Referências}
+  	}
+  	\renewcommand*{\nomname}{Abreviaturas e símbolos}
+ 
+	\def\lstlistlistingname{Listagens}
+	  	\addto{\captionsportuguese}{%
+			\renewcommand*{\lstlistlistingname}{Listagens}
+	}
+	
+% English
 \else\if\@language1
   	\gdef\@notdefined{UNDEFINED}
   	\gdef\acknowledgementsname{Acknowledgements}
@@ -598,7 +644,6 @@ de \@degree \\em \@majorfield}
 	\fi\fi\fi
 }
 
-
 \def\ptabstractfile#1{%
   \gdef\@ptabstractfile{#1}}
 \def\@ptabstractfile{\@empty}
@@ -683,6 +728,7 @@ de \@degree \\em \@majorfield}
 	\endthesismainmatter
 }
 
+
 % Appendixes
 \newcount\@appxcount
 \@appxcount 0\relax
@@ -704,30 +750,24 @@ de \@degree \\em \@majorfield}
 	\repeat
 }
 
+% To process lists and other stuff
+\RequirePackage{etoolbox}
 
-\def\printlistoffigures{%
-  \gdef\@printlistoffigures{\listoffigures}}
-\def\@printlistoffigures{}
-
-\def\printlistoftables{%
-  \gdef\@printlistoftables{\listoftables}}
-\def\@printlistoftables{}
-
-\def\printlistoflistings{%
-  \gdef\@printlistoflistings{\lstlistoflistings}}
-\def\@printlistoflistings{}
-
-\def\printotherlists{%
-	\@printlistoffigures
-	\@printlistoftables
-	\if\@language0   % Portuguese language
-% Since the document class does not translate the Listings label in caption neither in index
-		\def\lstlistlistingname{Listagens}		
-		\renewcommand*{\lstlistingname}{Listagem}
-	\fi
-	\@printlistoflistings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Deal with optional lists in the frontmatter: listoftables, listoffigures, etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\@printlist#1{ %
+		#1\cleardoublepage
 }
 
+\def\addlisttofrontmatter#1{ %
+		\listgadd{\@frontmatter@list}{#1}
+}
+
+\def\printotherlists{ %
+		\cleardoublepage
+		\forlistloop{\@printlist}{\@frontmatter@list} %
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Frontpage
@@ -830,8 +870,8 @@ de \@degree \\em \@majorfield}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Dedicatory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\dedicatory{%
-	\if@openright\cleardoublepage\else\clearpage\fi
+\def\dedicatory{ %
+	\if @openright\cleardoublepage\else\clearpage\fi
 	\thispagestyle{empty}
 	~\\[2cm]
     \begin{flushright}

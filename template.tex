@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Template for writing dissertations with ThesisMasterISEL
 %%
-%% Version 20130925 (Sep 2013) v1.12
+%% Version 20150108 (Jan 2015) v2
 %% 
 %% Instituto Superior de Engenharia de Lisboa
 %% Instituto Politécnico de Lisboa
@@ -48,8 +48,9 @@
 %%  BEGINING OF USER COSTUMIZATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %====================================================================
-% Additional package syou may ant to use (comment those not needed)
+% Additional packages you may want to use (comment those not needed)
 %====================================================================
 
 % To enable customizble enumerates
@@ -64,6 +65,23 @@
 % Sort citations - ONLY if using "plain" style, otherwise keep commented
 %\usepackage[sort]{cite}
 
+
+% The contents of both files (acronyms and glossary) will be merged
+\InputIfFileExists{Chapters/acronyms}{%
+% File glossary.tex exists and is read
+}{%
+% File glossary.tex is not found, ignore
+}
+\InputIfFileExists{Chapters/glossary}{%
+% File glossary.tex exists and is read
+}{%
+% File glossary.tex is not found, ignore
+}
+
+% To register TODO notes in the text
+\usepackage[textsize=footnotesize]{todonotes}
+\setlength{\marginparwidth}{1.5cm}
+
 %====================================================================
 % PACKAGE listings
 %====================================================================
@@ -77,6 +95,7 @@
 %
 \usepackage{listings}
 %====================================================================
+
 % == Color Definitions ===
 \definecolor{olivegreen}    {cmyk}{0.64, 0   , 0.95, 0.40}
 \definecolor{dkgreen}{rgb}{0,0.6,0}	
@@ -109,12 +128,9 @@
 	morekeywords={} 
 	}	
 
+%====================================================================
 % To aggregate multiple figures in a single one with subfigures
 \usepackage{subfigure}
-
-% To register TODO notes in the text
-\usepackage[textsize=footnotesize]{todonotes}
-\setlength{\marginparwidth}{1.5cm}
 
 % To have text wrapping figures
 \usepackage{wrapfig}
@@ -142,6 +158,7 @@
 
 % Force word hyphenation
 \hyphenation{do-cu-ment}
+
 %====================================================================
 % Some default values that you may whish to override
 %====================================================================
@@ -205,16 +222,14 @@
 % Resume/summary text in English
 \enabstractfile{abstract}
 
+%%------------------------------------------------------------
 % The Table of Contents is always printed. The other lists may be omited.
+%%------------------------------------------------------------
 
-% The List of Figures. Comment to omit.
-\printlistoffigures 
-
-% The List of Tables. Comment to omit.
-\printlistoftables 
-
-% The List of Code Listings. Comment to omit.
-\printlistoflistings 
+\addlisttofrontmatter{\listoffigures} 	% The List of Figures. Comment to omit.
+\addlisttofrontmatter{\listoftables} 		% The List of Tables. Comment to omit.
+\addlisttofrontmatter{\lstlistoflistings} % The List of Code Listings. Comment to omit.
+\addlisttofrontmatter{\printnoidxglossary} % The List if Abreviations / Glossary. Comment to omit.
 
 % Text chapters
 % syntax: \chapterfile{file}
@@ -222,20 +237,13 @@
 \chapterfile{chapter2}
 \chapterfile{chapter3}
 
-% Glossary's file
-% Comment if not needed
-\makeglossaries
-\input{Chapters/glossary}
-
-
-% Text appendixes
+% Text appendixes. Comment if not needed
 % sintax: \appendixfile{file}
-% Comment if not needed
 \appendixfile{appendix1}
 
 %%============================================================
 %%
-%%  END OF USER COSTUMIZAITON
+%%  END OF USER COSTUMIZATION
 %%
 %%============================================================
 %
@@ -250,37 +258,40 @@
 %% Before main text
 \frontmatter
 
-% The first front page
-% Repeats the front page twice 
+% The first front page. Repeats the front page twice 
 % \Repeat{n-times}{\command}
 \Repeat{2}{\frontpage}
+
 %%------------------------------------------------------------
 %% All the names inside braces below sould correspond to a file
 %%     with extension ".tex" and located in the "Chapters" folder
 %%------------------------------------------------------------
+
 % Dedicatory text. Will only be considered for final documents,
 % i.e., "bsc" and "msc", otherwise, it will be silently ignored
 \printdedicatory
+
 % Acknowledgments text. Will only be considered for final documents,
 % i.e., "bsc" and "msc", otherwise, it will be silently ignored
 % Acknowledgments will only be printed if adequate for the document type
 \printacknowledgements
+
 % Abstracts/resumes/summaries in two languages. The first abstract will
 % use the document main language and second the foreign language
 \printabstract
 
 %%------------------------------------------------------------
-% The List of Symbols (Nomenclature). Comment to omit.
+
+%% The List of Symbols (Nomenclature). Comment to omit.
 \printnomenclature
-
-% Tables/lists of contents
+%
+%% Always print the table of contents
 \tableofcontents 
-
-% Always print the table of contents
+%
+%% Print other lists of contents according to instructions given above
 \printotherlists 
+%
 
-% Print other lists of contents according to instructions given above
-%%
 % ----------------------------------------------------------------------
 %  Print Document Chapters
 % ----------------------------------------------------------------------
@@ -292,52 +303,37 @@
 % ----------------------------------------------------------------------
 %%
 %\cleardoublepage
-%%%%------------------------------------------------------------
-%%% Print the bibliography
-%\bibliographystyle{plain}
-%\bibliography{bibliography}
-%%
-%%%%------------------------------------------------------------
+
 % Include all references in .bib file, even non-cited ones...
 \nocite{*}
 
 % Produces the bibliography section when processed by BibTeX
-%
-% Bibliography style
-% > entries ordered alphabetically
-%\bibliographystyle{plain}
-% > unsorted with entries appearing in the order in which the citations appear.
-%\bibliographystyle{unsrt}
-% > entries ordered alphabetically, with first names and names of journals and months abbreviated
-%\bibliographystyle{abbrv}
-% > entries ordered alphabetically, with reference markers based on authors' initials and publication year
-%\bibliographystyle{alpha}
-%
+% ----------------------------------------------------------------------
+%% Bibliography style
+% ----------------------------------------------------------------------
+%\bibliographystyle{plain}  % > entries ordered alphabetically
+
+%\bibliographystyle{unsrt} % > unsorted with entries appearing in the order in which the citations appear.
+
+%\bibliographystyle{abbrv} % > entries ordered alphabetically, with first names and names of journals and months abbreviated
+
+%\bibliographystyle{alpha} % > entries ordered alphabetically, with reference markers based on authors' initials and publication year
+
 % Replacement bibliography styles provided by 'natbib' package
 % (plainnat.bst, abbrvnat.bst, unsrtnat.bst )
-% > entries ordered alphabetically
-\bibliographystyle{plainnat}
-% > unsorted with entries appearing in the order in which the citations appear.
-%\bibliographystyle{unsrtnat}
-% > entries ordered alphabetically, with first names and names of journals and months abbreviated
-%\bibliographystyle{abbrvnat}
-% > entries ordered alphabetically, with reference markers based on authors' initials and publication year
-%\bibliographystyle{alpha}
+\bibliographystyle{plainnat} % > entries ordered alphabetically
 
+%\bibliographystyle{unsrtnat} % > unsorted with entries appearing in the order in which the citations appear.
+
+%\bibliographystyle{abbrvnat} % > entries ordered alphabetically, with first names and names of journals and months abbreviated
+
+%\bibliographystyle{alpha} % > entries ordered alphabetically, with reference markers based on authors' initials and publication year
 
 % External bibliography database file in the BibTeX format
 \cleardoublepage
 \bibliography{bibliography} % file "bibliography.bib"
-% Add entry in the table of contents as chapter
-\addcontentsline{toc}{chapter}{\bibname}
+%\addcontentsline{toc}{chapter}{\bibname} % Add entry in the table of contents as chapter
 
-% ----------------------------------------------------------------------
-%  Print Glossary, if any!
-% ----------------------------------------------------------------------
-%%
-\cleardoublepage
-\printglossaries
-%
 %%
 % ----------------------------------------------------------------------
 %  Print appendixes, if any!  (optional)
@@ -348,5 +344,7 @@
 \printappendixes 
 \cleardoublepage
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% End of document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document} 

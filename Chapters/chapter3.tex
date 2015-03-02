@@ -39,7 +39,7 @@ The example above was introduced with:
 
  \lstset{language=TeX, numbers=none, morekeywords={\begin,\includegraphics,\caption}, caption=Nomenclature example, label=lst:nomen_example}
  \begin{lstlisting}
-I want \nom{$\beta$}{The second letter of the greek alphabet} to be listed after \nom{$\alpha$}{The first letter of the greek alphabet}.
+I want \nom{$\beta$}{The second letter of the Greek alphabet} to be listed after \nom{$\alpha$}{The first letter of the Greek alphabet}.
  \end{lstlisting}
  
 Similar to a glossary or bibliography, the document is typesetted once (latex). Next, the nomenclature is generated using makeindex. Finally, the document is typesetted again, adding the nomenclature to it.
@@ -47,10 +47,14 @@ Similar to a glossary or bibliography, the document is typesetted once (latex). 
 \begin{verbatim}
 $ pdflatex template
 $	makeindex template.nlo -s nomencl.ist -o template.nls
-$	pdflatex template
+$	pdflatex template (twice)
 \end{verbatim}
 
+or, if you use texmaker, the idea is change  Makeindex Commands in  Texmaker/Preferences/makeindex. By default it states:  "/usr/texbin/makeindex" \%.idx,  and you change to "/usr/texbin/makeindex" \%.nlo -s nomencl.ist -o \%.nls. 
+
+\begin{sloppypar}
 The makeindex command takes the nomenclature file (.nlo), the style file (nomencl.ist) and the name of the output file (.nls) as input arguments.
+\end{sloppypar}
 
 After the Nomenclature and/or List of Symbols (if applicable) follow(s) the List of Figures. 
 
@@ -100,15 +104,12 @@ The plural of the word ``\gls{matrix}'' is ``matrices'' not ``matrixs'', so the 
  plural=matrices % the plural
 }
  \end{verbatim}
- 
  What you do first is generate your PDF once. An ist-file as well as a glossary file (*.glo) are generated. The glossary-file contains all the glossary entries found in the document in plain text. Next you type the following command in the command-line:
- 
  \begin{verbatim}
 $makeindex template.glo -s template.ist -t template.glg -o 
 template.gls
  \end{verbatim}
-
-generating the two files with the extensions *.gls and *.glg. If entries are ignored or rejected, which can be seen either in the glg-file or directly in the output of the makeindex-command, you have to check your glossary entries. The important of the two files is the *.gls-file, as it is used by Latex for the actual glossary. You now need to re-generate the PDF and if everything works fine, your glossary should appear where you wanted it.
+The two files with the extensions *.gls and *.glg are generated. If entries are ignored or rejected, which can be seen either in the glg-file or directly in the output of the makeindex-command (see \ref{sec:nomenclature}), you have to check your glossary entries. The important of the two files is the *.gls-file, as it is used by Latex for the actual glossary. You now need to re-generate the PDF and if everything works fine, your glossary should appear where you wanted it.
 
 \section{Importing Images} % (fold)
 \label{sec:importing_images}
@@ -170,10 +171,12 @@ A typical pass for a document with figures, cross-references and a bibliography 
 \begin{verbatim}
 $ pdflatex template
 $ bibtex template
-$ pdflatex template
-$ pdflatex template
+$ pdflatex template (twice)
 \end{verbatim}
+\begin{sloppypar}
 You will notice that there is a new PDF file in the working directory called \verb!template.pdf!. Simple :)
+\end{sloppypar}
+
 
 Please note that, to be sure all table of contents, cross-references and bibliography citations are up-to-date, you must run \verb!latex! once, then \verb!bibtex!, and then \verb!latex! twice.
 % section generating_pdfs_with_pdflatex (end)
@@ -194,13 +197,10 @@ and not\\
 \verb!\includegraphics{evolution_steps.png}!.\\
 If you use the first form, \verb!latex! or \verb!pdflatex! will add an appropriate file extension.
 
-This means that, if you plan to use only \verb!pdflatex!, you need only to keep (preferably) a PDF version of all the images. If you plan to use also \verb!latex!, then you also need an EPS version of each image.
+This means that, if you plan to use only \verb!pdflatex!, you need only to keep (preferably) a PDF version of all the images. If you plan to use also \verb!latex!, then you also need an EPS version of each image.\\
 % subsection creating_source_files_compatible_with_both_latex_and_pdflatex (end)
 
 % section generating_pdfs_from_latex (end)
-
-
-\newpage
 
 {\Large To be included in the sections above} \\
 
@@ -229,7 +229,8 @@ Footnotes are a very useful way of providing extra information to the reader. Us
 
 The footnote facility is easy to use: \verb!\footnote{Simple footnote}!\footnote{Simple footnote}. 
 
-The tabular environment can be used to typeset tables with optional horizontal and vertical lines. LaTeX determines the width of the columns automatically. The first line of the environment has the form: \verb!\begin{tabular}[pos]{table spec}!
+The tabular environment can be used to typeset tables with optional horizontal and vertical lines. LaTeX determines the width of the columns automatically. The first line of the environment has the form: 
+\verb!\begin{tabular}[pos]{table spec}!
 
 \begin{itemize}
 \item[table spec] tells LaTeX the alignment to be used in each column and the vertical lines to insert.
@@ -265,7 +266,9 @@ Armadillo & frozen & 8.99 \\
 \end{tabular}
 \end{table}
 
+\begin{sloppypar}
 There are two ways to incorporate images into your \texttt{LaTeX} document, and both use the graphicx package by means of putting the command  \verb!\usepackage{graphicx}!  near the top of the \texttt{LaTeX} file, just after the documentclass command.
+\end{sloppypar}
 
 The two methods are
 
@@ -323,6 +326,22 @@ y <- square(x)
 
 Typesetting mathematics is one of \texttt{LaTeX}'s greatest strengths. It is also a large topic due to the existence of so much mathematical notation. It is recommend to read the following document available in \href{http://www.google.pt/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CB4QFjAA&url=ftp%3A%2F%2Fftp.ams.org%2Fpub%2Ftex%2Fdoc%2Famsmath%2Fshort-math-guide.pdf&ei=DkScUOm8IJC5hAei7oGQDg&usg=AFQjCNEHl1pXuurNmXAdqfC0z-pPAbDyUw}{Short Math Guide for LaTeX - AMS - American Mathematical Society}.
 
+\section{Page orientation}
 
+\begin{sloppypar}
+The default page layout is ``portrait'', but sometimes it is still useful/necessary to have the whole document or only single pages changed to ``landscape''. The latter might be due to a large table or figure. If you want to make appear the left side up, better readable on screen, the pdflscape-package will do it:
+\verb!\usepackage{pdflscape}!
+\end{sloppypar}
+and again:
+\begin{verbatim}
+\begin{landscape}
+...
+\end{landscape}
+\end{verbatim}
 
-\centering{\textbf{Writing by Matilde Pós-de-Mina Pato with collaboration of Nuno Datia, \\2012 October}}
+or, 
+\verb!\includepdf[landscape=true,pages={1}]{example.pdf}!
+
+to put the page in ``landscape'', while the rest will remain in ``portrait'' orientation. Nevertheless, the header/footer will also be changed in orientation.
+
+\centering{\textbf{Written by Matilde Pós-de-Mina Pato with collaboration of Nuno Datia, \\2012 October}}
