@@ -157,7 +157,8 @@
 		pdfdisplaydoctitle,
 		citecolor=mydarkblue,
 		linkcolor=black,
-		urlcolor=mydarkblue]{hyperref}
+		urlcolor=mydarkblue,
+		pagebackref]{hyperref}	%or, pagebackref
 	\else
 		\RequirePackage{graphicx}
 		\DeclareGraphicsExtensions{.eps, .png, .jpg}
@@ -168,7 +169,8 @@
 			pdfdisplaydoctitle,
 			citecolor=mydarkblue,
 			linkcolor=black,
-			urlcolor=mydarkblue]{hyperref}
+			urlcolor=mydarkblue,
+			pagebackref]{hyperref} %or, pagebackref
 \fi
 
 %====================================================================
@@ -212,7 +214,7 @@
 % The nomencl package implements a few basic commands to do that.
 % First load the package in the preamble. The makenomenclature command is required for the generation of the nomenclature file (.nlo). Commenting it out is a convenient way to “switch it off”.
 %
-\usepackage[printonlyused]{acronym}
+\usepackage[printonlyused,withpage]{acronym}
 \usepackage[
 	intoc]               % show listings as entries in table of contents      
 	{nomencl}
@@ -261,7 +263,7 @@
 \parbox[t][0.15\paperheight]{0.1\paperwidth}{%
 \vfill
 \centering
-\includegraphics[scale=0.1]{#1}%
+\includegraphics[scale=0.5]{#1}%
 \vfill
 }}
 
@@ -338,11 +340,27 @@ de \@degree \\em \@majorfield}
 			\renewcommand*{\lstlistlistingname}{Listagens}
 	}
 	
+	\def\backrefbrazil{%
+		\def\backrefpagesname{p\'aginas}%
+		\def\backrefsectionsname{se\c c\~oes}%
+		\def\backrefsep{, }%
+		\def\backreftwosep{ e~}%
+		\def\backreflastsep{, e~}%
+	}
+	
 % English
 \else\if\@language1
   	\gdef\@notdefined{UNDEFINED}
   	\gdef\acknowledgementsname{Acknowledgements}
   	\def\appendixname{Appendix}
+  	
+  	\def\backrefenglish{%
+		\def\backrefpagesname{pages}%
+		\def\backrefsectionsname{sections}%
+		\def\backrefsep{, }%
+		\def\backreftwosep{ and~}%
+		\def\backreflastsep{, and~}%
+		}
 \fi\fi
 
 
@@ -970,6 +988,18 @@ de \@degree \\em \@majorfield}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%http://tex.stackexchange.com/questions/15971/bibliography-with-page-numbers
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{%
+    \ifcase #1 (not cited)%
+    \or        (p.~#2)%
+    \else      (pp.~#2)%
+    \fi}
+
+% break long URLs in Bibtex
+\usepackage{breakurl}
+\usepackage[breaklinks]{hyperref}
+\def\UrlBreaks{\do\/\do-}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Tables and figures
