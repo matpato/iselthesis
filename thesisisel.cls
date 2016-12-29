@@ -124,6 +124,8 @@
 \usepackage{amsmath, amssymb, amsfonts, verbatim, mathabx}
 %\RequirePackage{amsmath,amsfonts,amssymb,amsthm,verbatim, mathabx} 
 
+\usepackage{paralist} % Provides the inparaenum environment (with an optional formatting specification in square brackets)
+
 \RequirePackage{csquotes}
 \RequirePackage{babel}
 
@@ -192,6 +194,8 @@
 	inner=3.5cm,
 	outer=2.5cm]{geometry}[2012/10/09]
 % \setlength{\marginparwidth}{2cm}
+
+\RequirePackage{tikz}	%Tikz is probably the most complex and powerful tool to create graphic elements in LATEX. 
 
 \RequirePackage{ctable}
 
@@ -305,7 +309,7 @@
 
 \gdef\@bscdissertationtstr{Relatório para obtenção do Grau 
 de \@degree \\em \@majorfield}
-\gdef\@prepmscdissertationtstr{Relatório intermédio para obtenção do Grau 
+\gdef\@prepmscdissertationtstr{Relatório preliminar para obtenção do Grau 
 de \@degree \\em \@majorfield}
 \gdef\@mscdissertationtstr{Dissertação para obtenção do Grau 
 de \@degree \\em \@majorfield}
