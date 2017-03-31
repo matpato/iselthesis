@@ -50,7 +50,11 @@ $	makeindex template.nlo -s nomencl.ist -o template.nls
 $	pdflatex template (twice)
 \end{verbatim}
 
-or, if you use texmaker, the idea is change  Makeindex Commands in  Texmaker/Preferences/makeindex. By default it states:  "/usr/texbin/makeindex" \%.idx,  and you change to "/usr/texbin/makeindex" \%.nlo -s nomencl.ist -o \%.nls. 
+or, if you use texmaker, the idea is change  \\
+
+Makeindex Commands in  Texmaker/Preferences/makeindex. \\
+
+By default it states:  "/usr/texbin/makeindex" \%.idx,  and you change to "/usr/texbin/makeindex" \%.nlo -s nomencl.ist -o \%.nls. 
 
 \begin{sloppypar}
 The makeindex command takes the nomenclature file (.nlo), the style file (nomencl.ist) and the name of the output file (.nls) as input arguments.
@@ -344,4 +348,6 @@ or,
 
 to put the page in ``landscape'', while the rest will remain in ``portrait'' orientation. Nevertheless, the header/footer will also be changed in orientation.
 
-\centering{\textbf{Written by Matilde Pós-de-Mina Pato with collaboration of Nuno Datia, \\2012 October}}
+\centering{\textbf{Written by Matilde Pós-de-Mina Pato with collaboration of Nuno Datia, \\2012 October (1st version)}}
+
+\centering{\textbf{Written by Matilde Pós-de-Mina Pato, \\ \today ~ - version 2.2 (last version)}}
