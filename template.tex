@@ -1,7 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Template for writing dissertations with ThesisMasterISEL
 %%
-%% Version 20150108 (Jan 2015) v2
+%% Version 20170102 (Jan 2017) v2.1
+%% Version 20170330 (March 2017) v2.2
 %% 
 %% Instituto Superior de Engenharia de Lisboa
 %% Instituto Politécnico de Lisboa
@@ -11,7 +12,7 @@
 %% BUGS and SUGGESTIONS: please submit an issue at the project web page
 %%
 %% Authors / Contributors:
-%%     - Matilde Pós-de-Mina Pato (mpato@deq.isel.pt)
+%%     - Matilde Pós-de-Mina Pato (mpato@deetc.isel.pt)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Main options (please read the manual for further details)
@@ -41,7 +42,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[msc,pt,twoside,12pt,a4paper]{thesisisel} 
+\documentclass[msc,en,twoside,12pt,a4paper]{thesisisel} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -58,7 +59,6 @@
 
 % Beautiful simple tables
 \usepackage{booktabs}
-
 
 % Use colors in background of table cells
 %\usepackage{colortbl}
@@ -82,52 +82,6 @@
 % To register TODO notes in the text
 \usepackage[textsize=footnotesize]{todonotes}
 \setlength{\marginparwidth}{1.5cm}
-
-%====================================================================
-% PACKAGE listings
-%====================================================================
-%
-% The ‘listings’ package is loaded at the beginning of a LATEX file in the preamble
-% Here is an example of my \lset{} declaration for ‘R’ code. 
-% Then, after having including this (also in the preamble), I simply include my external ‘R’ files. 
-% They can be included using an:
-% \include{ } - like interface to the external files;
-% by using the command \lstinputlisting{./code.R} to include the code from the file code.R which % is located in the same directory as the ‘LATEX’ source file.
-%
-\usepackage{listings}
-%====================================================================
-
-% == Color Definitions ===
-\definecolor{olivegreen}    {cmyk}{0.64, 0 , 0.95, 0.40}
-\definecolor{dkgreen}{rgb}{0,0.6,0}	
-\definecolor{midnightblue}  {cmyk}{0.98, 0.13, 0 , 0.43}
-%%             
-\lstset{ 
-	language=R, 					% the language of the code
-	basicstyle=\scriptsize\ttfamily,  % the size of the fonts that are used for the code
-	commentstyle=\ttfamily\color{dkgreen}, % comment style
-    numbers=left,     % where to put the line-numbers; possible values are (none, left, right)
-   	numberstyle=\ttfamily\color{gray}, 
-	stepnumber=2,  % the step between two line-numbers. If it's 1, each line will be numbered
-    numbersep=5pt, 				% how far the line-numbers are from the code	
-    xleftmargin=\parindent,
-    backgroundcolor=\color{white},  % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-	showspaces=false,   % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-  	showstringspaces=false,  % underline spaces within strings only
-  	showtabs=false,               % show tabs within strings adding particular underscores
-	stringstyle=\ttfamily, 		 % typewriter type for strings
-	frame=single, 					 % adds a frame around the code
-	rulesepcolor=\color{black},
-	columns=fullflexible,
-   	tabsize=2,                       % sets default tabsize to 2 spaces
-   	captionpos=b, 				% sets the caption-position to bottom
-	breakatwhitespace=false,% sets if automatic breaks should only happen at whitespace
-  	breaklines=true,              % sets automatic line breaking
-   	title=\lstname                 % show the filename of files included with \lstinputlisting; also try caption instead of title
-    escapeinside={},         		% if you want to add LaTeX within your code
-    keywordstyle=\ttfamily\color{midnightblue}\itshape, % keyword style
-	morekeywords={} 
-	}	
 
 %====================================================================
 % To aggregate multiple figures in a single one with subfigures
@@ -180,32 +134,9 @@
 % Title of the dissertation/thesis
 % USe "\\" to break the title into two or more lines
 
-%% Title of thesis
-\title{[Título da dissertação, do Projecto ou do Relatório de Estágio]}
+\input{personaldataofthesis}
+%% Title of Report + author(s) + professor + date
 
-%% Author
-\author[f]{\uppercase{[Nome completo do autor]}}
-\authordegree{(Grau do candidato)}
-
-%% Date
-\themonth{MÊS}
-\theyear{ANO}
-
-%% Supervisors (maximum of 2)
-% use [f] for female and [m] for male
-\adviser[m]{[Nome do orientador]}{[Grau]}
-\adviser[m]{[Nome do orientador]}{[Grau]}
-
-%
-%% Jury (maximum of 5 elements)
-%% Use [p] for president, [a] for referees
-%% President of the jury
-\jury[p]{[Grau e Nome do presidente do júri]}
-%% Referees
-\jury[a]{[Grau e  Nome do primeiro vogal]}
-\jury[a]{[Grau e  Nome do segundo vogal]}
-\jury[a]{[Grau e  Nome do terceiro vogal]}
-\jury[a]{[Grau e  Nome do quarto vogal]}
 
 %%------------------------------------------------------------
 %% All the names inside braces below sould correspond to a file
@@ -227,9 +158,16 @@
 % The Table of Contents is always printed. The other lists may be omited.
 %%------------------------------------------------------------
 
-\addlisttofrontmatter{\listoffigures} 	% The List of Figures. Comment to omit.
-\addlisttofrontmatter{\listoftables} 		% The List of Tables. Comment to omit.
-\addlisttofrontmatter{\lstlistoflistings} % The List of Code Listings. Comment to omit.
+%%------------------------------------------------------------
+% The Table of Contents is always printed. The other lists may be omited.
+%%------------------------------------------------------------
+
+% Conditionally insert List of Figures, Tables and Code Listings
+% Conditionally insert List of Figures, Tables and Code Listings
+\addlisttofrontmatter{\conditionalLoF} 	% The List of Figures. 
+\addlisttofrontmatter{\conditionalLoT} 	% The List of Tables. 
+\addlisttofrontmatter{\conditionalLoL} 	% The List of Code Listings. 
+
 \addlisttofrontmatter{\printnoidxglossary} % The List if Abreviations / Glossary. Comment to omit.
 
 % Text chapters

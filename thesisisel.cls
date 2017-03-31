@@ -146,27 +146,27 @@
 \RequirePackage[scaled]{helvet}
 \RequirePackage{courier}
 \RequirePackage{palatino}
-
 \usepackage{ifpdf}		% This is now the recommended way for checking for PDFLaTeX:
 \ifpdf
 	\RequirePackage[pdftex]{graphicx}
 	\DeclareGraphicsExtensions{.pdf, .png, .jpg, .tif}
-	\RequirePackage[pdftex,usenames]{color}
+	\RequirePackage[pdftex,usenames,dvipsnames]{color}
 	\definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
 	\RequirePackage[pdftex,
-		breaklinks,
+		breaklinks = true,
 		colorlinks,
 		pdfdisplaydoctitle,
 		citecolor=mydarkblue,
 		linkcolor=black,
 		urlcolor=mydarkblue,
-		pagebackref]{hyperref}	%or, pagebackref
+		pagebackref]{hyperref} %or, pagebackref
 	\else
 		\RequirePackage{graphicx}
 		\DeclareGraphicsExtensions{.eps, .png, .jpg}
 		\RequirePackage[usenames]{color}
 		\definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
-		\RequirePackage[breaklinks,
+		\RequirePackage[
+			breaklinks = true,
 			colorlinks,
 			pdfdisplaydoctitle,
 			citecolor=mydarkblue,
@@ -263,11 +263,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Add ISEL's logo and image in frontpage
-\newcommand{\logo}[1]{
+\newcommand{\logo}[2]{
 \parbox[t][0.15\paperheight]{0.1\paperwidth}{%
 \vfill
 \centering
-\includegraphics[scale=0.5]{#1}%
+\includegraphics[scale=#2]{#1}%
 \vfill
 }}
 
@@ -775,6 +775,36 @@ de \@degree \\em \@majorfield}
 % To process lists and other stuff
 \RequirePackage{etoolbox}
 
+%====================================================================
+% PACKAGE listings
+%====================================================================
+%
+% The ‘listings’ package is loaded at the beginning of a LATEX file in the preamble
+% Here is an example of my \lset{} declaration for ‘R’ code. 
+% Then, after having including this (also in the preamble), I simply include my external ‘R’ files. 
+% They can be included using an:
+% \include{ } - like interface to the external files;
+% by using the command \lstinputlisting{./code.R} to include the code from the file code.R which % is located in the same directory as the ‘LATEX’ source file.
+%
+%====================================================================
+
+%\usepackage{fancyvrb}
+\usepackage[final]{listings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Conditional list of figure, table, listings - listoffigures, listoftables and lstlistoflistings only if listings are present
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[figure,table,lstlisting]{totalcount}
+
+\newcommand\conditionalLoF{%
+  \iftotalfigures\listoffigures\fi}
+\newcommand\conditionalLoT{%
+  \iftotaltables\listoftables\fi}
+\newcommand\conditionalLoL{%
+  \iftotallstlistings\lstlistoflistings\fi}  
+%  
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Deal with optional lists in the frontmatter: listoftables, listoffigures, etc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -802,7 +832,7 @@ de \@degree \\em \@majorfield}
 
 \begin{center}
 % Put logo
-	\logo{\@universitylogo}
+	\logo{\@universitylogo}{0.12}
 
 %Define font style (ptm=Times New Roman)
 	\fontfamily{ptm}
@@ -1002,21 +1032,94 @@ de \@degree \\em \@majorfield}
 
 % break long URLs in Bibtex
 \usepackage{breakurl}
-\usepackage[breaklinks]{hyperref}
 \def\UrlBreaks{\do\/\do-}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Tables and figures
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Mathematics
+%% Common listing def: R and Java example
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Reference macros
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% == Color Definitions ===
+\definecolor{olivegreen}    {cmyk}{0.64, 0 , 0.95, 0.40}
+\definecolor{dkgreen}{rgb}{0,0.6,0}	
+\definecolor{midnightblue}  {cmyk}{0.98, 0.13, 0 , 0.43}
+%%      
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Appendix
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% R       
+\lstset{ 
+	language=R, 					% the language of the code
+	basicstyle=\scriptsize\ttfamily,  % the size of the fonts that are used for the code
+	commentstyle=\ttfamily\color{dkgreen}, % comment style
+    numbers=left,     % where to put the line-numbers; possible values are (none, left, right)
+   	numberstyle=\ttfamily\color{gray}, 
+	stepnumber=2,  % the step between two line-numbers. If it's 1, each line will be numbered
+    numbersep=5pt, 				% how far the line-numbers are from the code	
+    xleftmargin=\parindent,
+    backgroundcolor=\color{white},  % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	showspaces=false,   % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  	showstringspaces=false,  % underline spaces within strings only
+  	showtabs=false,               % show tabs within strings adding particular underscores
+	stringstyle=\ttfamily, 		 % typewriter type for strings
+	frame=single, 					 % adds a frame around the code
+	rulesepcolor=\color{black},
+	columns=fullflexible,
+   	tabsize=2,                       % sets default tabsize to 2 spaces
+   	captionpos=b, 				% sets the caption-position to bottom
+	breakatwhitespace=false,% sets if automatic breaks should only happen at whitespace
+  	breaklines=true,              % sets automatic line breaking
+   	title=\lstname                 % show the filename of files included with \lstinputlisting; also try caption instead of title
+    escapeinside={},         		% if you want to add LaTeX within your code
+    keywordstyle=\ttfamily\color{midnightblue}\itshape, % keyword style
+	morekeywords={} 
+	}	
+
+%% JAVA
+\colorlet{lstKeywordsColor}{MidnightBlue}
+\colorlet{lstKeywordsAltColor}{BrickRed}
+\colorlet{lstCommentsColor}{ForestGreen}
+\colorlet{lstStringColor}{BrickRed}
+% Usage: \begin{javalst}[Caption]{Label}
+\lstnewenvironment{javalst}[2][]%
+{\lstset{language=java,basicstyle=\small\tt,frame=tb,captionpos=b,caption=#1,label={lst:#2},tabsize=2}}%
+{}%
+\lstnewenvironment{xmllst}[2][]%
+{\lstset{language=XML,basicstyle=\small\tt,frame=tb,captionpos=b,caption=#1,label={lst:#2},tabsize=2}}%
+{}%
+\lstnewenvironment{lst}[2][]%
+{\lstset{basicstyle=\footnotesize\tt,frame=tb,captionpos=b,caption=#1,label={lst:#2},tabsize=2}}%
+{}%
+
+% For inline code
+\newcommand{\codejava}[1]{\lstinline[basicstyle=\tt,%
+		keywordstyle=\color{lstKeywordsColor}\bfseries,%
+		commentstyle=\color{lstCommentsColor},%
+		stringstyle=\color{lstStringColor},% 		
+		language=Java]|#1|}
+
+%for code in file
+% usage \lstfromfile{language}{caption}{label}{path}
+\newcommand{\lstfromfile}[5]
+{	\lstinputlisting[language=#1,basicstyle=\small\tt,frame=tb,captionpos=b,commentstyle=\color{lstCommentsColor},stringstyle=\color{lstStringColor},keywordstyle=\color{lstKeywordsColor}\bfseries,caption=#2,label={#3},tabsize=2,#5]{#4}
+}
+%define java language
+\lstset{ %
+language=java,                % choose the language of the code
+basicstyle=\footnotesize\ttfamily,       % the size of the fonts that are used for the code
+numbers=left,                   % where to put the line-numbers
+numberstyle=\tiny,      % the size of the fonts that are used for the line-numbers
+stepnumber=1,                   % the step between two line-numbers. If it is 1 each line will be numbered
+numbersep=5pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=single,           % adds a frame around the code
+tabsize=2,          % sets default tabsize to 2 spaces
+captionpos=b,           % sets the caption-position to bottom
+breaklines=true,        % sets automatic line breaking
+breakatwhitespace=false,    % sets if automatic breaks should only happen at whitespace
+escapeinside={\%*}{*)},          % if you want to add a comment within your code
+stringstyle= \color{lstStringColor},
+keywordstyle = \color{lstKeywordsColor}\bfseries,
+commentstyle=\color{lstCommentsColor}\itshape,
+}
