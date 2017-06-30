@@ -66,31 +66,37 @@
 
 % == Type of Document ===
 %
-% \@degreetype=0	BSc report
-% \@degreetype=1	MSc preliminary report
-% \@degreetype=2	MSc dissertation
+% \@degreetype=0	BSc preliminary report
+% \@degreetype=1	BSc report
+% \@degreetype=2	MSc preliminary report
+% \@degreetype=3	MSc dissertation
 %
 
-%\let\@degreetype=3
-\DeclareOption{bsc}{
+%\let\@degreetype=4
+\DeclareOption{prepbsc}{
 	\let\@degreetype=0
+	\def\@degree{\@bachelordegree}
+	\def\@dissertationtype{\@prepbscdissertationtstr}
+}
+\DeclareOption{bsc}{
+	\let\@degreetype=1
 	\def\@degree{\@bachelordegree}
 	\def\@dissertationtype{\@bscdissertationtstr}
 }
 \DeclareOption{prepmsc}{
-	\let\@degreetype=1
+	\let\@degreetype=2
 	\def\@degree{\@mastersdegree}
 	\def\@dissertationtype{\@prepmscdissertationtstr}
 }
 \DeclareOption{msc}{
-	\let\@degreetype=2
+	\let\@degreetype=3
 	\def\@degree{\@mastersdegree}
 	\def\@dissertationtype{\@mscdissertationtstr}
 }
 
 
 % == Default Options ===
-\ExecuteOptions{en,msc}
+\ExecuteOptions{pt,msc}
 \ProcessOptions
 
 \LoadClass{book}
@@ -122,7 +128,6 @@
   \let\iiiint\relax 
   \let\idotsint\relax 
 \usepackage{amsmath, amssymb, amsfonts, verbatim, mathabx}
-%\RequirePackage{amsmath,amsfonts,amssymb,amsthm,verbatim, mathabx} 
 
 \usepackage{paralist} % Provides the inparaenum environment (with an optional formatting specification in square brackets)
 
@@ -185,7 +190,7 @@
              pdftitle={ },
              pdfauthor={ },
              pdfsubject={ },
-             pdfcreator={Matilde Pato},
+             pdfcreator={Matilde P.M. Pato},
              pdfkeywords={ }
              }
 %
@@ -209,6 +214,13 @@
 \usepackage{tocbibind} % Add bibliography/index/contents to Table of Contents. Automatically adds the bibliography and/or the index and/or the contents, etc., to the Table of Contents.
 
 %====================================================================
+% PACKAGE algorithm and algpseudocode
+%====================================================================
+\usepackage[Algoritmo]{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+
+%====================================================================
 % PACKAGE acronym and nomencl
 %====================================================================
 % This package is most usefull for acronyms. The package garantees that all acronyms definitions 
@@ -225,7 +237,7 @@
 \makenomenclature
 \usepackage[
 	translate=babel,
-	nonumberlist, % do not show page numbers
+	%nonumberlist, % do not show page numbers
 	acronym,        % generate acronym listing
 	toc,                % show listings as entries in table of contents
 	section]          % use section level for toc entries
@@ -283,6 +295,7 @@
 \parbox[t][6cm][c]{12cm}{%
 }}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% LABELS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -297,7 +310,8 @@
 \gdef\@singlemadviserstr{Orientador}
 \gdef\@manymadviserstr{Orientadores}
 
-\gdef\@bachelordissertationstr{Trabalho de Licenciatura}
+\gdef\@bachelordissertationstr{Trabalho Final de Curso}
+\gdef\@bachelorqualifyingstr{Preparação do Trabalho Final de Curso}
 \gdef\@mastersdissertationstr{Dissertação de Mestrado}
 \gdef\@mastersqualifyingstr{Preparação de Dissertação}
 
@@ -307,12 +321,16 @@
 \gdef\@singlejuryastr{Vogal}
 \gdef\@manyjuryastr{Vogais}
 
-\gdef\@bscdissertationtstr{Relatório para obtenção do Grau 
-de \@degree \\em \@majorfield}
+\gdef\@prepbscdissertationtstr{Relatório preliminar realizado no âmbito de
+ \@coursefield, \\ do curso de licenciatura em \@majorfield\\
+ Semestre de Verão \@scholaryear}
+\gdef\@bscdissertationtstr{Relatório final realizado no âmbito de
+ \@coursefield, \\ do curso de licenciatura em \@majorfield\\
+ Semestre de Verão \@scholaryear}
 \gdef\@prepmscdissertationtstr{Relatório preliminar para obtenção do Grau 
-de \@degree \\em \@majorfield}
-\gdef\@mscdissertationtstr{Dissertação para obtenção do Grau 
-de \@degree \\em \@majorfield}
+de Mestre \\em \@majorfield}
+\gdef\@mscdissertationtstr{\@thesistype~ para obtenção do Grau 
+de Mestre \\em \@majorfield}
 
 \gdef\@presentationtext{\@dissertationtype}
 
@@ -341,9 +359,12 @@ de \@degree \\em \@majorfield}
  
 	\def\lstlistlistingname{Listagens}
 	  	\addto{\captionsportuguese}{%
-			\renewcommand*{\lstlistlistingname}{Listagens}
+			\renewcommand*{\lstlistingname}{Listagens}%
 	}
 	
+	\renewcommand{\algorithmicrequire}{\textbf{Dados: }}
+	\renewcommand{\algorithmicensure}{\textbf{Resultado: }}
+
 	\def\backrefbrazil{%
 		\def\backrefpagesname{p\'aginas}%
 		\def\backrefsectionsname{se\c c\~oes}%
@@ -355,7 +376,7 @@ de \@degree \\em \@majorfield}
 % English
 \else\if\@language1
   	\gdef\@notdefined{UNDEFINED}
-  	\gdef\acknowledgementsname{Acknowledgements}
+  	\gdef\acknowledgementsname{Acknowledgments}
   	\def\appendixname{Appendix}
   	
   	\def\backrefenglish{%
@@ -366,7 +387,6 @@ de \@degree \\em \@majorfield}
 		\def\backreflastsep{, and~}%
 		}
 \fi\fi
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -388,9 +408,21 @@ de \@degree \\em \@majorfield}
    \gdef\@department{#1}}
  \def\@department{~department\@notdefined}
 
+\def\thesistype#1{%
+  \gdef\@thesistype{#1}}
+\def\@thesistype{~thesistype\@notdefined}
+
 \def\majorfield#1{%
   \gdef\@majorfield{#1}}
 \def\@majorfield{~majorfield \@notdefined}
+
+\def\coursefield#1{%
+  \gdef\@coursefield{#1}}
+\def\@coursefield{~coursefield \@notdefined}
+
+\def\scholaryear#1{%
+  \gdef\@scholaryear{#1}}
+\def\@scholaryear{~scholaryear \@notdefined}
 
 %\def\@noimage
 
@@ -408,38 +440,92 @@ de \@degree \\em \@majorfield}
 \def\theyear#1{\gdef\@theyear{#1}}
 \def\@theyear{~theyear \@notdefined}
 
-%% Author's identification
+
+%% Author identification (at most 2 of each)
+%% \author[m|f]{Name}
+
+\def\@theauthorgender{f}	% default for female authors
+\newcount\@theauthorcount	% number of authors
+\@theauthorcount 0\relax
+
 
 \def\author{%
   \@ifnextchar [%
-    {\@pauthor}%
-    {\@pauthor[m]}}
+    {\@pauthor[]}%
+    {\@pauthor[][m]}}
 
-\def\@pauthor[#1]#2{%
-  \if#1m
-  	\def\authorgender{m}
-  \else\if#1f
-	\def\authorgender{f}
+
+%\if\@degreetype=2
+	
+%  	\else
+%  	\typeout{^^J%
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J%
+%!  Please specify author gender using [m] or [f] as the first^^J%
+%!  argument of the "author" macro.  See the template! ;)^^J%
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J%
+%	}
+%   	\errhelp{Please be gentle and follow the template recommendations.}
+%   	\errmessage{Please specify author gender!}
+%  	\fi\fi
+%  	\gdef\@author{#2}
+%  	\hypersetup{pdfauthor={\@author}}
+%  	}
+%\else
+  	
+% #1 = [] 
+% #2 = [m] or [f]
+% #3 = {name}
+\def\@pauthor[#1][#2]#3{%
+  \expandafter\advance\csname @the#1authorcount\endcsname 1\relax
+  \ifx#2m
+  	\expandafter\def\@the#1authorgender{m}
+  \else\ifx#2f
   \else
   \typeout{^^J%
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J%
-!  Please specify author gender using [m] or [f] as the first^^J%
-!  argument of the "author" macro.  See the template! ;)^^J%
+!  Please specify #1author gender using [m] or [f] as the second^^J%
+!  argument of the "#1author" macro.  See the template! ;)^^J%
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J%
 }
    \errhelp{Please be gentle and follow the template recommendations.}
    \errmessage{Please specify author gender!}
   \fi\fi
+  \expandafter\gdef\csname @#1authorname\expandafter\number\csname @the#1authorcount\endcsname\endcsname{#3}
+	}
 
-  \gdef\@author{#2}
-  \hypersetup{pdfauthor={\@author}}
-  }
+\def\@theauthorstr[#1]{%
+	\@ptheauthorstr[#1]{\expandafter\csname @the#1authorcount\endcsname}{\expandafter\csname @the#1authorgender\endcsname}
+	}
+
+%\def\@ptheauthorstr[#1]#2#3{%
+%	\ifnum #2 > 1
+%%		do nothing
+%	\else			 
+%  		\hypersetup{pdfauthor={\@author}}
+%	\fi
+%	}
+
+\def\printauthor[#1]#2{%
+	\ifcsname @#1authorname#2\endcsname
+		\ifnum #2 = 1
+			% do nothing
+		\fi
+		&
+		\expandafter\csname @#1authorgender#2\endcsname\
+		\expandafter\csname @#1authorname#2\endcsname
+	\\
+	\fi
+}
+
 
 \def\@author{~author \@notdefined}
+%%
 
 \def\authordegree#1{%
   \gdef\@authordegree{#1}}
+  
 \def\@authordegree{~authordegree \@notdefined}
+
 
 %% Advisors identification (at most 4 of each)
 %% \adviser[m|f]{Category}{Name}
@@ -510,13 +596,16 @@ de \@degree \\em \@majorfield}
 \def\@title{~title \@notdefined}
 
 \def\@texttype{%
-  \if\@degreetype0
-    \@bachelordissertationstr
+ 	\if\@degreetype0
+    \@bachelorqualifyingstr	  
   \else\if\@degreetype1
-    \@mastersqualifyingstr
+    \@bachelordissertationstr
   \else\if\@degreetype2
+    \@mastersqualifyingstr
+  \else\if\@degreetype3
   \@mastersdissertationstr
-  \fi\fi\fi}
+  \fi\fi\fi\fi}
+
 
 \def\thedegree#1#2{%
 	\expandafter\csname @#1#2\endcsname}
@@ -525,10 +614,12 @@ de \@degree \\em \@majorfield}
   \if\@degreetype0
     \thedegree{\authorgender}{bachelordegreestr}
   \else\if\@degreetype1
-    \thedegree{\authorgender}{mastersdegreestr}
+    \thedegree{\authorgender}{bachelordegreestr}    
   \else\if\@degreetype2
     \thedegree{\authorgender}{mastersdegreestr}
-\fi\fi\fi}
+  \else\if\@degreetype3
+    \thedegree{\authorgender}{mastersdegreestr}
+\fi\fi\fi\fi}
 
 
 % Jury identification (at most 5 of each)
@@ -605,7 +696,6 @@ de \@degree \\em \@majorfield}
 	\fi
 }
 
-
 \def\printthejury{%
 	\fontsize{11}{12}
 	\selectfont
@@ -647,11 +737,12 @@ de \@degree \\em \@majorfield}
 \else
 \def\printdedicatory{
 	\if\@degreetype0
-		\@input@{Chapters/\@dedicatoryfile}\global\let\@dedicatoryfile\@empty
 	\else\if\@degreetype1
-	\else\if\@degreetype2
 		\@input@{Chapters/\@dedicatoryfile}\global\let\@dedicatoryfile\@empty
-	\fi\fi\fi
+	\else\if\@degreetype2
+	\else\if\@degreetype3
+		\@input@{Chapters/\@dedicatoryfile}\global\let\@dedicatoryfile\@empty
+	\fi\fi\fi\fi
 }
 \fi
 
@@ -660,10 +751,11 @@ de \@degree \\em \@majorfield}
 \def\@acknowledgementsfile{~acknowledgementsfile \@notdefined}
 
 \def\printacknowledgements{
-	\if\@degreetype0		\@input@{Chapters/\@acknowledgementsfile}\global\let\@acknowledgementsfile\@empty
-	\else\if\@degreetype1
-	\else\if\@degreetype2		\@input@{Chapters/\@acknowledgementsfile}\global\let\@acknowledgementsfile\@empty
-	\fi\fi\fi
+	\if\@degreetype0	
+	\else\if\@degreetype1	\@input@{Chapters/\@acknowledgementsfile}\global\let\@acknowledgementsfile\@empty
+	\else\if\@degreetype2
+	\else\if\@degreetype3		\@input@{Chapters/\@acknowledgementsfile}\global\let\@acknowledgementsfile\@empty
+	\fi\fi\fi\fi
 }
 
 \def\ptabstractfile#1{%
@@ -757,7 +849,7 @@ de \@degree \\em \@majorfield}
 
 \def\appendixfile#1{%
 	\advance\@appxcount 1\relax
-	\expandafter\gdef\csname @appendixfile\number\@appxcount\endcsname{Chapters/#1}
+	\expandafter\gdef\csname @appendixfile\number\@appxcount\endcsname{Appendixes/#1}
 }
 
 \def\printappendixes{%	
@@ -774,7 +866,7 @@ de \@degree \\em \@majorfield}
 
 % To process lists and other stuff
 \RequirePackage{etoolbox}
-
+%\usepackage{pgffor}%
 %====================================================================
 % PACKAGE listings
 %====================================================================
@@ -789,12 +881,17 @@ de \@degree \\em \@majorfield}
 %====================================================================
 
 %\usepackage{fancyvrb}
-\usepackage[final]{listings}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Conditional list of figure, table, listings - listoffigures, listoftables and lstlistoflistings only if listings are present
+%% Conditional list of figure, table, listings - listoffigures, listoftables and lstlistoflistings only if listings are present
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{listings}
+
+\renewcommand{\lstlistoflistings}{
+	\begingroup
+	\tocfile{\lstlistingname}{lol}
+	\endgroup}
 \usepackage[figure,table,lstlisting]{totalcount}
 
 \newcommand\conditionalLoF{%
@@ -803,8 +900,8 @@ de \@degree \\em \@majorfield}
   \iftotaltables\listoftables\fi}
 \newcommand\conditionalLoL{%
   \iftotallstlistings\lstlistoflistings\fi}  
-%  
-
+  
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Deal with optional lists in the frontmatter: listoftables, listoffigures, etc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -865,14 +962,25 @@ de \@degree \\em \@majorfield}
 % Name of Candidate
 	\fontsize{16}{19.2}
 	\selectfont
-	\textbf{\@author}
-	
+	\textbf{
+		\ctable[
+			cap=,
+			caption=,
+			label=,
+			pos=h,
+			maxwidth=1\linewidth,
+			doinside=\hspace*{-0.1cm},
+		]{rX}{}{ 
+			\printauthor[]{1}
+			\printauthor[]{2}
+	}}
+
 \vspace{0.15cm}	
 % Academic qualifications
 	\fontsize{14}{16.8}
 	\selectfont
 	\@authordegree
-
+	
 \vspace{0.75cm}
 % Degree
 	\fontsize{12}{13}
@@ -898,12 +1006,9 @@ de \@degree \\em \@majorfield}
 
 \vfill\vfill
 % Referee board
-\if\@degreetype0
+\if\@degreetype3
 \printthejury
-\else\if\@degreetype1
-\else\if\@degreetype2
-\printthejury
-\fi\fi\fi
+\fi
 
 \vfill\vfill\vfill
 
@@ -989,8 +1094,10 @@ de \@degree \\em \@majorfield}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Quotations
+%% Chapter files
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\MaxNumOfChapters}{10}% Adjust these two settings for your needs.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Table of contents
@@ -1073,7 +1180,12 @@ de \@degree \\em \@majorfield}
 	morekeywords={} 
 	}	
 
-%% JAVA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Common listing def - JAVA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Listings
+%\usepackage{fancyvrb}
 \colorlet{lstKeywordsColor}{MidnightBlue}
 \colorlet{lstKeywordsAltColor}{BrickRed}
 \colorlet{lstCommentsColor}{ForestGreen}
@@ -1099,8 +1211,11 @@ de \@degree \\em \@majorfield}
 %for code in file
 % usage \lstfromfile{language}{caption}{label}{path}
 \newcommand{\lstfromfile}[5]
-{	\lstinputlisting[language=#1,basicstyle=\small\tt,frame=tb,captionpos=b,commentstyle=\color{lstCommentsColor},stringstyle=\color{lstStringColor},keywordstyle=\color{lstKeywordsColor}\bfseries,caption=#2,label={#3},tabsize=2,#5]{#4}
+{	\lstinputlisting[language=#1,basicstyle=\small\tt,frame=tb,captionpos=b,
+commentstyle=\color{lstCommentsColor},stringstyle=\color{lstStringColor},
+keywordstyle=\color{lstKeywordsColor}\bfseries,caption=#2,label={#3},tabsize=2,#5]{#4}
 }
+
 %define java language
 \lstset{ %
 language=java,                % choose the language of the code

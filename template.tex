@@ -19,31 +19,24 @@
 %% Options marked with (*) are the values by default
 %% See also file "defaults.tex"
 %%
-%% - Class of text
-%%           bsc		- BSc graduation report
-%%           prepmsc	- Preparation of MSc dissertation
-%%           (*)msc		- MSc dissertation
-%% - Languages
-%%           (*)pt			- português
-%%           en		- english
-%% - Single/double sided printing
-%%           oneside	- single sided printing
-%%           (*)twoside	- double sided printing
-%% - Font size
-%%           11pt	- Use font size 11
-%%           (*)12pt		- Use font size 12
-%% - Text encoding
-%%           latin1		- Windows
-%%           (*)utf8	- other systems (Linux, Mac)
-%%
 %% DON'T MIX TEXT ENCODINGS. All the files are saved using UTF8. 
 %% If you want to use latin1, you should first re-save all these
 %% files (*.tex, *.cls,  ...) using latin1 encoding first
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[msc,en,twoside,12pt,a4paper]{thesisisel} 
-
+\documentclass[
+	bsc,			% (*) msc, prepmsc, bsc, prepbsc - degree
+					% prepbsc(msc) Preparation of BSc (MSc) dissertation
+					% bsc(msc) BSc graduation report/ MSc dissertation
+	en,			% (*) pt, en - languages 
+	twoside,	% (*) twoside, oneside - single or double sided printing
+	12pt,		% (*) 12pt, 11pt, 10pt - use font size
+	a4paper,	% the paper size/format
+	utf8,			% (*) utf8, latin1	- Text encoding: Linux, Mac or Windows
+	hyperref = true,  % Hyperlinks in citations: true(*) false
+	listof=totoc
+	]{thesisisel} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  BEGINING OF USER COSTUMIZATION
@@ -53,9 +46,6 @@
 %====================================================================
 % Additional packages you may want to use (comment those not needed)
 %====================================================================
-
-% To enable customizble enumerates
-\usepackage{paralist}
 
 % Beautiful simple tables
 \usepackage{booktabs}
@@ -103,8 +93,8 @@
 % Where to look for figures
 \graphicspath{{Logo/}{Chapters/img/}} 
 
-% Where to find R files
-\newcommand{\rfiles}[1]{../r-files/#1}
+% Where to find code scripts files
+\newcommand{\codefiles}[1]{Chapters/scripts/#1}
 % syntax: \lstinputlisting[]{\rfile{name.r}}
 
 % Where to find Chapters files
@@ -158,19 +148,14 @@
 % The Table of Contents is always printed. The other lists may be omited.
 %%------------------------------------------------------------
 
-%%------------------------------------------------------------
-% The Table of Contents is always printed. The other lists may be omited.
-%%------------------------------------------------------------
-
-% Conditionally insert List of Figures, Tables and Code Listings
 % Conditionally insert List of Figures, Tables and Code Listings
 \addlisttofrontmatter{\conditionalLoF} 	% The List of Figures. 
 \addlisttofrontmatter{\conditionalLoT} 	% The List of Tables. 
-\addlisttofrontmatter{\conditionalLoL} 	% The List of Code Listings. 
-
+\addlisttofrontmatter{\conditionalLoL}	% The List of Code Listings.
 \addlisttofrontmatter{\printnoidxglossary} % The List if Abreviations / Glossary. Comment to omit.
 
-% Text chapters
+% ---------------------------------------------------------------------------------
+% TEX CHAPTERS:
 % syntax: \chapterfile{file}
 \chapterfile{chapter1}
 \chapterfile{chapter2}
@@ -179,6 +164,7 @@
 % Text appendixes. Comment if not needed
 % sintax: \appendixfile{file}
 \appendixfile{appendix1}
+
 
 %%============================================================
 %%
@@ -218,9 +204,7 @@
 % Abstracts/resumes/summaries in two languages. The first abstract will
 % use the document main language and second the foreign language
 \printabstract
-
 %%------------------------------------------------------------
-
 %% The List of Symbols (Nomenclature). Comment to omit.
 \printnomenclature
 %
@@ -230,7 +214,6 @@
 %% Print other lists of contents according to instructions given above
 \printotherlists 
 %
-
 % ----------------------------------------------------------------------
 %  Print Document Chapters
 % ----------------------------------------------------------------------
@@ -244,29 +227,15 @@
 %\cleardoublepage
 
 % Include all references in .bib file, even non-cited ones...
-\nocite{*}
+%\nocite{*}
 
 % Produces the bibliography section when processed by BibTeX
 % ----------------------------------------------------------------------
 %% Bibliography style
 % ----------------------------------------------------------------------
-%\bibliographystyle{plain}  % > entries ordered alphabetically
-
-%\bibliographystyle{unsrt} % > unsorted with entries appearing in the order in which the citations appear.
-
-%\bibliographystyle{abbrv} % > entries ordered alphabetically, with first names and names of journals and months abbreviated
-
-%\bibliographystyle{alpha} % > entries ordered alphabetically, with reference markers based on authors' initials and publication year
-
 % Replacement bibliography styles provided by 'natbib' package
 % (plainnat.bst, abbrvnat.bst, unsrtnat.bst )
 \bibliographystyle{plainnat} % > entries ordered alphabetically
-
-%\bibliographystyle{unsrtnat} % > unsorted with entries appearing in the order in which the citations appear.
-
-%\bibliographystyle{abbrvnat} % > entries ordered alphabetically, with first names and names of journals and months abbreviated
-
-%\bibliographystyle{alpha} % > entries ordered alphabetically, with reference markers based on authors' initials and publication year
 
 % Bibliography with page numbers
 % \backrefenglish 	% english version

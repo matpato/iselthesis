@@ -225,6 +225,15 @@ If you are writing only one or two documents and aren't planning on writing more
 \end{thebibliography}
 \end{verbatim}
 
+In this document, the bibliography is in a separate document: \texttt{bi\-blio\-gra\-phy.bib}  where information is entered from \url{https://scholar.google.pt/}, as the show in Figure \ref{fig:bibtex}.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.85\textwidth]{bibtexexample}
+	  \caption{Screenshot from Scholar Google}
+  \label{fig:bibtex}
+\end{figure}
+
 To actually cite a given document is \textit{very} easy. Go to the point where you want the citation to appear, and use the following: \verb!\cite{citekey}!, where the citekey is that of the bibitem you wish to cite, e.g \verb!~\cite{lamport94}!.  When \texttt{LaTeX} processes the document, the citation will be cross-referenced with the bibitems and replaced with the appropriate number citation. The advantage here, once again, is that LaTeX looks after the numbering for you.
 
 When a sequence of multiple citations are needed, you should use a single \verb!\cite{}! command. The citations are then separated by commas. Note that you must not use spaces between the citations. Here's an result example \cite{strunk,chicago,texbook}.
@@ -305,12 +314,14 @@ There are two different ways to place two figures/tables side-by-side. The subfi
 \end{figure}
 
 
-Using the package listings you can add non-formatted text as you would do with \verb!\begin{verbatim}! but its main aim is to include the source code of any programming language within your document. If you wish to include pseudocode or algorithms see \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms_and_Pseudocode}{LaTeX/Algorithms\_ and\_Pseudocode}, as Listing ~\ref{code:test}.
+Using the package listings you can add non-formatted text as you would do with \verb!\begin{verbatim}! but its main aim is to include the source code of any programming language within your document. If you wish to include pseudocode or algorithms see \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms_and_Pseudocode}{LaTeX/Algorithms\_ and\_Pseudocode}, as Listing ~\ref{lst:SetApp}.
+
+\lstfromfile{java,linerange={59-64}}{Static method - SetApp}{lst:SetApp}{Chapters/scripts/SetApp.java}{showlines=true,morekeywords={tran,begin,return},basicstyle=\footnotesize\ttfamily}
 
 \begin{minipage}{\textwidth}
 \lstset{language=R,numbers=left}
 \begin{lstlisting}[
-    frame=trBL,escapechar=|,
+    %%frame=trBL,escapechar=|,
     caption={R-Code (Test).},
     label={code:test}
 ]
@@ -350,4 +361,4 @@ to put the page in ``landscape'', while the rest will remain in ``portrait'' ori
 
 \centering{\textbf{Written by Matilde Pós-de-Mina Pato with collaboration of Nuno Datia, \\2012 October (1st version)}}
 
-\centering{\textbf{Written by Matilde Pós-de-Mina Pato, \\ \today ~ - version 2.2 (last version)}}
+\centering{\textbf{Written by Matilde Pós-de-Mina Pato, \\ \today ~ - version 2.3.1 (last version)}}
