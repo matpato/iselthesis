@@ -3,7 +3,8 @@
 %%
 %% Version 20170102 (Jan 2017) v2.1
 %% Version 20170330 (March 2017) v2.2
-%% 
+%% Version 20170330 (May 2017) v2.3.1
+
 %% Instituto Superior de Engenharia de Lisboa
 %% Instituto Politécnico de Lisboa
 %%
@@ -26,10 +27,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[
-	bsc,			% (*) msc, prepmsc, bsc, prepbsc - degree
+	msc,			% (*) msc, prepmsc, bsc, prepbsc - degree
 					% prepbsc(msc) Preparation of BSc (MSc) dissertation
 					% bsc(msc) BSc graduation report/ MSc dissertation
-	en,			% (*) pt, en - languages 
+					% GO TO LINE 189
+	pt,			% (*) pt, en - languages 
 	twoside,	% (*) twoside, oneside - single or double sided printing
 	12pt,		% (*) 12pt, 11pt, 10pt - use font size
 	a4paper,	% the paper size/format
@@ -185,7 +187,9 @@
 
 % The first front page. Repeats the front page twice 
 % \Repeat{n-times}{\command}
-\Repeat{2}{\frontpage}
+\Repeat{2}{\frontpage} % insert only 1 for Bachelor report and 2 for Master Thesis
+%\frontpageBSC % comment this line if you write a Master Thesis 
+						   % and uncomment for Bachelor Report
 
 %%------------------------------------------------------------
 %% All the names inside braces below sould correspond to a file

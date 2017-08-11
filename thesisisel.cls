@@ -969,10 +969,11 @@ de Mestre \\em \@majorfield}
 			label=,
 			pos=h,
 			maxwidth=1\linewidth,
-			doinside=\hspace*{-0.1cm},
+			doinside=\hspace*{0.1cm},
 		]{rX}{}{ 
 			\printauthor[]{1}
 			\printauthor[]{2}
+			\printauthor[]{3}
 	}}
 
 \vspace{0.15cm}	
@@ -997,7 +998,7 @@ de Mestre \\em \@majorfield}
 		label=,
 		pos=h,
 		maxwidth=1\linewidth,
-		doinside=\hspace*{-0.1cm},
+		doinside=\hspace*{0.1cm},
 	]{rX}{}{ 
 		\printadviser[]{1}
 		\printadviser[]{2}
@@ -1023,6 +1024,85 @@ de Mestre \\em \@majorfield}
 \thispagestyle{empty}
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Frontpage - Bachelor Project
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\frontpageBSC{
+
+\thispagestyle{empty}
+\newgeometry{tmargin=0.25cm,bmargin=0.5cm,lmargin=2cm,rmargin=2cm}
+
+\begin{center}
+% Put logo
+	\logo{\@universitylogo}{0.12}
+
+%Define font style (ptm=Times New Roman)
+	\fontfamily{ptm}
+
+% Name of Institute
+	\fontsize{16}{19.2}
+	\selectfont
+	\textbf{\@university}
+
+\vspace{0.25cm}	
+% Name of Department
+	\fontsize{14}{16.8}
+	\selectfont
+	\textbf{\@department}
+
+
+\vspace{0.65cm}
+% Title of Dissertation
+	\fontsize{18}{21.6}
+	\selectfont
+	\textbf{\@title}\\[0.75cm]
+
+\vspace{1.5cm}	
+% Name of Candidate
+	\fontsize{14}{16.8}
+	\selectfont
+	\textbf{
+		\ctable[
+			cap=,
+			caption=,
+			label=,
+			pos=h,
+			maxwidth=1\linewidth,
+			doinside=\hspace*{0.1cm},
+		]{rX}{}{ 
+		\toprule
+		\printauthor[]{1}\\
+		\ifnum \@theauthorcount > 1		
+		\midrule	
+		\printauthor[]{2}\\
+		\ifnum \@theauthorcount > 2
+		\midrule	
+		\printauthor[]{3}
+		\fi\fi
+}}
+
+
+\vspace{0.75cm}
+% Degree
+	\fontsize{12}{13}
+	\selectfont
+	\@presentationtext
+	
+\vfill\vfill
+
+\vfill\vfill\vfill
+
+% Date
+\fontsize{10}{12.2}
+\selectfont
+\textbf{\@themonth, \@theyear}
+	
+\end{center}
+\restoregeometry
+\cleardoublepage %\newpage
+\thispagestyle{empty}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Dedicatory
