@@ -216,7 +216,6 @@
 %====================================================================
 % PACKAGE algorithm and algpseudocode
 %====================================================================
-\usepackage[Algoritmo]{algorithm}
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 
