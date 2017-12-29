@@ -4,8 +4,9 @@
 %%%
 %%% By Matilde Pós-de-Mina Pato (mpato@deq.isel.pt)
 %%% Version of October 2012
-%%% version 1.1: July 2013 
-%%% version 2.0: January 2015
+%%% Version v1.1:  July 2013 
+%%% Version v2.0: March 2015
+%%% Version v2.3: December 2017
 %%%
 %%% This template is vaguely based on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
@@ -216,6 +217,7 @@
 %====================================================================
 % PACKAGE algorithm and algpseudocode
 %====================================================================
+\usepackage[Algoritmo]{algorithm}
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 
@@ -358,7 +360,9 @@ de Mestre \\em \@majorfield}
  
 	\def\lstlistlistingname{Listagens}
 	  	\addto{\captionsportuguese}{%
-			\renewcommand*{\lstlistingname}{Listagens}%
+			%\renewcommand*{\lstlistingname}{Listagem}%
+			\renewcommand*{\lstlistingname}{Listagem}% Listing -> Algorithm
+			\renewcommand{\lstlistlistingname}{Lista de Listagens}% List of Listings -> List of Algorithms
 	}
 	
 	\renewcommand{\algorithmicrequire}{\textbf{Dados: }}
@@ -377,7 +381,14 @@ de Mestre \\em \@majorfield}
   	\gdef\@notdefined{UNDEFINED}
   	\gdef\acknowledgementsname{Acknowledgments}
   	\def\appendixname{Appendix}
-  	
+
+	\def\lstlistlistingname{Listings}
+	  	\addto{\captionsportuguese}{%
+			%\renewcommand*{\lstlistingname}{Listagem}%
+			\renewcommand*{\lstlistingname}{Listing}% Listing -> Algorithm
+			\renewcommand{\lstlistlistingname}{List of \lstlistingname s}% List of Listings -> List of Algorithms
+	}
+	  	
   	\def\backrefenglish{%
 		\def\backrefpagesname{pages}%
 		\def\backrefsectionsname{sections}%
@@ -443,16 +454,21 @@ de Mestre \\em \@majorfield}
 %% Author identification (at most 2 of each)
 %% \author[m|f]{Name}
 
-\def\@theauthorgender{f}	% default for female authors
+\def\@author{~author \thesisisel@notdefined}
+%%
+\def\authordegree#1{%
+  \gdef\@authordegree{#1}}
+\def\@authordegree{~authordegree \@notdefined}
+
+
+\def\@theauthorgender{m}	% default for male authors
 \newcount\@theauthorcount	% number of authors
 \@theauthorcount 0\relax
-
 
 \def\author{%
   \@ifnextchar [%
     {\@pauthor[]}%
     {\@pauthor[][m]}}
-
 
 %\if\@degreetype=2
 	
@@ -477,8 +493,9 @@ de Mestre \\em \@majorfield}
 \def\@pauthor[#1][#2]#3{%
   \expandafter\advance\csname @the#1authorcount\endcsname 1\relax
   \ifx#2m
-  	\expandafter\def\@the#1authorgender{m}
+  	\def\@the#1authorgender{m}
   \else\ifx#2f
+  	\def\@the#1authorgender{f}
   \else
   \typeout{^^J%
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J%
@@ -506,25 +523,15 @@ de Mestre \\em \@majorfield}
 
 \def\printauthor[#1]#2{%
 	\ifcsname @#1authorname#2\endcsname
-		\ifnum #2 = 1
+		\ifnum #2 > 1
 			% do nothing
 		\fi
 		&
-		\expandafter\csname @#1authorgender#2\endcsname\
+		\expandafter\csname @#1authorgender#2\endcsname
 		\expandafter\csname @#1authorname#2\endcsname
 	\\
 	\fi
 }
-
-
-\def\@author{~author \@notdefined}
-%%
-
-\def\authordegree#1{%
-  \gdef\@authordegree{#1}}
-  
-\def\@authordegree{~authordegree \@notdefined}
-
 
 %% Advisors identification (at most 4 of each)
 %% \adviser[m|f]{Category}{Name}
@@ -727,6 +734,17 @@ de Mestre \\em \@majorfield}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Including chapters and similars
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\reverseconcat}[3]{#3#2#1}
+\newcommand{\version}[1]{ 
+	\if\@language0
+		\selectlanguage{portuguese}
+			vers\~ao #1
+	\else
+	 	\selectlanguage{english}
+	 		version #1
+	 \fi
+ }
+
 \def\dedicatoryfile#1{%
   \gdef\@dedicatoryfile{#1}}
 \def\@dedicatoryfile{\@empty}
@@ -889,7 +907,7 @@ de Mestre \\em \@majorfield}
 
 \renewcommand{\lstlistoflistings}{
 	\begingroup
-	\tocfile{\lstlistingname}{lol}
+	\tocfile{\lstlistlistingname}{lol}
 	\endgroup}
 \usepackage[figure,table,lstlisting]{totalcount}
 
@@ -975,7 +993,7 @@ de Mestre \\em \@majorfield}
 			\printauthor[]{3}
 	}}
 
-\vspace{0.15cm}	
+\vspace{0.10cm}	
 % Academic qualifications
 	\fontsize{14}{16.8}
 	\selectfont
@@ -1217,6 +1235,7 @@ de Mestre \\em \@majorfield}
     \fi}
 
 % break long URLs in Bibtex
+%URL linebreak in footnote
 \usepackage{breakurl}
 \def\UrlBreaks{\do\/\do-}
 
@@ -1229,34 +1248,51 @@ de Mestre \\em \@majorfield}
 \definecolor{olivegreen}    {cmyk}{0.64, 0 , 0.95, 0.40}
 \definecolor{dkgreen}{rgb}{0,0.6,0}	
 \definecolor{midnightblue}  {cmyk}{0.98, 0.13, 0 , 0.43}
-%%      
-
-%% R       
+%%    
+\lstset{
+literate=%
+% Latin
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}  
+%% R     
 \lstset{ 
-	language=R, 					% the language of the code
-	basicstyle=\scriptsize\ttfamily,  % the size of the fonts that are used for the code
-	commentstyle=\ttfamily\color{dkgreen}, % comment style
-    numbers=left,     % where to put the line-numbers; possible values are (none, left, right)
-   	numberstyle=\ttfamily\color{gray}, 
-	stepnumber=2,  % the step between two line-numbers. If it's 1, each line will be numbered
-    numbersep=5pt, 				% how far the line-numbers are from the code	
-    xleftmargin=\parindent,
-    backgroundcolor=\color{white},  % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-	showspaces=false,   % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-  	showstringspaces=false,  % underline spaces within strings only
-  	showtabs=false,               % show tabs within strings adding particular underscores
-	stringstyle=\ttfamily, 		 % typewriter type for strings
-	frame=single, 					 % adds a frame around the code
-	rulesepcolor=\color{black},
-	columns=fullflexible,
-   	tabsize=2,                       % sets default tabsize to 2 spaces
-   	captionpos=b, 				% sets the caption-position to bottom
-	breakatwhitespace=false,% sets if automatic breaks should only happen at whitespace
-  	breaklines=true,              % sets automatic line breaking
-   	title=\lstname                 % show the filename of files included with \lstinputlisting; also try caption instead of title
-    escapeinside={},         		% if you want to add LaTeX within your code
-    keywordstyle=\ttfamily\color{midnightblue}\itshape, % keyword style
-	morekeywords={} 
+	language = R, 					% the language of the code
+	basicstyle = \scriptsize\ttfamily,  % the size of the fonts that are used for the code
+	commentstyle = \ttfamily\color{dkgreen}, % comment style
+    numbers = left,     % where to put the line-numbers; possible values are (none, left, right)
+   	numberstyle = \ttfamily\color{gray}, 
+	stepnumber = 2,  % the step between two line-numbers. If it's 1, each line will be numbered
+    numbersep = 5pt, 				% how far the line-numbers are from the code	
+    xleftmargin = \parindent,
+    backgroundcolor = \color{white},  % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	showspaces = false,   % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  	showstringspaces = false,  % underline spaces within strings only
+  	showtabs = false,               % show tabs within strings adding particular underscores
+	stringstyle = \ttfamily, 		 % typewriter type for strings
+	frame = single, 					 % adds a frame around the code
+	rulesepcolor = \color{black},
+	columns = fullflexible,
+   	tabsize = 2,                       % sets default tabsize to 2 spaces
+   	captionpos = b, 				% sets the caption-position to bottom
+	breakatwhitespace = false,% sets if automatic breaks should only happen at whitespace
+  	breaklines = true,              % sets automatic line breaking
+   	title = \lstname                 % show the filename of files included with \lstinputlisting; also try caption instead of title
+    escapeinside = {},         		% if you want to add LaTeX within your code
+    keywordstyle = \ttfamily\color{midnightblue}\itshape, % keyword style
+	morekeywords = {},
+	inputencoding=latin1 
 	}	
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1271,49 +1307,82 @@ de Mestre \\em \@majorfield}
 \colorlet{lstStringColor}{BrickRed}
 % Usage: \begin{javalst}[Caption]{Label}
 \lstnewenvironment{javalst}[2][]%
-{\lstset{language=java,basicstyle=\small\tt,frame=tb,captionpos=b,caption=#1,label={lst:#2},tabsize=2}}%
+{
+\lstset{
+	language = java,
+	basicstyle = \small\tt,
+	frame = tb,
+	captionpos = b,
+	caption = #1,
+	label = {lst:#2},
+	tabsize = 2}}%
 {}%
+
 \lstnewenvironment{xmllst}[2][]%
-{\lstset{language=XML,basicstyle=\small\tt,frame=tb,captionpos=b,caption=#1,label={lst:#2},tabsize=2}}%
+{
+\lstset{
+	language = XML,
+	basicstyle = \small\tt,
+	frame = tb,
+	captionpos = b,
+	caption = #1,
+	label = {lst:#2},
+	tabsize = 2}}%
 {}%
 \lstnewenvironment{lst}[2][]%
-{\lstset{basicstyle=\footnotesize\tt,frame=tb,captionpos=b,caption=#1,label={lst:#2},tabsize=2}}%
+{
+\lstset{
+	basicstyle = \footnotesize\tt,
+	frame = tb,
+	captionpos = b,
+	caption = #1,
+	label = {lst:#2},
+	tabsize = 2}}%
 {}%
 
 % For inline code
-\newcommand{\codejava}[1]{\lstinline[basicstyle=\tt,%
-		keywordstyle=\color{lstKeywordsColor}\bfseries,%
-		commentstyle=\color{lstCommentsColor},%
-		stringstyle=\color{lstStringColor},% 		
-		language=Java]|#1|}
+\newcommand{\codejava}[1]{
+	\lstinline[
+		basicstyle = \tt,%
+		keywordstyle = \color{lstKeywordsColor}\bfseries,%
+		commentstyle = \color{lstCommentsColor},%
+		stringstyle = \color{lstStringColor},% 		
+		language = Java]|#1|}
 
 %for code in file
 % usage \lstfromfile{language}{caption}{label}{path}
-\newcommand{\lstfromfile}[5]
-{	\lstinputlisting[language=#1,basicstyle=\small\tt,frame=tb,captionpos=b,
-commentstyle=\color{lstCommentsColor},stringstyle=\color{lstStringColor},
-keywordstyle=\color{lstKeywordsColor}\bfseries,caption=#2,label={#3},tabsize=2,#5]{#4}
+\newcommand{\lstfromfile}[5]{				
+	\lstinputlisting[language=#1,
+	   basicstyle = \small\tt,
+		frame = tb,
+		captionpos = b,
+		commentstyle = \color{lstCommentsColor},
+		stringstyle = \color{lstStringColor},
+		keywordstyle = \color{lstKeywordsColor}\bfseries,
+		caption = #2,
+		label = {#3},
+		tabsize = 2,#5]{#4}
 }
 
 %define java language
 \lstset{ %
-language=java,                % choose the language of the code
-basicstyle=\footnotesize\ttfamily,       % the size of the fonts that are used for the code
-numbers=left,                   % where to put the line-numbers
-numberstyle=\tiny,      % the size of the fonts that are used for the line-numbers
-stepnumber=1,                   % the step between two line-numbers. If it is 1 each line will be numbered
-numbersep=5pt,                  % how far the line-numbers are from the code
-backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
-showspaces=false,               % show spaces adding particular underscores
-showstringspaces=false,         % underline spaces within strings
-showtabs=false,                 % show tabs within strings adding particular underscores
-frame=single,           % adds a frame around the code
-tabsize=2,          % sets default tabsize to 2 spaces
-captionpos=b,           % sets the caption-position to bottom
-breaklines=true,        % sets automatic line breaking
-breakatwhitespace=false,    % sets if automatic breaks should only happen at whitespace
-escapeinside={\%*}{*)},          % if you want to add a comment within your code
-stringstyle= \color{lstStringColor},
-keywordstyle = \color{lstKeywordsColor}\bfseries,
-commentstyle=\color{lstCommentsColor}\itshape,
+	language = java,            % choose the language of the code
+	basicstyle = \footnotesize\ttfamily,       % the size of the fonts that are used for the code
+	numbers = left,              % where to put the line-numbers
+	numberstyle = \tiny,      % the size of the fonts that are used for the line-numbers
+	stepnumber = 1,            % the step between two line-numbers. If it is 1 each line will be 		numbered
+	numbersep = 5pt,          % how far the line-numbers are from the code
+	backgroundcolor = \color{white},  % choose the background color. You must add 		\usepackage{color}
+	showspaces = false,       % show spaces adding particular underscores
+	showstringspaces = false,      % underline spaces within strings
+	showtabs = false,           % show tabs within strings adding particular underscores
+	frame = single,              % adds a frame around the code
+	tabsize = 2,                   % sets default tabsize to 2 spaces
+	captionpos = b,             % sets the caption-position to bottom
+	breaklines = true,          % sets automatic line breaking
+	breakatwhitespace = false,    % sets if automatic breaks should only happen at whitespace
+	escapeinside = {\%*}{*)},          % if you want to add a comment within your code
+	stringstyle = \color{lstStringColor},
+	keywordstyle = \color{lstKeywordsColor}\bfseries,
+	commentstyle = \color{lstCommentsColor}\itshape,
 }

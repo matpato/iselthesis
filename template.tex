@@ -1,10 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Template for writing dissertations with ThesisMasterISEL
 %%
+%% Version 20121009 (Oct 2012) v1.0 - first version
+%% Version 20130201 (Feb 2013) v1.1
+%% Version 20130704 (Jul 2013) v1.11
+%% Version 20130925 (Sep 2013) v1.12
+%% Version 20141123 (Nov 2014) v1.13
 %% Version 20170102 (Jan 2017) v2.1
 %% Version 20170330 (March 2017) v2.2
-%% Version 20170330 (May 2017) v2.3.1
-
+%% Version 20170530 (May 2017) v2.3.1
+%% Version 20171207 (December 2017) v2.4
 %% Instituto Superior de Engenharia de Lisboa
 %% Instituto Politécnico de Lisboa
 %%
@@ -97,7 +102,7 @@
 
 % Where to find code scripts files
 \newcommand{\codefiles}[1]{Chapters/scripts/#1}
-% syntax: \lstinputlisting[]{\codefiles{name.r}}
+% syntax: \lstinputlisting[]{\rfile{name.r}}
 
 % Where to find Chapters files
 \newcommand{\chapterfiles}[1]{Chapters/#1}
@@ -213,7 +218,9 @@
 \printnomenclature
 %
 %% Always print the table of contents
-\tableofcontents 
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+\tableofcontents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{3}}
 %
 %% Print other lists of contents according to instructions given above
 \printotherlists 
