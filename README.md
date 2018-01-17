@@ -2,7 +2,7 @@
 Template for bachelor and master degrees report written in LaTex
 
 
-![Demo](/images/screen_demoHowtoUseLatex.png = 100x)[URL][logo]
+![Demo](/images/screen_demoHowtoUseLatex.png = 100x100)[URL][logo]
 
 [logo]:(https://iselpt-my.sharepoint.com/personal/mpato_deetc_isel_pt/_layouts/15/guestaccess.aspx?docid=116e03e4de12144cca265b04b454d91a4&authkey=AQ1Or1mX_GsCeqVOm9OgP-A&e=owKW6c)
 
