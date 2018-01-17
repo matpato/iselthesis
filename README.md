@@ -41,7 +41,7 @@ This template serves both degrees as a bachelor's and master's degree. And, duri
 1. Appendixes: Directory with tex files with a section or table of subsidiary matter at the end of a book or document;
 1. Logo: Directory with Faculty logos;
 1. Chapters: Directory where to put user files (text and figures);
-	1. chapter# - tex files for each chapter (#: 1, 2, ...) 
+	1. chapter# - tex files for each chapter (#: 1, 2, ...); 
 	1. scripts: Directory with useful bash scripts, e.g., for cleaning all temporary files;
 	1. img: Directory with all images to use in the chapters, e.g. \texttt{ra-raster.png}.
 	
