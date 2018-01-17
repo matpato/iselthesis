@@ -47,8 +47,8 @@ This template serves both degrees as a bachelor's and master's degree. And, duri
 	
 1. alpha-pt.bst: A file with bibliography names in portuguese, e.g., 'Relatório Técnico' e 'Tese de Mestrado' instead of 'Technical Report' and 'Master Thesis'. This file is used automatically if Portuguese is selected as the main language (see below);
 1. defaults.tex: A file with the main default values for the package (institution name, faculty's logo, degree name and similars - TO CHANGE BY THE USER);
-1. personaldataofthesis.tex: A file with the main default values for the package (identification of report as well as the author and juries - TO CHANGE BY THE USER);
-1. template.tex: The main file. You should run  \texttt{LaTeX} in this one. Please refrain from changing the file content outside of the well defined area;
+1. personaldataofthesis.tex: A file with the identification of report as well as the author and juries names - TO CHANGE BY THE USER;
+1. template.tex: The main file. Please refrain from changing the file content outside of the well defined area;
 1. bibliography.bib: The bib file. An easy way to find to import citation into bibtex is select option "Show links to import citation into BibTex" in \href{http://scholar.google.pt/scholar_settings?hl=en&as_sdt=0,5}{Scholar google settings};
 1. thesisisel.cls: The  LaTeX class file for the thesis{} style. Currently, some of the defaults are stored here instead of \verb!defaults.tex!. This file should not be changed, unless you're ready to play with fire! :) - **DO NOT CHANGE**).
 	
