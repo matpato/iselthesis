@@ -2,8 +2,8 @@
 Template for bachelor and master degrees report written in LaTex
 
 
-<img src="/images/screen_demoHowtoUseLatex.png" width="300" height="300" /> [URL][logo]
-[Demo]:(https://iselpt-my.sharepoint.com/personal/mpato_deetc_isel_pt/_layouts/15/guestaccess.aspx?docid=116e03e4de12144cca265b04b454d91a4&authkey=AQ1Or1mX_GsCeqVOm9OgP-A&e=owKW6c)
+<img src="/images/screen_demoHowtoUseLatex.png" width="600" height="300" />
+[URL]:(https://iselpt-my.sharepoint.com/personal/mpato_deetc_isel_pt/_layouts/15/guestaccess.aspx?docid=116e03e4de12144cca265b04b454d91a4&authkey=AQ1Or1mX_GsCeqVOm9OgP-A&e=owKW6c)
 
 
 ## Instructions
