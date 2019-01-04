@@ -1,7 +1,6 @@
 \chapter{A Short \texttt{LaTeX} Tutorial with Examples}
 \label{cha:a_short_latex_tutorial_with_examples}
 
-
 This Chapter aims at exemplifying how to do common stuff with \texttt{LaTeX}. We also show some stuff which is not that common! ;) 
 
 Please, use these examples as a starting point, but you should always consider using the \emph{Big Oracle} (aka, \href{http://www.google.com}{Google}, your best friend) to search for additional information or alternative ways for achieving similar results.
@@ -12,19 +11,8 @@ Please, use these examples as a starting point, but you should always consider u
 
 In engineering and science, a thesis or dissertation is the culmination of a master's or Ph.D. degree. A thesis or dissertation presents the research that the student performed for that degree. From the student's perspective, the primary purpose of a thesis or dissertation is to persuade the student's committee that he or she has performed and communicated research worthy of the degree. In other words, the main purpose of the thesis or dissertation is to help the student secure the degree. From the perspective of the engineering and scientific community, the primary purpose is to document the student's research. Although much research from theses and dissertations is also communicated in journal articles, theses and dissertations stand as detailed documents that allow others to see what the work was and how it was performed. For that reason, theses and dissertations are often read by other graduate students, especially those working in the research group of the authoring student. 
 	
-With a thesis or dissertation, the format also encompasses the names of the sections that are expected: \textbf{Abstract, Acknowledgments, Nomenclature, List of Figures, List of Tables, Introduction, Literature Review, Theoretical Analysis of Secondary Flows, Computational Methods, Experimental Design, Experimental and Computational Results, Conclusions and Future Work, References, Glossary and Appendix.}
-% section document_structure (end)
-
-
-\section{Dealing with Bibliography} % (fold)
-\label{sec:dealing_with_bibliography}
-
-% section dealing_with_bibliogrpahy (end)
-
-\section{Inserting Tables} % (fold)
-\label{sec:inserting_tables}
-
-% section inserting_tables (end)
+With a thesis or dissertation, the format also encompasses the names of the sections that are expected: \textbf{Abstract, Acknowledgments, Nomenclature, List of Figures, List of Tables, Introduction, State-of-the-Art, Experimental Design, Experimental and Computational Results, Conclusions and Future Work, References and Appendix.}	
+ 
 
 \section{Nomenclature/List of Symbols} % (fold)
 \label{sec:nomenclature}
@@ -140,7 +128,7 @@ The two files with the extensions *.gls and *.glg are generated. If entries are 
  This then gives you access to:\\
  \verb!\begin{wrapfigure}[lineheight]{alignment}{width}!
  \\
- Alignment can normally be either 'l' for left, or 'r' for right. Lowercase 'l' or 'r' forces the figure to start precisely where specified (and may cause it to run over page breaks), while capital 'L' or 'R' allows the figure to float. If you defined your document as twosided, the alignment can also be 'i' for inside or 'o' for outside, as well as 'I' or 'O'. The width is obviously the width of the figure. The example above was introduced with: 
+ Alignment can normally be either 'l' for left, or 'r' for right. Lowercase 'l' or 'r' forces the figure to start precisely where specified (and may cause it to run over page breaks), while capital 'L' or 'R' allows the figure to float. If you defined your document as \textit{twosided}, the alignment can also be 'i' for inside or 'o' for outside, as well as 'I' or 'O'. The width is obviously the width of the figure. The example above was introduced with: 
  \lstset{language=TeX, numbers=none, morekeywords={begin,includegraphics,caption}, caption=Wrapfig example, label=lst:latex_example}
  \begin{lstlisting}
  	\begin{wrapfigure}{l}{2.5cm}
@@ -153,12 +141,6 @@ The two files with the extensions *.gls and *.glg are generated. If entries are 
 % subsection inserting_images_wrapped_with_text (end)
 
 % section floats_figures_and_captions (end)
-
-
-\section{Text Formatting} % (fold)
-\label{sec:text_formatting}
-
-% section text_formatting (end)
 
 
 \section{Generating PDFs from \texttt{LaTeX}} % (fold)
@@ -313,10 +295,11 @@ There are two different ways to place two figures/tables side-by-side. The subfi
   \label{fig:figura-completa}
 \end{figure}
 
-
 Using the package listings you can add non-formatted text as you would do with \verb!\begin{verbatim}! but its main aim is to include the source code of any programming language within your document. If you wish to include pseudocode or algorithms see \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms_and_Pseudocode}{LaTeX/Algorithms\_ and\_Pseudocode}, as Listing ~\ref{lst:SetApp}.
 
-\lstfromfile{java,linerange={59-64}}{Static method - SetApp}{lst:SetApp}{Chapters/scripts/SetApp.java}{showlines=true,morekeywords={tran,begin,return},basicstyle=\footnotesize\ttfamily}
+%  \lstfromfile{language}{linerange}{caption}{label}{othersinsideoflstinoputlisting}{path}
+
+\lstfromfile{java}{59-64}{Static method - SetApp}{SetApp}{showlines=true,morekeywords={begin,System,out,print},numbers=left, firstnumber=59}{SetApp.java}
 
 \begin{minipage}{\textwidth}
 \lstset{language=R,numbers=left}
@@ -361,4 +344,4 @@ to put the page in ``landscape'', while the rest will remain in ``portrait'' ori
 
 \centering{\textbf{Written by Matilde Pós-de-Mina Pato with collaboration of Nuno Datia, \\2012 October (1st version)}}
 
-\centering{\textbf{Written by Matilde Pós-de-Mina Pato, \\ 2017 December \hspace{2em}--\version{2.4} (last version)}}
+\centering{\textbf{Written by Matilde Pós-de-Mina Pato, \\ \today  \hspace{2em}--\version{2.4} (last version)}}

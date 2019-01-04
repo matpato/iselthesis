@@ -1,0 +1,164 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Helper package to develop presentations in beamer
+%	Authors: Matilde Pato & Nuno Datia
+%	2018, March
+%	Version 1
+%	Depends on: beamer, xparse, listings, tcolorbox
+% Suports: Java, XML, R, SQL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Available Commands:
+%  \pausewithspace
+%	\headersize
+%	\subheadersize
+%	\highlightsize
+%	\cont
+%	TODO
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+
+%************** PACKAGES ***************
+\usepackage{listings}
+\usepackage{color}
+
+
+
+%************** STYLES ***************
+% == Color Definitions ===
+
+\definecolor{ForestGreen}    {cmyk}{0.76, 0 , 0.76, 0.45}
+\definecolor{BrickRed}{cmyk}{0,0.73,0.69,0.28}	
+\definecolor{MidnightBlue}  {cmyk}{0.98, 0.78, 0 , 0.56}
+% Listings
+\usepackage{fancyvrb}
+\colorlet{lstKeywordsColor}{MidnightBlue}
+\colorlet{lstKeywordsAltColor}{BrickRed}
+\colorlet{lstCommentsColor}{ForestGreen}
+\colorlet{lstStringColor}{BrickRed}
+
+
+%Javalst
+% Usage: \begin{javalst}[Caption]{Label}
+\lstnewenvironment{javalst}[2][]%
+{
+	\lstset{
+	language=Java,
+	basicstyle=\small\tt,
+	frame=tb,
+	captionpos=b,
+	caption=#1,
+	label={lst:#2},
+	tabsize=2}
+	}%
+{}%
+
+%XMLlst
+\lstnewenvironment{xmllst}[2][]%
+{
+	\lstset{
+	language=XML,
+	basicstyle=\small\tt,
+	frame=tb,
+	captionpos=b,
+	caption=#1,
+	label={lst:#2},
+	tabsize=2}
+	}%
+{}%
+
+%lst
+\lstnewenvironment{lst}[2][]%
+{\
+	lstset{
+		basicstyle=\footnotesize\tt,
+		frame=tb,
+		captionpos=b,
+		caption=#1,
+		label={lst:#2},
+		tabsize=2}
+		}%
+{}
+
+\renewcommand{\lstlistingname}{Código}
+
+% ************* Continue line numbers in listings package  *************
+%  Always I forget this so I created some aliases
+
+\def\ContinueLineNumber{
+	\lstset{
+		firstnumber = last
+		}
+	}
+\def\StartLineAt#1{
+	\lstset{
+		firstnumber = #1
+		}
+	}
+\let\numberLineAt\StartLineAt
+
+\lstset{
+literate=%
+% Latin
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}  
+
+\renewcommand*\thelstnumber{\oldstylenums{\the\value{lstnumber}}}
+
+% ---------------------- TYPESETTING ---------------------- %
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{lstCommentsColor},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{lstKeywordsColor}\bfseries,       % keyword style
+  stringstyle=\color{lstStringColor},     % string literal style   
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\scriptsize, % the style that is used for the line-numbers
+}
+
+% ************* FOR  CODE IN FILE ************* 
+% usage \lstfromfile{language}{linerange}{caption}{label}{othersinsideoflstinoputlisting}{path}
+\newcommand{\lstfromfile}[6]{	
+	\lstinputlisting[
+		language=#1,
+		linerange={#2},
+		basicstyle=\small\tt,
+		frame=tb,
+		captionpos=b,
+		caption=#3,
+		label={lst:#4},
+		tabsize=2,
+		#5] {#6}
+}
+
+% ************* FOR INLINE CODE ************* 
+% usage \code{language}{code}
+\newcommand{\code}[2]{
+	\lstinline[
+		basicstyle=\tt,%
+		keywordstyle=\color{lstKeywordsColor}\bfseries,%
+		commentstyle=\color{lstCommentsColor},%
+		stringstyle=\color{lstStringColor},% 		
+		language=#1
+		]
+		|#2|
+		}

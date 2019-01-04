@@ -1,10 +1,18 @@
+\def\thetitle{%
+ [Título da dissertacao, do Projecto ou do Relatorio de Estágio]
+}
+\def\theauthor{%
+ [Nome completo do autor]
+}
+
+
 %% Title of thesis
-\title{[Título da dissertação, do Projecto ou do Relatório de Estágio]}
+\title{ \thetitle }
 
 %% Author(s) 
 % gender: f for women or m for men and name
 %  ------ Master report  (maximum of 1) ---------
-\author[f]{\uppercase{[Nome completo do  autor]}}
+\author[f]{\uppercase{\theauthor}}
 \authordegree{(Grau do candidato)} 
 
 %  ------ Bachelor report  (maximum of 3) ---------
@@ -16,21 +24,26 @@
 
 
 %% Date
-\themonth{MÊS}
+\themonth{MES}
 \theyear{ANO}
 
 %% Supervisors (maximum of 2)
 % use [f] for female and [m] for male
+%% ---------------------------------------------------%%
+%% \adviser[m|f]{Category}{Name}
+%% ---------------------------------------------------%%
 \adviser[m]{[Nome do orientador]}{[Grau]}
 \adviser[f]{[Nome do orientador]}{[Grau]}
 
 %
 %% Jury (maximum of 5 elements)
-%% Use [p] for president, [a] for referees
-%% President of the jury
-\jury[p]{[Grau e Nome do presidente do júri]}
+%% Use [p] for president, of the jury and [a] for referees
+%% ---------------------------------------------------%%
+%% \jury[p|a]{Category and Name}
+%% ---------------------------------------------------%%
+\jury[p]{[Grau e Nome do presidente do juri]}
 %% Referees
 \jury[a]{[Grau e  Nome do primeiro vogal]}
 \jury[a]{[Grau e  Nome do segundo vogal]}
-\jury[a]{[Grau e  Nome do terceiro vogal]}
-\jury[a]{[Grau e  Nome do quarto vogal]}
+%\jury[a]{[Grau e  Nome do terceiro vogal]}
+%\jury[a]{[Grau e  Nome do quarto vogal]}

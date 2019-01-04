@@ -1,0 +1,73 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{fullpage}
+
+\usepackage{listings}
+\usepackage{color}
+
+\title{Syntax Highlighting in LaTeX with the listings Package}
+\author{writeLaTeX}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style   
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Java}
+\begin{lstlisting}[language=java]{ morekeywords={System, out, print, println}}
+class HelloWorldApp {
+    public static void main(String[] args) {
+        System.out.println("Hello World!"); // Display the string.
+        for (int i = 0; i < 100; ++i) {
+            System.out.println(i);
+        }
+    }
+}
+\end{lstlisting}
+
+\section{Python}
+% from http://wiki.scipy.org/Numpy_Example_List
+\begin{lstlisting}[language=python]
+>>> from numpy import *
+>>> from numpy.fft import *
+>>> signal = array([-2., 8., -6., 4., 1., 0., 3., 5.])
+>>> fourier = fft(signal)
+>>> N = len(signal)
+>>> timestep = 0.1 # if unit=day -> freq unit=cycles/day
+>>> freq = fftfreq(N, d=timestep) # freqs corresponding to 'fourier'
+>>> freq
+array([ 0. , 1.25, 2.5 , 3.75, -5. , -3.75, -2.5 , -1.25])
+>>> fftshift(freq) # freqs in ascending order
+array([-5. , -3.75, -2.5 , -1.25, 0. , 1.25, 2.5 , 3.75])
+\end{lstlisting}
+
+\section{MATLAB/Octave}
+% from http://wiki.scipy.org/Numpy_Example_List
+\begin{lstlisting}[language=octave]
+octave:1> function xdot = f (x, t)
+>
+>  r = 0.25; k = 1.4;
+>  a = 1.5; b = 0.16; c = 0.9; d = 0.8;
+>
+>  xdot(1) = r*x(1)*(1 - x(1)/k) - a*x(1)*x(2)/(1 + b*x(1));
+>  xdot(2) = c*a*x(1)*x(2)/(1 + b*x(1)) - d*x(2);
+>
+> endfunction
+\end{lstlisting}
+
+\end{document}

@@ -56,13 +56,12 @@ public class SetApp {
 
     }
 
-    private static void printSet(Set set) {
+    private static void printSet(Set set) {  // comment
         int[] elements = set.getElements();
         System.out.print('{');
         for (int i = 0; i < elements.length; i++) {
             System.out.print(elements[i] + (i == elements.length-1 ? "" : ","));
         }
-
         System.out.println('}');
     }
 }
