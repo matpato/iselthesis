@@ -370,68 +370,6 @@ de Mestre \\em \@majorfield}
 \gdef\@keywordsnameEN{Keywords}
 
 
-% Portuguese
-\if\@language0
-  	\gdef\@notdefined{NÃO DEFINIDO}
-  	\gdef\acknowledgementsname{Agradecimentos} 
-  	
-  	\addto{\captionsportuguese}{%	
-  		\renewcommand{\contentsname}{Índice}
-  	}
-  	\def\appendixname{Anexos}
-  	\addto{\captionsportuguese}{%
-  		\renewcommand{\bibname}{Referências}
-  	}
-  	
-  	\def\glossaryname{Main}
- 		\addto{\captionsportuguese}{
- 			\renewcommand*{\glossaryname}{Lista de Abreviaturas}
- 			\renewcommand*{\pagelistname}{Páginas}
- 			\renewcommand*{\entryname}{Notação}
-	}
-	
-  	\renewcommand*{\nomname}{Abreviaturas e símbolos}
- 
-	\def\lstlistlistingname{Listagens}
-	  	\addto{\captionsportuguese}{%
-			%\renewcommand*{\lstlistingname}{Listagem}%
-			\renewcommand*{\lstlistingname}{Listagem}% Listing -> Algorithm
-			\renewcommand{\lstlistlistingname}{Lista de Listagens}% List of Listings -> List of Algorithms
-	}
-	
-	\renewcommand{\algorithmicrequire}{\textbf{Dados: }}
-	\renewcommand{\algorithmicensure}{\textbf{Resultado: }}
-
-	\def\backrefbrazil{%
-		\def\backrefpagesname{p\'aginas}%
-		\def\backrefsectionsname{se\c c\~oes}%
-		\def\backrefsep{, }%
-		\def\backreftwosep{ e~}%
-		\def\backreflastsep{, e~}%
-	}
-	
-% English
-\else\if\@language1
-  	\gdef\@notdefined{UNDEFINED}
-  	\gdef\acknowledgementsname{Acknowledgments}
-  	\def\appendixname{Appendix}
-
-	\def\lstlistlistingname{Listings}
-	  	\addto{\captionsportuguese}{%
-			%\renewcommand*{\lstlistingname}{Listagem}%
-			\renewcommand*{\lstlistingname}{Listing}% Listing -> Algorithm
-			\renewcommand{\lstlistlistingname}{List of \lstlistingname s}% List of Listings -> List of Algorithms
-	}
-	  	
-  	\def\backrefenglish{%
-		\def\backrefpagesname{pages}%
-		\def\backrefsectionsname{sections}%
-		\def\backrefsep{, }%
-		\def\backreftwosep{ and~}%
-		\def\backreflastsep{, and~}%
-		}
-\fi\fi
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DEFINE LOGO AND IMAGE IN FRONTPAGE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -852,26 +790,27 @@ de Mestre \\em \@majorfield}
 \def\@enabstractfile{~enabstractfile \@notdefined}
 \fi\fi
 
-
-\def\printabstract{%
-	\if\@language0   % Sumário-PT + Abstract-EN for thesis in Portuguese
+\def\printabstract{%	
+	\ifx\@language0 % Sumário-PT + Abstract-EN for thesis in Portuguese
 		\selectlanguage{portuguese}
+		\if\@degreetype1\@degreetype3
 		\@input@{Chapters/\@ptabstractfile}\global\let\@ptabstractfile\@empty
 		\ifx\@enabstractfile\@empty
 		\else
 			\selectlanguage{english}
 			\@input@{Chapters/\@enabstractfile}\global\let\@enabstractfile\@empty
 			\selectlanguage{portuguese}
-		\fi
-	\else\if\@language1   % Abstract-EN + Sumário-PT for thesis in English
+		\fi\fi
+	\else\ifx\@language1   % Abstract-EN + Sumário-PT for thesis in English
 		\selectlanguage{english}
+		\if\@degreetype1\@degreetype3
 		\@input@{Chapters/\@enabstractfile}\global\let\@enabstractfile\@empty
 		\ifx\@ptabstractfile\@empty
 		\else
 			\selectlanguage{portuguese}
 			\@input@{Chapters/\@ptabstractfile}\global\let\@ptabstractfile\@empty
 			\selectlanguage{english}
-		\fi
+		\fi\fi
 	\fi\fi
 }
 
@@ -945,6 +884,72 @@ de Mestre \\em \@majorfield}
 % To process lists and other stuff
 \RequirePackage{etoolbox}
 %\usepackage{pgffor}%
+
+% Portuguese
+\if\@language0
+  	\gdef\@notdefined{NÃO DEFINIDO}
+  	\gdef\acknowledgementsname{Agradecimentos} 
+  	
+  	\addto\captionsportuguese{% Replace "english" with the language you use
+  		\renewcommand{\contentsname}{Índice}%
+	}
+	
+ 	\renewcommand*{\listtablename}{Lista de Tabelas}
+	\renewcommand*{\listfigurename}{Lista de Figuras}
+	
+  	\def\appendixname{Anexos}
+  	\addto{\captionsportuguese}{%
+  		\renewcommand{\bibname}{Referências}
+  	}
+  	
+  	\def\glossaryname{Main}
+ 		\addto{\captionsportuguese}{
+ 			\renewcommand*{\glossaryname}{Lista de Abreviaturas}
+ 			\renewcommand*{\pagelistname}{Páginas}
+ 			\renewcommand*{\entryname}{Notação}
+	}
+	
+  	\renewcommand*{\nomname}{Lista de Abreviaturas e S\'{i}mbolos} % Nomenclatura
+ 
+	\def\lstlistlistingname{Listagens}
+	  	\addto{\captionsportuguese}{%
+			%\renewcommand*{\lstlistingname}{Listagem}%
+			\renewcommand*{\lstlistingname}{Listagem}% Listing -> Algorithm
+			\renewcommand{\lstlistlistingname}{Lista de Listagens}% List of Listings -> List of Algorithms
+	}
+	
+	\renewcommand{\algorithmicrequire}{\textbf{Dados: }}
+	\renewcommand{\algorithmicensure}{\textbf{Resultado: }}
+
+	\def\backrefbrazil{%
+		\def\backrefpagesname{p\'aginas}%
+		\def\backrefsectionsname{se\c c\~oes}%
+		\def\backrefsep{, }%
+		\def\backreftwosep{ e~}%
+		\def\backreflastsep{, e~}%
+	}
+	
+% English
+\else\if\@language1
+  	\gdef\@notdefined{UNDEFINED}
+  	\gdef\acknowledgementsname{Acknowledgments}
+  	\def\appendixname{Appendix}
+
+	\def\lstlistlistingname{Listings}
+	  	\addto{\captionsenglish}{%
+			%\renewcommand*{\lstlistingname}{Listagem}%
+			\renewcommand*{\lstlistingname}{Listing}% Listing -> Algorithm
+			\renewcommand{\lstlistlistingname}{List of \lstlistingname s}% List of Listings -> List of Algorithms
+	}
+	  	
+  	\def\backrefenglish{%
+		\def\backrefpagesname{pages}%
+		\def\backrefsectionsname{sections}%
+		\def\backrefsep{, }%
+		\def\backreftwosep{ and~}%
+		\def\backreflastsep{, and~}%
+		}
+\fi\fi
 
 %====================================================================
 % PACKAGE listings
@@ -1122,7 +1127,7 @@ de Mestre \\em \@majorfield}
 
 \begin{center}
 % Put logo
-	\logo{\@universitylogo}{0.12}
+	\logo{\@universitylogo}{0.35}
 
 %Define font style (ptm=Times New Roman)
 	\fontfamily{ptm}
@@ -1158,7 +1163,7 @@ de Mestre \\em \@majorfield}
 			maxwidth=1\linewidth,
 			doinside=\hspace*{0.1cm},
 		]{rX}{}{ 
-		\toprule
+		%\toprule
 		\printauthor[]{1}\\
 		\ifnum \@theauthorcount > 1		
 		\midrule	
