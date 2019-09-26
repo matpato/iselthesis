@@ -793,7 +793,7 @@ de Mestre \\em \@majorfield}
 \def\printabstract{%	
 	\ifx\@language0 % Sumário-PT + Abstract-EN for thesis in Portuguese
 		\selectlanguage{portuguese}
-		\if\@degreetype1\@degreetype3
+		\if{\@degreetype1\@degreetype3}
 		\@input@{Chapters/\@ptabstractfile}\global\let\@ptabstractfile\@empty
 		\ifx\@enabstractfile\@empty
 		\else
@@ -803,7 +803,7 @@ de Mestre \\em \@majorfield}
 		\fi\fi
 	\else\ifx\@language1   % Abstract-EN + Sumário-PT for thesis in English
 		\selectlanguage{english}
-		\if\@degreetype1\@degreetype3
+		\if{\@degreetype1\@degreetype3}
 		\@input@{Chapters/\@enabstractfile}\global\let\@enabstractfile\@empty
 		\ifx\@ptabstractfile\@empty
 		\else
