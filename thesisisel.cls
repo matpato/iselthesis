@@ -356,7 +356,7 @@
  Semestre de Verão \@scholaryear}
 \gdef\@prepmscdissertationtstr{Relatório preliminar para obtenção do Grau 
 de Mestre \\em \@majorfield}
-\gdef\@mscdissertationtstr{\@thesistype~ para obtenção do Grau 
+\gdef\@mscdissertationtstr{\@thesistype~para obtenção do Grau 
 de Mestre \\em \@majorfield}
 
 \gdef\@presentationtext{\@dissertationtype}
