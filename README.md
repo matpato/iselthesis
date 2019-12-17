@@ -1,30 +1,25 @@
-# reportisel
+# thesisisel
 Template for bachelor and master degrees report written in LaTex
 
 1. Instructions
 
-This template serves both degrees as a bachelor's and master's degree. And, during the development stages of the work as final or "Preparation of BSc (MSc) dissertation". To do this simply change the following settings (see template.tex, line 29-41):
+This template serves both degrees as a bachelor's and master's degree. And, during the development stages of the work as final or "Preparation of BSc (MSc) dissertation". To do this simply change the following settings (see template.tex, line 34-46):
 
 	\documentclass[
-		msc,			% (*) msc, prepmsc, bsc, prepbsc - degree
-						% prepbsc(msc) Preparation of BSc (MSc) dissertation
-						% bsc(msc) BSc graduation report/ MSc dissertation
-						% GO TO LINE 189
-		pt,				% (*) pt, en - languages 
-		twoside,		% (*) twoside, oneside - single or double sided printing
-		12pt,			% (*) 12pt, 11pt, 10pt - use font size
-		a4paper,		% the paper size/format
-		utf8,			% (*) utf8, latin1	- Text encoding: Linux, Mac or Windows
-		hyperref = true,% Hyperlinks in citations: true(*) false
+		prepmsc,	% (*) msc, prepmsc, bsc, prepbsc - degree
+					% prepbsc(msc) Preparation of BSc (MSc) dissert
+					% bsc(msc) BSc graduation report/ MSc dissertation
+					% GO TO LINE 189
+		pt,			% (*) pt, en - languages 
+		twoside,	% (*) twoside, oneside - single/double sided printing
+		12pt,		% (*) 12pt, 11pt, 10pt - use font size
+		a4paper,	% the paper size/format
+		utf8,		% (*) utf8, latin1 - Text encoding: Linux, Mac or Windows
+		hyperref = true,  % Hyperlinks in citations: true(*) false
 		listof=totoc
 		]{thesisisel} 
 
 	1.1 How to run
-
-	Nomenclature:
-		$ pdflatex template
-		$ makeindex template.nlo -s nomencl.ist -o template.nls
-		$ pdflatex template (twice)
 
 	Bibliography:
 		$ pdflatex template
@@ -62,7 +57,7 @@ The template will first automatically place the abstract in the language of the 
 4. How to write using LaTex
 
 	https://www.latex-project.org
-	https://www.sharelatex.com/learn/Creating_a_document_in_LaTeX
+	https://www.overleaf.com
 	http://www4.di.uminho.pt/~jcr/AULAS/didac/manuais/manual-latex.pdf
 
 	tikZ and PGF: http://www.texample.net/tikz/
@@ -75,9 +70,8 @@ The template will first automatically place the abstract in the language of the 
 
 	2. MiKTeX (pronounced mick-tech) is an up-to-date implementation of TeX/LaTeX and related programs. TeX is a typesetting system written by Donald Ervin Knuth who says that it is intended for the creation of beautiful books - and especially for books that contain a lot of mathematics. (source: https://miktex.org)
 
-	3. ShareLaTeX is an open-source online real-time collaborative LaTeX editor. We run a hosted version at http://www.sharelatex.com, but you can also run your own local version, and contribute to the development of ShareLaTeX. (source: https://pt.sharelatex.com)
-	
-	4. Overleaf is an online LaTeX and Rich Text collaborative writing and publishing tool that makes the whole process of writing, editing and publishing scientific documents much quicker and easier. (source: https://www.overleaf.com)
+	3. Overleaf is an open-source online real-time collaborative LaTeX editor. Overleaf comes with a complete, ready to go LaTeX environment which runs on our servers. With Overleaf you get the same LaTeX set-up wherever you go. By working with your colleagues and students on Overleaf, you know that you're not going to hit any version inconsistencies or package conflicts. (source: https://www.overleaf.com)
+ 
 
 # 
 
@@ -86,7 +80,7 @@ Authors
 	Matilde Pós-de-Mina Pato
 	Nuno Datia (as contributor)
 
-January, 04th 2019 
+December, 17th 2019 
 
 
 this package and template are not official for ISEL/IPL.
