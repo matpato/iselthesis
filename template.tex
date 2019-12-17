@@ -10,6 +10,7 @@
 %% Version 20170330 (March 2017) v2.2
 %% Version 20170530 (May 2017) v2.3.1
 %% Version 20190104 (January 2019) v2.4
+%% Version 20191217 (December 2019) v2.5
 %% Instituto Superior de Engenharia de Lisboa
 %% Instituto Politécnico de Lisboa
 %%
@@ -146,9 +147,10 @@
 % Conditionally insert List of Figures, Tables and Code Listings
 \addlisttofrontmatter{\conditionalLoF} 	% The List of Figures. 
 \addlisttofrontmatter{\conditionalLoT} 	% The List of Tables. 
-\addlisttofrontmatter{\conditionalLoL}	% The List of Code Listings.
-\addlisttofrontmatter{\printnoidxglossary} % The List if Abreviations / Glossary. Comment to omit.
-%\renewcommand{\glossaryname}{Lista de }
+\addlisttofrontmatter{\conditionalLoL}		% The List of Code Listings.
+\addlisttofrontmatter{\printnoidxglossary[type=acronym]} % The List of Abreviations 
+\addlisttofrontmatter{\printnoidxglossary} %  default: type=main,  Glossary. Comment to omit.						
+%\printnoidxglossary[type=symbols] % only glossaries 
 % ---------------------------------------------------------------------------------
 % TEX CHAPTERS:
 % syntax: \chapterfile{file}
@@ -203,8 +205,6 @@
 % use the document main language and second the foreign language
 \printabstract
 %%------------------------------------------------------------
-%% The List of Symbols (Nomenclature). Comment to omit.
-\printnomenclature
 %
 %% Always print the table of contents
 \addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
@@ -213,13 +213,14 @@
 %
 %% Print other lists of contents according to instructions given above
 \printotherlists 
+%% The List of Symbols (Nomenclature). Comment to omit.
+%\printnomenclature
 %
 % ----------------------------------------------------------------------
 %  Print Document Chapters
 % ----------------------------------------------------------------------
 %%
 % Title page: page (i)
-
 \printchapters
 %%
 % ----------------------------------------------------------------------

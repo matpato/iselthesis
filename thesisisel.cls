@@ -2,21 +2,22 @@
 %%% thesisisel.cls
 %%% ISEL/IPL Dissertation document class
 %%%
-%%% By Matilde Pós-de-Mina Pato (mpato@deq.isel.pt)
+%%% By Matilde Pós-de-Mina Pato (matilde.pato@isel.pt)
 %%% Version of October 2012
 %%% Version v1.1:  July 2013 
 %%% Version v2.0: March 2015
 %%% Version v2.3: December 2017
 %%% Version v2.4: January 2019
+%%% Version v2.5: December 2019
 %%% 
 %%% This template is vaguely based on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
 %%%
-%%% BUGS and SUGGESTIONS: please send email to "mpato@deq.isel.pt"
+%%% BUGS and SUGGESTIONS: please send email to "matilde.pato@isel.pt"
 %%%     or sumit a ticket in the the project web page at
 %%%     https://github.com/matpato/thesisisel
 %%%
-%%% CONTRIBUTERS are welcome. Please contact "mpato@deq.isel.pt"
+%%% CONTRIBUTERS are welcome. Please contact "matilde.pato@isel.pt"
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
@@ -104,6 +105,7 @@
 
 \RequirePackage[
 			breaklinks = true,
+			hidelinks,
 			colorlinks,
 			pdfdisplaydoctitle,
 			citecolor=mydarkblue,
@@ -138,7 +140,7 @@
   \let\iiiint\relax 
   \let\idotsint\relax 
 \usepackage{amsmath, amssymb, amsfonts, verbatim, mathabx}
-
+\usepackage{spverbatim}
 % underline  
 \usepackage{ulem}
 
@@ -172,20 +174,17 @@
 \usepackage[a-1b]{pdfx}
 
 %======================================================================
-
-
+\RequirePackage[]{xcolor}
+\definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
 \usepackage{ifpdf}		% This is now the recommended way for checking for PDFLaTeX:
 \ifpdf
 	\RequirePackage[pdftex]{graphicx}
-	\DeclareGraphicsExtensions{.pdf, .png, .jpg, .tif}
-	\RequirePackage[pdftex,usenames,dvipsnames]{color}
-	\definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
-	
+	\DeclareGraphicsExtensions{.pdf, .png, .jpg, .tif}	
 	\else
 		\RequirePackage{graphicx}
 		\DeclareGraphicsExtensions{.eps, .png, .jpg}
-		\RequirePackage[usenames]{color}
-		\definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
+%		\RequirePackage[usenames]{color}
+%		\definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
 		%or, 
 \fi
 
@@ -215,6 +214,7 @@
   \Hy@DisableOption{pdfmoddate}%
   \Hy@DisableOption{pdfproducer}%
   \Hy@DisableOption{pdfkeywords}
+  \Hy@DisableOption{backref}
   }
   
 %====================================================================
@@ -279,25 +279,29 @@
 % First load the package in the preamble. The makenomenclature command is required for the generation of the nomenclature file (.nlo). Commenting it out is a convenient way to “switch it off”.
 %
 \usepackage[printonlyused,withpage]{acronym}
+%\usepackage[
+%	intoc]               % show listings as entries in table of contents      
+%	{nomencl}
+%\makenomenclature
 \usepackage[
-	intoc]               % show listings as entries in table of contents      
-	{nomencl}
-\makenomenclature
-\usepackage[
+	nogroupskip,
+	sort=use,
 	translate=babel,
 	%nonumberlist, % do not show page numbers
-	acronym,        % generate acronym listing
-	toc,                % show listings as entries in table of contents
-	section]          % use section level for toc entries
+	acronym,        	% generate acronym listing
+	toc                	% show listings as entries in table of contents
+	]          				% use section level for toc entries
 	{glossaries}
 \glsdisablehyper
 \makenoidxglossaries
 
-\setglossarystyle{long} % long3colheader
+
+\setglossarystyle{long} %long3colheader
 % style=long,header=none,border=none,cols=2 &
 \addtolength{\glspagelistwidth}{1cm}
 \addtolength{\glsdescwidth}{2.5cm}
 \renewcommand*{\glsnamefont}[1]{\bfseries #1}%
+
 %====================================================================
 % PACKAGE pdfpages and pdflscape
 %====================================================================
@@ -768,9 +772,11 @@ de Mestre \\em \@majorfield}
 
 \def\printacknowledgements{
 	\if\@degreetype0	
-	\else\if\@degreetype1	\@input@{Chapters/\@acknowledgementsfile}\global\let\@acknowledgementsfile\@empty
+	\else\if\@degreetype1			
+		\@input@{Chapters/\@acknowledgementsfile}\global\let\@acknowledgementsfile\@empty
 	\else\if\@degreetype2
-	\else\if\@degreetype3		\@input@{Chapters/\@acknowledgementsfile}\global\let\@acknowledgementsfile\@empty
+	\else\if\@degreetype3		
+		\@input@{Chapters/\@acknowledgementsfile}\global\let\@acknowledgementsfile\@empty
 	\fi\fi\fi\fi
 }
 
@@ -904,12 +910,11 @@ de Mestre \\em \@majorfield}
   	
   	\def\glossaryname{Main}
  		\addto{\captionsportuguese}{
- 			\renewcommand*{\glossaryname}{Lista de Abreviaturas}
+ 			\renewcommand*{\acronymname}{Lista de Abreviaturas e Siglas}
+ 			\renewcommand*{\glossaryname}{Glossário}
  			\renewcommand*{\pagelistname}{Páginas}
  			\renewcommand*{\entryname}{Notação}
 	}
-	
-  	\renewcommand*{\nomname}{Lista de Abreviaturas e S\'{i}mbolos} % Nomenclatura
  
 	\def\lstlistlistingname{Listagens}
 	  	\addto{\captionsportuguese}{%
@@ -968,10 +973,22 @@ de Mestre \\em \@majorfield}
 %listings package provides a key called inputpath for specifying a path where \lstinputlisting should search for source files.
 \newcommand*\lstinputpath[1]{\lstset{inputpath=#1}}
 
+%%\newcommand\listnomenclature{Symbols}
+%%\usepackage{longtable}
+%%\newcommand\listofnomenclature[2]{
+%%\btypeout{\listnomenclature}
+%%\addtotoc{\listnomenclature}
+%%    \chapter*{\listnomenclature
+%%      \@mkboth{
+%%          \MakeUppercase\listnomenclature}{\MakeUppercase\listnomenclature}}
+%%\begin{longtable}[c]{#1}#2\end{longtable}\par
+%%    \cleardoublepage
+%%}
 \renewcommand{\lstlistoflistings}{
 	\begingroup
 	\tocfile{\lstlistlistingname}{lol}
-	\endgroup}
+	\endgroup
+	}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Conditional list of figure, table, listings - listoffigures, listoftables and lstlistoflistings only if listings are present
@@ -992,8 +1009,10 @@ de Mestre \\em \@majorfield}
 \newcommand\conditionalLoT{%
   \iftotaltables\listoftables\fi}
 \newcommand\conditionalLoL{%
-  \iftotallstlistings\lstlistoflistings\fi}   
-  
+  \iftotallstlistings\lstlistoflistings\fi} 
+%\newcommand\conditionalLoA{%
+%  \iftotallstnomenclature\lstlistofnomenclature\fi}     
+%  \listofnomenclature{ll}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Deal with optional lists in the frontmatter: listoftables, listoffigures, etc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1143,6 +1162,12 @@ de Mestre \\em \@majorfield}
 	\selectfont
 	\textbf{\@department}
 
+% Put image
+	\ifx\@workimage\undefined
+	\noimage
+	\else
+	\image{\@workimage}
+	\fi
 
 \vspace{0.65cm}
 % Title of Dissertation
@@ -1304,13 +1329,13 @@ de Mestre \\em \@majorfield}
 %http://tex.stackexchange.com/questions/15971/bibliography-with-page-numbers
 \usepackage{backref}
 \renewcommand*{\backref}[1]{}
-\renewcommand*{\backrefalt}[4]{%
-    \ifcase #1 (not cited)%
-    \or        (p.~#2)%
-    \else      (pp.~#2)%
-    \fi}
+%\renewcommand*{\backrefalt}[4]{%
+%    \ifcase #1  (not cited)%
+%    \or        (p.~#2)%
+%    \else      (pp.~#2)%
+%    \fi}
 
 % break long URLs in Bibtex
 %URL linebreak in footnote
-\usepackage{breakurl}
+%\usepackage{breakurl}
 \def\UrlBreaks{\do\/\do-}

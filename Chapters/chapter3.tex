@@ -11,69 +11,79 @@ Please, use these examples as a starting point, but you should always consider u
 
 In engineering and science, a thesis or dissertation is the culmination of a master's or Ph.D. degree. A thesis or dissertation presents the research that the student performed for that degree. From the student's perspective, the primary purpose of a thesis or dissertation is to persuade the student's committee that he or she has performed and communicated research worthy of the degree. In other words, the main purpose of the thesis or dissertation is to help the student secure the degree. From the perspective of the engineering and scientific community, the primary purpose is to document the student's research. Although much research from theses and dissertations is also communicated in journal articles, theses and dissertations stand as detailed documents that allow others to see what the work was and how it was performed. For that reason, theses and dissertations are often read by other graduate students, especially those working in the research group of the authoring student. 
 	
-With a thesis or dissertation, the format also encompasses the names of the sections that are expected: \textbf{Abstract, Acknowledgments, Nomenclature, List of Figures, List of Tables, Introduction, State-of-the-Art, Experimental Design, Experimental and Computational Results, Conclusions and Future Work, References and Appendix.}	
+With a thesis or dissertation, the format also encompasses the names of the sections that are expected: 
+\begin{enumerate}
+\item Thesis Cover
+\item Acknowledgments (if exist)
+\item Abstract (Portuguese and English)
+\item Index
+\item List of Figures
+\item List of Tables
+\item Nomenclature/List of Abbreviations (if exists)
+\item Glossary (if exists)
+\item Introduction
+\item State-of-the-Art or Related work
+\item Proposed method
+\item Experiment result
+\item Conclusion and Future work
+\item References, and 
+\item Appendix (if exists)
+\end{enumerate}
  
+\subsection{State-of-the-Art}
+\label{sec:state}
 
-\section{Nomenclature/List of Symbols} % (fold)
-\label{sec:nomenclature}
+State-of-the-Art (SoTA) is a step to demonstrate the novelty of your research results. The importance of being the first to demonstrate research results is a cornerstone of the research business\footnote{``Why and how to write the state-of-the-art'', by Babak A. Farshchian, May 22, 2007}. 
 
-The Nomenclature includes abbreviations and terms found in the thesis that the writer uses frequently and does not define at each usage. The List of Symbols includes all special symbols used in the thesis that the writer does not define at each usage.
-
-Add abbreviations together with their description or long form to your document. Ideally, this is done immediately after an abbreviation is mentioned for the first time. Consider the following example:
-
-\textit{I want \nom{$\beta$}{The second letter of the greek alphabet} to be listed after \nom{$\alpha$}{The first letter of the greek alphabet}.}
-
-The example above was introduced with:
-
- \lstset{language=TeX, numbers=none, morekeywords={\begin,\includegraphics,\caption}, caption=Nomenclature example, label=lst:nomen_example}
- \begin{lstlisting}
-I want \nom{$\beta$}{The second letter of the Greek alphabet} to be listed after \nom{$\alpha$}{The first letter of the Greek alphabet}.
- \end{lstlisting}
+Besides demonstrating the novelty of your research results, a SoTA has other important properties:
+\begin{enumerate}
+\item It teaches you a lot about your research problem. By reading literature related to your research problem you will learn from other researchers and it will be easier for you to understand and analyze your problem;
+\item It proves that your research problem has relevance;
+\item It shows different approaches to a solution;
+\item It shows what you can reuse from what others have done. 
+\end{enumerate}
  
-Similar to a glossary or bibliography, the document is typesetted once (latex). Next, the nomenclature is generated using makeindex. Finally, the document is typesetted again, adding the nomenclature to it.
+ 
+\subsection{Related work}
+\label{sec:relatedwork}
 
-\begin{verbatim}
-$ pdflatex template
-$	makeindex template.nlo -s nomencl.ist -o template.nls
-$	pdflatex template (twice)
-\end{verbatim}
+In the \textit{Related Works} section, you should discuss briefly about published matter that technically relates to your proposed work\footnote{\url{https://academia.stackexchange.com/questions/68164/how-to-write-a-related-work-section-in-computer-science}}
 
-or, if you use texmaker, the idea is change  \\
+A short summary of what you can include (but not limited to) in the Related Works section:
+\begin{enumerate}
+\item Work that proposes a different method to solve the same problem;
+\item Work that uses the same proposed method to solve a different problem;
+\item A method that is similar to your method that solves a relatively similar problem;
+\item A discussion of a set of related problems that covers your problem domain.
+\end{enumerate}
+    
 
-Makeindex Commands in  Texmaker/Preferences/makeindex. \\
-
-By default it states:  "/usr/texbin/makeindex" \%.idx,  and you change to "/usr/texbin/makeindex" \%.nlo -s nomencl.ist -o \%.nls. 
-
-\begin{sloppypar}
-The makeindex command takes the nomenclature file (.nlo), the style file (nomencl.ist) and the name of the output file (.nls) as input arguments.
-\end{sloppypar}
-
-After the Nomenclature and/or List of Symbols (if applicable) follow(s) the List of Figures. 
-
-\section{Glossary} % (fold)
+\section{Glossary and Nomenclature/List of Symbols} % (fold)
 \label{sec:glossary}
 
-A glossary is a nice thing to have in a report and usually very helpful. As you probably can imaging, it is very easy to create in Latex. Nevertheless, there are a few things to be done, especially generating the glossary-files.
+Many technical documents use terms or acronyms unknown to the general population. It is common practice to add a glossary to make such documents more accessible. A \textit{glossary} is a nice thing to have in a report and usually very helpful. As you probably can imaging, it is very easy to create in Latex. 
 
-First you have to tell Latex to use the glossary package and to create the glo-file containing all the glossar-entries in your document:
+As with all packages, you need to load glossaries with \verb|\usepackage|, but there are certain packages that must be loaded before glossaries, if they are required: \texttt{hyperref, babel, polyglossia, inputenc} and \texttt{fontenc}.
 
 \begin{verbatim}
 \usepackage{glossaries} 
-\makeglossaries
+\makenoidxglossaries
 \end{verbatim}
+
+Once you have loaded \texttt{glossaries}, you need to define your terms in the preamble (or, separated file) and then you can use them throughout the document. 
 
 Next you need to define the terms you want to appear in the glossary. Again, this must be done in the preamble. This is done using the command
 
-\verb!\newglossaryentry{<label>}{<key-val list>}! 
+\spverb!\newglossaryentry{<label>}{<key-val list>}! 
 
-The first argument \verb!<label>! is a unique label to allow you to refer to this entry in your document text. The entry will only appear in the glossary if you have referred to it in the document using one of the commands listed later. The second argument is a comma separated \verb!<key>=<value>! list.
+The first argument \spverb!<label>! is a unique label to allow you to refer to this entry in your document text. The entry will only appear in the glossary if you have referred to it in the document using one of the commands listed later. The second argument is a comma separated \spverb!<key>=<value>! list.
 
-Inside the text you just need to use the command \verb!\gls{name}! or \verb!\glspl{name}! (plural name) to call it. For example, the following defines the term 'set' and assigns a brief description. The term is given the label set. This is the minimum amount of information you must give:
+Inside the text you just need to use the command \spverb!\gls{name}! or \spverb!\glspl{name}! (plural name) to call it. For example, the following defines the term 'set' and assigns a brief description. The term is given the label set. This is the minimum amount of information you must give:
 
 \begin{verbatim}
 \newglossaryentry{set} % the label
-{name=set,            		% the term
- description={a collection of objects} %a brief description
+{	name=set,            								% the term
+ 	description={a collection of objects} 	% a brief description
 }
  \end{verbatim}
 
@@ -81,27 +91,44 @@ Other example, now the glossary associated with a symbol, \gls{U}:
 
 \begin{verbatim}
 \newglossaryentry{U}   % the label
-{name={universal set}, % the term
- description={the set of all things} % a brief description
- symbol={\ensuremath{\mathcal{U}}}  % the associated symbol 
+{	name={universal set}, % the term
+ 	description={the set of all things} 		% a brief description
+ 	symbol={\ensuremath{\mathcal{U}}}  	% the associated symbol 
 }
  \end{verbatim}
+ 
+Here's a simple example:
+\begin{verbatim}
+\usepackage{glossaries} 
+\newglossaryentry{ex}{name={sample},description={an example}}
+\newacronym{svm}{SVM}{support vector machine}
+\newacronym{beta}{$\beta$}{Second letter of the greek alphabet}
+\newacronym{alpha}{$\alpha$}{First letter of the greek alphabet}
+
+\begin{document}
+Here's my \gls{ex} term. First use: \gls{svm}. 
+Second use: \gls{svm}.
+
+\textit{I want the \gls{beta} to be listed after the \gls{alpha}}.
+\end{document}
+\end{verbatim}
+
+This produces: \textit{Here's my sample term. First use: support vector machine (SVM).\\ Second use: SVM.\\
+I want the \gls{beta} to be listed after the \gls{alpha}.}
+
+Do not use \spverb|\gls| in chapter or section headings as it can have some unpleasant side-effects. Instead use \spverb|\glsentrytext| for regular entries and one of \verb|\glsentryshort|, \spverb|\glsentrylong| or \spverb|\glsentryfull| for acronyms. Alternatively use glossaries-extra which provides special commands for use in section headings, such as \spverb|\glsfmtshort{<label>}|.
 
 The plural of the word ``\gls{matrix}'' is ``matrices'' not ``matrixs'', so the term needs the plural form set explicitly:
 
  \begin{verbatim}
 \newglossaryentry{matrix}% the label
-{name=matrix, % the term
- description={a rectangular table of elements}, 
- plural=matrices % the plural
+{	name=matrix, % the term
+ 	description={a rectangular table of elements}, 
+	plural=matrices % the plural
 }
  \end{verbatim}
- What you do first is generate your PDF once. An ist-file as well as a glossary file (*.glo) are generated. The glossary-file contains all the glossary entries found in the document in plain text. Next you type the following command in the command-line:
- \begin{verbatim}
-$makeindex template.glo -s template.ist -t template.glg -o 
-template.gls
- \end{verbatim}
-The two files with the extensions *.gls and *.glg are generated. If entries are ignored or rejected, which can be seen either in the glg-file or directly in the output of the makeindex-command (see \ref{sec:nomenclature}), you have to check your glossary entries. The important of the two files is the *.gls-file, as it is used by Latex for the actual glossary. You now need to re-generate the PDF and if everything works fine, your glossary should appear where you wanted it.
+
+Given a set of numbers, there are elementary methods to compute its \acrlong{gcd}, which is abbreviated \acrshort{gcd}. This process is similar to that used for the \acrfull{lcm}.
 
 \section{Importing Images} % (fold)
 \label{sec:importing_images}
@@ -116,17 +143,17 @@ The two files with the extensions *.gls and *.glg are generated. If entries are 
  
  You should only use this feature is \emph{really} necessary. This means, you have a very small image, that will look lonely just with text above and below.
  
- In this case, you must use the \verb!wrapfigure! package.  To use \verb!wrapfig!, you must first add this to the preamble:
+ In this case, you must use the \spverb!wrapfigure! package.  To use \spverb!wrapfig!, you must first add this to the preamble:
  
- \begin{wrapfigure}{l}{2.5cm}
-   \centering
-     \includegraphics[width=2cm]{evolution_steps-vectorial}
-   \caption{Vectorial image}\
- \end{wrapfigure}	
+\begin{wrapfigure}{l}{2.5cm}
+\centering
+\includegraphics[width=2cm]{evolution_steps-vectorial}
+\caption{Vectorial image}
+\end{wrapfigure}	
  
- \noindent\verb!\usepackage{wrapfig}!\\
+ \noindent\spverb!\usepackage{wrapfig}!\\
  This then gives you access to:\\
- \verb!\begin{wrapfigure}[lineheight]{alignment}{width}!
+ \spverb!\begin{wrapfigure}[lineheight]{alignment}{width}!
  \\
  Alignment can normally be either 'l' for left, or 'r' for right. Lowercase 'l' or 'r' forces the figure to start precisely where specified (and may cause it to run over page breaks), while capital 'L' or 'R' allows the figure to float. If you defined your document as \textit{twosided}, the alignment can also be 'i' for inside or 'o' for outside, as well as 'I' or 'O'. The width is obviously the width of the figure. The example above was introduced with: 
  \lstset{language=TeX, numbers=none, morekeywords={begin,includegraphics,caption}, caption=Wrapfig example, label=lst:latex_example}
@@ -149,9 +176,9 @@ The two files with the extensions *.gls and *.glg are generated. If entries are 
 \subsection{Generating PDFs with pdflatex} % (fold)
 \label{ssec:generating_pdfs_with_pdflatex}
 
-You may create PDF files either by using \verb!latex! to generate a DVI file, and then use one of the many DVI-2-PDF converters, such as \verb!dvipdfm!.
+You may create PDF files either by using \spverb!latex! to generate a DVI file, and then use one of the many DVI-2-PDF converters, such as \spverb!dvipdfm!.
 
-Alternatively, you may use \verb!pdflatex!, which will immediately generate a PDF with no intermediate DVI or PS files. In some systems, such as Apple, PDF is already the default format for \texttt{LaTeX}. I strongly recommend you to use this approach, unless you have a very good argument to go for \verb!latex! + \verb!dvipdfm!.
+Alternatively, you may use \spverb!pdflatex!, which will immediately generate a PDF with no intermediate DVI or PS files. In some systems, such as Apple, PDF is already the default format for \texttt{LaTeX}. I strongly recommend you to use this approach, unless you have a very good argument to go for \spverb!latex! + \spverb!dvipdfm!.
 
 A typical pass for a document with figures, cross-references and a bibliography would be:
 \begin{verbatim}
@@ -160,54 +187,51 @@ $ bibtex template
 $ pdflatex template (twice)
 \end{verbatim}
 \begin{sloppypar}
-You will notice that there is a new PDF file in the working directory called \verb!template.pdf!. Simple :)
+You will notice that there is a new PDF file in the working directory called \spverb!template.pdf!. Simple :)
 \end{sloppypar}
 
 
-Please note that, to be sure all table of contents, cross-references and bibliography citations are up-to-date, you must run \verb!latex! once, then \verb!bibtex!, and then \verb!latex! twice.
+Please note that, to be sure all table of contents, cross-references and bibliography citations are up-to-date, you must run \spverb!latex! once, then \spverb!bibtex!, and then \spverb!latex! twice.
 % section generating_pdfs_with_pdflatex (end)
 
 \subsection{Dealing with Images} % (fold)
 \label{sub:dealing_with_images}
 
-You may process the same source files with both \verb!latex! or \verb!pdflatex!. But, if your text include images, you must be careful. \verb!latex! and \verb!pdflatex! accept images in different (exclusive) formats.  For \verb!latex! you may use EPS ou PS figures. For \verb!pdflatex! you may use JPG, PNG or PDF figures.  I strongly recommend you to use PDF figures in vectorial format (do not use bitmap images unless you have no other choice).
+You may process the same source files with both \spverb!latex! or \spverb!pdflatex!. But, if your text include images, you must be careful. \spverb!latex! and \spverb!pdflatex! accept images in different (exclusive) formats.  For \spverb!latex! you may use EPS ou PS figures. For \spverb!pdflatex! you may use JPG, PNG or PDF figures.  I strongly recommend you to use PDF figures in vectorial format (do not use bitmap images unless you have no other choice).
 % subsection dealing_with_images (end)
 
 
 \subsection{Creating Source Files Compatible with both latex and pdflatex} % (fold)
 \label{ssec:creating_source_files_compatible_with_both_latex_and_pdflatex}
 
-Do not include the extension of the file in the \verb!\includegraphics! command. E.g., use\\
-\verb!\includegraphics{evolution_steps}!\\
-and not\\
-\verb!\includegraphics{evolution_steps.png}!.\\
-If you use the first form, \verb!latex! or \verb!pdflatex! will add an appropriate file extension.
+Do not include the extension of the file in the \spverb!\includegraphics! command, use: 
+\spverb!\includegraphics{evolution_steps}!, 
+and not:
+\spverb!\includegraphics{ evolution_steps.png}!.
+In the first form, \verb!latex! or \verb!pdflatex! will add an appropriate file extension.
 
 This means that, if you plan to use only \verb!pdflatex!, you need only to keep (preferably) a PDF version of all the images. If you plan to use also \verb!latex!, then you also need an EPS version of each image.\\
 % subsection creating_source_files_compatible_with_both_latex_and_pdflatex (end)
-
 % section generating_pdfs_from_latex (end)
 
 {\Large To be included in the sections above} \\
 
 If you are writing only one or two documents and aren't planning on writing more on the same subject for a long time, maybe you don't want to waste time creating a database of references you are never going to use. In this case you should consider using the basic and simple bibliography support that is embedded within \texttt{LaTeX}.
 
-\texttt{LaTeX} provides an environment called \textbf{thebibliography} that you have to use where you want the bibliography; that usually means at the very end of your document, just before the \verb!\end{document}! command. Here is a practical example:
+\texttt{LaTeX} provides an environment called \texttt{thebibliography} that you have to use where you want the bibliography; that usually means at the very end of your document, just before the \verb!\end{document}! command. Here is a practical example:
 
 \begin{verbatim}
 \begin{thebibliography}{9}
-
 \bibitem{lamport94}
   Leslie Lamport,
   \emph{\LaTeX: A Document Preparation System}.
   Addison Wesley, Massachusetts,
   2nd Edition,
   1994.
-
 \end{thebibliography}
 \end{verbatim}
 
-In this document, the bibliography is in a separate document: \texttt{bi\-blio\-gra\-phy.bib}  where information is entered from \url{https://scholar.google.pt/}, as the show in Figure \ref{fig:bibtex}.
+In this document, the bibliography is in a separate document: \texttt{bi\-blio\-gra\-phy.bib}  where information is entered from \url{https://scholar.google.pt/}, as show  \figurename~\ref{fig:bibtex}.
 
 \begin{figure}[ht]
 	\centering
@@ -216,7 +240,7 @@ In this document, the bibliography is in a separate document: \texttt{bi\-blio\-
   \label{fig:bibtex}
 \end{figure}
 
-To actually cite a given document is \textit{very} easy. Go to the point where you want the citation to appear, and use the following: \verb!\cite{citekey}!, where the citekey is that of the bibitem you wish to cite, e.g \verb!~\cite{lamport94}!.  When \texttt{LaTeX} processes the document, the citation will be cross-referenced with the bibitems and replaced with the appropriate number citation. The advantage here, once again, is that LaTeX looks after the numbering for you.
+To actually, cite a given document is \textit{very} easy. Go to the point where you want the citation to appear, and use the following: \verb!\cite{citekey}!, where the \texttt{citekey} is that of the \texttt{bibitem} you wish to cite, e.g \verb!~\cite{lamport94}!.  When \texttt{LaTeX} processes the document, the citation will be cross-referenced with the bibitems and replaced with the appropriate number citation. The advantage here, once again, is that \texttt{LaTeX} looks after the numbering for you.
 
 When a sequence of multiple citations are needed, you should use a single \verb!\cite{}! command. The citations are then separated by commas. Note that you must not use spaces between the citations. Here's an result example \cite{strunk,chicago,texbook}.
 
@@ -225,16 +249,16 @@ Footnotes are a very useful way of providing extra information to the reader. Us
 The footnote facility is easy to use: \verb!\footnote{Simple footnote}!\footnote{Simple footnote}. 
 
 The tabular environment can be used to typeset tables with optional horizontal and vertical lines. LaTeX determines the width of the columns automatically. The first line of the environment has the form: 
-\verb!\begin{tabular}[pos]{table spec}!
+\spverb!\begin{tabular}[pos]{table spec}!
 
 \begin{itemize}
-\item[table spec] tells LaTeX the alignment to be used in each column and the vertical lines to insert.
+\item[table spec] tells \texttt{LaTeX} the alignment to be used in each column and the vertical lines to insert.
 \item[pos] can be used to specify the vertical position of the table relative to the baseline of the surrounding text. 
 \end{itemize}
 
 The number of columns does not need to be specified as it is inferred by looking at the number of arguments provided. It is also possible to add vertical lines between the columns here. 
 
-Some notes are important to followed, such as present in Table \ref{tab:results}: 
+Some notes are important to followed, such as present in \tablename~ \ref{tab:results}: 
 \begin{asparaenum}[i)]
 	\item Not defined vertical lines;
 	\item The legend must be on top;
@@ -278,7 +302,7 @@ To get the best quality of the images in  PDF files I'd recommend using vector-b
 
 In all cases, each image must be in an individual 1-image file; no animation files or multipage documents. 
 
-There are two different ways to place two figures/tables side-by-side. The subfigure package provides functionality to arrange figures and tables next to each other, within the usual figure-floating-environment. Subfigure will alphabetically number your subfigures and you have access to the complete reference as usual through \verb!\ref{fig:subfig1}!, Figure \ref{fig:figura-completa}, or to the letter only through \verb!\subref{fig:subfig1}!, ~\subref{fig:ra-vectorial}, or either \verb!\ref{fig:ra-raster}!, Figure \ref{fig:ra-raster}.
+There are two different ways to place two figures/tables side-by-side. The \texttt{sub\-fi\-gu\-re} package provides functionality to arrange figures and tables next to each other, within the usual figure-floating-environment. Subfigure will alphabetically number your subfigures and you have access to the complete reference as usual through \verb!\figurename~\ref{fig:subfig1}!, \figurename~ \ref{fig:figura-completa}, or to the letter only through \verb!\subref{fig:subfig1}!, \subref{fig:ra-vectorial}, or either \spverb!\figurename~  \ref{fig:ra-raster}!, \figurename~ \ref{fig:ra-raster}.
 
 \begin{figure}[htbp]
 	\centering
@@ -298,7 +322,7 @@ There are two different ways to place two figures/tables side-by-side. The subfi
 Using the package listings you can add non-formatted text as you would do with \verb!\begin{verbatim}! but its main aim is to include the source code of any programming language within your document. If you wish to include pseudocode or algorithms see \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms_and_Pseudocode}{LaTeX/Algorithms\_ and\_Pseudocode}, as Listing ~\ref{lst:SetApp}.
 
 %  \lstfromfile{language}{linerange}{caption}{label}{othersinsideoflstinoputlisting}{path}
-
+\vskip1em
 \lstfromfile{java}{59-64}{Static method - SetApp}{SetApp}{showlines=true,morekeywords={begin,System,out,print},numbers=left, firstnumber=59}{SetApp.java}
 
 \begin{minipage}{\textwidth}
@@ -344,4 +368,4 @@ to put the page in ``landscape'', while the rest will remain in ``portrait'' ori
 
 \centering{\textbf{Written by Matilde Pós-de-Mina Pato with collaboration of Nuno Datia, \\2012 October (1st version)}}
 
-\centering{\textbf{Written by Matilde Pós-de-Mina Pato, \\ \today  \hspace{2em}--\version{2.4} (last version)}}
+\centering{\textbf{Written by Matilde Pós-de-Mina Pato, \\ \today  \hspace{2em}--\version{2.5} (last version)}}
