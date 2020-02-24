@@ -9,6 +9,7 @@
 %%% Version v2.3: December 2017
 %%% Version v2.4: January 2019
 %%% Version v2.5: December 2019
+%%% Version v2.5.1.: February 2020
 %%% 
 %%% This template is vaguely based on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
@@ -96,9 +97,20 @@
 	\def\@dissertationtype{\@mscdissertationtstr}
 }
 
+% == Printable or On Screen  Document ===
+%
+% \@printable=1		Format your thesis in a way that presents on paper: onpaper
+% \@printable=0		Format your thesis in a way that presents on screen: onscreen 
+%\let\@degreetype=4
+\DeclareOption{onpaper}{
+	\let\@printable=1
+}
+\DeclareOption{onscreen}{
+	\let\@printable=0
+}
 
 % == Default Options ===
-\ExecuteOptions{pt,msc}
+\ExecuteOptions{pt,msc,onpaper}
 \ProcessOptions
 
 \LoadClass{book}
@@ -125,6 +137,7 @@
 \fi\fi
 
 \RequirePackage[T1]{fontenc}
+
 
 %====================================================================
 % PACKAGE amsmath, amsthm, amssymb, amsfonts:
@@ -241,12 +254,21 @@
 %			urlcolor=mydarkblue,
 %			pagebackref]{hyperref} 
 %		
-	
+
+% Print on paper
+\if\@printable1
 \RequirePackage[top=3cm,
 	bottom=3cm,
 	inner=3.5cm,
 	outer=2.5cm]{geometry}[2012/10/09]
-% \setlength{\marginparwidth}{2cm}
+% Print on screen
+\else\if\@printable0
+\RequirePackage[top=3cm,
+	bottom=3cm,
+	inner=2.5cm,
+	outer=2.5cm]{geometry}[2012/10/09]
+\fi\fi
+	
 
 \RequirePackage{tikz}	%Tikz is probably the most complex and powerful tool to create graphic elements in LATEX. 
 
@@ -972,6 +994,8 @@ de Mestre \\em \@majorfield}
 \usepackage{listings}
 %listings package provides a key called inputpath for specifying a path where \lstinputlisting should search for source files.
 \newcommand*\lstinputpath[1]{\lstset{inputpath=#1}}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
 
 %%\newcommand\listnomenclature{Symbols}
 %%\usepackage{longtable}

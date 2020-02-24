@@ -116,7 +116,7 @@ Second use: \gls{svm}.
 This produces: \textit{Here's my sample term. First use: support vector machine (SVM).\\ Second use: SVM.\\
 I want the \gls{beta} to be listed after the \gls{alpha}.}
 
-Do not use \spverb|\gls| in chapter or section headings as it can have some unpleasant side-effects. Instead use \spverb|\glsentrytext| for regular entries and one of \verb|\glsentryshort|, \spverb|\glsentrylong| or \spverb|\glsentryfull| for acronyms. Alternatively use glossaries-extra which provides special commands for use in section headings, such as \spverb|\glsfmtshort{<label>}|.
+Do not use \spverb|\gls| in chapter or section headings as it can have some unpleasant side-effects. Instead use \spverb|\glsentrytext| for regular entries and one of \verb|\glsentryshort|, \spverb|\glsentrylong| or \spverb|\glsentryfull| for acronyms. Alternatively use glossaries-extra which provides special commands for use in section headings, such as \\ \spverb|\glsfmtshort{<label>}|.
 
 The plural of the word ``\gls{matrix}'' is ``matrices'' not ``matrixs'', so the term needs the plural form set explicitly:
 
@@ -135,118 +135,8 @@ Given a set of numbers, there are elementary methods to compute its \acrlong{gcd
 
 % section importing_images (end)
 
-\section{Floats, Figures and Captions} % (fold)
+\section{Floats Figures and Tables, and Captions} % (fold)
 \label{sec:floats_figures_and_captions}
-
- \subsection{Inserting Figures Wrapped with text} % (fold)
- \label{ssec:inserting_images_wrapped_with_text}
- 
- You should only use this feature is \emph{really} necessary. This means, you have a very small image, that will look lonely just with text above and below.
- 
- In this case, you must use the \spverb!wrapfigure! package.  To use \spverb!wrapfig!, you must first add this to the preamble:
- 
-\begin{wrapfigure}{l}{2.5cm}
-\centering
-\includegraphics[width=2cm]{evolution_steps-vectorial}
-\caption{Vectorial image}
-\end{wrapfigure}	
- 
- \noindent\spverb!\usepackage{wrapfig}!\\
- This then gives you access to:\\
- \spverb!\begin{wrapfigure}[lineheight]{alignment}{width}!
- \\
- Alignment can normally be either 'l' for left, or 'r' for right. Lowercase 'l' or 'r' forces the figure to start precisely where specified (and may cause it to run over page breaks), while capital 'L' or 'R' allows the figure to float. If you defined your document as \textit{twosided}, the alignment can also be 'i' for inside or 'o' for outside, as well as 'I' or 'O'. The width is obviously the width of the figure. The example above was introduced with: 
- \lstset{language=TeX, numbers=none, morekeywords={begin,includegraphics,caption}, caption=Wrapfig example, label=lst:latex_example}
- \begin{lstlisting}
- 	\begin{wrapfigure}{l}{2.5cm}
- 	  \centering
- 	    \includegraphics[width=2cm]{evolution_steps-vectorial}
- 	  \caption{Vectorial image}
- 	\end{wrapfigure}	
- \end{lstlisting}
-
-% subsection inserting_images_wrapped_with_text (end)
-
-% section floats_figures_and_captions (end)
-
-
-\section{Generating PDFs from \texttt{LaTeX}} % (fold)
-\label{sec:generating_pdfs_from_latex}
-
-\subsection{Generating PDFs with pdflatex} % (fold)
-\label{ssec:generating_pdfs_with_pdflatex}
-
-You may create PDF files either by using \spverb!latex! to generate a DVI file, and then use one of the many DVI-2-PDF converters, such as \spverb!dvipdfm!.
-
-Alternatively, you may use \spverb!pdflatex!, which will immediately generate a PDF with no intermediate DVI or PS files. In some systems, such as Apple, PDF is already the default format for \texttt{LaTeX}. I strongly recommend you to use this approach, unless you have a very good argument to go for \spverb!latex! + \spverb!dvipdfm!.
-
-A typical pass for a document with figures, cross-references and a bibliography would be:
-\begin{verbatim}
-$ pdflatex template
-$ bibtex template
-$ pdflatex template (twice)
-\end{verbatim}
-\begin{sloppypar}
-You will notice that there is a new PDF file in the working directory called \spverb!template.pdf!. Simple :)
-\end{sloppypar}
-
-
-Please note that, to be sure all table of contents, cross-references and bibliography citations are up-to-date, you must run \spverb!latex! once, then \spverb!bibtex!, and then \spverb!latex! twice.
-% section generating_pdfs_with_pdflatex (end)
-
-\subsection{Dealing with Images} % (fold)
-\label{sub:dealing_with_images}
-
-You may process the same source files with both \spverb!latex! or \spverb!pdflatex!. But, if your text include images, you must be careful. \spverb!latex! and \spverb!pdflatex! accept images in different (exclusive) formats.  For \spverb!latex! you may use EPS ou PS figures. For \spverb!pdflatex! you may use JPG, PNG or PDF figures.  I strongly recommend you to use PDF figures in vectorial format (do not use bitmap images unless you have no other choice).
-% subsection dealing_with_images (end)
-
-
-\subsection{Creating Source Files Compatible with both latex and pdflatex} % (fold)
-\label{ssec:creating_source_files_compatible_with_both_latex_and_pdflatex}
-
-Do not include the extension of the file in the \spverb!\includegraphics! command, use: 
-\spverb!\includegraphics{evolution_steps}!, 
-and not:
-\spverb!\includegraphics{ evolution_steps.png}!.
-In the first form, \verb!latex! or \verb!pdflatex! will add an appropriate file extension.
-
-This means that, if you plan to use only \verb!pdflatex!, you need only to keep (preferably) a PDF version of all the images. If you plan to use also \verb!latex!, then you also need an EPS version of each image.\\
-% subsection creating_source_files_compatible_with_both_latex_and_pdflatex (end)
-% section generating_pdfs_from_latex (end)
-
-{\Large To be included in the sections above} \\
-
-If you are writing only one or two documents and aren't planning on writing more on the same subject for a long time, maybe you don't want to waste time creating a database of references you are never going to use. In this case you should consider using the basic and simple bibliography support that is embedded within \texttt{LaTeX}.
-
-\texttt{LaTeX} provides an environment called \texttt{thebibliography} that you have to use where you want the bibliography; that usually means at the very end of your document, just before the \verb!\end{document}! command. Here is a practical example:
-
-\begin{verbatim}
-\begin{thebibliography}{9}
-\bibitem{lamport94}
-  Leslie Lamport,
-  \emph{\LaTeX: A Document Preparation System}.
-  Addison Wesley, Massachusetts,
-  2nd Edition,
-  1994.
-\end{thebibliography}
-\end{verbatim}
-
-In this document, the bibliography is in a separate document: \texttt{bi\-blio\-gra\-phy.bib}  where information is entered from \url{https://scholar.google.pt/}, as show  \figurename~\ref{fig:bibtex}.
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.85\textwidth]{bibtexexample}
-	  \caption{Screenshot from Scholar Google}
-  \label{fig:bibtex}
-\end{figure}
-
-To actually, cite a given document is \textit{very} easy. Go to the point where you want the citation to appear, and use the following: \verb!\cite{citekey}!, where the \texttt{citekey} is that of the \texttt{bibitem} you wish to cite, e.g \verb!~\cite{lamport94}!.  When \texttt{LaTeX} processes the document, the citation will be cross-referenced with the bibitems and replaced with the appropriate number citation. The advantage here, once again, is that \texttt{LaTeX} looks after the numbering for you.
-
-When a sequence of multiple citations are needed, you should use a single \verb!\cite{}! command. The citations are then separated by commas. Note that you must not use spaces between the citations. Here's an result example \cite{strunk,chicago,texbook}.
-
-Footnotes are a very useful way of providing extra information to the reader. Usually, it is non-essential information which can be placed at the bottom of the page. This keeps the main body of text concise.
-
-The footnote facility is easy to use: \verb!\footnote{Simple footnote}!\footnote{Simple footnote}. 
 
 The tabular environment can be used to typeset tables with optional horizontal and vertical lines. LaTeX determines the width of the columns automatically. The first line of the environment has the form: 
 \spverb!\begin{tabular}[pos]{table spec}!
@@ -302,7 +192,7 @@ To get the best quality of the images in  PDF files I'd recommend using vector-b
 
 In all cases, each image must be in an individual 1-image file; no animation files or multipage documents. 
 
-There are two different ways to place two figures/tables side-by-side. The \texttt{sub\-fi\-gu\-re} package provides functionality to arrange figures and tables next to each other, within the usual figure-floating-environment. Subfigure will alphabetically number your subfigures and you have access to the complete reference as usual through \verb!\figurename~\ref{fig:subfig1}!, \figurename~ \ref{fig:figura-completa}, or to the letter only through \verb!\subref{fig:subfig1}!, \subref{fig:ra-vectorial}, or either \spverb!\figurename~  \ref{fig:ra-raster}!, \figurename~ \ref{fig:ra-raster}.
+There are two different ways to place two figures/tables side-by-side. The \texttt{sub\-fi\-gu\-re} package provides functionality to arrange figures and tables next to each other, within the usual figure-floating-environment. Subfigure will alphabetically number your subfigures and you have access to the complete reference \figurename~ \ref{fig:figura-completa} as usual through \spverb!\figurename~\ref{fig:subfig1}!, or \subref{fig:ra-vectorial} to the letter only or either \figurename~ \ref{fig:ra-raster} through \verb!\subref{fig:subfig1}! and \verb!\figurename~\ref{fig:ra-raster}!, respectively.
 
 \begin{figure}[htbp]
 	\centering
@@ -319,7 +209,7 @@ There are two different ways to place two figures/tables side-by-side. The \text
   \label{fig:figura-completa}
 \end{figure}
 
-Using the package listings you can add non-formatted text as you would do with \verb!\begin{verbatim}! but its main aim is to include the source code of any programming language within your document. If you wish to include pseudocode or algorithms see \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms_and_Pseudocode}{LaTeX/Algorithms\_ and\_Pseudocode}, as Listing ~\ref{lst:SetApp}.
+Using the package listings you can add non-formatted text as you would do with \verb!\begin{verbatim}! but its main aim is to include the source code of any programming language within your document. If you wish to include pseudocode or algorithms see \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms_and_Pseudocode}{LaTeX/Algorithms\_ and\_Pseudocode}, as \lstlistingname ~\ref{lst:SetApp}.
 
 %  \lstfromfile{language}{linerange}{caption}{label}{othersinsideoflstinoputlisting}{path}
 \vskip1em
@@ -343,6 +233,86 @@ x <- c(1:100)
 y <- square(x)
 \end{lstlisting}
 \end{minipage}
+
+
+
+\section{Generating PDFs from \texttt{LaTeX}} % (fold)
+\label{sec:generating_pdfs_from_latex}
+
+\subsection{Generating PDFs with pdflatex} % (fold)
+\label{ssec:generating_pdfs_with_pdflatex}
+
+You may create PDF files either by using \spverb!latex! to generate a DVI file, and then use one of the many DVI-2-PDF converters, such as \spverb!dvipdfm!.
+
+Alternatively, you may use \spverb!pdflatex!, which will immediately generate a PDF with no intermediate DVI or PS files. In some systems, such as Apple, PDF is already the default format for \texttt{LaTeX}. I strongly recommend you to use this approach, unless you have a very good argument to go for \spverb!latex! + \spverb!dvipdfm!.
+
+A typical pass for a document with figures, cross-references and a bibliography would be:
+\begin{verbatim}
+$ pdflatex template
+$ bibtex template
+$ pdflatex template (twice)
+\end{verbatim}
+\begin{sloppypar}
+You will notice that there is a new PDF file in the working directory called \spverb!template.pdf!. Simple :)
+\end{sloppypar}
+
+
+Please note that, to be sure all table of contents, cross-references and bibliography citations are up-to-date, you must run \spverb!latex! once, then \spverb!bibtex!, and then \spverb!latex! twice.
+% section generating_pdfs_with_pdflatex (end)
+
+\subsection{Dealing with Images} % (fold)
+\label{sub:dealing_with_images}
+
+You may process the same source files with both \spverb!latex! or \spverb!pdflatex!. But, if your text include images, you must be careful. \spverb!latex! and \spverb!pdflatex! accept images in different (exclusive) formats.  For \spverb!latex! you may use EPS ou PS figures. For \spverb!pdflatex! you may use JPG, PNG or PDF figures.  I strongly recommend you to use PDF figures in vectorial format (do not use bitmap images unless you have no other choice).
+% subsection dealing_with_images (end)
+
+
+\subsection{Creating Source Files Compatible with both latex and pdflatex} % (fold)
+\label{ssec:creating_source_files_compatible_with_both_latex_and_pdflatex}
+
+Do not include the extension of the file in the \spverb!\includegraphics! command, use: 
+\spverb!\includegraphics{evolution_steps}!, 
+and not:\\
+\spverb!\includegraphics{ evolution_steps.png}!.\\
+In the first form, \verb!latex! or \verb!pdflatex! will add an appropriate file extension.
+
+This means that, if you plan to use only \verb!pdflatex!, you need only to keep (preferably) a PDF version of all the images. If you plan to use also \verb!latex!, then you also need an EPS version of each image.\\
+% subsection creating_source_files_compatible_with_both_latex_and_pdflatex (end)
+% section generating_pdfs_from_latex (end)
+
+{\Large To be included in the sections above} \\
+
+If you are writing only one or two documents and aren't planning on writing more on the same subject for a long time, maybe you don't want to waste time creating a database of references you are never going to use. In this case you should consider using the basic and simple bibliography support that is embedded within \texttt{LaTeX}.
+
+\texttt{LaTeX} provides an environment called \texttt{thebibliography} that you have to use where you want the bibliography; that usually means at the very end of your document, just before the \verb!\end{document}! command. Here is a practical example:
+
+\begin{verbatim}
+\begin{thebibliography}{9}
+\bibitem{lamport94}
+  Leslie Lamport,
+  \emph{\LaTeX: A Document Preparation System}.
+  Addison Wesley, Massachusetts,
+  2nd Edition,
+  1994.
+\end{thebibliography}
+\end{verbatim}
+
+In this document, the bibliography is in a separate document: \texttt{bi\-blio\-gra\-phy.bib}  where information is entered from \url{https://scholar.google.pt/}, as show  \figurename~\ref{fig:bibtex}.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.85\textwidth]{bibtexexample}
+	  \caption{Screenshot from Scholar Google}
+  \label{fig:bibtex}
+\end{figure}
+
+To actually, cite a given document is \textit{very} easy. Go to the point where you want the citation to appear, and use the following: \verb!\cite{citekey}!, where the \texttt{citekey} is that of the \texttt{bibitem} you wish to cite, e.g \verb!~\cite{lamport94}!.  When \texttt{LaTeX} processes the document, the citation will be cross-referenced with the bibitems and replaced with the appropriate number citation. The advantage here, once again, is that \texttt{LaTeX} looks after the numbering for you.
+
+When a sequence of multiple citations are needed, you should use a single \verb!\cite{}! command. The citations are then separated by commas. Note that you must not use spaces between the citations. Here's an result example \cite{strunk,chicago,texbook}.
+
+Footnotes are a very useful way of providing extra information to the reader. Usually, it is non-essential information which can be placed at the bottom of the page. This keeps the main body of text concise.
+
+The footnote facility is easy to use: \verb!\footnote{Simple footnote}!\footnote{Simple footnote}. 
 
 \section{Equations}
 
@@ -368,4 +338,4 @@ to put the page in ``landscape'', while the rest will remain in ``portrait'' ori
 
 \centering{\textbf{Written by Matilde Pós-de-Mina Pato with collaboration of Nuno Datia, \\2012 October (1st version)}}
 
-\centering{\textbf{Written by Matilde Pós-de-Mina Pato, \\ \today  \hspace{2em}--\version{2.5} (last version)}}
+\centering{\textbf{Written by Matilde Pós-de-Mina Pato, \\ \today  \hspace{2em}--\version{2.5.1} (last version)}}

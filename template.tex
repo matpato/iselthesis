@@ -11,15 +11,21 @@
 %% Version 20170530 (May 2017) v2.3.1
 %% Version 20190104 (January 2019) v2.4
 %% Version 20191217 (December 2019) v2.5
+%% Version 20200224 (February 2020) v2.5.1
+%%
 %% Instituto Superior de Engenharia de Lisboa
 %% Instituto Politécnico de Lisboa
 %%
 %% Project web page at: https://github.com/matpato/thesisisel
 %%
-%% BUGS and SUGGESTIONS: please submit an issue at the project web page
+%% BUGS and SUGGESTIONS: please send email to "matilde.pato@isel.pt"
+%%     or sumit a ticket in the the project web page at
+%%     https://github.com/matpato/thesisisel
+%%
+%% CONTRIBUTERS are welcome. Please contact "matilde.pato@isel.pt"
 %%
 %% Authors / Contributors:
-%%     - Matilde Pós-de-Mina Pato (mpato@deetc.isel.pt)
+%%     - Matilde Pós-de-Mina Pato (matilde.pato@isel.pt)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Main options (please read the manual for further details)
@@ -36,12 +42,12 @@
 	msc,		% (*) msc, prepmsc, bsc, prepbsc - degree
 					% prepbsc(msc) Preparation of BSc (MSc) dissertation
 					% bsc(msc) BSc graduation report/ MSc dissertation
-					% GO TO LINE 189
 	pt,			% (*) pt, en - languages 
 	twoside,	% (*) twoside, oneside - single or double sided printing
 	12pt,		% (*) 12pt, 11pt, 10pt - use font size
 	a4paper,	% the paper size/format
 	utf8,			% (*) utf8, latin1	- Text encoding: Linux, Mac or Windows
+	onscreen, 	% (*) onpaper, onscreen Format your thesis in a way that presents well on paper and/or on screen
 	hyperref = true,  % Hyperlinks in citations: true(*) false
 	listof=totoc
 	]{thesisisel} 
@@ -92,7 +98,7 @@
 
 % Where to find Chapters files
 \newcommand{\chapterfiles}[1]{Chapters/#1}
-% syntax: \include{\chapterfiles{name.tex}}
+% syntax: \chapterfiles{name.tex}
 
 % Force word hyphenation
 \hyphenation{}

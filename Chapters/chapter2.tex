@@ -44,7 +44,8 @@ The template file for writing dissertations in  \texttt{LaTeX} is organized into
 		\item \textbf{defaults.tex} A file with the main default values for the package (institution name, faculty's logo, degree name and similars);
 		\item \textbf{personaldataofthesis.tex} A file with the main default values for the package (identification of report as well as the author and juries);
 		\item \textbf{template.tex} The main file. You should run  \texttt{LaTeX} in this one. Please refrain from changing the file content outside of the well defined area;
-		\item \textbf{bibliography.bib} The bib file. An easy way to find to import citation into \texttt{bibtex} is select option \texttt{Show links to import citation into \texttt{BibTex}} in \href{http://scholar.google.pt/scholar_settings?hl=en&as_sdt=0,5}{\texttt{Scholar google settings}}.
+		\item \textbf{bibliography.bib} The bib file. An easy way to find to import citation into \texttt{bibtex} is select option \texttt{Show links to import citation into
+Bib\-Tex} in \href{http://scholar.google.pt/scholar_settings?hl=en&as_sdt=0,5}{\texttt{Scholar google settings}}.
 		\item \textbf{thesisisel.cls} The  \texttt{LaTeX} class file for the thesis{} style. Currently, some of the defaults are stored here instead of \verb!defaults.tex!. This file should not be changed, unless you're ready to play with fire! :)
 	\end{enumerate}
 \end{enumerate}
@@ -79,7 +80,8 @@ The language option affects:
 	\item \textbf{The type of documents in the bibliography.} E.g., 'Technical Report' vs.\ 'Relatório Técnico', 'MSc Thesis' vs.\ 'Tese de Mestrado', etc.
 \end{itemize} 
 
-No mater which language you chose, you will always have the appropriate hyphenation rules according to the language at that point. You always get portuguese hyphenation rules in the 'Resumo', english hyphenation rules in the 'Abstract', and then the main language hyphenation rules for the rest of the document. If you need to force hyphenation write inside of \verb!\hyphenation{}! the hyphenated word, e.g. \verb!\hyphenation{op-ti-cal net-works}!.
+No mater which language you chose, you will always have the appropriate hyphenation rules according to the language at that point. You always get portuguese hyphenation rules in the 'Resumo', english hyphenation rules in the 'Abstract', and then the main language hyphenation rules for the rest of the document. If you need to force hyphenation write inside of \verb!\hyphenation{}! the hyphenated word, e.g. \\
+\verb!\hyphenation{op-ti-cal net-works}!.
 % section package_options (end)
 
 \subsection{Class of Text} % (fold)
@@ -89,7 +91,12 @@ You must choose the class of text for the document. The available options are:
 
 \begin{enumerate}
 	\item \textbf{bsc} --- BSc graduation report.
-	\item \textbf{prepmsc} --- Preparation of MSc dissertation. This is a preliminary report graduate students at ISEL/IPL must prepare to conclude the first semester of the two-semesters MSc work. The files specified by \verb!\dedicatoryfile! and \verb!\acknowledgmentsfile! are ignored, even if present, for this class of document.
+	\item \textbf{prepmsc} --- Preparation of MSc dissertation. This is a preliminary report graduate students at ISEL/IPL must prepare to conclude the first semester of the two-semesters MSc work. The files specified by 
+	\begin{inparaenum}
+	\item \verb!\dedicatoryfile! and 
+	\item \verb!\acknowledgmentsfile! 
+	\end{inparaenum}
+	are ignored, even if present, for this class of document.
 	\item \textbf{msc} --- MSc dissertation.
 \end{enumerate}
 %% subsection class_of_text (end)
@@ -102,12 +109,22 @@ You must choose the class of text for the document. The available options are:
 
 You must choose how your document will be printed. The available options are:
 
-\begin{inparaenum}[(i)]
+\begin{enumerate}
 \item \textbf{oneside} --- Single side page printing, and
 \item \textbf{*twoside} --- Double sided page printing.
-\end{inparaenum}
+\end{enumerate}
 
+The article 50th, of Decree-Law No. 115/2013, requires the deposit of a digital copy of doctoral thesis and master's dissertations in a repository that is part of the RCAAP  repository\footnote{Repositórios Científicos de Acesso Aberto de Portugal}, \url{https://www.rcaap.pt}.  This deposit aims to preserve scientific work, as well as providing Open Access to scientific production is not restricted object or embargo.
+
+For the reason explained above, we include the option to format your thesis in a way that presents well on screen and/or on paper.   But always remember that your work will be stored in the RCAAP portal in electronic format.
 % subsection printing (end)
+
+The available options are:
+
+\begin{enumerate}
+\item \textbf{*onpaper} --- Format your thesis in a way that presents on paper or,
+\item \textbf{onscreen} --- on screen.
+\end{enumerate}
 
 % =============
 % = Font Size =
@@ -144,18 +161,25 @@ You must choose the font size for your document. The available options are:
 Let's have a look at a couple of examples:
 
 \begin{itemize}
-	\item BSc graduation report, in portuguese, with 12pt size and to be printed one sided (I wonder why one would do this!)\\
-	\verb!\documentclass[bsc,pt,12pt,oneside,latin1]{thesisisel}!
-	\item Preparation of MSc thesis, in portuguese, with 12pt size and to be printed one sided (I wonder why one would do this!)\\
-	\verb!\documentclass[prepmsc,pt,12pt,oneside,latin1]{thesisisel}!
-	\item MSc dissertation, in english, with 12pt size and to be printed double sided\\
-	\verb!\documentclass[msc,en,12pt,twoside,utf8]{thesisisel}!
+	\item BSc graduation report, in portuguese, with 11pt size and to be printed one sided (I wonder why one would do this!)\\
+	\verb!\documentclass[bsc,pt,11pt,oneside,latin1]{thesisisel}!
+	\item Preparation of MSc thesis, in portuguese, with 12pt size and to be printed one sided (I wonder why one would do this!). Note that, \verb!pt! is declared by default, so it can be omitted: \\
+	\verb!\documentclass[prepmsc,12pt,oneside,latin1]{thesisisel}!
+	\item MSc dissertation, in english, with 12pt size and to be printed double sided on screen. Note that, \verb!twoside! and \verb!12pt! are declared by default, so it can be omitted: \\
+	\verb!\documentclass[msc,en,utf8,onscreen]{thesisisel}!
 \end{itemize}
-% subsection examples (end)
 
+
+The present document is defined according to the following settings:
+\begin{Verbatim}[breaklines=true, breakanywhere=true]
+\documentclass[msc,pt,twoside,12pt,a4paper,utf8,onscreen,hyperref=true,listof=totoc] {thesisisel}
+\end{Verbatim}
+
+% subsection examples (end)
+	
 \section{How to Write Using \texttt{LaTeX}} % (fold)
 \label{sec:how_to_write_using_latex}
 
-Please have a look at Chapter~\ref{cha:a_short_latex_tutorial_with_examples}, where you may find many examples of \href{http://tobi.oetiker.ch/lshort/lshort.pdf}{\texttt{LaTeX}} constructs, such as Sectioning, inserting Figures and Tables, writing Equations, Theorems and algorithms, exhibit code listings, etc.
+Please have a look at Chapter~\ref{cha:a_short_latex_tutorial_with_examples}, where you may find many examples of \href{http://tobi.oetiker.ch/lshort/lshort.pdf}{\texttt{LaTeX}} constructs, such as sectioning, inserting figures and tables, writing equations, theorems and algorithms, exhibit code listings, etc.
 
 %% section how_to_write_using_latex (end)

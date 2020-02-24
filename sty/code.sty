@@ -8,13 +8,17 @@
 % Suports: Java, XML, R, SQL
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{code}[2018/03/03 v1 Base file of Helper package to develop presentations in beamer]
 
 %************** PACKAGES ***************
-\usepackage{listings}
-\usepackage{color}
+\RequirePackage{xparse} %ARGUMENTS PARSING
+\RequirePackage{listings}
+\RequirePackage{tcolorbox}
+
 %************** STYLES ***************
 % == Color Definitions ===
 \definecolor{olivegreen}    {cmyk}{0.64, 0 , 0.95, 0.40}
@@ -35,7 +39,6 @@
 \colorlet{lstCommentsColor}{ForestGreen}
 \colorlet{lstStringColor}{BrickRed}
 
-%************** LINE NUMBER ***************
 %%% Always I forget this so I created some aliases
 \def\ContinueLineNumber{\lstset{firstnumber=last}}
 \def\StartLineAt#1{\lstset{firstnumber=#1}}
@@ -49,7 +52,7 @@
 \kern-.75em\lower0.4ex\hbox{$\cdot$}
 \quad\thinspace\text{ }}}
 
-%************** CODE ***************
+
 %Javalst
 % Usage: \begin{javalst}[Caption]{Label}
 \lstnewenvironment{javalst}[2][]%
@@ -120,6 +123,7 @@ literate=%
   {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
   {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
   {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {ã}{{\~a}}1
   {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
   {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
   {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
@@ -212,7 +216,7 @@ literate=%
   	frame=single,
   	keepspaces=true,
   	keywordstyle=\color{blue},
-  	morekeywords={*,modify,begin,references,REFERENCES,theta,equijoin, project, rename},
+  	morekeywords={*,modify,begin,references,REFERENCES,theta,equijoin, project, rename,PRINT,IS NULL},
   	numbers=left,
   	numbersep=15pt,
   	numberstyle=\tiny,
@@ -229,11 +233,28 @@ literate=%
 % usage \code{language}{code}
 \newcommand{\code}[2]{
 	\lstinline[
+		language=#1,
 		basicstyle=\tt,%
 		keywordstyle=\color{lstKeywordsColor}\bfseries,%
 		commentstyle=\color{lstCommentsColor},%
 		stringstyle=\color{lstStringColor},% 		
-		language=#1
+		morekeywords={DATETIME}
 		]
 		|#2|
 		}
+		
+\newcommand{\codemorekeywords}[3]{
+	\lstinline[
+		language=#1,
+		basicstyle=\tt,%
+		keywordstyle=\color{lstKeywordsColor}\bfseries,%
+		commentstyle=\color{lstCommentsColor},%
+		stringstyle=\color{lstStringColor},% 		
+		morekeywords=#2
+		]
+		|#3|
+		}		
+
+
+
+

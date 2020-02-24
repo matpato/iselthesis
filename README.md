@@ -6,15 +6,15 @@ Template for bachelor and master degrees report written in LaTex
 This template serves both degrees as a bachelor's and master's degree. And, during the development stages of the work as final or "Preparation of BSc (MSc) dissertation". To do this simply change the following settings (see template.tex, line 34-46):
 
 	\documentclass[
-		prepmsc,	% (*) msc, prepmsc, bsc, prepbsc - degree
-					% prepbsc(msc) Preparation of BSc (MSc) dissert
+		msc,		% (*) msc, prepmsc, bsc, prepbsc - degree
+					% prepbsc(msc) Preparation of BSc (MSc) dissertation
 					% bsc(msc) BSc graduation report/ MSc dissertation
-					% GO TO LINE 189
 		pt,			% (*) pt, en - languages 
-		twoside,	% (*) twoside, oneside - single/double sided printing
+		twoside,	% (*) twoside, oneside - single or double sided printing
 		12pt,		% (*) 12pt, 11pt, 10pt - use font size
 		a4paper,	% the paper size/format
-		utf8,		% (*) utf8, latin1 - Text encoding: Linux, Mac or Windows
+		utf8,			% (*) utf8, latin1	- Text encoding: Linux, Mac or Windows
+		onpaper, % (*) onpaper, onscreen Format your thesis in a way that presents well on paper and/or on screen
 		hyperref = true,  % Hyperlinks in citations: true(*) false
 		listof=totoc
 		]{thesisisel} 
@@ -80,7 +80,7 @@ Authors
 	Matilde Pós-de-Mina Pato
 	Nuno Datia (as contributor)
 
-December, 17th 2019 
+February, 24th 2020
 
 
-this package and template are not official for ISEL/IPL.
+This package and template are not official for ISEL/IPL.
