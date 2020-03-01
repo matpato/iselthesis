@@ -10,6 +10,7 @@
 %%% Version v2.4: January 2019
 %%% Version v2.5: December 2019
 %%% Version v2.5.1.: February 2020
+%%% Version v2.5.2.: March 2020
 %%% 
 %%% This template is vaguely based on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
@@ -20,6 +21,7 @@
 %%%
 %%% CONTRIBUTERS are welcome. Please contact "matilde.pato@isel.pt"
 %%%
+%%% Thanks to: Carolina Neves (ISEL)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{thesisisel}[2012/10/09 ISEL thesis template]
@@ -110,11 +112,29 @@
 }
 
 % == Default Options ===
-\ExecuteOptions{pt,msc,onpaper}
+\ExecuteOptions{
+	pt,
+	msc,
+	onpaper
+}
 \ProcessOptions
 
 \LoadClass{book}
 
+%====================================================================
+% PACKAGE hyperref
+%====================================================================
+% Set links for references and citations in document
+% Some MiKTeX distributions have faulty PDF creators in which case this package will not work correctly
+% Long live Linux :D
+%% Title of Report + author(s) + professor + date
+%\hypersetup{ a4paper=true,
+%%             pdftitle={ },
+%%             pdfauthor={ },
+%%             pdfsubject={ },
+% %            pdfcreator={Matilde P.M. Pato},
+% %            pdfkeywords={ }
+%             }
 \RequirePackage[
 			breaklinks = true,
 			hidelinks,
@@ -122,8 +142,8 @@
 			pdfdisplaydoctitle,
 			citecolor=mydarkblue,
 			linkcolor=black,
-			urlcolor=mydarkblue,
-			pagebackref]{hyperref} 
+			urlcolor=mydarkblue
+			]{hyperref} 
 			
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PACKAGES
@@ -184,7 +204,7 @@
 \RequirePackage{courier}
 \RequirePackage{palatino}
 \usepackage{xmpincl}
-\usepackage[a-1b]{pdfx}
+%\usepackage[a-1b]{pdfx}
 
 %======================================================================
 \RequirePackage[]{xcolor}
@@ -196,77 +216,50 @@
 	\else
 		\RequirePackage{graphicx}
 		\DeclareGraphicsExtensions{.eps, .png, .jpg}
-%		\RequirePackage[usenames]{color}
-%		\definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
-		%or, 
 \fi
 
- \def\PDF@FinishDoc{%
-  \Hy@UseMaketitleInfos
-  \pdfinfo{
-     /Title(\xmpTitle)%
-     /Author(\xmpAuthor)%
-	 /Creator(\xmpProducer)%
-     \ifx\@pdfcreationdate\@empty
-    \else
-      /CreationDate(\@pdfcreationdate)%
-    \fi
-    \ifx\@pdfmoddate\@empty
-    \else
-      /ModDate(\@pdfmoddate)%
-    \fi
-      /Producer(\xmpProducer)%
-     /Trapped /False
-     /GTS_PDFA1Version (PDF/A-1b:2005)%
-  }%
-  \Hy@EnableOption{pdfauthor}%
-  \Hy@DisableOption{pdftitle}%
-  \Hy@DisableOption{pdfsubject}%
-  \Hy@DisableOption{pdfcreator}%
-  \Hy@DisableOption{pdfcreationdate}%
-  \Hy@DisableOption{pdfmoddate}%
-  \Hy@DisableOption{pdfproducer}%
-  \Hy@DisableOption{pdfkeywords}
-  \Hy@DisableOption{backref}
-  }
-  
-%====================================================================
-% PACKAGE hyperref
-%====================================================================
-% Set links for references and citations in document
-% Some MiKTeX distributions have faulty PDF creators in which case this package will not work correctly
-% Long live Linux :D
-%% Title of Report + author(s) + professor + date
-%\hypersetup{ a4paper=true,
-%%             pdftitle={ },
-%%             pdfauthor={ },
-%%             pdfsubject={ },
-% %            pdfcreator={Matilde P.M. Pato},
-% %            pdfkeywords={ }
-%             }
-
-%\RequirePackage[
-%			breaklinks = true,
-%			colorlinks,
-%			pdfdisplaydoctitle,
-%			citecolor=mydarkblue,
-%			linkcolor=black,
-%			urlcolor=mydarkblue,
-%			pagebackref]{hyperref} 
-%		
+% \def\PDF@FinishDoc{%
+%  \Hy@UseMaketitleInfos
+%  \pdfinfo{
+%     /Title(\xmpTitle)%
+%     /Author(\xmpAuthor)%
+%	 /Creator(\xmpProducer)%
+%     \ifx\@pdfcreationdate\@empty
+%    \else
+%      /CreationDate(\@pdfcreationdate)%
+%    \fi
+%    \ifx\@pdfmoddate\@empty
+%    \else
+%      /ModDate(\@pdfmoddate)%
+%    \fi
+%      /Producer(\xmpProducer)%
+%     /Trapped /False
+%     /GTS_PDFA1Version (PDF/A-1b:2005)%
+%  }%
+%  \Hy@EnableOption{pdfauthor}%
+%  \Hy@DisableOption{pdftitle}%
+%  \Hy@DisableOption{pdfsubject}%
+%  \Hy@DisableOption{pdfcreator}%
+%  \Hy@DisableOption{pdfcreationdate}%
+%  \Hy@DisableOption{pdfmoddate}%
+%  \Hy@DisableOption{pdfproducer}%
+%  \Hy@DisableOption{pdfkeywords}
+%  %\Hy@DisableOption{backref}
+%  }
+%  
 
 % Print on paper
 \if\@printable1
 \RequirePackage[top=3cm,
 	bottom=3cm,
 	inner=3.5cm,
-	outer=2.5cm]{geometry}[2012/10/09]
+	outer=2.5cm]{geometry}[2010/09/12]
 % Print on screen
 \else\if\@printable0
 \RequirePackage[top=3cm,
 	bottom=3cm,
 	inner=2.5cm,
-	outer=2.5cm]{geometry}[2012/10/09]
+	outer=2.5cm]{geometry}[2010/09/12]
 \fi\fi
 	
 
@@ -491,23 +484,6 @@ de Mestre \\em \@majorfield}
     {\@pauthor[]}%
     {\@pauthor[][m]}}
 
-%\if\@degreetype=2
-	
-%  	\else
-%  	\typeout{^^J%
-%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J%
-%!  Please specify author gender using [m] or [f] as the first^^J%
-%!  argument of the "author" macro.  See the template! ;)^^J%
-%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J%
-%	}
-%   	\errhelp{Please be gentle and follow the template recommendations.}
-%   	\errmessage{Please specify author gender!}
-%  	\fi\fi
-%  	\gdef\@author{#2}
-%  	\hypersetup{pdfauthor={\@author}}
-%  	}
-%\else
-  	
 % #1 = [] 
 % #2 = [m] or [f]
 % #3 = {name}
@@ -887,28 +863,6 @@ de Mestre \\em \@majorfield}
 	\endthesismainmatter
 }
 
-
-% Appendixes
-\newcount\@appxcount
-\@appxcount 0\relax
-
-\def\appendixfile#1{%
-	\advance\@appxcount 1\relax
-	\expandafter\gdef\csname @appendixfile\number\@appxcount\endcsname{Appendixes/#1}
-}
-
-\def\printappendixes{%	
-	\appendix
-	\newcount\@myi
-	\@myi 0\relax
-	\loop
-		\advance\@myi 1\relax
-		\def\@appxname{\expandafter\csname @appendixfile\number\@myi\endcsname}
-		\@input@{\@appxname}
-	\ifnum \@myi < \@appxcount
-	\repeat
-}
-
 % To process lists and other stuff
 \RequirePackage{etoolbox}
 %\usepackage{pgffor}%
@@ -997,17 +951,7 @@ de Mestre \\em \@majorfield}
 \usepackage{fancyvrb}
 \usepackage{fvextra}
 
-%%\newcommand\listnomenclature{Symbols}
-%%\usepackage{longtable}
-%%\newcommand\listofnomenclature[2]{
-%%\btypeout{\listnomenclature}
-%%\addtotoc{\listnomenclature}
-%%    \chapter*{\listnomenclature
-%%      \@mkboth{
-%%          \MakeUppercase\listnomenclature}{\MakeUppercase\listnomenclature}}
-%%\begin{longtable}[c]{#1}#2\end{longtable}\par
-%%    \cleardoublepage
-%%}
+
 \renewcommand{\lstlistoflistings}{
 	\begingroup
 	\tocfile{\lstlistlistingname}{lol}
@@ -1056,6 +1000,23 @@ de Mestre \\em \@majorfield}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FRONTPAGE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\printcoverpage{
+\if\@degreetype0{
+	\Repeat{1}{\frontpage}
+	}
+\else\if\@degreetype1{
+	\Repeat{1}{\frontpage}
+	\Repeat{1}{\frontpageBSC}  
+}	
+\else\if\@degreetype2{
+	\Repeat{1}{\frontpage} 
+}	
+\else\if\@degreetype3{
+	\Repeat{2}{\frontpage}  
+}	
+\fi\fi\fi\fi
+}
+
 \def\frontpage{
 
 \thispagestyle{empty}
@@ -1105,8 +1066,8 @@ de Mestre \\em \@majorfield}
 			pos=h,
 			maxwidth=1\linewidth,
 			doinside=\hspace*{0.1cm},
-		]{rX}{}{ 
-			\printauthor[]{1}
+		]{rX}{}{ 			
+			\printauthor[]{1}			
 			\printauthor[]{2}
 			\printauthor[]{3}
 	}}
@@ -1170,7 +1131,7 @@ de Mestre \\em \@majorfield}
 
 \begin{center}
 % Put logo
-	\logo{\@universitylogo}{0.35}
+	\logo{\@universitylogo}{0.12}
 
 %Define font style (ptm=Times New Roman)
 	\fontfamily{ptm}
@@ -1212,7 +1173,7 @@ de Mestre \\em \@majorfield}
 			maxwidth=1\linewidth,
 			doinside=\hspace*{0.1cm},
 		]{rX}{}{ 
-		%\toprule
+		\midrule	
 		\printauthor[]{1}\\
 		\ifnum \@theauthorcount > 1		
 		\midrule	
@@ -1363,3 +1324,30 @@ de Mestre \\em \@majorfield}
 %URL linebreak in footnote
 %\usepackage{breakurl}
 \def\UrlBreaks{\do\/\do-}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Appendixes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcount\@appxcount
+\@appxcount 0\relax
+
+\def\appendixfile#1{%
+	\advance\@appxcount 1\relax
+	\expandafter\gdef\csname @appendixfile\number\@appxcount\endcsname{Appendixes/#1}
+}
+
+\ifx\@appendixfile\@empty
+	\def\printappendixes{}
+\else
+	\def\printappendixes{
+		\appendix
+		\newcount\@myi
+		\@myi 0\relax
+		\loop
+			\advance\@myi 1\relax
+			\def\@appxname{\expandafter\csname @appendixfile\number\@myi		\endcsname}
+		\@input@{\@appxname}
+		\ifnum \@myi < \@appxcount
+		\repeat
+	}
+\fi

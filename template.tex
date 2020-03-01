@@ -12,6 +12,7 @@
 %% Version 20190104 (January 2019) v2.4
 %% Version 20191217 (December 2019) v2.5
 %% Version 20200224 (February 2020) v2.5.1
+%% Version 20200301 (March 2020) v2.5.2
 %%
 %% Instituto Superior de Engenharia de Lisboa
 %% Instituto Politécnico de Lisboa
@@ -164,6 +165,7 @@
 \chapterfile{chapter2}
 \chapterfile{chapter3}
 
+
 % Text appendixes. Comment if not needed
 % sintax: \appendixfile{file}
 \appendixfile{appendix1}
@@ -180,17 +182,13 @@
 %% Begining of document
 \begin{document}
 %\input{template.xmpdata}
-%	\includexmp{template}
 %%------------------------------------------------------------
 %% Before main text
 \frontmatter
 
 % The first front page. Repeats the front page twice 
 % \Repeat{n-times}{\command}
-\Repeat{2}{\frontpage} % insert only 1 for Bachelor report and 2 for Master Thesis
-%\frontpageBSC % comment this line if you write a Master Thesis 
-						   % and uncomment for Bachelor Report
-
+\printcoverpage
 %\InputIfFileExists{\jobname.xmpdata}{}{}
 
 %%------------------------------------------------------------
