@@ -13,6 +13,7 @@
 %% Version 20191217 (December 2019) v2.5
 %% Version 20200224 (February 2020) v2.5.1
 %% Version 20200301 (March 2020) v2.5.2
+%% Version 20200615 (June 2020) v2.5.3
 %%
 %% Instituto Superior de Engenharia de Lisboa
 %% Instituto Politécnico de Lisboa
@@ -40,7 +41,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[
-	msc,		% (*) msc, prepmsc, bsc, prepbsc - degree
+	prepbsc,		% (*) msc, prepmsc, bsc, prepbsc - degree
 					% prepbsc(msc) Preparation of BSc (MSc) dissertation
 					% bsc(msc) BSc graduation report/ MSc dissertation
 	pt,			% (*) pt, en - languages 
@@ -165,11 +166,28 @@
 \chapterfile{chapter2}
 \chapterfile{chapter3}
 
-
-% Text appendixes. Comment if not needed
+% -----------------------------------------------------------
+%% Bibliography style
+% -----------------------------------------------------------
+% If you want to change some parameters
+%\usepackage[
+%style={ieee, numeric, alphabetic, authoryear, authortitle, verbose, apa, chem-acs, chem-angew, mla, nature, science, nejm, phys},
+%sorting={none, nty, nyt, nyvt, anyt, anyvt, ynt, debug},
+%backend={biber,bibtext}
+%url=false,%
+%isbn=false,%
+%urldate=long,
+%uniquename=false,
+%uniquelist=false
+%]{biblatex}
+%
+\addbibresource{bibliography.bib}
+% -----------------------------------------------------------
+%% Text appendixes
+% -----------------------------------------------------------
+% Comment if not needed
 % sintax: \appendixfile{file}
 \appendixfile{appendix1}
-
 %%============================================================
 %%
 %%  END OF USER COSTUMIZATION
@@ -238,21 +256,11 @@
 
 % Produces the bibliography section when processed by BibTeX
 % ----------------------------------------------------------------------
-%% Bibliography style
+%% Print bibliography 
 % ----------------------------------------------------------------------
-% Replacement bibliography styles provided by 'natbib' package
-% (plainnat.bst, abbrvnat.bst, unsrtnat.bst )
-\bibliographystyle{plainnat} % > entries ordered alphabetically
-
-% Bibliography with page numbers
-% \backrefenglish 	% english version
-\backrefbrazil			% portuguese version
-
-% External bibliography database file in the BibTeX format
 \cleardoublepage
-\bibliography{bibliography} % file "bibliography.bib"
-%\addcontentsline{toc}{chapter}{\bibname} % Add entry in the table of contents as chapter
-
+\normalem
+\printbibliography[heading=bibintoc]					
 %%
 % ----------------------------------------------------------------------
 %  Print appendixes, if any!  (optional)

@@ -218,35 +218,6 @@
 		\DeclareGraphicsExtensions{.eps, .png, .jpg}
 \fi
 
-% \def\PDF@FinishDoc{%
-%  \Hy@UseMaketitleInfos
-%  \pdfinfo{
-%     /Title(\xmpTitle)%
-%     /Author(\xmpAuthor)%
-%	 /Creator(\xmpProducer)%
-%     \ifx\@pdfcreationdate\@empty
-%    \else
-%      /CreationDate(\@pdfcreationdate)%
-%    \fi
-%    \ifx\@pdfmoddate\@empty
-%    \else
-%      /ModDate(\@pdfmoddate)%
-%    \fi
-%      /Producer(\xmpProducer)%
-%     /Trapped /False
-%     /GTS_PDFA1Version (PDF/A-1b:2005)%
-%  }%
-%  \Hy@EnableOption{pdfauthor}%
-%  \Hy@DisableOption{pdftitle}%
-%  \Hy@DisableOption{pdfsubject}%
-%  \Hy@DisableOption{pdfcreator}%
-%  \Hy@DisableOption{pdfcreationdate}%
-%  \Hy@DisableOption{pdfmoddate}%
-%  \Hy@DisableOption{pdfproducer}%
-%  \Hy@DisableOption{pdfkeywords}
-%  %\Hy@DisableOption{backref}
-%  }
-%  
 
 % Print on paper
 \if\@printable1
@@ -273,8 +244,8 @@
 \cs_new_eq:NN \Repeat \prg_replicate:nn
 \ExplSyntaxOff
 
-\usepackage[square, comma, sort&compress, numbers]{natbib}
-\usepackage{tocbibind} % Add bibliography/index/contents to Table of Contents. Automatically adds the bibliography and/or the index and/or the contents, etc., to the Table of Contents.
+%\usepackage[square, comma, sort&compress, numbers]{natbib}
+%\usepackage{tocbibind} % Add bibliography/index/contents to Table of Contents. Automatically adds the bibliography and/or the index and/or the contents, etc., to the Table of Contents.
 
 %====================================================================
 % PACKAGE algorithm and algpseudocode
@@ -880,10 +851,9 @@ de Mestre \\em \@majorfield}
 	\renewcommand*{\listfigurename}{Lista de Figuras}
 	
   	\def\appendixname{Anexos}
-  	\addto{\captionsportuguese}{%
-  		\renewcommand{\bibname}{Referências}
-  	}
-  	
+  	\addto\captionsportuguese{
+	\renewcommand{\bibname}{Referências}
+	}
   	\def\glossaryname{Main}
  		\addto{\captionsportuguese}{
  			\renewcommand*{\acronymname}{Lista de Abreviaturas e Siglas}
@@ -901,14 +871,6 @@ de Mestre \\em \@majorfield}
 	
 	\renewcommand{\algorithmicrequire}{\textbf{Dados: }}
 	\renewcommand{\algorithmicensure}{\textbf{Resultado: }}
-
-	\def\backrefbrazil{%
-		\def\backrefpagesname{p\'aginas}%
-		\def\backrefsectionsname{se\c c\~oes}%
-		\def\backrefsep{, }%
-		\def\backreftwosep{ e~}%
-		\def\backreflastsep{, e~}%
-	}
 	
 % English
 \else\if\@language1
@@ -923,13 +885,6 @@ de Mestre \\em \@majorfield}
 			\renewcommand{\lstlistlistingname}{List of \lstlistingname s}% List of Listings -> List of Algorithms
 	}
 	  	
-  	\def\backrefenglish{%
-		\def\backrefpagesname{pages}%
-		\def\backrefsectionsname{sections}%
-		\def\backrefsep{, }%
-		\def\backreftwosep{ and~}%
-		\def\backreflastsep{, and~}%
-		}
 \fi\fi
 
 %====================================================================
@@ -1312,18 +1267,56 @@ de Mestre \\em \@majorfield}
 %% Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %http://tex.stackexchange.com/questions/15971/bibliography-with-page-numbers
-\usepackage{backref}
-\renewcommand*{\backref}[1]{}
-%\renewcommand*{\backrefalt}[4]{%
-%    \ifcase #1  (not cited)%
-%    \or        (p.~#2)%
-%    \else      (pp.~#2)%
-%    \fi}
-
-% break long URLs in Bibtex
 %URL linebreak in footnote
 %\usepackage{breakurl}
+\usepackage[
+style=ieee, %{ieee, numeric, alphabetic, authoryear, authortitle, verbose, apa, chem-acs, chem-angew, mla, nature, science, nejm, phys},
+%defernumbers=true, 
+backend=bibtex, %{bibtex, biber}
+sorting=debug, %{none, nty, nyt, nyvt, anyt, anyvt, ynt, debug},
+%dashed=false, 
+maxnames=20,
+maxcitenames=3,
+giveninits=false,
+citestyle=nature,
+natbib=true,%
+doi=true,%
+%url=false,%
+isbn=true,%
+%urldate=long,
+%uniquename=false,
+%uniquelist=false
+]{biblatex}
+%%%% The important part:
+\DefineBibliographyStrings{portuguese}{%
+	bibliography = {Referências},
+    references = {Referências},
+    page={pág.},
+    pages={páginas},
+    and={\&},
+  	mathesis = {Tese de Mestrado},
+  	phdthesis = {Tese de Doutoramento}
+}
+
+\DefineBibliographyStrings{english}{%
+	bibliography = {References},
+    references = {References},
+    page={page},
+    pages={pages},
+    and={\&}  	
+}
+
 \def\UrlBreaks{\do\/\do-}
+%\usepackage[square, comma, sort&compress, numbers]{natbib}
+\usepackage{tocbibind} % Add bibliography/index/contents to Table of Contents. Automatically adds the bibliography and/or the index and/or the contents, etc., to the Table of Contents.
+
+\addbibresource{bibliography.bib}
+% If you want to break on URL numbers
+\setcounter{biburlnumpenalty}{9000}
+% If you want to break on URL lower case letters
+\setcounter{biburllcpenalty}{9000}
+% If you want to break on URL UPPER CASE letters
+\setcounter{biburlucpenalty}{9000}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Appendixes
