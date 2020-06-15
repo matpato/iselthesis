@@ -7,13 +7,13 @@ This template serves both degrees as a bachelor's and master's degree. And, duri
 
 	\documentclass[
 		msc,		% (*) msc, prepmsc, bsc, prepbsc - degree
-					% prepbsc(msc) Preparation of BSc (MSc) dissertation
-					% bsc(msc) BSc graduation report/ MSc dissertation
-		pt,			% (*) pt, en - languages 
+				% prepbsc(msc) Preparation of BSc (MSc) dissertation
+				% bsc(msc) BSc graduation report/ MSc dissertation
+		pt,		% (*) pt, en - languages 
 		twoside,	% (*) twoside, oneside - single or double sided printing
 		12pt,		% (*) 12pt, 11pt, 10pt - use font size
 		a4paper,	% the paper size/format
-		utf8,			% (*) utf8, latin1	- Text encoding: Linux, Mac or Windows
+		utf8,		% (*) utf8, latin1	- Text encoding: Linux, Mac or Windows
 		onpaper, % (*) onpaper, onscreen Format your thesis in a way that presents well on paper and/or on screen
 		hyperref = true,  % Hyperlinks in citations: true(*) false
 		listof=totoc
@@ -80,7 +80,7 @@ Authors
 	Matilde Pós-de-Mina Pato
 	Nuno Datia (as contributor)
 
-February, 24th 2020
+June, 15th 2020
 
 
 This package and template are not official for ISEL/IPL.
