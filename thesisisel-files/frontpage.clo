@@ -1,0 +1,23 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% frontpage.clo
+%% ISEL thesis configuration file
+%%
+%% Costumization for the FRONTPAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\printcoverpage{
+\if\@degreetype0{
+	\Repeat{1}{\frontpage}
+	}
+\else\if\@degreetype1{
+	\Repeat{1}{\frontpage}
+	\Repeat{1}{\frontpageBSC}  
+}	
+\else\if\@degreetype2{
+	\Repeat{1}{\frontpage} 
+}	
+\else\if\@degreetype3{
+	\Repeat{2}{\frontpage}  
+}	
+\fi\fi\fi\fi
+}

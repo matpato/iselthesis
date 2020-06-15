@@ -11,6 +11,7 @@
 %%% Version v2.5: December 2019
 %%% Version v2.5.1.: February 2020
 %%% Version v2.5.2.: March 2020
+%%% Version v2.5.3.: June 2020
 %%% 
 %%% This template is vaguely based on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
@@ -157,7 +158,6 @@
 \fi\fi
 
 \RequirePackage[T1]{fontenc}
-
 
 %====================================================================
 % PACKAGE amsmath, amsthm, amssymb, amsfonts:
@@ -851,9 +851,7 @@ de Mestre \\em \@majorfield}
 	\renewcommand*{\listfigurename}{Lista de Figuras}
 	
   	\def\appendixname{Anexos}
-  	\addto\captionsportuguese{
-	\renewcommand{\bibname}{Referências}
-	}
+
   	\def\glossaryname{Main}
  		\addto{\captionsportuguese}{
  			\renewcommand*{\acronymname}{Lista de Abreviaturas e Siglas}
@@ -906,7 +904,6 @@ de Mestre \\em \@majorfield}
 \usepackage{fancyvrb}
 \usepackage{fvextra}
 
-
 \renewcommand{\lstlistoflistings}{
 	\begingroup
 	\tocfile{\lstlistlistingname}{lol}
@@ -952,214 +949,13 @@ de Mestre \\em \@majorfield}
 		\forlistloop{\@printlist}{\@frontmatter@list} %
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% FRONTPAGE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\printcoverpage{
-\if\@degreetype0{
-	\Repeat{1}{\frontpage}
-	}
-\else\if\@degreetype1{
-	\Repeat{1}{\frontpage}
-	\Repeat{1}{\frontpageBSC}  
-}	
-\else\if\@degreetype2{
-	\Repeat{1}{\frontpage} 
-}	
-\else\if\@degreetype3{
-	\Repeat{2}{\frontpage}  
-}	
-\fi\fi\fi\fi
-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% FRONTPAGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{thesisisel-files/frontpage.clo}
+\input{thesisisel-files/frontpageMSc.clo}
+\input{thesisisel-files/frontpageBSC.clo}
 
-\def\frontpage{
-
-\thispagestyle{empty}
-\newgeometry{tmargin=0.25cm,bmargin=0.5cm,lmargin=2cm,rmargin=2cm}
-
-\begin{center}
-% Put logo
-	\logo{\@universitylogo}{0.12}
-
-%Define font style (ptm=Times New Roman)
-	\fontfamily{ptm}
-
-% Name of Institute
-	\fontsize{16}{19.2}
-	\selectfont
-	\textbf{\@university}
-
-\vspace{0.25cm}	
-% Name of Department
-	\fontsize{14}{16.8}
-	\selectfont
-	\textbf{\@department}
-
-% Put image
-	\ifx\@workimage\undefined
-	\noimage
-	\else
-	\image{\@workimage}
-	\fi
-
-\vspace{0.65cm}
-% Title of Dissertation
-	\fontsize{18}{21.6}
-	\selectfont
-	\textbf{\@title}\\[0.75cm]
-
-
-\vspace{0.2cm}	
-% Name of Candidate
-	\fontsize{16}{19.2}
-	\selectfont
-	\textbf{
-		\ctable[
-			cap=,
-			caption=,
-			label=,
-			pos=h,
-			maxwidth=1\linewidth,
-			doinside=\hspace*{0.1cm},
-		]{rX}{}{ 			
-			\printauthor[]{1}			
-			\printauthor[]{2}
-			\printauthor[]{3}
-	}}
-
-\vspace{0.10cm}	
-% Academic qualifications
-	\fontsize{14}{16.8}
-	\selectfont
-	\@authordegree
-	
-\vspace{0.75cm}
-% Degree
-	\fontsize{12}{13}
-	\selectfont
-	\@presentationtext
-	
-	\vfill
-	% Advisers
-	\fontsize{11}{14.4}
-	\selectfont
-	\ctable[
-		cap=,
-		caption=,
-		label=,
-		pos=h,
-		maxwidth=1\linewidth,
-		doinside=\hspace*{0.1cm},
-	]{rX}{}{ 
-		\printadviser[]{1}
-		\printadviser[]{2}
-}
-
-
-\vfill\vfill
-% Referee board
-\if\@degreetype3
-\printthejury
-\fi
-
-\vfill\vfill\vfill
-
-% Date
-\fontsize{10}{12.2}
-\selectfont
-\textbf{\@themonth, \@theyear}
-	
-\end{center}
-\restoregeometry
-\cleardoublepage %\newpage
-\thispagestyle{empty}
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Frontpage - Bachelor Project
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\def\frontpageBSC{
-
-\thispagestyle{empty}
-\newgeometry{tmargin=0.25cm,bmargin=0.5cm,lmargin=2cm,rmargin=2cm}
-
-\begin{center}
-% Put logo
-	\logo{\@universitylogo}{0.12}
-
-%Define font style (ptm=Times New Roman)
-	\fontfamily{ptm}
-
-% Name of Institute
-	\fontsize{16}{19.2}
-	\selectfont
-	\textbf{\@university}
-
-\vspace{0.25cm}	
-% Name of Department
-	\fontsize{14}{16.8}
-	\selectfont
-	\textbf{\@department}
-
-% Put image
-	\ifx\@workimage\undefined
-	\noimage
-	\else
-	\image{\@workimage}
-	\fi
-
-\vspace{0.65cm}
-% Title of Dissertation
-	\fontsize{18}{21.6}
-	\selectfont
-	\textbf{\@title}\\[0.75cm]
-
-\vspace{1.5cm}	
-% Name of Candidate
-	\fontsize{14}{16.8}
-	\selectfont
-	\textbf{
-		\ctable[
-			cap=,
-			caption=,
-			label=,
-			pos=h,
-			maxwidth=1\linewidth,
-			doinside=\hspace*{0.1cm},
-		]{rX}{}{ 
-		\midrule	
-		\printauthor[]{1}\\
-		\ifnum \@theauthorcount > 1		
-		\midrule	
-		\printauthor[]{2}\\
-		\ifnum \@theauthorcount > 2
-		\midrule	
-		\printauthor[]{3}
-		\fi\fi
-}}
-
-
-\vspace{0.75cm}
-% Degree
-	\fontsize{12}{13}
-	\selectfont
-	\@presentationtext
-	
-\vfill\vfill
-
-\vfill\vfill\vfill
-
-% Date
-\fontsize{10}{12.2}
-\selectfont
-\textbf{\@themonth, \@theyear}
-	
-\end{center}
-\restoregeometry
-\cleardoublepage %\newpage
-\thispagestyle{empty}
-}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Dedicatory
@@ -1270,23 +1066,24 @@ de Mestre \\em \@majorfield}
 %URL linebreak in footnote
 %\usepackage{breakurl}
 \usepackage[
-style=ieee, %{ieee, numeric, alphabetic, authoryear, authortitle, verbose, apa, chem-acs, chem-angew, mla, nature, science, nejm, phys},
+	style=ieee, %{ieee, numeric, alphabetic, authoryear, authortitle, verbose, apa, chem-acs, chem-angew, mla, nature, science, nejm, phys},
 %defernumbers=true, 
-backend=bibtex, %{bibtex, biber}
-sorting=debug, %{none, nty, nyt, nyvt, anyt, anyvt, ynt, debug},
-%dashed=false, 
-maxnames=20,
-maxcitenames=3,
-giveninits=false,
-citestyle=nature,
-natbib=true,%
-doi=true,%
-%url=false,%
-isbn=true,%
-%urldate=long,
-%uniquename=false,
-%uniquelist=false
+	backend=bibtex, %{bibtex, biber}
+	sorting=debug, %{none, nty, nyt, nyvt, anyt, anyvt, ynt, debug},
+	%dashed=false, 
+	maxnames=20,
+	maxcitenames=3,
+	giveninits=false,
+	citestyle=nature,
+	natbib=true,%
+	doi=true,%
+	%url=false,%
+	isbn=true,%
+	%urldate=long,
+	%uniquename=false,
+	%uniquelist=false
 ]{biblatex}
+
 %%%% The important part:
 \DefineBibliographyStrings{portuguese}{%
 	bibliography = {Referências},
@@ -1303,14 +1100,14 @@ isbn=true,%
     references = {References},
     page={page},
     pages={pages},
-    and={\&}  	
+    %and={\&}  	
 }
 
 \def\UrlBreaks{\do\/\do-}
 %\usepackage[square, comma, sort&compress, numbers]{natbib}
+
 \usepackage{tocbibind} % Add bibliography/index/contents to Table of Contents. Automatically adds the bibliography and/or the index and/or the contents, etc., to the Table of Contents.
 
-\addbibresource{bibliography.bib}
 % If you want to break on URL numbers
 \setcounter{biburlnumpenalty}{9000}
 % If you want to break on URL lower case letters
