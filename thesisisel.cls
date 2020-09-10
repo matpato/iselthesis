@@ -914,7 +914,8 @@ de Mestre \\em \@majorfield}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % To aggregate multiple figures in a single one with subfigures
-\usepackage{subfigure}
+% Note: subfigure package does not recognise \textwidth as a number, when it is in fact a number (equivalent to the constant width of the total text block on a page). The way to resolve this is to use the more updated subcaption package
+\usepackage{subcaption}
 
 % To have text wrapping figures
 \usepackage{wrapfig}
