@@ -73,9 +73,7 @@ The template will first automatically place the abstract in the language of the 
 	3. Overleaf is an open-source online real-time collaborative LaTeX editor. Overleaf comes with a complete, ready to go LaTeX environment which runs on our servers. With Overleaf you get the same LaTeX set-up wherever you go. By working with your colleagues and students on Overleaf, you know that you're not going to hit any version inconsistencies or package conflicts. (source: https://www.overleaf.com)
  
 
-# 
-
-Authors
+## Authors
 
 	Matilde Pós-de-Mina Pato
 	Nuno Datia (as contributor)
