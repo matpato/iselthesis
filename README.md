@@ -80,7 +80,11 @@ Authors
 	Matilde Pós-de-Mina Pato
 	Nuno Datia (as contributor)
 
-February, 24th 2020
+September, 25th 2020
 
 
 This package and template are not official for ISEL/IPL.
+
+# License
+
+[MIT]: https://choosealicense.com/licenses/mit/
