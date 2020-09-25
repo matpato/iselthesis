@@ -1,5 +1,5 @@
 # thesisisel
-Template for bachelor and master degrees report written in LaTex
+The thesisisel is designed to create a bachelor or master degrees report written in LaTex
 
 1. Instructions
 
@@ -45,6 +45,13 @@ thesisisel This is the main directory and includes:
 	2.7 template.tex: The main file. You should run  \texttt{LaTeX} in this one. Please refrain from changing the file content outside of the well defined area;
 	2.8 bibliography.bib: The bib file. An easy way to find to import citation into bibtex is select option "Show links to import citation into BibTex" in \href{http://scholar.google.pt/scholar_settings?hl=en&as_sdt=0,5}{Scholar google settings}.
 	2.9 thesisisel.cls: The  LaTeX class file for the thesis{} style. Currently, some of the defaults are stored here instead of \verb!defaults.tex!. This file should not be changed, unless you're ready to play with fire! :) - DO NOT CHANGE);
+	
+All of these files should be in the same folder. The outputs will be a .pdf file called template.pdf with the manuscript. After that, this should be renamed. 
+
+In addition, latex generates extra files which are .aux, .log, .out, .bbl and .synctex.gz. Theses files provide important info: 
+	.log - about the compiler that you are running (warning and errors);
+	.aux, .sync, .toc and others - are needed for things to actually work when you compile your document multiple times.
+Deleting them can break things, then it's not really a great idea to (automatically) remove them. However, if you desire to have a cleaner working directory, there are a few ways to accomplish that. For example, you can compile your document with the output-directory parameter. [Read more ...](https://tex.stackexchange.com/questions/369771/how-to-delete-files-generated-by-latex)  
 	
 # 
 
