@@ -87,4 +87,4 @@ This package and template are not official for ISEL/IPL.
 
 # License
 
-[MIT]: https://choosealicense.com/licenses/mit/
+[MIT](https://choosealicense.com/licenses/mit/)
