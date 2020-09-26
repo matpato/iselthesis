@@ -1,5 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% thesisisel.cls
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% thesisisel.cls
 %%% ISEL/IPL Dissertation document class
 %%%
 %%% By Matilde Pós-de-Mina Pato (matilde.pato@isel.pt)
@@ -22,7 +21,7 @@
 %%%
 %%% CONTRIBUTERS are welcome. Please contact "matilde.pato@isel.pt"
 %%%
-%%% Thanks to: Carolina Neves (ISEL)
+%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{thesisisel}[2012/10/09 ISEL thesis template]
@@ -70,15 +69,13 @@
 \DeclareOption{latin1}{\let\@utf=0}
 \DeclareOption{utf8}{\let\@utf=1}
 
-% == Type of Document ===
-%
-% \@degreetype=0	BSc preliminary report	: prepbsc
+% == Type of document ===
+% \@degreetype=0	BSc preliminary report		: prepbsc
 % \@degreetype=1	BSc report							: bsc
-% \@degreetype=2	MSc preliminary report	: prepmsc
+% \@degreetype=2	MSc preliminary report		: prepmsc
 % \@degreetype=3	MSc dissertation				: msc
 %
 			
-%\let\@degreetype=4
 \DeclareOption{prepbsc}{
 	\let\@degreetype=0
 	\def\@degree{\@bachelordegree}
@@ -116,15 +113,19 @@
 \ExecuteOptions{
 	pt,
 	msc,
-	onpaper
+	onscreen
 }
 \ProcessOptions
 
-\LoadClass{book}
+\LoadClass{book} 
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%====================================================================
+%================================================
 % PACKAGE hyperref
-%====================================================================
+%================================================
 % Set links for references and citations in document
 % Some MiKTeX distributions have faulty PDF creators in which case this package will not work correctly
 % Long live Linux :D
@@ -144,11 +145,11 @@
 			citecolor=mydarkblue,
 			linkcolor=black,
 			urlcolor=mydarkblue
-			]{hyperref} 
-			
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% PACKAGES
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			]{hyperref}
+
+%================================================
+% PACKAGE latin, utf8
+%================================================
 % Latin1
 \if\@utf0
 \RequirePackage[latin1]{inputenc}
@@ -159,9 +160,9 @@
 
 \RequirePackage[T1]{fontenc}
 
-%====================================================================
+%================================================
 % PACKAGE amsmath, amsthm, amssymb, amsfonts:
-%====================================================================
+%================================================
 % This package is typically required. Among many other things it adds the possibility
 % to put symbols in bold by using \boldsymbol (not \mathbf); defines additional 
 % fonts and symbols; adds the \eqref command for citing equations. I prefer the style
@@ -183,7 +184,7 @@
 \newcounter{saveenumi}
 \newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
 \newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
-% Beautiful simple tables
+% === Beautiful simple tables ===
 \usepackage{booktabs}
 \RequirePackage{csquotes}
 \RequirePackage{babel}
@@ -197,8 +198,9 @@
 \RequirePackage{setspace}           % One-and-half spacing
 \onehalfspacing
 
-%======================================================================
-% General styles
+%================================================
+% PACKAGE general styles
+%================================================
 %\RequirePackage{mathptmx}
 \RequirePackage[scaled]{helvet}
 \RequirePackage{courier}
@@ -206,7 +208,6 @@
 \usepackage{xmpincl}
 %\usepackage[a-1b]{pdfx}
 
-%======================================================================
 \RequirePackage[]{xcolor}
 \definecolor{mydarkblue}{rgb}{0.0,0.08,0.45}
 \usepackage{ifpdf}		% This is now the recommended way for checking for PDFLaTeX:
@@ -219,13 +220,14 @@
 \fi
 
 
-% Print on paper
+%  === Geometry: Print on paper ===
 \if\@printable1
 \RequirePackage[top=3cm,
 	bottom=3cm,
 	inner=3.5cm,
 	outer=2.5cm]{geometry}[2010/09/12]
-% Print on screen
+	
+% === Geometry: Print on screen ===
 \else\if\@printable0
 \RequirePackage[top=3cm,
 	bottom=3cm,
@@ -233,7 +235,9 @@
 	outer=2.5cm]{geometry}[2010/09/12]
 \fi\fi
 	
-
+%================================================
+% PACKAGE tikz
+%================================================
 \RequirePackage{tikz}	%Tikz is probably the most complex and powerful tool to create graphic elements in LATEX. 
 
 \RequirePackage{ctable}
@@ -244,19 +248,16 @@
 \cs_new_eq:NN \Repeat \prg_replicate:nn
 \ExplSyntaxOff
 
-%\usepackage[square, comma, sort&compress, numbers]{natbib}
-%\usepackage{tocbibind} % Add bibliography/index/contents to Table of Contents. Automatically adds the bibliography and/or the index and/or the contents, etc., to the Table of Contents.
-
-%====================================================================
+%================================================
 % PACKAGE algorithm and algpseudocode
-%====================================================================
+%================================================
 \usepackage[Algoritmo]{algorithm}
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 
-%====================================================================
+%================================================
 % PACKAGE acronym and nomencl
-%====================================================================
+%================================================
 % This package is most usefull for acronyms. The package garantees that all acronyms definitions 
 % are given at the first usage. 
 % IMPORTANT: do not use acronyms in titles/captions; otherwise the definition will appear on the table of contents.
@@ -281,43 +282,89 @@
 \glsdisablehyper
 \makenoidxglossaries
 
-
 \setglossarystyle{long} %long3colheader
 % style=long,header=none,border=none,cols=2 &
 \addtolength{\glspagelistwidth}{1cm}
 \addtolength{\glsdescwidth}{2.5cm}
 \renewcommand*{\glsnamefont}[1]{\bfseries #1}%
 
-%====================================================================
+\def\UrlBreaks{\do\/\do-}
+%\usepackage[square, comma, sort&compress, numbers]{natbib}
+
+%================================================
 % PACKAGE pdfpages and pdflscape
-%====================================================================
+%================================================
 \usepackage{pdfpages} % include pdf file
 % The pdflscape package adds PDF support to the landscape environment of package lscape, by setting the PDF/Rotate page attribute.
 \usepackage{pdflscape}
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%================================================
+% PACKAGE listings
+%================================================
+
+% To process lists and other stuff
+\RequirePackage{etoolbox}
+
+% The ‘listings’ package is loaded at the beginning of a LATEX file in the preamble
+% Here is an example of my \lset{} declaration for ‘R’ code. 
+% Then, after having including this (also in the preamble), I simply include my external ‘R’ files. 
+% They can be included using an:
+% \include{ } - like interface to the external files;
+% by using the command \lstinputlisting{./code.R} to include the code from the file code.R which % is located in the same directory as the ‘LATEX’ source file.
+%
+%====================================================================
+
+\usepackage{listings}
+% listings package provides a key called inputpath for specifying a path where \lstinputlisting should search for source files.
+\newcommand*\lstinputpath[1]{\lstset{inputpath=#1}}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+
+\renewcommand{\lstlistoflistings}{
+	\begingroup
+	\tocfile{\lstlistlistingname}{lol}
+	\endgroup
+	}
+
+%================================================
+% PACKAGE subcaption, float, figures, totalcount
+%================================================
+
+% To aggregate multiple figures in a single one with subfigures
+% Note: subfigure package does not recognise \textwidth as a number, when it is in fact a number (equivalent to the constant width of the total text block on a page). The way to resolve this is to use the more updated subcaption package
+\usepackage{subcaption}
+
+% To have text wrapping figures
+\usepackage{wrapfig}
+\usepackage{float}						% Improves the interface for defining floating objects such as figures and tables
+%
+\usepackage[figure,table,lstlisting]{totalcount}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GENERAL PURPOSE MACROS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%
  \let\origcleardoublepage=\cleardoublepage
  \def\cleardoublepage{%
    \newpage{\pagestyle{empty}\origcleardoublepage}
  }
 
 % 
-% No identation
+% === No identation ===
 \setlength{\parskip}{\medskipamount}
 \setlength{\parindent}{0pt}
 % 
 
 %%
-% For use with the pseudocode package
+% === For use with the pseudocode package ===
  \def\@lopcchapterspace{\relax}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% LABELS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 %% Some relevant strings
 \gdef\@mbachelordegreestr{Licenciado}
 \gdef\@fbachelordegreestr{Licenciada}
@@ -351,7 +398,7 @@ de Mestre \\em \@majorfield}
 
 \gdef\@presentationtext{\@dissertationtype}
 
-%% Language Dependent
+%%  === Language Dependencies ===
 
 \gdef\@abstrnamePT{Resumo}
 \gdef\@abstrnameEN{Abstract}
@@ -359,10 +406,56 @@ de Mestre \\em \@majorfield}
 \gdef\@keywordsnamePT{Palavras-chave}
 \gdef\@keywordsnameEN{Keywords}
 
+% Portuguese
+\if\@language0
+  	\gdef\@notdefined{NÃO DEFINIDO}
+  	\gdef\acknowledgementsname{Agradecimentos} 
+  	
+  	\addto\captionsportuguese{% Replace "english" with the language you use
+  		\renewcommand{\contentsname}{Índice}%
+	}
+	
+ 	\renewcommand*{\listtablename}{Lista de Tabelas}
+	\renewcommand*{\listfigurename}{Lista de Figuras}
+	
+  	\def\appendixname{Anexos}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  	\def\glossaryname{Main}
+ 		\addto{\captionsportuguese}{
+ 			\renewcommand*{\acronymname}{Lista de Abreviaturas e Siglas}
+ 			\renewcommand*{\glossaryname}{Glossário}
+ 			\renewcommand*{\pagelistname}{Páginas}
+ 			\renewcommand*{\entryname}{Notação}
+	}
+ 
+	\def\lstlistlistingname{Listagens}
+	  	\addto{\captionsportuguese}{%
+			%\renewcommand*{\lstlistingname}{Listagem}%
+			\renewcommand*{\lstlistingname}{Listagem}% Listing -> Algorithm
+			\renewcommand{\lstlistlistingname}{Lista de Listagens}% List of Listings -> List of Algorithms
+	}
+	
+	\renewcommand{\algorithmicrequire}{\textbf{Dados: }}
+	\renewcommand{\algorithmicensure}{\textbf{Resultado: }}
+	
+% English
+\else\if\@language1
+  	\gdef\@notdefined{UNDEFINED}
+  	\gdef\acknowledgementsname{Acknowledgments}
+  	\def\appendixname{Appendix}
+
+	\def\lstlistlistingname{Listings}
+	  	\addto{\captionsenglish}{%
+			%\renewcommand*{\lstlistingname}{Listagem}%
+			\renewcommand*{\lstlistingname}{Listing}% Listing -> Algorithm
+			\renewcommand{\lstlistlistingname}{List of \lstlistingname s}% List of Listings -> List of Algorithms
+	}
+	  	
+\fi\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DEFINE LOGO AND IMAGE IN FRONTPAGE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% ADD ISEL's LOGO and IMAGE in frontpage
 \newcommand{\logo}[2]{
 \parbox[t][0.15\paperheight]{0.1\paperwidth}{%
@@ -435,6 +528,9 @@ de Mestre \\em \@majorfield}
 \def\theyear#1{\gdef\@theyear{#1}}
 \def\@theyear{~theyear \@notdefined}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% AUTHOR and ADVISORS DEFINITION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Author identification (at most 2 of each)
 %% \author[m|f]{Name}
@@ -480,14 +576,6 @@ de Mestre \\em \@majorfield}
 \def\@theauthorstr[#1]{%
 	\@ptheauthorstr[#1]{\expandafter\csname @the#1authorcount\endcsname}{\expandafter\csname @the#1authorgender\endcsname}
 	}
-
-%\def\@ptheauthorstr[#1]#2#3{%
-%	\ifnum #2 > 1
-%%		do nothing
-%	\else			 
-%  		\hypersetup{pdfauthor={\@author}}
-%	\fi
-%	}
 
 \def\printauthor[#1]#2{%
 	\ifcsname @#1authorname#2\endcsname
@@ -564,7 +652,10 @@ de Mestre \\em \@majorfield}
 	\fi
 	}
 
-%% WORK IDENTIFICATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DOCUMENT IDENTIFICATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
 \def\@
 \def\title#1{%
   \gdef\@title{#1}
@@ -597,8 +688,10 @@ de Mestre \\em \@majorfield}
     \thedegree{\authorgender}{mastersdegreestr}
 \fi\fi\fi\fi}
 
-
-% JURY IDENTIFICATION (at most 5 of each)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% JURY IDENTIFICATION (at most 5 of each)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
 %% [p] for president and [a] for referees 
 %% ---------------------------------------------------%%
 %% \jury[p|a]{Category and Name}
@@ -691,21 +784,18 @@ de Mestre \\em \@majorfield}
 	}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PAGE LAYOUT
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \synctex=1 % Uase synctex
 \brokenpenalty=10000
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Fonts
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FONTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand\quotefont{\normalfont\normalsize}
 \newcommand\quotefonti{\it\normalsize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Including chapters and similars
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\newcommand{\reverseconcat}[3]{#3#2#1}
 \newcommand{\version}[1]{ 
 	\if\@language0
@@ -716,7 +806,13 @@ de Mestre \\em \@majorfield}
 	 		version #1
 	 \fi
  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PRINT CHAPTERS, DEDICATORY, ACKNOWLEDGEMENTS, ABSTRACT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\input{thesisisel-files/thesismainmatter.clo}
 
+% === Dedicatory ===
 \def\dedicatoryfile#1{%
   \gdef\@dedicatoryfile{#1}}
 \def\@dedicatoryfile{\@empty}
@@ -735,6 +831,7 @@ de Mestre \\em \@majorfield}
 }
 \fi
 
+% === Acknowledgement ===
 \def\acknowledgementsfile#1{%
   \gdef\@acknowledgementsfile{#1}}
 \def\@acknowledgementsfile{~acknowledgementsfile \@notdefined}
@@ -749,6 +846,7 @@ de Mestre \\em \@majorfield}
 	\fi\fi\fi\fi
 }
 
+% === Abstract ===
 \def\ptabstractfile#1{%
   \gdef\@ptabstractfile{#1}}
 \def\@ptabstractfile{\@empty}
@@ -787,31 +885,7 @@ de Mestre \\em \@majorfield}
 	\fi\fi
 }
 
- 	
-\def\thesismainmatter{%
-	\mainmatter
-	\pagestyle{fancy}
-	\fancyhead{}
-	\setlength{\headheight}{15pt}
-	\fancyhead[RO,LE]{\leftmark\hfill\rightmark}
-	\def\chaptermark##1{\markboth{\fontfamily{ptm}% Times New Roman (ptm) or Helvetica (phv)
-		\selectfont\footnotesize\thechapter.\ \textsc{##1}}{}}
-	\def\sectionmark##1{\markright{\fontfamily{ptm}%
-	 	\selectfont\footnotesize\thesection.\ ##1}}
-	\if\@language0   % Thesis in  Portuguese
-		\selectlanguage{portuguese}
-	\else\if\@language1   % Thesis in English
-		\selectlanguage{english}
-	\fi\fi
-}
-
-\def\endthesismainmatter{%
-	\fancyhead{}
-	\lhead{\nouppercase{\textsc{\leftmark}}}
-	\rhead{}
-}
-
-% Chapters
+% === Chapters ===
 \newcount\@chapcount
 \@chapcount 0\relax
 
@@ -833,109 +907,17 @@ de Mestre \\em \@majorfield}
 	\endthesismainmatter
 }
 
-% To process lists and other stuff
-\RequirePackage{etoolbox}
-%\usepackage{pgffor}%
-
-% Portuguese
-\if\@language0
-  	\gdef\@notdefined{NÃO DEFINIDO}
-  	\gdef\acknowledgementsname{Agradecimentos} 
-  	
-  	\addto\captionsportuguese{% Replace "english" with the language you use
-  		\renewcommand{\contentsname}{Índice}%
-	}
-	
- 	\renewcommand*{\listtablename}{Lista de Tabelas}
-	\renewcommand*{\listfigurename}{Lista de Figuras}
-	
-  	\def\appendixname{Anexos}
-
-  	\def\glossaryname{Main}
- 		\addto{\captionsportuguese}{
- 			\renewcommand*{\acronymname}{Lista de Abreviaturas e Siglas}
- 			\renewcommand*{\glossaryname}{Glossário}
- 			\renewcommand*{\pagelistname}{Páginas}
- 			\renewcommand*{\entryname}{Notação}
-	}
- 
-	\def\lstlistlistingname{Listagens}
-	  	\addto{\captionsportuguese}{%
-			%\renewcommand*{\lstlistingname}{Listagem}%
-			\renewcommand*{\lstlistingname}{Listagem}% Listing -> Algorithm
-			\renewcommand{\lstlistlistingname}{Lista de Listagens}% List of Listings -> List of Algorithms
-	}
-	
-	\renewcommand{\algorithmicrequire}{\textbf{Dados: }}
-	\renewcommand{\algorithmicensure}{\textbf{Resultado: }}
-	
-% English
-\else\if\@language1
-  	\gdef\@notdefined{UNDEFINED}
-  	\gdef\acknowledgementsname{Acknowledgments}
-  	\def\appendixname{Appendix}
-
-	\def\lstlistlistingname{Listings}
-	  	\addto{\captionsenglish}{%
-			%\renewcommand*{\lstlistingname}{Listagem}%
-			\renewcommand*{\lstlistingname}{Listing}% Listing -> Algorithm
-			\renewcommand{\lstlistlistingname}{List of \lstlistingname s}% List of Listings -> List of Algorithms
-	}
-	  	
-\fi\fi
-
-%====================================================================
-% PACKAGE listings
-%====================================================================
-%
-% The ‘listings’ package is loaded at the beginning of a LATEX file in the preamble
-% Here is an example of my \lset{} declaration for ‘R’ code. 
-% Then, after having including this (also in the preamble), I simply include my external ‘R’ files. 
-% They can be included using an:
-% \include{ } - like interface to the external files;
-% by using the command \lstinputlisting{./code.R} to include the code from the file code.R which % is located in the same directory as the ‘LATEX’ source file.
-%
-%====================================================================
-
-\usepackage{listings}
-%listings package provides a key called inputpath for specifying a path where \lstinputlisting should search for source files.
-\newcommand*\lstinputpath[1]{\lstset{inputpath=#1}}
-\usepackage{fancyvrb}
-\usepackage{fvextra}
-
-\renewcommand{\lstlistoflistings}{
-	\begingroup
-	\tocfile{\lstlistlistingname}{lol}
-	\endgroup
-	}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Conditional list of figure, table, listings - listoffigures, listoftables and lstlistoflistings only if listings are present
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% To aggregate multiple figures in a single one with subfigures
-% Note: subfigure package does not recognise \textwidth as a number, when it is in fact a number (equivalent to the constant width of the total text block on a page). The way to resolve this is to use the more updated subcaption package
-\usepackage{subcaption}
-
-% To have text wrapping figures
-\usepackage{wrapfig}
-\usepackage{float}						% Improves the interface for defining floating objects such as figures and tables
-%
-%====================================================================
- \usepackage[figure,table,lstlisting]{totalcount}
-
+% === Conditional list of tables, figures, ... ===
 \newcommand\conditionalLoF{%
   \iftotalfigures\listoffigures\fi}
 \newcommand\conditionalLoT{%
   \iftotaltables\listoftables\fi}
 \newcommand\conditionalLoL{%
   \iftotallstlistings\lstlistoflistings\fi} 
-%\newcommand\conditionalLoA{%
-%  \iftotallstnomenclature\lstlistofnomenclature\fi}     
-%  \listofnomenclature{ll}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Deal with optional lists in the frontmatter: listoftables, listoffigures, etc.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\@printlist#1{ %
 		#1\cleardoublepage
 }
@@ -949,17 +931,18 @@ de Mestre \\em \@majorfield}
 		\forlistloop{\@printlist}{\@frontmatter@list} %
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% FRONTPAGE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FRONTPAGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 \input{thesisisel-files/frontpage.clo}
 \input{thesisisel-files/frontpageMSc.clo}
 \input{thesisisel-files/frontpageBSC.clo}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Dedicatory
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DEDICATORY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 \def\dedicatory{ %
 	\if @openright\cleardoublepage\else\clearpage\fi
 	\thispagestyle{empty}
@@ -975,9 +958,10 @@ de Mestre \\em \@majorfield}
 	\end{flushright}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Quote
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% QUOTE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 \def\quote{%
 	\if@openright\cleardoublepage\else\clearpage\fi
 	\thispagestyle{empty}
@@ -993,75 +977,81 @@ de Mestre \\em \@majorfield}
 	\end{flushright}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Acknowledgements
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ACKNOWLEDGEMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 \def\acknowledgements{%
   \chapter*{\acknowledgementsname}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Abstract
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ABSTRACT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 \def\abstractEN{%
   \selectlanguage{english}
   \gdef\@keywordsname{\@keywordsnameEN}
   \chapter*{\@abstrnameEN}
 }
   
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Resumo (Abstract in Portuguese)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  ABSTRACT IN PORTUGUESE LANGUAGE (RESUMO)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 \def\abstractPT{%
   \selectlanguage{portuguese}
   \gdef\@keywordsname{\@keywordsnamePT}
   \chapter*{\@abstrnamePT}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Keywords
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% KEYWORDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 \def\@keywordsname{\@defaultkeywordsname}
 \def\keywords{%
   \par\vskip\baselineskip\noindent{\bf\@keywordsname: }}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Chapter files
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CHAPTERS FILES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 \newcommand*{\MaxNumOfChapters}{10}% Adjust these two settings for your needs.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Table of contents
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TABLE OF CONTENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 \setcounter{tocdepth}{2}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Sectioning
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SECTIONING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 \setcounter{secnumdepth}{3}
 
-\definecolor{backGrayColor}{rgb}{0.7,0.7,0.7} % Background title color
 
+\definecolor{backGrayColor}{rgb}{0.7,0.7,0.7} % Background title color
 \titleformat{\chapter}[display]
-{\bfseries\Huge}				% format
-{\hfill\colorbox{backGrayColor}{\fontsize{80}{100}\selectfont{\textcolor{white}{\thechapter}}}} % label
-{1ex}							% sep
-{%\titlerule
-  \vspace{2ex}\filleft}			% before
-[\vspace{1cm}					%\titlerule
+	{\bfseries\Huge}				% format
+	{\hfill\colorbox{backGrayColor}{\fontsize{80}{100}\selectfont{\textcolor{white}	{\thechapter}}}} % label
+	{1ex}							% sep
+	{%\titlerule
+  	\vspace{2ex}\filleft}			% before
+	[\vspace{1cm}					%\titlerule
 ]
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADERS & FOOTERS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Headers & footers
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Bibliography
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 %http://tex.stackexchange.com/questions/15971/bibliography-with-page-numbers
 %URL linebreak in footnote
 %\usepackage{breakurl}
@@ -1102,10 +1092,6 @@ de Mestre \\em \@majorfield}
     pages={pages},
     %and={\&}  	
 }
-
-\def\UrlBreaks{\do\/\do-}
-%\usepackage[square, comma, sort&compress, numbers]{natbib}
-
 \usepackage{tocbibind} % Add bibliography/index/contents to Table of Contents. Automatically adds the bibliography and/or the index and/or the contents, etc., to the Table of Contents.
 
 % If you want to break on URL numbers
@@ -1115,9 +1101,10 @@ de Mestre \\em \@majorfield}
 % If you want to break on URL UPPER CASE letters
 \setcounter{biburlucpenalty}{9000}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Appendixes
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% APPENDIXES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 \newcount\@appxcount
 \@appxcount 0\relax
 

@@ -12,10 +12,10 @@ This template serves both degrees as a bachelor's and master's degree. And, duri
 		pt,			% (*) pt, en - languages 
 		twoside,	% (*) twoside, oneside - single or double sided printing
 		12pt,		% (*) 12pt, 11pt, 10pt - use font size
-		a4paper,	% the paper size/format
+		a4paper,	% Paper size/format
 		utf8,			% (*) utf8, latin1	- Text encoding: Linux, Mac or Windows
 		onpaper, % (*) onpaper, onscreen Format your thesis in a way that presents well on paper and/or on screen
-		hyperref = true,  % Hyperlinks in citations: true(*) false
+		hyperref = true,  % (*) true, false - Hyperlinks in citations
 		listof=totoc
 		]{thesisisel} 
 
@@ -79,8 +79,10 @@ The template will first automatically place the abstract in the language of the 
 
 	2. MiKTeX (pronounced mick-tech) is an up-to-date implementation of TeX/LaTeX and related programs. TeX is a typesetting system written by Donald Ervin Knuth who says that it is intended for the creation of beautiful books - and especially for books that contain a lot of mathematics. (source: https://miktex.org)
 
-	3. Overleaf is an open-source online real-time collaborative LaTeX editor. Overleaf comes with a complete, ready to go LaTeX environment which runs on our servers. With Overleaf you get the same LaTeX set-up wherever you go. By working with your colleagues and students on Overleaf, you know that you're not going to hit any version inconsistencies or package conflicts. (source: https://www.overleaf.com)
- 
+	3. Visual Studio Code is a source code editor which runs on your desktop and is available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a rich ecosystem of extensions for other languages (such as C++, C#, Java, Python, PHP, Go, Latex) and runtimes (such as .NET and Unity). (source: https://code.visualstudio.com)
+	Helper: LaTeX Workshop (https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
+
+	4. Overleaf is an open-source online real-time collaborative LaTeX editor. Overleaf comes with a complete, ready to go LaTeX environment which runs on our servers. With Overleaf you get the same LaTeX set-up wherever you go. By working with your colleagues and students on Overleaf, you know that you're not going to hit any version inconsistencies or package conflicts. (source: https://www.overleaf.com)
 
 ## Authors
 

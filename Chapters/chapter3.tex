@@ -9,7 +9,9 @@ Please, use these examples as a starting point, but you should always consider u
 \section{Document Structure} % (fold)
 \label{sec:document_structure}
 
-In engineering and science, a thesis or dissertation is the culmination of a master's or Ph.D. degree. A thesis or dissertation presents the research that the student performed for that degree. From the student's perspective, the primary purpose of a thesis or dissertation is to persuade the student's committee that he or she has performed and communicated research worthy of the degree. In other words, the main purpose of the thesis or dissertation is to help the student secure the degree. From the perspective of the engineering and scientific community, the primary purpose is to document the student's research. Although much research from theses and dissertations is also communicated in journal articles, theses and dissertations stand as detailed documents that allow others to see what the work was and how it was performed. For that reason, theses and dissertations are often read by other graduate students, especially those working in the research group of the authoring student. 
+In engineering and science, a thesis or dissertation is the culmination of a master's or Ph.D. degree. A thesis or dissertation presents the research that the student performed for that degree. From the student's perspective, the primary purpose of a thesis or dissertation is to persuade the student's committee that he or she has performed and communicated research worthy of the degree. In other words, the main purpose of the thesis or dissertation is to help the student secure the degree. 
+
+From the perspective of the engineering and scientific community, the primary purpose is to document the student's research. Although much research from theses and dissertations is also communicated in journal articles, theses and dissertations stand as detailed documents that allow others to see what the work was and how it was performed. For that reason, theses and dissertations are often read by other graduate students, especially those working in the research group of the authoring student \cite{gustavii2016write, glasman2010science, chicago, strunk}. 
 	
 With a thesis or dissertation, the format also encompasses the names of the sections that are expected: 
 \begin{enumerate}
@@ -192,19 +194,23 @@ To get the best quality of the images in  PDF files I'd recommend using vector-b
 
 In all cases, each image must be in an individual 1-image file; no animation files or multipage documents. 
 
-There are two different ways to place two figures/tables side-by-side. The \texttt{sub\-fi\-gu\-re} package provides functionality to arrange figures and tables next to each other, within the usual figure-floating-environment. Subfigure will alphabetically number your subfigures and you have access to the complete reference \figurename~ \ref{fig:figura-completa} as usual through \spverb!\figurename~\ref{fig:subfig1}!, or \subref{fig:ra-vectorial} to the letter only or either \figurename~ \ref{fig:ra-raster} through \verb!\subref{fig:subfig1}! and \verb!\figurename~\ref{fig:ra-raster}!, respectively.
+There are two different ways to place two figures/tables side-by-side.  More complicated figures with multiple images. You can do this using subfigure environments inside a figure environment. Subfigure will alphabetically number your subfigures and you have access to the complete reference as usual through \verb!\ref{fig:figurelabel}!, \figurename~\ref{fig:figura-completa}, or \figurename~\ref{fig:ra-raster} using \verb!\ref{fig:subfigurelabel}!.
 
 \begin{figure}[htbp]
 	\centering
-    \subfigure[Vectorial] {
+    \begin{subfigure}[b]{0.4\textwidth}
+    	\centering
+		\includegraphics[width=\textwidth]{ra-vectorial}
+		\caption{}
 		\label{fig:ra-vectorial}
-		\includegraphics[width=0.4\textwidth]{ra-vectorial}
-    }
+     \end{subfigure}	
 \qquad\qquad
-    \subfigure[Raster] {
+ 	\begin{subfigure}[b]{0.4\textwidth}
+    	\centering
+		\includegraphics[width=\textwidth]{ra-raster}
+		\caption{}
 		\label{fig:ra-raster}
-		\includegraphics[width=0.4\textwidth]{ra-raster}
-    }
+	\end{subfigure}		
   \caption{Subfigure example with vectorial and no-vectorial images}
   \label{fig:figura-completa}
 \end{figure}
@@ -212,7 +218,6 @@ There are two different ways to place two figures/tables side-by-side. The \text
 Using the package listings you can add non-formatted text as you would do with \verb!\begin{verbatim}! but its main aim is to include the source code of any programming language within your document. If you wish to include pseudocode or algorithms see \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms_and_Pseudocode}{LaTeX/Algorithms\_ and\_Pseudocode}, as \lstlistingname ~\ref{lst:SetApp}.
 
 %  \lstfromfile{language}{linerange}{caption}{label}{othersinsideoflstinoputlisting}{path}
-\vskip1em
 \lstfromfile{java}{59-64}{Static method - SetApp}{SetApp}{showlines=true,morekeywords={begin,System,out,print},numbers=left, firstnumber=59}{SetApp.java}
 
 \begin{minipage}{\textwidth}
@@ -233,9 +238,6 @@ x <- c(1:100)
 y <- square(x)
 \end{lstlisting}
 \end{minipage}
-
-
-
 \section{Generating PDFs from \texttt{LaTeX}} % (fold)
 \label{sec:generating_pdfs_from_latex}
 

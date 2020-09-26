@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Template for writing dissertations with ThesisMasterISEL
 %%
 %% Version 20121009 (Oct 2012) v1.0 - first version
@@ -28,8 +28,7 @@
 %%
 %% Authors / Contributors:
 %%     - Matilde Pós-de-Mina Pato (matilde.pato@isel.pt)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Main options (please read the manual for further details)
 %% Options marked with (*) are the values by default
 %% See also file "defaults.tex"
@@ -38,8 +37,7 @@
 %% If you want to use latin1, you should first re-save all these
 %% files (*.tex, *.cls,  ...) using latin1 encoding first
 %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[
 	msc,		% (*) msc, prepmsc, bsc, prepbsc - degree
 					% prepbsc(msc) Preparation of BSc (MSc) dissertation
@@ -47,21 +45,21 @@
 	pt,			% (*) pt, en - languages 
 	twoside,	% (*) twoside, oneside - single or double sided printing
 	12pt,		% (*) 12pt, 11pt, 10pt - use font size
-	a4paper,	% the paper size/format
+	a4paper,	% Paper size/format
 	utf8,			% (*) utf8, latin1	- Text encoding: Linux, Mac or Windows
-	onscreen, 	% (*) onpaper, onscreen Format your thesis in a way that presents well on paper and/or on screen
-	hyperref = true,  % Hyperlinks in citations: true(*) false
+	onscreen, % (*) onscreen, onpaper - Page layout: screen versus paper print
+	hyperref = true,  % (*) true, false - Hyperlinks in citations
 	listof=totoc
 	]{thesisisel} 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  BEGINING OF USER COSTUMIZATION
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%====================================================================
+%================================================
 % Additional packages you may want to use (comment those not needed)
-%====================================================================
+%================================================
 %\usepackage{colortbl}
 
 % Sort citations - ONLY if using "plain" style, otherwise keep commented
@@ -88,9 +86,9 @@
 % Define the nomenclature command that prints the symbol/abbreviation and generates a list entry at the same time.
 \newcommand*{\nom}[2]{#1\nomenclature{#1}{#2}}
 %
-%====================================================================
+%================================================
 % Standard configuration for user included packages
-%====================================================================
+%================================================
 \usepackage{sty/code}
 
 % Where to look for figures
@@ -105,9 +103,9 @@
 % Force word hyphenation
 \hyphenation{}
 
-%====================================================================
+%================================================
 % Some default values that you may whish to override
-%====================================================================
+%================================================
 %% Identification: items prefixed with (*) are the default values, as defined in "defaults.tex"
 % (*)\university{Instituto Superior de Engenharia de Lisboa}
 % (*)\faculty{Instituto Politécnico de Lisboa}
@@ -121,7 +119,7 @@
 % \doublespacing
 %
 %		
-%============================================================
+%================================================
 \input{personaldataofthesis}
 % Title of Report + author(s) + professor + date
 \hypersetup{ a4paper=true,
@@ -132,10 +130,10 @@
              pdfkeywords={{ }, { }, { } }
              }
              
-%%------------------------------------------------------------
+%% ------------------------------------------------------------
 %% All the names inside braces below sould correspond to a file
 %%     with extension ".tex" and located in the "Chapters" folder
-%%------------------------------------------------------------
+%% ------------------------------------------------------------
 \dedicatoryfile{dedicatory} 
 
 % Acknowledgments text. Will only be considered for final documents,
@@ -148,9 +146,9 @@
 % Resume/summary text in English
 \enabstractfile{abstract}
 
-%%------------------------------------------------------------
+%% ------------------------------------------------------------
 % The Table of Contents is always printed. The other lists may be omited.
-%%------------------------------------------------------------
+%% ------------------------------------------------------------
 
 % Conditionally insert List of Figures, Tables and Code Listings
 \addlisttofrontmatter{\conditionalLoF} 	% The List of Figures. 
@@ -159,16 +157,16 @@
 \addlisttofrontmatter{\printnoidxglossary[type=acronym]} % The List of Abreviations 
 \addlisttofrontmatter{\printnoidxglossary} %  default: type=main,  Glossary. Comment to omit.						
 %\printnoidxglossary[type=symbols] % only glossaries 
-% ---------------------------------------------------------------------------------
+% 
 % TEX CHAPTERS:
 % syntax: \chapterfile{file}
 \chapterfile{chapter1}
 \chapterfile{chapter2}
 \chapterfile{chapter3}
 
-% -----------------------------------------------------------
+%% ------------------------------------------------------------
 %% Bibliography style
-% -----------------------------------------------------------
+%% ------------------------------------------------------------
 % If you want to change some parameters
 %\usepackage[
 %style={ieee, numeric, alphabetic, authoryear, authortitle, verbose, apa, chem-acs, chem-angew, mla, nature, science, nejm, phys},
@@ -182,37 +180,40 @@
 %]{biblatex}
 %
 \addbibresource{bibliography.bib}
-% -----------------------------------------------------------
+%% ------------------------------------------------------------
 %% Text appendixes
-% -----------------------------------------------------------
+%% ------------------------------------------------------------
 % Comment if not needed
 % sintax: \appendixfile{file}
 \appendixfile{appendix1}
-%%============================================================
-%%
-%%  END OF USER COSTUMIZATION
-%%
-%%============================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%%============================================================
-%% Please do not change below this point!!! :)
-%%============================================================
+%%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
+%%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
+%%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
+%%
+%%   END OF USER COSTUMIZATION
+%%   Please do not change below this point!!! :)
+%%
+%%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
+%%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
+%%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
 %% Begining of document
 \begin{document}
-%\input{template.xmpdata}
-%%------------------------------------------------------------
+%% ------------------------------------------------------------
 %% Before main text
 \frontmatter
-
 % The first front page. Repeats the front page twice 
-% \Repeat{n-times}{\command}
 \printcoverpage
-%\InputIfFileExists{\jobname.xmpdata}{}{}
 
-%%------------------------------------------------------------
+%% ------------------------------------------------------------
 %% All the names inside braces below sould correspond to a file
 %%     with extension ".tex" and located in the "Chapters" folder
-%%------------------------------------------------------------
+%% ------------------------------------------------------------
 
 % Dedicatory text. Will only be considered for final documents,
 % i.e., "bsc" and "msc", otherwise, it will be silently ignored
@@ -226,7 +227,7 @@
 % Abstracts/resumes/summaries in two languages. The first abstract will
 % use the document main language and second the foreign language
 \printabstract
-%%------------------------------------------------------------
+%% ------------------------------------------------------------
 %
 %% Always print the table of contents
 \addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
@@ -238,40 +239,31 @@
 %% The List of Symbols (Nomenclature). Comment to omit.
 %\printnomenclature
 %
-% ----------------------------------------------------------------------
+%% ------------------------------------------------------------
 %  Print Document Chapters
-% ----------------------------------------------------------------------
+%% ------------------------------------------------------------
 %%
 % Title page: page (i)
 \printchapters
 %%
-% ----------------------------------------------------------------------
-%  Print Bibliography
-% ----------------------------------------------------------------------
+%% ------------------------------------------------------------
+%  Print Bibliography: Produces the bibliography section when processed by BibTeX
+%% ------------------------------------------------------------
 %%
-%\cleardoublepage
-
-% Include all references in .bib file, even non-cited ones...
-%\nocite{*}
-
-% Produces the bibliography section when processed by BibTeX
-% ----------------------------------------------------------------------
-%% Print bibliography 
-% ----------------------------------------------------------------------
 \cleardoublepage
 \normalem
 \printbibliography[heading=bibintoc]					
 %%
-% ----------------------------------------------------------------------
+%% ------------------------------------------------------------
 %  Print appendixes, if any!  (optional)
-% ----------------------------------------------------------------------
+%% ------------------------------------------------------------
 %%
 \cleardoublepage
 \setcounter{page}{1} \pagenumbering{roman}
 \printappendixes 
 \cleardoublepage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% End of document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document} 
