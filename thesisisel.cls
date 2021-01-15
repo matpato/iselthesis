@@ -265,18 +265,22 @@
 % The nomencl package implements a few basic commands to do that.
 % First load the package in the preamble. The makenomenclature command is required for the generation of the nomenclature file (.nlo). Commenting it out is a convenient way to “switch it off”.
 %
-\usepackage[printonlyused,withpage]{acronym}
+
 %\usepackage[
-%	intoc]               % show listings as entries in table of contents      
+%	  printonlyused,
+%   withpage,
+%   intoc]               	% show listings as entries in table of contents      
 %	{nomencl}
 %\makenomenclature
 \usepackage[
-	nogroupskip,
-	sort=use,
-	translate=babel,
+	%nogroupskip,
+	sort = standard,  %or, def or use
+	order = letter,		 %or, word
+	translate = babel,
+	shortcuts,
 	%nonumberlist, % do not show page numbers
 	acronym,        	% generate acronym listing
-	toc                	% show listings as entries in table of contents
+	toc                		% show listings as entries in table of contents
 	]          				% use section level for toc entries
 	{glossaries}
 \glsdisablehyper
