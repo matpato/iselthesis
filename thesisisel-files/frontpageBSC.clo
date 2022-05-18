@@ -12,7 +12,7 @@
 
 \begin{center}
 % Put logo
-	\logo{\@universitylogo}{0.12}
+	\logo{\@universitylogo}{0.25}
 
 %Define font style (ptm=Times New Roman)
 	\fontfamily{ptm}

@@ -465,7 +465,7 @@ de Mestre \\em \@majorfield}
 \parbox[t][0.15\paperheight]{0.1\paperwidth}{%
 \vfill
 \centering
-\includegraphics[scale=#2]{#1}%
+\hspace*{-5em}\includegraphics[scale=#2]{#1}%
 \vfill
 }}
 
