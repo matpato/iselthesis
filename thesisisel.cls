@@ -414,7 +414,7 @@ de Mestre \\em \@majorfield}
 \if\@language0
   	\gdef\@notdefined{NÃO DEFINIDO}
   	\gdef\acknowledgementsname{Agradecimentos} 
-  	
+  	\gdef\equationname{equação} 
   	\addto\captionsportuguese{% Replace "english" with the language you use
   		\renewcommand{\contentsname}{Índice}%
 	}
@@ -447,7 +447,7 @@ de Mestre \\em \@majorfield}
   	\gdef\@notdefined{UNDEFINED}
   	\gdef\acknowledgementsname{Acknowledgments}
   	\def\appendixname{Appendix}
-
+	\gdef\equationname{equation}	
 	\def\lstlistlistingname{Listings}
 	  	\addto{\captionsenglish}{%
 			%\renewcommand*{\lstlistingname}{Listagem}%
@@ -465,7 +465,7 @@ de Mestre \\em \@majorfield}
 \parbox[t][0.15\paperheight]{0.1\paperwidth}{%
 \vfill
 \centering
-\hspace*{-5em}\includegraphics[scale=#2]{#1}%
+\hspace*{-4em}\includegraphics[scale=#2,trim=5em 0 5em 0,clip]{#1}%
 \vfill
 }}
 
