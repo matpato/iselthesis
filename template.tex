@@ -16,6 +16,8 @@
 %% Version 20200615 (June 2020) v2.5.3
 %% Version 20200928 (September 2020) v2.6
 %% Version 20210115 (January 2020) v2.6.1
+%% Version 20221009 (October 2022) v2.6.2
+
 
 %%
 %% Instituto Superior de Engenharia de Lisboa
@@ -125,7 +127,7 @@
 %================================================
 \input{personaldataofthesis}
 % Title of Report + author(s) + professor + date
-\hypersetup{ a4paper=true,
+\hypersetup{ 
              pdftitle={ \thetitle},
              pdfauthor={ \theauthor},
              pdfsubject={ 
@@ -148,6 +150,7 @@
 
 % Resume/summary text in English
 \enabstractfile{abstract}
+\RequirePackage{fix-cm}
 
 %% ------------------------------------------------------------
 % The Table of Contents is always printed. The other lists may be omited.
