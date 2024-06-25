@@ -1,0 +1,36 @@
+% ============================================================
+%% fix-babel.clo
+%% ISEL thesis configuration file
+%%
+%% Minor fixes to babel translation to portuguese
+%%
+%% Order and language for printing the abstracts depending on 
+%% the language
+% ============================================================
+
+
+% Replace "Conteúdo" with "Índice"
+% Replace "Índice" with "Índice Remissivo"
+% "Listings" in Portuguese
+\addto\captionsportuguese{%
+  \def\contentsname{Índice}%
+  \def\indexname{Índice Remissivo}%
+  \def\listfigurename{Índice de Figuras}%
+  \def\listtablename{Índice de Tabelas}%
+  \def\lstlistlistingname{Índice de Listagens}%
+  \def\lstlistingname{Listagem}%
+  \defineshorthand{"-}{\babelhyphen{repeat}}% generates a hyphen that will repeat on a new line
+  \gdef\annexname{Anexo}
+  \gdef\annexplname{Anexos}
+  \gdef\appendixplname{Apêndices}
+}
+\addto\captionsenglish{%
+  \def\lstlistlistingname{Listings}%
+  \def\lstlistingname{Listing}%
+  \gdef\annexname{Annex}
+  \gdef\annexplname{Annexes}
+  \gdef\appendixplname{Appendices}
+}
+
+
+

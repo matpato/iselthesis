@@ -1,0 +1,9 @@
+*2024-06-24 — Version 4.0.0 — Template renamed to ISEL thesis (iselthesis)
++ add Statement file for master's dissertation
++ add option 'printcommittee' (default=true) to inhibit printing the committee (when it should be printed)
++ add 2 covers page for final master's dissertation. The second include the affiliation of the committee, the first don't need it. The author must add all information
++ add different kinds of chapters 
++ add new font styles
++ New option: *otherlistsat=front|back* to print the other lists (figures, tables, etc) after the TOC or just before the appendixes
++ Split file “lang-text.clo”: now it contains only main language settings. The language-dependent strings now are in separate files “strings-<LANG>.clo”
++ add support for both Appendixes and Annexes.

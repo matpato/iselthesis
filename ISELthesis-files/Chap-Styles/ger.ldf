@@ -1,0 +1,10 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chap-Styles/ger.ldf
+%% ISEL thesis configuration file
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Chap-Styles/ger.ldf}%
+
+%%%%% Configure chapters, headers, footers, and page numbering
+\chapterstyle{ger}

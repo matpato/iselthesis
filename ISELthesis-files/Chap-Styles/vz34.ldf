@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chap-Styles/vz34.ldf
+%% ISEL thesis configuration file
+%%
+%% Customization for the VZ34 chapter style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Chap-Styles/vz34.ldf}%
+
+%%%%% Configure chapters, headers, footers, and page numbering
+
+\newif\ifNoChapNumber
+\makechapterstyle{VZ34}{%
+  \renewcommand\chapternamenum{}
+  \renewcommand\printchaptername{}
+  \renewcommand\printchapternum{}
+  \renewcommand\chapnumfont{\Huge\bfseries}
+  \renewcommand\chaptitlefont{\Huge\bfseries\raggedright}
+  \renewcommand\printchaptertitle[1]{%
+    \ifNoChapNumber
+      \begin{tabular}{@{}p{\textwidth}}%
+        \chaptitlefont ##1%
+      \end{tabular}%
+    \else
+      \begin{tabular}{@{}p{1cm}|!{\quad}p{\textwidth-1cm-2em-4\tabcolsep }}%
+        \chapnumfont \thechapter%
+        & \chaptitlefont ##1%
+      \end{tabular}%
+    \fi
+    \NoChapNumberfalse%
+  }%
+  \renewcommand\printchapternonum{\NoChapNumbertrue}
+}
+\chapterstyle{VZ34}

@@ -1,0 +1,11 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chap-Styles/dash.ldf
+%% ISEL thesis configuration file
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Chap-Styles/dash.ldf}%
+
+%%%%% Configure chapters, headers, footers, and page numbering
+
+\chapterstyle{thatcher}

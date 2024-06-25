@@ -1,0 +1,258 @@
+% ============================================================
+%% options.clo
+%% ISEL thesis configuration file
+%%
+%% Processing of Class optinos
+%%
+% ============================================================
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PROCESS KEY-VAL OPTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\RequirePackage{kvoptions-patch}
+\RequirePackage{xkeyval}
+\RequirePackage{xifthen}
+
+
+% unsafe expand next if the command is a single token
+\providecommand*\expandnextsingle[2]{\expandafter#1\expandafter{#2}}
+\providecommand*\eifstrequal[1]{\expandnextsingle\ifstrequal{#1}}
+\newrobustcmd*\edefoption[2]{\protected@edef#2{\option{#1}}}%
+\newrobustcmd*\ifequal[2]{%
+  \edefoption{#1}\opt@temp
+  \eifstrequal{\opt@temp}{#2}%
+}
+
+
+% --------------------------------------------------------
+% DOCUMENT DEGREE   - iselthesis@opt€docdegree
+%
+% bsc     BSc report			        
+% mscprep MSc preliminary report
+% msc     MSc dissertation				
+\DeclareOptionX{docdegree}{%
+	\typeout{'docdegree'=#1}%
+	\gdef\iselthesis@opt@docdegree{#1}%
+}
+
+% --------------------------------------------------------
+% DOCUMENT TYPE	- iselthesis@opt€doctype
+%
+% dissertation     Dissertation			        
+% project          Project Report		
+\DeclareOptionX{doctype}{%
+	\typeout{'doctype'=#1}%
+	\gdef\iselthesis@opt@doctype{#1}%
+}
+
+% --------------------------------------------------------
+% SCHOOL - iselthesis@opt@scholl
+%
+% isel/deetc Departamento de Engenharia Eletrónica e de Telecomunicações e de Computadores do Instituto Superior de Engenharia de Lisboa
+% \DeclareOptionX{department}{%
+% 	\typeout{'department'=#1}%
+% 	\gdef\iselthesis@opt@department{#1}%
+% }
+
+% --------------------------------------------------------
+% CHAPTER STYLE - iselthesis@opt@chapstyle
+%
+% bar bianchi bluebox brotherton compact default elegant ger isel jenor lyhne madsen maroonbox pedersen thatcher veelo vz14 vz34 vz43(*)
+\DeclareOptionX{chapstyle}{%
+	\typeout{'chapstyle'=#1}%
+	\gdef\iselthesis@opt@chapstyle{#1}%
+}
+
+% --------------------------------------------------------
+% FONT STYLE - iselthesis@opt@fontstyle
+%
+% arial(*) baskervaldx bookman charter ebgaramond fbb  garamond heuristica kpfonts libertine newpx scholax
+\DeclareOptionX{fontstyle}{%
+	\typeout{'fontstyle'=#1}%
+	\gdef\iselthesis@opt@fontstyle{#1}%
+}
+
+
+% --------------------------------------------------------
+% WHERE TO PRINT OTHER LISTS - iselthesis@opt@otherlistsat
+%
+% front back
+\gdef\iselthesis@opt@otherlistsat{front}%
+\DeclareOptionX{otherlistsat}{%
+	\typeout{'otherlistsat'=#1}%
+	\gdef\iselthesis@opt@otherlistsat{#1}%
+}
+
+
+% --------------------------------------------------------
+% MAIN LANGUAGE - iselthesis@opt@lang
+%
+% pt  Portuguese
+% en  English
+\newcommand{\iselthesis@addtobabel}[1]{%
+  \typeout{'babellang'=\thelangabbrev[#1]}%
+  \PassOptionsToPackage{\thelangabbrev[#1]}{babel}%
+}
+
+
+\gdef\iselthesis@opt@lang{en}%
+\DeclareOptionX{lang}{%
+  \typeout{'lang'=#1}%
+  \lowercase{\gdef\iselthesis@opt@lang{#1}}%
+  \xdef\iselthesis@tmp{\thelangsused[\iselthesis@opt@lang]}%
+  \iteratecsvlist{\iselthesis@addtobabel}{\iselthesis@tmp}%
+}
+
+% --------------------------------------------------------
+% COVER LANGUAGE - iselthesis@opt@coverlang
+%
+% pt  Portuguese
+% en  English
+\gdef\iselthesis@opt@coverlang{\iselthesis@opt@lang}%
+\DeclareOptionX{coverlang}{%
+  \typeout{'coverlang'=#1}%
+  \lowercase{\gdef\iselthesis@opt@coverlang{#1}}
+}
+
+
+% --------------------------------------------------------
+% PRINT AFTER COVER
+%
+% true
+% false
+\DeclareOptionX{aftercover}[false]{%
+	\typeout{'aftercover'=#1}%
+  \gdef\iselthesis@opt@aftercover{#1}%
+}
+
+
+% --------------------------------------------------------
+% PRINT EVALUATION COMMITTEE
+%
+% true
+% false
+\DeclareOptionX{printcommittee}[true]{%
+	\typeout{'printcommittee'=#1}%
+  \gdef\iselthesis@opt@printcommittee{#1}%
+}
+
+
+% --------------------------------------------------------
+% HYPER LINKS COLOR
+%
+% darkblue, black
+\DeclareOptionX{linkscolor}{%
+	\typeout{'linkscolor'=#1}%
+	\PassOptionsToPackage{allcolors=#1}{hyperref}%
+}
+
+
+% --------------------------------------------------------
+% CHARACTER ENCODING
+%
+% utf8
+% latin1
+% Anything else valid for package "inputenc"
+\DeclareOptionX{enc}{%
+	\typeout{'enc'=#1}%
+	\PassOptionsToPackage{#1}{inputenc}%
+}
+
+% --------------------------------------------------------
+% PRINT BOOK SPINE
+%
+% true
+% false
+\DeclareOptionX{spine}[true]{%
+	\typeout{'spine'=#1}%
+	\ifthenelse{\equal{#1}{true}}{%
+    \AtEndDocument{%
+    \InputIfFileExists{iselthesis-files/Schools/\iselthesis@opt@department/spine.clo}%
+                      {}
+                      {\input{iselthesis-files/spine.clo}}%
+    \printspine%
+    }%
+  }{}%
+}
+
+
+
+% --------------------------------------------------------
+% BIBLATEX OPTIONS
+% Are passed to the biblatex package
+%
+% style= numeric | alphabetic | …
+% ...
+\DeclareOptionX{biblatex}{%
+ 	\typeout{'biblatex'=#1}%
+	\PassOptionsToPackage{#1}{biblatex}%
+}
+
+
+% --------------------------------------------------------
+% BOOK OPTIONS		
+% Are passed to the main class (book)
+%
+% twoside, a4paer, ...
+\DeclareOptionX{memoir}{%
+	\typeout{'memoir'=#1}%
+	\PassOptionsToClass{#1}{memoir}%
+}
+
+% --------------------------------------------------------
+% DESTINATION MEDIA
+%
+% screen  PDF to visualize in the screen or tablets
+% paper   PDF to print
+\DeclareOptionX{media}[screen]{%
+	\typeout{'media'=#1}%
+  \ifthenelse{\equal{#1}{screen}}{%
+    % \PassOptionsToClass{oneside}{memoir}%
+  }{%
+    % \PassOptionsToClass{twoside}{memoir}%
+    \PassOptionsToPackage{allcolors=black}{hyperref}%
+  }%
+  \def\iselthesis@opt@media{#1}%
+}
+
+
+% --------------------------------------------------------
+% DEFAULT OPTIONS
+% \PassOptionsToPackage{portuguese,english}{babel}
+\ExecuteOptionsX{%
+	docdegree=msc,
+    doctype=dissertation,
+    lang=en,
+    coverlang=pt,
+    fontstyle=arial,
+    chapstyle=vz43,
+	enc=utf8,
+    otherlistsat=front,
+    aftercover=false,
+    linkscolor=darkgray,
+    printcommittee=true,
+	spine=false,
+	biblatex={%
+		% sorting=nyt,%
+		% style=alphabetic,%
+		% labelyear=false,%
+		style=numeric,
+		maxalphanames=2,
+		defernumbers=true,%
+		maxbibnames=20,%
+		maxcitenames=2,%
+		mincitenames=1,%
+		firstinits=true,% will render all first and middle names as initials
+		uniquename=init,%
+		% dashed=false,%
+		sortcites=true,
+        backref=true,      
+	},
+	memoir={a4paper, 11pt, draft},
+    media=screen,
+}
+
+% --------------------------------------------------------
+% PROCESSING OPTIONS
+\ProcessOptionsX\relax

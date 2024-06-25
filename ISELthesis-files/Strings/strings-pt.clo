@@ -1,0 +1,69 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% strings-pt.clo
+%% ISEL thesis configuration file
+%%
+%% Costumization for language depedent strings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------
+%% Portuguese - strings
+% --------------------------------------------------------
+
+\abstractstring(pt):={Resumo}
+\keywordsstring(pt):={Palavras-chave}
+\notdefined(pt):={NÃO DEFINIDO}
+\acknowledgementstr(pt):={Agradecimentos}
+
+%% Degree 
+\degreestr(bsc,m,pt):={Licenciado}
+\degreestr(bsc,f,pt):={Licenciada}
+\degreestr(msc,m,pt):={Mestre}
+\degreestr(msc,f,pt):={Mestre}
+\degreestr(mscprep,m,pt):={Mestre}
+\degreestr(mscprep,f,pt):={Mestre}
+
+% Dissertation type
+\doctypestr(msc,dissertation,pt):={Dissertação}
+\doctypestr(mscprep,dissertation,pt):={Dissertação}
+\doctypestr(msc,project,pt):={Trabalho de Projeto}
+\doctypestr(mscprep,project,pt):={Trabalho de Projeto}
+
+% Committee fields
+\committeetitlestr(pt):={Júri}
+\committeestr(c,1,m,pt):={Presidente}
+\committeestr(c,1,f,pt):={Presidente}
+\committeestr(c,2,m,pt):={Presidentes}
+\committeestr(c,2,f,pt):={Presidentes}
+\committeestr(r,1,m,pt):={Vogal}
+\committeestr(r,1,f,pt):={Vogal}
+\committeestr(r,2,m,pt):={Vogais}
+\committeestr(r,2,f,pt):={Vogais}
+\committeestr(a,1,m,pt):={Orientador}
+\committeestr(a,1,f,pt):={Orientadora}
+\committeestr(a,2,m,pt):={Orientadores}
+\committeestr(a,2,f,pt):={Orientadoras}
+
+% --------------------------------------------------------
+%% Dissertation degree
+% --------------------------------------------------------
+
+%% BSc thesis
+\dissertationstr(bsc,pt)={Relatório para obtenção do Grau de %
+\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~em\\[1.25ex] \themajorfield(\iselthesis@opt@coverlang)}
+
+%% MSc thesis plan
+\dissertationstr(mscprep,pt)={Preparação de \thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) intermédio para obtenção do Grau de 
+\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~em \\[1.25ex]%
+\themajorfield(\iselthesis@opt@coverlang)}%, na Área de Especialização de \thespecialization(\iselthesis@opt@coverlang)}
+
+%% MSc thesis
+\dissertationstr(msc,pt)={\thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) para obtenção do Grau  de 
+\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~em \\[1.25ex]%
+\themajorfield(\iselthesis@opt@coverlang)}%, na Área de Especialização de \thespecialization(\iselthesis@opt@coverlang)}
+
+% --------------------------------------------------------
+%% Acknowledgment
+% --------------------------------------------------------
+
+\acknowledgmentsstring(pt):={Este documento foi gerado utilizando o processador (pdf)\LaTeX, com base no template “iselthesis” [1] desenvolvido no DEETC do ISEL [2].\\~
+[1] \url{https://github.com/matpato/iselthesis}\quad[2] \url{https://www.isel.pt/departamento/engenharia-electronica-e-telecomunicacoes-e-de-computadores}}

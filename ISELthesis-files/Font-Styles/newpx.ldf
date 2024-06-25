@@ -1,0 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Font-Styles/newpx.ldf
+%% ISEL thesis configuration file
+%%
+%% Customization of fonts to use Linux Libertine fontset
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\typeout{NT FILE Font-Styles/newpx.ldf}%
+
+\RequirePackage{newpxtext}
+\RequirePackage{newpxmath}

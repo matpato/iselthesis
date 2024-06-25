@@ -1,0 +1,38 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chap-Styles/jenor.ldf
+%% ISEL thesis configuration file
+%%
+%% Customization for the Jenor chapter style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Chap-Styles/jenor.ldf}%
+
+%%%%% Configure chapters, headers, footers, and page numbering
+\usepackage{fix-cm}
+\definecolor{numbercolor}{gray}{0.7}
+\newif\ifchapternonum
+\makechapterstyle{jenor}{%
+  \renewcommand\printchaptername{}
+  \renewcommand\printchapternum{}
+  \renewcommand\printchapternonum{\chapternonumtrue}
+  \renewcommand\chaptitlefont{\fontfamily{phv}\fontseries{db}%
+    \fontshape{n}\fontsize{20}{30}\selectfont\raggedleft}
+  \renewcommand\chapnumfont{\fontfamily{phv}\fontseries{m}\fontshape{n}%
+    \fontsize{.75in}{0in}\selectfont\color{darkgray}}
+  \renewcommand\printchaptertitle[1]{%
+    \noindent%
+    \ifchapternonum%
+    \begin{tabularx}{\textwidth}{X}%
+    {\parbox[b]{\linewidth}{\chaptitlefont ##1}%
+      \vphantom{\raisebox{-15pt}{\chapnumfont 1}}}
+    \end{tabularx}%
+    \else
+    \begin{tabularx}{\textwidth}{Xl}%
+    {\parbox[b]{\linewidth}{\chaptitlefont ##1}}%
+    & \raisebox{-10pt}{\chapnumfont \thechapter}%
+    \end{tabularx}%
+    \fi
+    \par\vskip2mm\hrule%
+  }
+}
+\chapterstyle{jenor}

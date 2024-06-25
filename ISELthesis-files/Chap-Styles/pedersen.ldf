@@ -1,0 +1,16 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chap-Styles/pedersen.ldf
+%% ISEL thesis configuration file
+%%
+%% Customization for the Pedersen chapter style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Chap-Styles/pedersen.ldf}%
+
+
+%%%%% Configure chapters, headers, footers, and page numbering
+\definecolor{ared}{rgb}{.647,.129,.149}
+\renewcommand\colorchapnum{\color{ared}}
+\renewcommand\chapnamefont{\HUGE\scshape}
+\renewcommand\colorchaptitle{\color{ared}}
+\chapterstyle{pedersen}

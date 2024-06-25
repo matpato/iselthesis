@@ -1,10 +1,10 @@
 % 
 %  chapter2.tex
-%  ThesisISEL
+%  ISELthesis
 %  
 %  Created by Matilde Pós-de-Mina Pato on 2012/10/09.
 %
-\chapter{ThesisISEL User's Manual}
+\chapter{ISELthesis User's Manual}
 \label{cha:users_manual}
 
 % ================
@@ -13,9 +13,9 @@
 \section{Introduction} % (fold)
 \label{sec:introduction}
 
-This chapter describes how to use the  \texttt{LaTeX} style thesis{}. This style file is a major rewrite from the most of Universities, which was in turn adapted from a style file from the FCT-UNL (not official version).  We aimed at providing an improved visual layout and, simultaneously, a \emph{very easy to use} template (aka, a  \texttt{LaTeX} template for dummies). 
+This chapter describes how to use the \LaTeX~ style \texttt{thesis{}}. This style file is a major rewrite from the most of Universities, which was in turn adapted from a style file from the FCT-UNL \cite{novathesis-manual}.  We aimed at providing an improved visual layout and, simultaneously, a \emph{very easy to use} template (aka, a  \LaTeX~ template for dummies). 
 
-\noindent%
+% \noindent%
 \fbox{%
 \begin{minipage}{\linewidth}
 	The first main rule you must know is that \textbf{you must} specify the encoding of your text files. A simple \emph{rule of thumb} is: if you are using Windows add 'latin1' to the list of package options; if you are using other systems, such as Linux or Mac OSx, add 'utf8' to the list of package options.
@@ -29,28 +29,33 @@ This chapter describes how to use the  \texttt{LaTeX} style thesis{}. This style
 \section{Folder Structure} % (fold)
 \label{sec:folder_structure}
 
-The template file for writing dissertations in  \texttt{LaTeX} is organized into a main directory, a set of files and sub-directories:
-\begin{enumerate}
-	\item[ThesisISEL] This is the main directory and includes:
-	\begin{enumerate}
-		\item \textbf{Logo} Directory with Faculty logos;
-		\item \textbf{sty} Directory will all sty files that help in formatting document;
-		\item \textbf{Chapters} Directory where to put user files (text and figures);
+The template file for writing dissertations in  \LaTeX~ is organised into a main directory, a set of files and sub-directories:
+\begin{description}
+	\item[iselthesis] This is the main directory and includes:
+	\begin{description}
+        \item[Chapters] Directory where to put user files (text and figures). For instances, including Chapters, Appendices, Annexes, Abstracts, Glossaries, Lists of Symbols, etc. Replace them with your own. The Statement file is important for submitting the final version of the master's thesis. It contains the text in both languages (English and Portuguese). The author must choose one of these depending on whether they have written their dissertation in English or Portuguese respectively. This folder includes:
 		\begin{enumerate}
-		\item \textbf{scripts} Directory with useful bash scripts, e.g., for cleaning all temporary files;
+		\item \textbf{scripts} Directory where you can place the code you need to insert into the text, or pseudo-code;
 		\item \textbf{img} Directory with all images of your thesis;
 		\end{enumerate}
+        \item[Config] Identify the directory where you will customise your content, including setting up chapters, appendices and appendices, and entering any personal information:
+		\begin{enumerate}
+		\item \textbf{\_cover.tex} Configure the contents of the cover: e.g. title of the thesis, author's name, names of committee members (including supervisor), date and figure;
+		\item \textbf{\_department.tex} Configure school and department content: e.g. school name, department, major, etc;
+        \item \textbf{\_files.tex} Select the files for chapters, appendices, annexes, abstracts, glossaries, etc;
+        \item \textbf{\_packages.tex} User customisation. Load additional packages and define your own commands to be used throughout the documentation.
+		\end{enumerate}
+		\item[Logo] Directory with Faculty logos;
+		\item[Scripts] Directory with useful bash scripts, e.g., for cleaning all temporary files;
 		\item \textbf{alpha-pt.bst} A file with bibliography names in portuguese, e.g., 'Relatório Técnico' e 'Tese de Mestrado' instead of 'Technical Report' and 'Master Thesis'. This file is used automatically if Portuguese is selected as the main language (see below);
-		\item \textbf{defaults.tex} A file with the main default values for the package (institution name, faculty's logo, degree name and similars);
-		\item \textbf{personaldataofthesis.tex} A file with the main default values for the package (identification of report as well as the author and juries);
-		\item \textbf{template.tex} The main file. You should run  \texttt{LaTeX} in this one. Please refrain from changing the file content outside of the well defined area;
-		\item \textbf{bibliography.bib} The bib file. An easy way to find to import citation into \texttt{bibtex} is select option \texttt{Show links to import citation into
+		\item[template.tex] The main file. You should run  \LaTeX~ in this one. Please refrain from changing the file content outside of the well defined area;
+		\item[bibliography.bib] The bib file. An easy way to find to import citation into \texttt{bibtex} is select option \texttt{Show links to import citation into
 Bib\-Tex} in \href{http://scholar.google.pt/scholar_settings?hl=en&as_sdt=0,5}{\texttt{Scholar google settings}}.
-		\item \textbf{thesisisel.cls} The  \texttt{LaTeX} class file for the thesis{} style. Currently, some of the defaults are stored here instead of \verb!defaults.tex!. This file should not be changed, unless you're ready to play with fire! :)
-	\end{enumerate}
-\end{enumerate}
+		\item[iselthesis.cls] The  \LaTeX~ class file for the thesis{} style. {\color{red}This file should not be changed}, unless you're ready to play with fire! :)
+	\end{description}
+\end{description}
 
-Again, we would like to recall that all the user \texttt{LaTeX} files should be stored in the \verb!ThesisISEL! directory, and all the images in \verb!ThesisISEL/Chapters/img! directory.\todo[inline]{Yet another note!}
+Again, we would like to recall that all the user \LaTeX~ files should be stored in the \verb!iselthesis! directory, and all the images in \verb!iselthesis/Chapters/img! directory.\todo[inline]{Yet another note!}
 % section folder_structure (end)
 
 % ===================
@@ -59,18 +64,54 @@ Again, we would like to recall that all the user \texttt{LaTeX} files should be 
 \section{Package Options} % (fold)
 \label{sec:package_options}
 
-The thesis{} style includes the following options, that must be included in the options list in the \verb!\documentclass[options]{thesisisel}! line at the top of the \texttt{template.tex} file.
+The thesis style includes the following options (see \tablename~\ref{tab:vardescription}), that must be included in the options list in the \verb|\documentclass[options]| line at the top of the \texttt{template.tex} file.
 
-The list below aggregates related options in a single item. For each list, the default value is prefixed with a *.
+The list below aggregates related options in a single item. For each list, the default value is prefixed with a asterisk (*).
 
+\begin{xltabular}{\linewidth}{ >{\bfseries}l   X }
+\caption{Description of options used in this document}
+\label{tab:vardescription}                                  
+\addtocounter{table}{-1}                  \\
+    \toprule
+\textbf{Options} & \textbf{Definition and values}  \\
+    \midrule
+\endfirsthead
+\caption[]{Description of options used in this document (Cont.)} \\
+    \toprule
+\textbf{Options} & \textbf{Definition and values}      \\
+    \midrule
+\endhead
+    \multicolumn{2}{r}{\footnotesize\textit{Continue on the next page}}
+\endfoot
+    \bottomrule
+\endlastfoot
+% table body
+docdegree   &  \textbf{Document degree}: Master -- msc(*), Preparation of Master -- mscprep and Bachelor -- bsc degree. \\ \midrule
+doctype & \textbf{Type of document}: dissertation(*) or project. \\ \midrule
+lang    &  \textbf{The main language for the document}: English -- en(*) and Portuguese -- pt.  \\  \midrule
+coverlang   &  \textbf{The language to be used when typesetting the cover page}: Portuguese by default.  \\  \midrule
+fontstyle & \textbf{The font set to be used in the document}: baskervaldx bookman charter ebgaramond fbb fourier garamond heuristica kpfonts(*) libertine mathpazo1 mathpazo2 newcent newpx newtx  \\  \midrule
+chapstyle   & \textbf{The chapter style to be used in the document}: bianchi bluebox brotherton dash default elegant ell ger hansen ist jenor lyhne madsen pedersen veelo vz14 vz34 vz43(*) \\  \midrule
+otherlistsat &   \textbf{Place where to put the other lists besides the table of contents}: front(*) and back. \\  \midrule
+linkscolor & \textbf{The color for all the hyperlinks in the PDF file}: darkblue, black (Set to 'black' for PRINTING). \\ \midrule
+printcommittee &  \textbf{List of the committee members}: set to 'false' from submitted versions who should not have the list of committee members.   \\ \midrule
+biblatex  & \textbf{Customize} \href{https://ctan.org/pkg/biblatex?lang=en}{\texttt{biblatex}}, the bibliography management system used in this class: list of options.  \\ \midrule
+memoir  & \textbf{Customize the base class} \href{https://ctan.math.illinois.edu/macros/latex/contrib/memoir/memman.pdf}{\texttt{memoir}}: list of options.  \\ \midrule
+media  & \textbf{The target of the PDF}: screen(*) or paper.\\
+\bottomrule
+\end{xltabular}
+
+  
+                        % 
+	
 \subsection{Language Related Options} % (fold)
 \label{sub:language_related_options}
 
 You must choose the main language for the document. The available options are:
 
 \begin{enumerate}
-	\item \textbf{*pt} --- The text is written in Portuguese (with a small abstract in English).
-	\item \textbf{en} --- The text is written in English (with a small abstract in Portuguese).
+	\item \textbf{pt} --- The document is written in Portuguese (with a small abstract in English).
+	\item \textbf{en} --- The document is written in English (with a small abstract in Portuguese).
 \end{enumerate}
 
 The language option affects:
@@ -91,7 +132,7 @@ You must choose the class of text for the document. The available options are:
 
 \begin{enumerate}
 	\item \textbf{bsc} --- BSc graduation report.
-	\item \textbf{prepmsc} --- Preparation of MSc dissertation. This is a preliminary report graduate students at ISEL/IPL must prepare to conclude the first semester of the two-semesters MSc work. The files specified by 
+	\item \textbf{mscprep} --- Preparation of MSc dissertation. This is a preliminary report graduate students at ISEL/IPL must prepare to conclude the first semester of the two-semesters MSc work. The files specified by 
 	\begin{inparaenum}
 	\item \verb!\dedicatoryfile! and 
 	\item \verb!\acknowledgmentsfile! 
@@ -110,34 +151,15 @@ You must choose the class of text for the document. The available options are:
 You must choose how your document will be printed. The available options are:
 
 \begin{enumerate}
-\item \textbf{oneside} --- Single side page printing, and
-\item \textbf{*twoside} --- Double sided page printing.
+\item \textbf{media}(*) --- Single side page printing, and
+\item \textbf{paper} --- Double sided page printing.
 \end{enumerate}
 
 The article 50th, of Decree-Law No. 115/2013, requires the deposit of a digital copy of doctoral thesis and master's dissertations in a repository that is part of the RCAAP  repository\footnote{Repositórios Científicos de Acesso Aberto de Portugal}, \url{https://www.rcaap.pt}.  This deposit aims to preserve scientific work, as well as providing Open Access to scientific production is not restricted object or embargo.
 
-For the reason explained above, we include the option to format your thesis in a way that presents well on screen and/or on paper.   But always remember that your work will be stored in the RCAAP portal in electronic format.
+For the reason explained above, we include the option to format your thesis in a way that presents well on screen and/or on paper. But always remember that your work will be stored in the RCAAP portal in electronic format.
 % subsection printing (end)
 
-The available options are:
-
-\begin{enumerate}
-\item \textbf{onpaper} --- Format your thesis in a way that presents on paper or,
-\item \textbf{*onscreen} --- on screen.
-\end{enumerate}
-
-% =============
-% = Font Size =
-% =============
-\subsection{Font Size} % (fold)
-\label{ssec:font_size}
-
-You must select the encoding for your text. The available options are:
-\begin{enumerate}
-	\item \textbf{11pt} --- Eleven (11) points font size.
-	\item \textbf{*12pt} --- Twelve (12) points font size. You should really stick to 12pt\ldots
-\end{enumerate}
-% subsection font_size (end)
 
 % =================
 % = Text encoding =
@@ -161,18 +183,44 @@ You must choose the font size for your document. The available options are:
 Let's have a look at a couple of examples:
 
 \begin{itemize}
-	\item BSc graduation report, in portuguese, with 11pt size and to be printed one sided (I wonder why one would do this!)\\
-	\verb!\documentclass[bsc,pt,11pt,oneside,latin1]{thesisisel}!
-	\item Preparation of MSc thesis, in portuguese, with 12pt size and to be printed one sided (I wonder why one would do this!). Note that, \verb!pt! is declared by default, so it can be omitted: \\
-	\verb!\documentclass[prepmsc,12pt,oneside,latin1]{thesisisel}!
-	\item MSc dissertation, in english, with 12pt size and to be printed double sided on screen. Note that, \verb!twoside! and \verb!12pt! are declared by default, so it can be omitted: \\
-	\verb!\documentclass[msc,en,utf8,onscreen]{thesisisel}!
+	\item BSc graduation report, in portuguese, considering printing on screen)\\
+	\verb!documentclass[docdegree=bsc, lang=pt, media=screen]{iselthesis}!
+	\item Preparation of MSc thesis, in portuguese, with link color equal to black (I wonder why one would do this!). Note that, \verb!pt! is declared by default, so it can be omitted: \\
+	\verb!\documentclass[docdegree=mscprep, lang=pt, linkcolor=black]{iselthesis}!
+	\item MSc's project, in english and to be printed single sided on screen. Note that, \verb!twoside! and \verb!12pt! are declared by default, so it can be omitted: \\
+	\verb!\documentclass[docdegree=msc, doctype=project, lang=en, media=screen]{iselthesis}!
 \end{itemize}
 
 
 The present document is defined according to the following settings:
 \begin{Verbatim}[breaklines=true, breakanywhere=true]
-\documentclass[msc,pt,twoside,12pt,a4paper,utf8,onscreen,hyperref=true,listof=totoc] {thesisisel}
+\documentclass[
+  docdegree=msc,       
+  doctype=dissertation, 
+  lang=en,             
+  coverlang=pt,        
+  fontstyle=kpfonts,   
+  chapstyle=vz43,    
+  otherlistsat=front,   
+  linkscolor=darkblue,  
+  printcommittee=true, 
+  biblatex={            
+    backend=bibtex,		  
+    style=numeric-comp, 
+    sortcites=true,     
+    sorting=nyt,       
+    maxbibnames=99,			
+    firstinits=true,   
+    hyperref=true,
+    backref=true,      
+},
+  memoir={	          
+    a4paper,          
+    11pt,              
+    final,            
+  },
+  media=screen,         
+]{iselthesis}
 \end{Verbatim}
 
 % subsection examples (end)
@@ -180,6 +228,6 @@ The present document is defined according to the following settings:
 \section{How to Write Using \texttt{LaTeX}} % (fold)
 \label{sec:how_to_write_using_latex}
 
-Please have a look at Chapter~\ref{cha:a_short_latex_tutorial_with_examples}, where you may find many examples of \href{http://tobi.oetiker.ch/lshort/lshort.pdf}{\texttt{LaTeX}} constructs, such as sectioning, inserting figures and tables, writing equations, theorems and algorithms, exhibit code listings, etc.
+Please have a look at Chapter~\ref{cha:a_short_latex_tutorial_with_examples}, where you may find many examples of \href{http://tobi.oetiker.ch/lshort/lshort.pdf}{\LaTeX} constructs, such as sectioning, inserting figures and tables, writing equations, theorems and algorithms, exhibit code listings, etc.
 
 %% section how_to_write_using_latex (end)

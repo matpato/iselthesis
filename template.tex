@@ -1,275 +1,137 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% iselthesis.cls
+%%% ISEL/IPL Dissertation document class
+%%%
+%%% By Matilde Pós-de-Mina Pato (matilde.pato@isel.pt)
+%%% Version of October 2012
+%%% Version v1.1:  July 2013 
+%%% Version v2.0: March 2015
+%%% Version v2.3: December 2017
+%%% Version v2.4: January 2019
+%%% Version v2.5: December 2019
+%%% Version v2.5.1.: February 2020
+%%% Version v2.5.2.: March 2020
+%%% Version v2.5.3.: June 2020
+%%% Version v3.0.: May 2024
+%%% Version v4.0.: June 2024
+%%% 
+%%% This template is vaguely based on a template from the
+%%%     Universidade Nova de Lisboa (NOT OFFICIAL)
+%%%
+%%% BUGS and SUGGESTIONS: please send email to "matilde.pato@isel.pt"
+%%%     or sumit a ticket in the the project web page at
+%%%     https://github.com/matpato/iselthesis
+%%%
+%%% CONTRIBUTERS are welcome. Please contact "matilde.pato@isel.pt"
+%%%
+%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Template for writing dissertations with ThesisMasterISEL
-%%
-%% Version 20121009 (Oct 2012) v1.0 - first version
-%% Version 20130201 (Feb 2013) v1.1
-%% Version 20130704 (Jul 2013) v1.11
-%% Version 20130925 (Sep 2013) v1.12
-%% Version 20141123 (Nov 2014) v1.13
-%% Version 20170102 (Jan 2017) v2.1
-%% Version 20170330 (March 2017) v2.2
-%% Version 20170530 (May 2017) v2.3.1
-%% Version 20190104 (January 2019) v2.4
-%% Version 20191217 (December 2019) v2.5
-%% Version 20200224 (February 2020) v2.5.1
-%% Version 20200301 (March 2020) v2.5.2
-%% Version 20200615 (June 2020) v2.5.3
-%% Version 20200928 (September 2020) v2.6
-%% Version 20210115 (January 2020) v2.6.1
-%% Version 20221009 (October 2022) v2.6.2
-
-
-%%
-%% Instituto Superior de Engenharia de Lisboa
-%% Instituto Politécnico de Lisboa
-%%
-%% Project web page at: https://github.com/matpato/thesisisel
-%%
-%% BUGS and SUGGESTIONS: please send email to "matilde.pato@isel.pt"
-%%     or sumit a ticket in the the project web page at
-%%     https://github.com/matpato/thesisisel
-%%
-%% CONTRIBUTERS are welcome. Please contact "matilde.pato@isel.pt"
-%%
-%% Authors / Contributors:
-%%     - Matilde Pós-de-Mina Pato (matilde.pato@isel.pt)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Main options (please read the manual for further details)
-%% Options marked with (*) are the values by default
-%% See also file "defaults.tex"
-%%
-%% DON'T MIX TEXT ENCODINGS. All the files are saved using UTF8. 
-%% If you want to use latin1, you should first re-save all these
-%% files (*.tex, *.cls,  ...) using latin1 encoding first
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+% The default option marked with (*)
 \documentclass[
-	msc,		% (*) msc, prepmsc, bsc, prepbsc - degree
-					% prepbsc(msc) Preparation of BSc (MSc) dissertation
-					% bsc(msc) BSc graduation report/ MSc dissertation
-	pt,			% (*) pt, en - languages 
-	twoside,	% (*) twoside, oneside - single or double sided printing
-	12pt,		% (*) 12pt, 11pt, 10pt - use font size
-	a4paper,	% Paper size/format
-	utf8,			% (*) utf8, latin1	- Text encoding: Linux, Mac or Windows
-	onscreen, % (*) onscreen, onpaper - Page layout: screen versus paper print
-	hyperref = true,  % (*) true, false - Hyperlinks in citations
-	listof=totoc
-	]{thesisisel} 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  BEGINING OF USER COSTUMIZATION
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  docdegree=msc,        % msc(*), mscprep, bsc
+  doctype=dissertation, % dissertation(*), project
+  lang=en,              % en, pt(*)
+  coverlang=pt,         % defaults to main language
+  fontstyle=kpfonts,    % baskervaldx bookman charter ebgaramond fbb fourier garamond
+                        % heuristica kpfonts(*) libertine mathpazo1 mathpazo2 newcent
+                        % newpx newtx 
+  chapstyle=vz43,    % bianchi bluebox brotherton dash default elegant ell ger 
+                        % hansen ist jenor lyhne madsen pedersen veelo vz14 vz34 vz43(*)
+  otherlistsat=front,   % front(*), back
+  linkscolor=darkblue,  % darkblue, black (Set to 'black' for PRINTING)
+  printcommittee=true,  % set to 'false' from submitted versins who should not have 
+                        % the list of committee memebers
+  biblatex={            % Options for biblatex (see biblatex documentation)
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%% uncomment for 'apa' like citations
+		% backend=biber,			% must use biber as the backend (and not bibtex)
+		% natbib=true,				% compatiblity with natbib (use \cite{…} or \citep{…})
+		% style=apa,					% APA style
+		% maxcitenames=2,			% use at most two names in citation
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%% uncomment for 'numeric-by-order-of-citation' like citations
+		% backend=bibtex,		  % use bibtex if possible
+		% style=numeric-comp, % numeric(*), alphabetic, authoryear, bwl-FU
+		% sortcites=true,     % If numeric, sort cites by crescent order
+		% sorting=none,       % none, nyt(*), ynt
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		% %%% uncomment for 'numeric-by-order-of-citation' like citations
+		backend=bibtex,		  % use bibtex if possible
+		style=numeric-comp, % numeric(*), alphabetic, authoryear, bwl-FU
+		sortcites=true,     % If numeric, sort cites by crescent order
+		sorting=nyt,        % none, nyt(*), ynt
+        backref=true,       % true(*), false if you want to back referencing from bibliographical citations
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%% uncomment for 'numeric-by-order-of-citation' like citations
+		% backend=bibtex,		  % use bibtex if possible
+		% style=alphabetic,   % numeric(*), alphabetic, authoryear, bwl-FU
+		% sorting=nyt,        % none, nyt(*), ynt
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%% other options for biblatex
+    maxbibnames=99,			% Never use 'et al' in the bibliography
+	firstinits=true,    % render all first and middle names as initials
+    hyperref=true       % Hyperlinks in citations: true(*) false
+	},
+	memoir={	            % See the 'memoir' documentation
+    a4paper,            % the paper size/format
+    11pt,               % 10pt, 11pt(*), 12pt
+    final,              % draft, final  <= Replace 'draft' with 'final' in final version
+  },
+  media=screen,         % screen(*), paper
+          % behavior to be defined in school options based in "\iselthesis@opt@media"
+          % definitions for screen: left and right margins are equal, colored links
+          % definitions for paper: left and right margins are different, black links
+]{iselthesis}
 
-%================================================
-% Additional packages you may want to use (comment those not needed)
-%================================================
-%\usepackage{colortbl}
+% --------------------------------------------------------
+%%
+%%  BEGINING OF USER CUSTOMIZATION
+%%
+% --------------------------------------------------------
 
-% Sort citations - ONLY if using "plain" style, otherwise keep commented
-%\usepackage[sort]{cite}
+\AtEndEnvironment{figure}{\gdef\there@is@a@figure{}} 
+\AtEndDocument{\ifdefined\there@is@a@figure\label{fig:was:used:in:doc}\fi} 
+\newcommand{\conditionalLoF}{\@ifundefined{r@fig:was:used:in:doc}{}{\listoffigures}}%
 
-% The contents of both files (acronyms and glossary) will be merged
-\InputIfFileExists{Chapters/acronyms}{%
-% File glossary.tex exists and is read
-}{%
-% File glossary.tex is not found, ignore
-}
 
-\InputIfFileExists{Chapters/glossary}{%
-% File glossary.tex exists and is read
-}{%
-% File glossary.tex is not found, ignore
-}
-
-% To register TODO notes in the text
-\usepackage[textsize=footnotesize]{todonotes}
-\setlength{\marginparwidth}{1.5cm}
-
-%
-% Define the nomenclature command that prints the symbol/abbreviation and generates a list entry at the same time.
-\newcommand*{\nom}[2]{#1\nomenclature{#1}{#2}}
-%
-%================================================
-% Standard configuration for user included packages
-%================================================
-\usepackage{sty/code}
-
-% Where to look for figures
-\graphicspath{{Logo/}{Chapters/img/}} 
-% Where to find code scripts files
-\lstinputpath{Chapters/scripts}
-
-% Where to find Chapters files
-\newcommand{\chapterfiles}[1]{Chapters/#1}
-% syntax: \chapterfiles{name.tex}
-
-% Force word hyphenation
-\hyphenation{}
-
-%================================================
-% Some default values that you may whish to override
-%================================================
-%% Identification: items prefixed with (*) are the default values, as defined in "defaults.tex"
-% (*)\university{Instituto Superior de Engenharia de Lisboa}
-% (*)\faculty{Instituto Politécnico de Lisboa}
-% (*)\majorfield{Engenharia Informática}
-% (*)\universitylogo{logoisel}
-% (*)\workimage{figura ilustrativa da imagem do trabalho 8x12cm}
-
-% Use double spacing (default is one-and-half spacing) is nice
-%     for supervisor to inert revision notes and comments.
-% (*)\onehalfspacing
-% \doublespacing
-%
-%		
-%================================================
-\input{personaldataofthesis}
-% Title of Report + author(s) + professor + date
-\hypersetup{ 
-             pdftitle={ \thetitle},
-             pdfauthor={ \theauthor},
-             pdfsubject={ 
-             },
-             pdfkeywords={{ }, { }, { } }
-             }
-             
-%% ------------------------------------------------------------
-%% All the names inside braces below sould correspond to a file
-%%     with extension ".tex" and located in the "Chapters" folder
-%% ------------------------------------------------------------
-\dedicatoryfile{dedicatory} 
-
-% Acknowledgments text. Will only be considered for final documents,
-% i.e., "bsc", "msc" and "phd", otherwise, it will be silently ignored
-\acknowledgementsfile{acknowledgements}
-
-% Resume/summary text in Portuguese
-\ptabstractfile{resumo}
-
-% Resume/summary text in English
-\enabstractfile{abstract}
-\RequirePackage{fix-cm}
-
-%% ------------------------------------------------------------
-% The Table of Contents is always printed. The other lists may be omited.
-%% ------------------------------------------------------------
-
-% Conditionally insert List of Figures, Tables and Code Listings
-\addlisttofrontmatter{\conditionalLoF} 	% The List of Figures. 
-\addlisttofrontmatter{\conditionalLoT} 	% The List of Tables. 
-\addlisttofrontmatter{\conditionalLoL}		% The List of Code Listings.
-\addlisttofrontmatter{\printnoidxglossary[type=acronym]} % The List of Abreviations 
-\addlisttofrontmatter{\printnoidxglossary} %  default: type=main,  Glossary. Comment to omit.						
-%\printnoidxglossary[type=symbols] % only glossaries 
-% 
-% TEX CHAPTERS:
-% syntax: \chapterfile{file}
-\chapterfile{chapter1}
-\chapterfile{chapter2}
-\chapterfile{chapter3}
-
-%% ------------------------------------------------------------
-%% Bibliography style
-%% ------------------------------------------------------------
-% If you want to change some parameters
-%\usepackage[
-%style={ieee, numeric, alphabetic, authoryear, authortitle, verbose, apa, chem-acs, chem-angew, mla, nature, science, nejm, phys},
-%sorting={none, nty, nyt, nyvt, anyt, anyvt, ynt, debug},
-%backend={biber,bibtext}
-%url=false,%
-%isbn=false,%
-%urldate=long,
-%uniquename=false,
-%uniquelist=false
-%]{biblatex}
-%
-\addbibresource{bibliography.bib}
-%% ------------------------------------------------------------
-%% Text appendixes
-%% ------------------------------------------------------------
-% Comment if not needed
-% sintax: \appendixfile{file}
-\appendixfile{appendix1}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
 %%
-%%   END OF USER COSTUMIZATION
-%%   Please do not change below this point!!! :)
+%% END OF USER COSTUMIZATION
+%% Please do not change below this point!!! :)
 %%
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 
+
+\benchmarktic
 %% Begining of document
 \begin{document}
-%% ------------------------------------------------------------
-%% Before main text
-\frontmatter
-% The first front page. Repeats the front page twice 
-\printcoverpage
 
-%% ------------------------------------------------------------
-%% All the names inside braces below sould correspond to a file
-%%     with extension ".tex" and located in the "Chapters" folder
-%% ------------------------------------------------------------
+% --------------------------------------------------------
+\ncthesisfrontmatter    % Before the main text (TOC, etc)
+% --------------------------------------------------------
+\printcoverpage		    % The cover page
+\printdedicatory        % Print the dedicatory (will only be printed if adequate for the document type)
+\printacknowledgements  % Print the acknowledgments (will only be printed if adequate for the document type)
+\printquote             % Print the quote (if file exists and is adequate for the document type)
+\printstatement         % Print statement text. This file will only be considered for final documents, i.e., "msc", otherwise, it will be silently ignored
+\printabstract          % Print abstracts (in PT and EN). The abstract in the document main language will be printed first, the abstract in the foreign language will be printed second
+\tableofcontents*       % Always print the table of contents
+\printotherlists        % If option 'otherlistsat=front', print other lists of contents according to instructions given above, otherwise do nothing
+% --------------------------------------------------------
+\ncthesismainmatter	    % The main text
+% --------------------------------------------------------
+\ncprintchapters        % Print document chapters		
+\printbib		        % Print the bibliography
+\printotherlists 	    % If option 'otherlistsat=back', print other lists of contents according to instructions given above, otherwise do nothing
 
-% Dedicatory text. Will only be considered for final documents,
-% i.e., "bsc" and "msc", otherwise, it will be silently ignored
-\printdedicatory
+\ncprintappendices      % Print appendixes, if any!
+\ncprintannexes         % Print annexes, if any!
 
-% Acknowledgments text. Will only be considered for final documents,
-% i.e., "bsc" and "msc", otherwise, it will be silently ignored
-% Acknowledgments will only be printed if adequate for the document type
-\printacknowledgements
-
-% Abstracts/resumes/summaries in two languages. The first abstract will
-% use the document main language and second the foreign language
-\printabstract
-%% ------------------------------------------------------------
-%
-%% Always print the table of contents
-\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
-\tableofcontents
-\addtocontents{toc}{\protect\setcounter{tocdepth}{3}}
-%
-%% Print other lists of contents according to instructions given above
-\printotherlists 
-%% The List of Symbols (Nomenclature). Comment to omit.
-%\printnomenclature
-%
-%% ------------------------------------------------------------
-%  Print Document Chapters
-%% ------------------------------------------------------------
-%%
-% Title page: page (i)
-\printchapters
-%%
-%% ------------------------------------------------------------
-%  Print Bibliography: Produces the bibliography section when processed by BibTeX
-%% ------------------------------------------------------------
-%%
-\cleardoublepage
-\normalem
-\printbibliography[heading=bibintoc]					
-%%
-%% ------------------------------------------------------------
-%  Print appendixes, if any!  (optional)
-%% ------------------------------------------------------------
-%%
-\cleardoublepage
-\setcounter{page}{1} \pagenumbering{roman}
-\printappendixes 
-\cleardoublepage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \printbackcoverpage     % Print the cover back page
+% --------------------------------------------------------
 %% End of document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\end{document} 
+% --------------------------------------------------------
+\end{document}

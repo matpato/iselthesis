@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chap-Styles/maroonbox.ldf
+%% ISEL thesis configuration file
+%%
+%% Customization for the ISEL chapter style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Chap-Styles/maroonbox.ldf}%
+
+
+%%%%% Configure chapters, headers, footers, and page numbering
+\newsavebox{\ChpNumBox}
+\definecolor{ChapMar}{RGB}{154,51,36}
+
+\newcommand*{\thickhrulefill}{%
+  \leavevmode\leaders\hrule height 1\p@ \hfill \kern \z@%
+}
+
+\newcommand*\BuildChpNum[2]{%
+  \begin{tabular}[t]{@{}c@{}}%
+    \makebox[0pt][c]{#1\strut}  \\[.5ex]%
+    \colorbox{ChapMar}{%
+      \rule[-6em]{0pt}{0pt}%
+      \rule{1ex}{0pt}\color{black}#2\strut%
+      \rule{1ex}{0pt}}%
+  \end{tabular}%
+}
+
+
+\makechapterstyle{MaroonBox}{%
+  \renewcommand{\chapnamefont}{\large\scshape}%
+  \renewcommand{\chapnumfont}{\color{white}\Huge\bfseries}%
+  \renewcommand{\chaptitlefont}{\raggedright\Huge\bfseries}%
+  \setlength{\beforechapskip}{10pt}%
+  \setlength{\midchapskip}{26pt}%
+  \setlength{\afterchapskip}{40pt}%
+  \renewcommand{\printchaptername}{}%
+  \renewcommand{\chapternamenum}{}%
+  \renewcommand{\printchapternum}{%
+    \sbox{\ChpNumBox}{%
+      \BuildChpNum{\chapnamefont\@chapapp}%
+      {\chapnumfont\thechapter}}}%
+  \renewcommand{\printchapternonum}{%
+    \sbox{\ChpNumBox}{%
+      \BuildChpNum{\chapnamefont\vphantom{\@chapapp}}%
+      {\chapnumfont\hphantom{\thechapter}}}}%
+  \renewcommand{\afterchapternum}{}%
+  \renewcommand{\printchaptertitle}[1]{%
+    \usebox{\ChpNumBox}\hfill%
+    \parbox[t]{\hsize-\wd\ChpNumBox-1em}{%
+      \vspace{\midchapskip}%
+      \thickhrulefill\par
+      \chaptitlefont ##1\par}}%
+    {\normalfont\huge\sffamily}
+
+}
+\chapterstyle{MaroonBox}

@@ -1,0 +1,8 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Font-Styles/ebgaramond.ldf
+%% ISEL thesis configuration file
+%%
+%% Customization of fonts to use Eb-Garamond fontset
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage[cmintegrals,cmbraces]{newtxmath}
+\RequirePackage{ebgaramond-maths}

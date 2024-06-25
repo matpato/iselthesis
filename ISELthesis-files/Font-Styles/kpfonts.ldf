@@ -1,0 +1,20 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Font-Styles/kpfonts.ldf
+%% ISEL thesis configuration file
+%%
+%% Customization of fonts to use Paltino-like fontset
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\typeout{NT FILE Font-Styles/kpfonts.ldf}%
+
+\RequirePackage[notextcomp,noamsmath]{kpfonts}%
+\RequirePackage[cal=boondoxo]{mathalfa}% mathcal
+\ifxeorlua{%
+  \IfFileExists{kpfonts-otf}
+      {\RequirePackage{kpfonts-otf}}%
+      {}%
+  \setmonofont{Inconsolatazi4-Regular.otf}
+}{%
+  \RequirePackage{inconsolata}
+}

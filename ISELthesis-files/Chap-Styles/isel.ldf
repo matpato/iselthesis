@@ -1,0 +1,54 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chap-Styles/isel.ldf
+%% ISEL thesis configuration file
+%%
+%% Customization for the ISEL chapter style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Chap-Styles/isel.ldf}%
+
+%%%%% Configure chapters, headers, footers, and page numbering
+\RequirePackage{soul}
+
+\definecolor{iseloficialcolor}{RGB}{154,51,36}
+
+\undef{\iselthesis@isel@chapter}
+\newsavebox{\iselthesis@isel@chapter}
+\undef{\iselthesis@isel@part}
+\newsavebox{\iselthesis@isel@part}
+
+
+\providecommand{\iselthesis@isel@chm}[1][2cm]{%
+  \resizebox{!}{#1}{%
+    \fboxsep=.75pt%
+    \color{iseloficialcolor}\thechapter%
+  }%
+}
+
+\providecommand{\iselthesis@isel@ptm}[1][4cm]{%
+  \iselthesis@isel@chm{#1}
+}
+
+
+\makechapterstyle{isel}{%
+  \renewcommand{\chapnamefont}{\normalfont\Large\scshape\raggedleft\so}%
+  \renewcommand{\chaptitlefont}{\normalfont\huge\bfseries\scshape}%\sffamily}%
+  % \renewcommand{\chapternamenum}{}
+  \renewcommand{\printchaptername}{}%
+  \renewcommand{\printchapternum}{\null\hfill\iselthesis@isel@chm[1cm]\hspace*{-5pt}\par
+  }
+  \renewcommand{\afterchapternum}{}%{\vspace*{-11ex}}%
+  \renewcommand{\printchaptertitle}[1]{\color{darkgray}\chaptitlefont\raggedleft ##1\par}%
+  %
+  % \renewcommand{\partnamefont}{\chapnamefont}
+  % \renewcommand{\parttitlefont}{\chaptitlefont}
+  % \renewcommand{\partnamenum}{}
+  \renewcommand{\printpartname}{}%
+  \renewcommand{\thepart}{\Roman{part}}
+  \renewcommand{\printpartnum}{\null\hfill\iselthesis@isel@ptm[4cm]\hspace*{14pt}\par}%
+  % \renewcommand{\afterpartnum}{\vspace*{-11ex}}%
+  \renewcommand{\printparttitle}[1]{\color{darkgray}\parttitlefont\raggedleft ##1\par}%
+  \renewcommand*{\partnumfont}{\normalfont\scshape\MakeLowercase}
+}
+\chapterstyle{isel}
+

@@ -1,0 +1,69 @@
+% ============================================================
+%% strings-en.clo
+%% ISEL thesis configuration file
+%%
+%% Customization for language dependent strings
+% ============================================================
+
+% --------------------------------------------------------
+%% English - strings
+% --------------------------------------------------------
+
+\abstractstring(en):={Abstract}
+\keywordsstring(en):={Keywords}
+\notdefined(en):={UNDEFINED}
+\acknowledgementstr(en):={Acknowledgements}
+
+%% Degree 
+\degreestr(msc,m,en):={Master's}
+\degreestr(msc,f,en):={Master's}
+\degreestr(mscprep,m,en):={Master's}
+\degreestr(mscprep,f,en):={Master's}
+\degreestr(bsc,m,en):={Bachelor's}
+\degreestr(bsc,f,en):={Bachelor's}
+
+% Dissertation type
+\doctypestr(msc,dissertation,en):={Dissertation}
+\doctypestr(mscprep,dissertation,en):={Dissertation}
+\doctypestr(msc,project,en):={Project Report}
+\doctypestr(mscprep,project,en):={Project Report}
+
+% Committee fields
+\committeetitlestr(en):={Examination Committee}
+\committeestr(c,1,m,en):={Chairperson}
+\committeestr(c,1,f,en):={Chairperson}
+\committeestr(c,2,m,en):={Chairpersons}
+\committeestr(c,2,f,en):={Chairpersons}
+\committeestr(r,1,m,en):={Raporteur}
+\committeestr(r,1,f,en):={Raporteur}
+\committeestr(r,2,m,en):={Raporteurs}
+\committeestr(r,2,f,en):={Raporteurs}
+\committeestr(a,1,m,en):={Adviser}
+\committeestr(a,1,f,en):={Adviser}
+\committeestr(a,2,m,en):={Advisers}
+\committeestr(a,2,f,en):={Advisers}
+
+% --------------------------------------------------------
+%% Dissertation degree
+% --------------------------------------------------------
+
+%% BSc thesis
+\dissertationstr(bsc,en)={Report submitted in partial fulfillment of the requirements for the degree of
+\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~ \\[1.25ex]%
+in \themajorfield(\iselthesis@opt@coverlang)}
+
+%% MSc thesis plan
+\dissertationstr(mscprep,en)={\thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) plan submitted in partial fulfillment of the requirements for the degree of\\[1.25ex]%
+\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~ in \themajorfield(\iselthesis@opt@coverlang)}
+
+%% MSc thesis 
+\dissertationstr(msc,en)={\thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) submitted in partial fulfillment of the requirements for the degree of\\[1.25ex]%
+\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~ in \themajorfield(\iselthesis@opt@coverlang)}
+
+% --------------------------------------------------------
+%% Acknowledgment
+% --------------------------------------------------------
+
+\acknowledgmentsstring(en)={This document was created using the (pdf)\LaTeX\ processor, based in the “iselthesis” template[1], developed at the DEETC of ISEL [2].\\~
+[1] \url{https://github.com/matpato/iselthesis}\quad
+[2] \url{https://www.isel.pt/departamento/engenharia-electronica-e-telecomunicacoes-e-de-computadores}}

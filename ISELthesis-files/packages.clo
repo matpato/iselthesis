@@ -1,0 +1,219 @@
+% ============================================================
+%% packages.clo
+%% ISEL thesis configuration file
+%%
+%% Packages to be loaded
+% ============================================================
+
+%%%%% Configure font encoding
+\RequirePackage[T1]{fontenc}	% Use new T1 fonts
+
+%%%%% Configure input encoding
+\RequirePackage{inputenc}		% Format for the input file(s), see the "enc" option
+
+%%%%% Configure multilingual language support
+\RequirePackage{csquotes}
+\RequirePackage[english]{babel}	% Support for bilingual documents
+
+\RequirePackage{translator} % Support month name translations for pgfcalendar
+
+%%%%% Fine tuning of typesetting
+\RequirePackage[%
+  babel=true,
+  activate={true,nocompatibility},  % activate={true,nocompatibility} - activate protrusion and expansion
+  final,            % final - enable microtype; use "draft" to disable  
+  tracking=true,    % tracking=true - activate this technique
+  kerning=true,     % kerning=true - activate this technique
+  spacing=true,     % spacing=true - activate this technique
+  factor=1100,      % factor=1100 - add 10% to the protrusion amount (default is 1000)
+  stretch=10,       % stretch=10 - reduce stretchability (default is 20)
+  shrink=10,        % shrink=10 - reduce shrinkability (default is 20)
+]{microtype}
+
+%% Date and Calendar Utility Macros
+\usepackage{pgfcalendar}
+
+%%%%% Better support for calculations
+\RequirePackage{xstring}
+
+%% VERY IMPORTANT
+\usepackage{booktabs}		% Beautiful simple tables
+\usepackage{paralist}		% To enable customizble enumerates
+
+%% IMPORTANT (consider removing/commenting)
+\usepackage[textsize=footnotesize]{todonotes}	% To register TODO notes in the text
+\setlength{\marginparwidth}{3.25cm}
+
+%% FOR DEMO PURPOSES ONLY --- TO BE REMOVED by final users
+\usepackage{lipsum}
+
+
+% --------------------------------------------------------
+% PACKAGE listings
+% --------------------------------------------------------
+
+% To process lists and other stuff
+\RequirePackage{etoolbox}
+
+% The ‘listings’ package is loaded at the beginning of a LATEX file in the preamble
+% Here is an example of my \lset{} declaration for ‘R’ code. 
+% Then, after having including this (also in the preamble), I simply include my external ‘R’ files. 
+% They can be included using an:
+% \include{ } - like interface to the external files;
+% by using the command \lstinputlisting{./code.R} to include the code from the file code.R which % is located in the same directory as the ‘LATEX’ source file.
+%
+% --------------------------------------------------------
+
+\usepackage{listings}
+% listings package provides a key called inputpath for specifying a path where \lstinputlisting should search for source files.
+\newcommand*\lstinputpath[1]{\lstset{inputpath=#1}}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+
+% --------------------------------------------------------
+% PACKAGE subcaption, float, figures, totalcount
+% --------------------------------------------------------
+
+% To aggregate multiple figures in a single one with subfigures
+% Note: subfigure package does not recognise \textwidth as a number, when it is in fact a number (equivalent to the constant width of the total text block on a page). The way to resolve this is to use the more updated subcaption package
+\RequirePackage{caption,subcaption}
+\captionsetup[figure]{textfont=it,position=bottom}
+% To have text wrapping figures
+\usepackage{wrapfig}
+\usepackage{float}		% Improves the interface for defining floating objects such as figures and tables
+%
+\usepackage[figure,table,lstlisting]{totalcount}
+
+% --------------------------------------------------------
+%% LOAD THESE PACKAGES JUST AT THE END OF THE PREAMBLE 
+%% AND BEFORE THE \BEGIN{DOCUMENT}
+% --------------------------------------------------------
+% Fixing autoref in hyperref
+\RequirePackage{ISELthesis-files/user-sty/fix-hyperref}
+
+\RequirePackage[%
+  , bookmarksnumbered=true%
+  , breaklinks=true%
+  , colorlinks=true%
+  , pdfdisplaydoctitle=true%
+  , unicode=true%
+]{hyperref}%
+\iselthesis@fixhyperref%
+% \pdfstringdefDisableCommands{%
+%   \def\\{}%
+%   \def\texttt#1{#1}%
+% }%
+\RequirePackage{bookmark}%
+
+
+% % To process the bibliography
+% % (This should be listed after the hyperref, otherwise hyperlinks in citations won't work)
+% \RequirePackage{biblatex}
+% \DeclareLanguageMapping{english}{american-apa}
+% \DeclareLanguageMapping{portuguese}{portuguese-apa}
+
+% --------------------------------------------------------
+% PACKAGE algorithm and algpseudocode
+% --------------------------------------------------------
+\usepackage[Algoritmo]{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+
+% --------------------------------------------------------
+% PACKAGE glossaries
+% The glossaries package supports acronyms and multiple glossaries, and has 
+% provision for operation in several languages (using the facilities of 
+% either babel or polyglossia). New entries are defined to have a name and 
+% description (and optionally an associated symbol).
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+%% CHECK IF USING LUALATEX OR XELATEX
+% --------------------------------------------------------
+
+\newcommand{\ifxeorlua}{\ifboolexpr{bool{luatex} or bool{xetex}}}
+\newcommand{\ifxetexorluatex}{\iftutex}
+
+% --------------------------------------------------------
+\ifxetexorluatex  % xelatex or lualatex
+  \RequirePackage[no-math]{fontspec}%
+  \defaultfontfeatures{Ligatures=TeX}
+\else% pdflatex
+  \RequirePackage[T1]{fontenc}          % Use new T1 fonts
+  % \RequirePackage[utf8]{inputenc}     % Format for the input file(s), see the "enc" option
+\fi
+
+\RequirePackage[%nonumberlist,
+    sort = standard,   % or, def or use
+	order = letter,	   % or, word
+    symbols,           % add symbols listing
+    translate = babel,
+    acronym,
+    %nogroupskip,
+	shortcuts,
+	%nonumberlist, % do not show page numbers
+    numberedsection,
+    toc]{glossaries-extra} % To create glossaries
+% \glsdisablehyper
+
+\RequirePackage{ISELthesis-files/user-sty/glossary-xltabular}%
+\setglossarystyle{xltabular}
+\setabbreviationstyle[acronym]{long-short}%
+% \GlsXtrEnablePreLocationTag{\emph{(\small p.~}}{\emph{(\small pp.~}}
+% \patchcmd{\@gls@automake@immediate}{-I xindy}{-q -I xindy}{}{}
+% \renewcommand{\gls@automake@makegloss}{makeglossaries -q}%
+% \renewcommand{\GlsXtrFormatLocationList}[1]{\emph{\small#1)}}
+% \renewcommand{\glsnamefont}[1]{\textbf{#1}}%
+
+% --------------------------------------------------------
+% “Process gnumberlist” option - after glossaries
+% \iftoggle{/iselthesis/gnumberlist}{}{\setupglossaries{nonumberlist}}%
+\AtEndPreamble{\@loadglossaryfiles\makenoidxglossaries}%
+
+% --------------------------------------------------------
+% TIKZ
+\RequirePackage{tikz}
+
+% --------------------------------------------------------
+% Configure Graphics
+% --------------------------------------------------------
+\RequirePackage[nobeamer]{graphbox} % improved version of "graphicx"
+\DeclareGraphicsExtensions{.pdf,.png,.tif,.jpg,.eps}
+% Put here the path of your images
+\graphicspath{{./Chapters/img}{/Chapters/img}}
+\providecommand*\appendtographicspath[1]{\xappto\Ginput@path{#1}}
+\providecommand*\prependtographicspath[1]{\xpreto\Ginput@path{#1}}
+
+%%%%% Options to sans serif fonts (will be loaded later)
+\PassOptionsToPackage{scaled=0.95}{inter}
+\PassOptionsToPackage{scaled=0.95}{helvet}
+\PassOptionsToPackage{scaled=0.95}{gillius2}
+
+% --------------------------------------------------------
+% Add an image to the backgroung
+% Used to insert the background image in the cover page
+% --------------------------------------------------------
+\RequirePackage{eso-pic}[2015/04/20]
+
+% --------------------------------------------------------
+% Standard configuration for user included packages
+% --------------------------------------------------------
+\usepackage{ISELthesis-files/user-sty/code}
+
+\usepackage[nodayofweek]{datetime}
+
+% --------------------------------------------------------
+% PACKAGE pdfpages and pdflscape
+% --------------------------------------------------------
+\usepackage{pdfpages}   % include pdf file
+% The pdflscape package adds PDF support to the landscape environment of package lscape, by setting the PDF/Rotate page attribute.
+\usepackage{pdflscape}
+%
+% \providecommand{\apashortdash}{-}
+\RequirePackage{ctable}
+
+\usepackage{url}
+
+% \usepackage{tabularx}   % package for tables
+\RequirePackage{longtable}
+\RequirePackage{xltabular}

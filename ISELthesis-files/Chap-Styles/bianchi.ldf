@@ -1,0 +1,10 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% bianchi.clo
+%% ISEL thesis configuration file
+%%
+%% Costumization for the Bianchi chapter style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Chap-Style/bianchi.ldf}%
+%%%%% Configure chapters, headers, footers, and page numbering
+\chapterstyle{bianchi}
