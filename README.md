@@ -41,7 +41,7 @@ This template serves both degrees as a bachelor's and master's degree. And, duri
 
 In the following, we explain how to actually use, i.e. add content and compile, the thesis template to create a nice and shiny PDF file that will please your supervisor.
 
-### Congiguration
+### Configuration
 
 The LaTeX template can be modified and configured easily using a very limited number of files, namely in _Config_ and _Chapters_ folders, and _template.tex_-file. Only use these two directories and one file to modify your LaTeX thesis. Please _DO NOT_ modify the actual LaTeX code for your thesis (as this becomes quite complex and consumes a lot of time). 
 
@@ -51,17 +51,18 @@ Please find a brief description of the various configuration options below:
 
 The _template.tex_ file contains the basic structure and all the chapter-files that contain the actual content of your thesis. Thus, you have to modify this file in order to configure some basic stuff like the language of your thesis here: 
 
-```	\documentclass[
-          docdegree=msc,       
-          doctype=dissertation, 
-          lang=en,             
-          coverlang=pt,        
-          fontstyle=kpfonts,   
-          chapstyle=vz43,    
-          otherlistsat=front,   
-          linkscolor=darkblue,  
-          printcommittee=true, 
-          biblatex={            
+```
+    \documentclass[
+        docdegree=msc,       
+        doctype=dissertation, 
+        lang=en,             
+        coverlang=pt,        
+        fontstyle=kpfonts,   
+        chapstyle=vz43,    
+        otherlistsat=front,   
+        linkscolor=darkblue,  
+        printcommittee=true, 
+        biblatex={            
             backend=bibtex,		  
             style=numeric-comp, 
             sortcites=true,     
@@ -71,12 +72,12 @@ The _template.tex_ file contains the basic structure and all the chapter-files t
             hyperref=true,
             backref=true,      
         },
-          memoir={	          
+        memoir={	          
             a4paper,          
             11pt,              
             final,            
-          },
-          media=screen,         
+        },
+        media=screen,         
         ]{iselthesis}
 ```
 
@@ -88,7 +89,7 @@ You have to modify both these files and place your abstract text in _abstract-en
 
 #### Adding content
 
-By default, the thesis template, i.e. the _template.tex_-file, contains (includes) some default content files for chapters and appendix from the _Chapters_-directory. You have to add, or remove in _/Config/_files.tex_ your own files. Please note that it is best practice to put all your content in separate files.
+By default, the thesis template, i.e. the _template.tex_-file, contains (includes) some default content files for chapters and appendix from the _Chapters_-directory. You have to add, or remove in _/Config/ __files.tex_ your own files. Please note that it is best practice to put all your content in separate files.
 
 ##### Bibliographies
 
