@@ -162,8 +162,8 @@ This is where you have to place all the personal stuff of your thesis in the __c
 | `_cover.tex`         | Configure cover contents (e.g., author's name, thesis/dissertation title, advisers, committee, etc)  |
 | `_department.tex`    | Configure school and department content: e.g. school name, department, major field, etc.             |
 | `_files.tex`         | Configure the files for chapters, appendices, annexes, etc.                                          |
+| `_memoir.tex`        | Options specific for the memoir package. Don't touch this file unless you know what you are doing!   |
 | `_packages.tex`      | Configure additional packages and commands                                                           |
-
 
 5. Recompile de document
 6. You're done with a beautifully formatted thesis/dissertation!

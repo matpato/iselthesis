@@ -55,6 +55,22 @@
 \let\old@Roman=\@Roman
 
 % --------------------------------------------------------
+%%  MEMOIR CUSTOMIZATION AND LOADING
+%%      Please open and edit the appropriate
+%%       configuration file “Config/_memoir.tex”
+% --------------------------------------------------------
+
+\newcommand*{\ncmemoirsetup}[1]{\PassOptionsToClass{#1}{memoir}}
+\input{Config/_memoir}
+\LoadClass{memoir}
+\OnehalfSpacing% One-and-half spacing
+
+\newcolumntype{L}{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
+\newcolumntype{C}{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}X}
+\newcolumntype{R}{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}X}
+
+
+% --------------------------------------------------------
 %% GENERAL PURPOSE MACROS
 % --------------------------------------------------------
 % Redefine \cleardoublepage to use a really empty page…
@@ -106,17 +122,6 @@
 \userData{langsused}
 
 \input{ISELthesis-files/lang-conf.clo}
-
-% --------------------------------------------------------
-% LOAD MAIN CLASS AND ADDITIONAL PACKAGES
-% --------------------------------------------------------
-\LoadClass{memoir}
-\OnehalfSpacing           % One-and-half spacing
-% \newsubfloat{figure}      % To handle subfigures
-
-\newcolumntype{L}{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
-\newcolumntype{C}{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}X}
-\newcolumntype{R}{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}X}
 
 % --------------------------------------------------------
 %% SOME ESSENTIAL PACKAGES
