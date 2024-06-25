@@ -89,7 +89,7 @@ You have to modify both these files and place your abstract text in _abstract-en
 
 #### Adding content
 
-By default, the thesis template, i.e. the _template.tex_-file, contains (includes) some default content files for chapters and appendix from the _Chapters_-directory. You have to add, or remove in _/Config/ __files.tex_ your own files. Please note that it is best practice to put all your content in separate files.
+By default, the thesis template, i.e. the _template.tex_-file, contains (includes) some default content files for chapters and appendix from the _Chapters_-directory. You have to add, or remove in _Config/_ __files.tex_ your own files. Please note that it is best practice to put all your content in separate files.
 
 ##### Bibliographies
 
