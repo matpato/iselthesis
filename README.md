@@ -25,7 +25,7 @@ Table of Contents
   * [About](#about)
   * [Getting Started](#getting-started)
     * [Configuration](#configuration)
-    * [With a Local LaTeX Installation](#local_install)
+    * [With a Local LaTeX Installation](#local-install)
     * [With a Remote Cloud\-based Service](#cloud-service)
   * [Getting Help](#getting-help)
     * [Problems and Difficulties](#problems-and-difficulties)
@@ -108,7 +108,7 @@ The default language of your thesis is English. If you want to switch to Portugu
 This is where you have to place all the personal stuff of your thesis in the __cover.tex_-file.
 
 
-### With a Local LaTeX Installation <a name="local_install"></a>
+### With a Local LaTeX Installation <a name="local-install"></a>
 
 *[See below](#cloud-service) for alternatives to a local LaTeX installation*
 
@@ -168,7 +168,7 @@ This is where you have to place all the personal stuff of your thesis in the __c
 5. Recompile de document
 6. You're done with a beautifully formatted thesis/dissertation!
 
-### With a Remote Cloud-based Service <a name="cloud_services"></a>
+### With a Remote Cloud-based Service <a name="cloud-service"></a>
 
 *[See above](#local-install) for using a local installation of LaTeX*
 
