@@ -175,7 +175,7 @@ This is where you have to place all the personal stuff of your thesis in the __c
 *ISELthesis v4.0.0 is available as an [Overleaf template](https://www.overleaf.com/latex/templates/novathesis-v7-dot-1-5/jhqwhtcwbmqc).  Just select <kbd>open as template</kbd> and follow from [step 3 above](#local-install)!*
 
 1. Download the [latest version from the GitHub repository as a Zip file](https://github.com/matpato/iselthesis/archive/refs/heads/master.zip).
-2. Login to your favorite LaTeX cloud service. I recommend [Overleaf](https://www.overleaf.com?r=f5160636&rm=d&rs=b) but there are alternatives (these instructions apply to Overleaf  and you'll have to adapt for other providers).
+2. Login to your favorite LaTeX cloud service. I recommend Overleaf but there are alternatives (these instructions apply to Overleaf  and you'll have to adapt for other providers).
 3. In the menu select <kbd>New project</kbd>-><kbd>Upload project</kbd>
 4. Upload the zip with all the "iselthesis" files.
 5. Select “*template.tex*” as the main file.

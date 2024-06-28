@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% iselthesis.cls
+%%% iselthesis.cls
 %%% ISEL/IPL Dissertation document class
 %%%
 %%% By Matilde Pós-de-Mina Pato (matilde.pato@isel.pt)
