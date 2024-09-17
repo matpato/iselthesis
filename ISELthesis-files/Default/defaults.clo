@@ -88,7 +88,8 @@
 \renewcommand\section{\@startsection {section}{1}{0pt}%
                                    {-3.5ex plus -0.5ex minus -.2ex}%
                                    {2.3ex \@plus.2ex}%
-                                   {\s@cnamfont}}
+                                   %{\s@cnamfont}
+                                   {\normalfont\Large\bfseries}}
 \renewcommand\subsection{\@startsection{subsection}{2}{0pt}%
                                      {-2.5ex plus -0.5ex minus -.2ex}%
                                      {1.5ex \@plus .2ex}%

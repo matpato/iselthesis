@@ -7,3 +7,5 @@
 + New option: *otherlistsat=front|back* to print the other lists (figures, tables, etc) after the TOC or just before the appendixes
 + Split file “lang-text.clo”: now it contains only main language settings. The language-dependent strings now are in separate files “strings-<LANG>.clo”
 + add support for both Appendixes and Annexes.
+*2024-09-17 — Version 4.0.1
++ Computer Modern Bright fonts do not support details and special characters. For this reason, the font of the sections is modified in the defaults.clo file
