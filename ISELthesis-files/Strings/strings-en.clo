@@ -64,6 +64,7 @@ in \themajorfield(\iselthesis@opt@coverlang)}
 %% Acknowledgment
 % --------------------------------------------------------
 
-\acknowledgmentsstring(en)={This document was created using the (pdf)\LaTeX\ processor, based in the “iselthesis” template[1], developed at the DEETC of ISEL [2].\\~
-[1] \url{https://github.com/matpato/iselthesis}\quad
-[2] \url{https://www.isel.pt/departamento/engenharia-electronica-e-telecomunicacoes-e-de-computadores}}
+\copyrighttextstring(en)={The \theschool(en) and the \theuniversity(en) have the right, perpetual and without geographical boundaries, to file and publish this dissertation through printed copies reproduced on paper or on digital form, or by any other means known or that may be invented, and to disseminate through scientific repositories and admit its copying and distribution for non-commercial, educational or research purposes, as long as credit is given to the author and editor.}
+
+
+\acknowledgmentsstring(en)={This document was created using the (pdf)\LaTeX\ processor, based in the “iselthesis” template \cite{iselthesis}, developed at the DEETC of ISEL-IPL.}

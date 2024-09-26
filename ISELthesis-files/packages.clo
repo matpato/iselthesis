@@ -213,6 +213,7 @@
 \RequirePackage{ctable}
 
 \usepackage{url}
+\usepackage{xurl}
 
 % \usepackage{tabularx}   % package for tables
 \RequirePackage{longtable}

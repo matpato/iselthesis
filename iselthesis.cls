@@ -343,6 +343,7 @@
 \newdata{abstractstring}
 \newdata{keywordsstring}
 
+\newdata{copyrighttextstring}
 \newdata{acknowledgmentsstring}
 \newdata{acknowledgementstr}
 
@@ -412,6 +413,14 @@
     \thedissertationstr(\iselthesis@opt@docdegree,\iselthesis@opt@coverlang)%
   }{%
     }%
+}
+
+\providecommand\thecopyrightstr{%
+    \thispagestyle{empty}%
+    \noindent%
+    Copyright\textcopyright\ \thedocauthor(name), %
+    \theschool(\iselthesis@opt@lang), \theuniversity(\iselthesis@opt@lang).\\%
+    \thecopyrighttextstring(\iselthesis@opt@lang)%
 }
 
 % --------------------------------------------------------
@@ -826,7 +835,9 @@
 			\equal{\iselthesis@opt@docdegree}{msc}	% msc
 		}{% THEN
 			\input{Chapters/\iselthesis@statementfile}%
-			\cleardoublepage%
+	        \newpage
+            \printcopyrightpage
+        %\cleardoublepage%
 		}{% ELSE
 		}%
 	}%
@@ -862,7 +873,7 @@
 }
 
 \newcommand{\printabstract}{% 
-	\xdef\iselthesis@tmp{\theabstractorder(\iselthesis@opt@lang)}%
+    \xdef\iselthesis@tmp{\theabstractorder(\iselthesis@opt@lang)}%
   \iteratecsvlist{\iselthesis@printabstract@lang}{\iselthesis@tmp}%
   % disables protrusion locally in the document for the forthcoming tables of contents
   \microtypesetup{protrusion=false}%
@@ -915,7 +926,7 @@
 	\InputIfFileExists{Chapters/#1}{\cleardoublepage}{ERROR: File '#1' does not exist!!!}%
 }
 
-\newcommand{\ncprintchapters}{%
+\newcommand{\printchapters}{%
 	\ifthenelse{\isundefined\iselthesis@chapter@list}{}%
 		{\forlistloop{\iselthesis@printchapter}{\iselthesis@chapter@list}}%
 }
@@ -1017,7 +1028,6 @@
   {}%
 }
 
-
 \newcommand{\iselthesis@loadallfiles}[2]{\optionlistdo{/@nc/file/#2/#1}{\iselthesisloadfile@i{##1}}}
 
 \newcommand{\iselthesisloadfile@i}[2][]{\IfFileExists{#2}{\input{#2}}{#1}}
@@ -1034,9 +1044,26 @@
 %% Bibliography
 % --------------------------------------------------------
 
-\newcommand{\addbibfile}[1]{\addbibresource{Bibliography/#1}}
+\newcommand{\addbibfile}[1]{\addbibresource{#1}}
 
 \newcommand{\printbib}{\printbibliography}
+
+% --------------------------------------------------------
+%% Copyright page
+% --------------------------------------------------------
+\newcommand{\printacknowledgementsblock}{%
+    \noindent\parbox{\linewidth}{%
+    \vspace*{2.5ex}\footnoterule\theacknowledgmentsstring(\iselthesis@opt@lang)}
+}
+
+\newcommand{\printcopyrightpage}{%
+  \null\vfill%
+  \noindent  \textbf{\large\thedoctitle(\iselthesis@opt@lang,main)}\par%
+  \bigskip%
+  \thecopyrightstr\par%
+  \printacknowledgementsblock 
+}
+
 
 % --------------------------------------------------------
 % %% Dedicatory
@@ -1190,9 +1217,11 @@
 % --------------------------------------------------------
 %  THESIS/DISSERTATION FILES
 %   Please open and edit the appropriate
-%   configuration file “Config/4_files.tex”
+%   configuration file “Config/_files.tex”
 % --------------------------------------------------------
 \input{Config/_files}
+\addbibfile{ISELthesis-files/manual-bib} 
+
 
 % --------------------------------------------------------
 %  UNIVERSITY/SCHOOL SPECIFIC MATERIALS
@@ -1211,8 +1240,8 @@
 \AtBeginDocument{%
   \hypersetup{%
     pdfauthor={\thedocauthor(name)},
-    pdftitle={\thedoctitle(\iselthesis@opt@coverlang,main)},
-    pdfsubject={\thedoctitle(\iselthesis@opt@coverlang,main)}
+    pdftitle={\thedoctitle(\iselthesis@opt@lang,main)},
+    pdfsubject={\thedoctitle(\iselthesis@opt@lang,main)}
   }
 
   %--------------------------------
