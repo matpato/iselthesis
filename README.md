@@ -205,7 +205,7 @@ If you couldn't find what you were looking for, ask for help in:
 	Matilde Pós-de-Mina Pato
 	Nuno Datia (as contributor)
 
-June, 25th 2024
+December, 12nd 2024
 
 This package and template are not official for ISEL/IPL.
 

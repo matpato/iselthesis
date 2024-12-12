@@ -11,7 +11,10 @@
 %%% Version v2.5: December 2019
 %%% Version v2.5.1.: February 2020
 %%% Version v2.5.2.: March 2020
-%%% Version v2.5.3.: June 2020
+%%% Version v2.5.3.: (June 2020) 
+%%% Version v2.6.: (September 2020) 
+%%% Version v2.6.1.: (January 2020) 
+%%% Version v2.6.2: (October 2022)
 %%% Version v3.0.: May 2024
 %%% Version v4.0: June 2024
 %%% 
@@ -1188,9 +1191,9 @@
 \makepagestyle{iselthesis@mainmatter}
 \makeoddfoot{iselthesis@mainmatter}{}{\thepage}{}
 \makeevenfoot{iselthesis@mainmatter}{}{\thepage}{}
-\makeheadrule{iselthesis@mainmatter}{\textwidth}{\normalrulethickness}
-\makeevenhead{iselthesis@mainmatter}{\small\textsc{\leftmark}}{}{}
-\makeoddhead{iselthesis@mainmatter}{}{}{\small\rightorleftmark}
+%\makeheadrule{iselthesis@mainmatter}{\textwidth}{\normalrulethickness}
+%\makeevenhead{iselthesis@mainmatter}{\small\textsc{\leftmark}}{}{}
+%\makeoddhead{iselthesis@mainmatter}{}{}{\small\rightorleftmark}
 
 \makepagestyle{iselthesis@frontmatter}
 \makeoddfoot{iselthesis@frontmatter}{}{\thepage}{}
@@ -1221,7 +1224,6 @@
 % --------------------------------------------------------
 \input{Config/_files}
 \addbibfile{ISELthesis-files/manual-bib} 
-
 
 % --------------------------------------------------------
 %  UNIVERSITY/SCHOOL SPECIFIC MATERIALS

@@ -99,6 +99,9 @@
 \newcommand{\conditionalLoF}{\@ifundefined{r@fig:was:used:in:doc}{}{\listoffigures}}%
 
 
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sansmathfonts}
+\usepackage{helvet}
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
@@ -118,7 +121,7 @@
 \ncthesisfrontmatter    % Before the main text (TOC, etc)
 % --------------------------------------------------------
 \printcoverpage		    % The cover page
-\printdedicatory        % Print the dedicatory (will only be printed if adequate for the document type)
+%\printdedicatory        % Print the dedicatory (will only be printed if adequate for the document type)
 \printacknowledgements  % Print the acknowledgments (will only be printed if adequate for the document type)
 \printquote             % Print the quote (if file exists and is adequate for the document type)
 \printstatement         % Print statement text. This file will only be considered for final documents, i.e., "msc", otherwise, it will be silently ignored
@@ -131,12 +134,4 @@
 \printchapters        % Print document chapters		
 \printbib		        % Print the bibliography
 \printotherlists 	    % If option 'otherlistsat=back', print other lists of contents according to instructions given above, otherwise do nothing
-
-\ncprintappendices      % Print appendixes, if any!
-\ncprintannexes         % Print annexes, if any!
-
-% \printbackcoverpage     % Print the cover back page
-% --------------------------------------------------------
-%% End of document
-% --------------------------------------------------------
 \end{document}

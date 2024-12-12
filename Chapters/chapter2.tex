@@ -90,7 +90,7 @@ docdegree   &  \textbf{Document degree}: Master -- msc(*), Preparation of Master
 doctype & \textbf{Type of document}: dissertation(*) or project. \\ \midrule
 lang    &  \textbf{The main language for the document}: English -- en(*) and Portuguese -- pt.  \\  \midrule
 coverlang   &  \textbf{The language to be used when typesetting the cover page}: Portuguese by default.  \\  \midrule
-fontstyle & \textbf{The font set to be used in the document}: baskervaldx bookman charter ebgaramond fbb fourier garamond heuristica kpfonts(*) libertine mathpazo1 mathpazo2 newcent newpx newtx  \\  \midrule
+fontstyle & \textbf{The font set to be used in the document}: aral(*) baskervaldx bookman charter ebgaramond fbb fourier garamond heuristica kpfonts libertine mathpazo1 mathpazo2 newcent newpx newtx  \\  \midrule
 chapstyle   & \textbf{The chapter style to be used in the document}: bianchi bluebox brotherton dash default elegant ell ger hansen ist jenor lyhne madsen pedersen veelo vz14 vz34 vz43(*) \\  \midrule
 otherlistsat &   \textbf{Place where to put the other lists besides the table of contents}: front(*) and back. \\  \midrule
 linkscolor & \textbf{The color for all the hyperlinks in the PDF file}: darkblue, black (Set to 'black' for PRINTING). \\ \midrule
@@ -132,7 +132,9 @@ You must choose the class of text for the document. The available options are:
 
 \begin{enumerate}
 	\item \textbf{bsc} --- BSc graduation report.
-	\item \textbf{mscprep} --- Preparation of MSc dissertation. This is a preliminary report graduate students at ISEL/IPL must prepare to conclude the first semester of the two-semesters MSc work. The files specified by 
+	\item \textbf{mscprep} --- Preparation of MSc dissertation. This is a preliminary report graduate students at ISEL/IPL must prepare to conclude the first semester of the two-semesters MSc work. 
+    
+    The files specified by 
 	\begin{inparaenum}
 	\item \verb!\dedicatoryfile! and 
 	\item \verb!\acknowledgmentsfile! 
@@ -151,7 +153,7 @@ You must choose the class of text for the document. The available options are:
 You must choose how your document will be printed. The available options are:
 
 \begin{enumerate}
-\item \textbf{media}(*) --- Single side page printing, and
+\item \textbf{screen}(*) --- Single side page printing, and
 \item \textbf{paper} --- Double sided page printing.
 \end{enumerate}
 
@@ -188,7 +190,7 @@ Let's have a look at a couple of examples:
 	\item Preparation of MSc thesis, in portuguese, with link color equal to black (I wonder why one would do this!). Note that, \verb!pt! is declared by default, so it can be omitted: \\
 	\verb!\documentclass[docdegree=mscprep, lang=pt, linkcolor=black]{iselthesis}!
 	\item MSc's project, in english and to be printed single sided on screen. Note that, \verb!twoside! and \verb!12pt! are declared by default, so it can be omitted: \\
-	\verb!\documentclass[docdegree=msc, doctype=project, lang=en, media=screen]{iselthesis}!
+	\verb!\documentclass[docdegree=msc,doctype=project,lang=en,media=screen]{iselthesis}!
 \end{itemize}
 
 
@@ -199,7 +201,7 @@ The present document is defined according to the following settings:
   doctype=dissertation, 
   lang=en,             
   coverlang=pt,        
-  fontstyle=kpfonts,   
+  fontstyle=arial,   
   chapstyle=vz43,    
   otherlistsat=front,   
   linkscolor=darkblue,  
