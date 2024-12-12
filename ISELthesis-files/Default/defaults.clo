@@ -170,7 +170,7 @@
 % Advisers
 \addcoveritem[c]{2}{%
  \setprintaffiliation{0} % [0] for surpress the affiliation and [1] for print the affiliation
- \committeestrfont(\iselthesis@opt@coverlang)={\bfseries}%
+ \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%\bfseries
  \fontsize{12}{12}\selectfont
   \printadvisers
   }(cover) 
@@ -182,10 +182,10 @@
     \equal{\iselthesis@opt@docdegree}{bsc}%
     \OR\equal{\iselthesis@opt@docdegree}{msc}}%
     {
-        \setprintaffiliation{0} 
+         \setprintaffiliation{0} 
         \committeetitlestrfont(\iselthesis@opt@coverlang)={
-        \fontsize{12}{12}\selectfont\bfseries}%
-        \committeestrfont(\iselthesis@opt@coverlang)={\bfseries}%
+        \fontsize{12}{12}\selectfont}%\bfseries
+        \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%\bfseries
         \fontsize{12}{12}\selectfont
          \printcommittee
   }%
@@ -265,7 +265,7 @@
 % Advisers
 \addcoveritem[c]{2}{%
  \setprintaffiliation{1} % [0] for surpress the affiliation and [1] for print the affiliation
- \committeestrfont(\iselthesis@opt@coverlang)={\bfseries}%
+ \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%\bfseries
  \fontsize{12}{12}\selectfont
   \printadvisers
   }(secondcover)  
@@ -278,8 +278,8 @@
     {
         \setprintaffiliation{1} 
         \committeetitlestrfont(\iselthesis@opt@coverlang)={
-        \fontsize{12}{12}\selectfont\bfseries}%
-        \committeestrfont(\iselthesis@opt@coverlang)={\bfseries}%
+        \fontsize{12}{12}\selectfont}%\bfseries
+        \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%\bfseries
         \fontsize{12}{12}\selectfont
          \printcommittee
   }%
