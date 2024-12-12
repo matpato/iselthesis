@@ -1,0 +1,106 @@
+% ============================================================
+%% metadata.clo
+%% ISEL thesis configuration file
+%%
+%% A PDF/A document is a special kind of PDF document that has been optimized for long-term archiving. PDF/A is a standard of the International Organization for Standardization (ISO). Some of the main features of PDF/A documents are:
+
+%% Self-containedness: this means that all resources that are required to reproduce the document's visual appearance, such as fonts, color spaces, etc., are embedded within the document itself. In particular, the document must be device independent.
+
+%% Unicode mapping: this means that all of the document's content has been mapped to machine readable Unicode text. Such a mapping makes the document searchable, allows text to be copied and pasted, and allows text to be displayed in other forms (such as via a screen reader for the blind).
+
+%% Metadata: PDF/A specifies a standardized format for including metadata, such as the document's title, author, copyright, keywords, abstract, publication data, and so on. This helps to ensure that the document can be found and correctly indexed by search engines, libraries, et
+% ============================================================
+
+% Symbols permitted in metadata
+% =============================
+% 
+% Within the metadata, all printable ASCII characters except
+% '\', '{', '}', and '%' represent themselves. Also, all printable
+% Unicode characters from the basic multilingual plane (i.e., up to code point U+FFFF) can be used directly with the UTF-8 encoding. 
+% Consecutive whitespace characters are combined into a single
+% space. Whitespace after a macro such as \copyright, \backslash, or \sep is ignored. Blank lines are not permitted. Moreover, the following markup can be used:
+%
+%  '\ '         - a literal space  (for example after a macro)                 
+%   \%          - a literal '%'                                                
+%   \{          - a literal '{'                                                
+%   \}          - a literal '}'                                               
+%   \backslash  - a literal '\'                                              
+%   \copyright  - the (c) copyright symbol                                      
+%
+% The macro \sep is only permitted within \Author, \Keywords, and  \Org.  It is used to separate multiple authors, keywords, etc.
+% 
+% List of supported metadata fields
+% =================================
+% 
+% Here is a complete list of user-definable metadata fields currently
+% supported, and their meanings. More may be added in the future.
+% 
+% General information:
+%
+%  \Author           - the document's human author. Separate multiple
+%                      authors with \sep.
+%  \Title            - the document's title.
+%  \Keywords         - list of keywords, separated with \sep.
+%  \Subject          - the abstract. 
+%  \Org              - publishers.
+% 
+% Copyright information:
+%
+%  \Copyright        - a copyright statement.
+%  \CopyrightURL     - location of a web page describing the owner
+%                      and/or rights statement for this document.
+%  \Copyrighted      - 'True' if the document is copyrighted, and
+%                      'False' if it isn't. This is automatically set
+%                      to 'True' if either \Copyright or \CopyrightURL
+%                      is specified, but can be overridden. For
+%                      example, if the copyright statement is "Public
+%                      Domain", this should be set to 'False'.
+%
+% Publication information:
+%
+% \PublicationType   - The type of publication. If defined, must be
+%                      one of book, catalog, feed, journal, magazine,
+%                      manual, newsletter, pamphlet. This is
+%                      automatically set to "journal" if \Journaltitle
+%                      is specified, but can be overridden.
+% \Journaltitle      - The title of the journal in which the document
+%                      was published. 
+% \Journalnumber     - The ISSN for the publication in which the
+%                      document was published.
+% \Volume            - Journal volume.
+% \Issue             - Journal issue/number.
+% \Firstpage         - First page number of the published version of
+%                      the document.
+% \Lastpage          - Last page number of the published version of
+%                      the document.
+% \Doi               - Digital Object Identifier (DOI) for the
+%                      document, without the leading "doi:".
+% \CoverDisplayDate  - Date on the cover of the journal issue, as a
+%                      human-readable text string.
+% \CoverDate         - Date on the cover of the journal issue, in a
+%                      format suitable for storing in a database field
+%                      with a 'date' data type.
+
+% \providecommand{\thisyear}{2024}
+% \providecommand{\pdfxopts}{a-2u,KOIxmp}
+%  \Title{Master Thesis Title \thisyear}
+%  \Author{John Very Longname Doe}
+%  \Subject{ ********* Add abstract here! *********}
+%  \Keywords{ ********* Add all keywords here! *********}
+%  \Copyright{Public domain}\Copyrighted{False}
+%  \CopyrightURL{http://tug.org/texlive/}
+%  \CoverDisplayDate{Month \thisyear}
+%  \CoverDate{\thisyear-MM-DD}
+%  \Creator{pdfTeX + pdfx.sty with options \pdfxopts, from TeX Live 2016}
+\Title        {Production of PDF/A-Compliant Documents}
+
+\Author       {Mr. Document Guy}
+
+\Copyright    {Copyright \copyright\ 2017 "Mr. Document Guy"}
+
+\Keywords     {PDF\sep
+               Archiving\sep
+               LaTeX}
+
+\Subject      {This is a sample document.}
+ 
