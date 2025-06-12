@@ -2,7 +2,7 @@
 <div style="display: flex; align-items: center;">
     <div style="flex: 1;">
         <a href="https://isel.pt" target="_blank">
-            <img src="./img/01_ISEL-Logotipo-RGB_Horizontal.png" alt="ISEL logo" style="width: 400px; height: auto;">
+            <img src="./Logo/01_ISEL-Logotipo-RGB_Horizontal.png" alt="ISEL logo" style="width: 400px; height: auto;">
         </a>
     </div>
 </div>
