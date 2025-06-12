@@ -48,8 +48,8 @@
 % --------------------------------------------------------
 
 %% BSc thesis
-\dissertationstr(bsc,pt)={Relatório para obtenção do Grau de %
-\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~em\\[1.25ex] \themajorfield(\iselthesis@opt@coverlang)}
+\dissertationstr(bsc,pt)={Relatório do projeto realizado no âmbito de Projeto e Seminário \\[1.25ex] 
+Licenciatura em \themajorfield(\iselthesis@opt@coverlang)}
 
 %% MSc thesis plan
 \dissertationstr(mscprep,pt)={Preparação de \thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) intermédio para obtenção do Grau de 
@@ -68,4 +68,4 @@
 \copyrighttextstring(pt)={O \theschool(en) e o \theuniversity(en) têm o direito, perpétuo e sem limites geográficos, de arquivar e publicar esta dissertação através de exemplares impressos reproduzidos em papel ou de forma digital, ou por qualquer outro meio conhecido ou que venha a ser inventado, e de a divulgar através de repositórios científicos e de admitir a sua cópia e distribuição com objetivos educacionais ou de investigação, não comerciais, desde que seja dado crédito ao autor e editor.}
 
 
-\acknowledgmentsstring(pt)={Este documento foi gerado utilizando o processador (pdf)\LaTeX, com base no template ``iselthesis'' \cite{iselthesis} desenvolvido no DEETC do ISEL-IPL}
+\acknowledgmentsstring(pt)={Este documento foi gerado utilizando o processador (pdf)\LaTeX, com base no template “iselthesis” \cite{iselthesis} desenvolvido no DEETC do ISEL-IPL}

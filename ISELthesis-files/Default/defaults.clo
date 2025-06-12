@@ -112,11 +112,11 @@
 % --------------------------------------------------------
 
 % LOGO
-\addcoveritem[c]{-1.5cm}{%
+\addcoveritem[c]{-1.15cm}{%
   \mbox{%
     \hspace*{0.5cm}%
     \begin{tabular}[c]{@{}l@{}}%
-      \includegraphics[width=8cm]{Logo/logoisel.png}%
+      \includegraphics[width=12cm]{Logo/01_ISEL-Logotipo-RGB_Horizontal.png}%
     \end{tabular}%
   }%
 }(cover)
@@ -185,7 +185,7 @@
          \setprintaffiliation{0} 
         \committeetitlestrfont(\iselthesis@opt@coverlang)={
         \fontsize{12}{12}\selectfont}%\bfseries
-        \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%\bfseries
+        \committeestrfont(\iselthesis@opt@docdegree,\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%\bfseries
         \fontsize{12}{12}\selectfont
          \printcommittee
   }%
@@ -204,34 +204,20 @@
 
 
 % --------------------------------------------------------
-%% Draw the cover page: COVER 2
+%% Draw the cover page: COVER 2 (MSc only - original version)
+%% For BSc: Add signature lines to secondcover items
 % --------------------------------------------------------
 
-% LOGO
-% \addcoveritem[c]{-1.5cm}{%
-%   \mbox{%
-%     \hspace*{0.5cm}%
-%     \begin{tabular}[c]{@{}l@{}}%
-%       \includegraphics[width=8cm]{logoisel}%
-%     \end{tabular}%
-%   }%
-% }(secondcover)  
-
-% \addcoveritem[c]{-1.5cm}{%
-% \ifx\@workimage\undefined
-% 	\noimage
-% 	\else
-% 	\image{}
-% 	\fi
-% } 
-
-% % School
-% \addcoveritem[c]{0.5cm}{%
-%   \fontsize{16}{16}\selectfont%
-%   \textbf{\MakeUppercase{\theuniversity[\iselthesis@opt@coverlang]}}\\%
-%   \vspace{2mm}%
-%   \textbf{\MakeUppercase{\thefaculty[\iselthesis@opt@coverlang]}}%
-% }(secondcover)  
+% --------------------------------------------------------
+%% Helper command for BSc adviser signature lines
+% --------------------------------------------------------
+\newcommand{\iselthesis@printadvisersignatureline}[1]{%
+  \par\noindent
+  \makebox[8cm]{\hrulefill}%
+  \par\vspace{0.5ex}%
+  {\fontsize{10}{10}\selectfont (#1)}%
+  \par\vspace{2ex}%
+}
 
 %% Title of Dissertation
 \addcoveritem[c]{10em}{%
@@ -239,13 +225,11 @@
   \textbf{\thedoctitle(\iselthesis@opt@coverlang,main,cover)}%
 }(secondcover)  
 
-
-% Author name
+% Author name - different for BSc vs MSc
 \addcoveritem[c]{1}{%
   \fontsize{14}{14}\selectfont%
   \textbf{\thedocauthor(name)}\\[1ex]
-  % Degree
-  % In this position only if it is a msc doc;
+  % Degree - show ONLY for MSc, NOT for BSc
   \ifthenelse{%
   \equal{\iselthesis@opt@docdegree}{msc}%
   \OR\equal{\iselthesis@opt@docdegree}{mscprep}}%
@@ -253,7 +237,12 @@
 	  \fontseries{mc}\fontsize{13}{13}\selectfont%
         (\thedocauthor(degree,\iselthesis@opt@coverlang))%
     }	
-{}
+    {}%
+  % Add signature line only for BSc
+  \ifthenelse{\equal{\iselthesis@opt@docdegree}{bsc}}{%
+    \vspace{3ex}%
+    \makebox[8cm]{\hrulefill}%
+  }{}%
 }(secondcover)  
 
 % Degree
@@ -262,31 +251,39 @@
   \thepresentationtext%
 }(secondcover)  
 
-% Advisers
+% Advisers - different for BSc (with signatures) vs MSc (with affiliations)
 \addcoveritem[c]{2}{%
- \setprintaffiliation{1} % [0] for surpress the affiliation and [1] for print the affiliation
- \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%\bfseries
- \fontsize{12}{12}\selectfont
-  \printadvisers
-  }(secondcover)  
-
-% Committee — only print the committee for the main classes
-\addcoveritem[c]{1}{%
-  \ifthenelse{%
-    \equal{\iselthesis@opt@docdegree}{bsc}%
-    \OR\equal{\iselthesis@opt@docdegree}{msc}}%
-    {
-        \setprintaffiliation{1} 
-        \committeetitlestrfont(\iselthesis@opt@coverlang)={
-        \fontsize{12}{12}\selectfont}%\bfseries
-        \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%\bfseries
-        \fontsize{12}{12}\selectfont
-         \printcommittee
+  \ifthenelse{\equal{\iselthesis@opt@docdegree}{bsc}}{%
+    % BSc: Advisers with signature lines - use existing adviser data
+    \setprintaffiliation{0} % Don't print affiliations for BSc signatures
+    \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%
+    \fontsize{12}{12}\selectfont
+    % Create custom adviser printing with signature lines
+    \ifcsname iselthesis@committee@a@list\endcsname
+      \forlistcsloop{\iselthesis@printadvisersignatureline}{iselthesis@committee@a@list}%
+    \fi
+  }{%
+    % MSc: Regular advisers with affiliations
+    \setprintaffiliation{1} % Print affiliations for MSc
+    \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%
+    \fontsize{12}{12}\selectfont
+    \printadvisers
   }%
-  {}%
 }(secondcover)  
 
-% % Date
+% Committee — only for MSc
+\addcoveritem[c]{1}{%
+  \ifthenelse{\equal{\iselthesis@opt@docdegree}{msc}}{%
+    \setprintaffiliation{1} 
+    \committeetitlestrfont(\iselthesis@opt@coverlang)={
+    \fontsize{12}{12}\selectfont}%
+    \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%
+    \fontsize{12}{12}\selectfont
+     \printcommittee
+  }{}%
+}(secondcover)  
+
+% Date
 \addcoveritem[c]{1}{%
   \fontsize{11}{11}\selectfont%
   \ifdraftdoc%

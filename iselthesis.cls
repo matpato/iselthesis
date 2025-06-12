@@ -289,7 +289,8 @@
   \setcounter{@iselthesis@cnt}{0}%	reset counter used in the name listing
   \ifthenelse{%
   	\equal{\iselthesis@opt@docdegree}{msc}%
-	}%
+	  \OR\equal{\iselthesis@opt@docdegree}{bsc}%  % This line enables BSc second cover
+    }%
 	{
     \thispagestyle{empty}%
     \selectthelanguage{\iselthesis@opt@coverlang}%

@@ -14,6 +14,7 @@
 % "Listings" in Portuguese
 \addto\captionsportuguese{%
   \def\contentsname{Índice}%
+  \def\sectionname{Secção}
   \def\indexname{Índice Remissivo}%
   \def\listfigurename{Índice de Figuras}%
   \def\listtablename{Índice de Tabelas}%
@@ -26,6 +27,7 @@
 }
 \addto\captionsenglish{%
   \def\lstlistlistingname{Listings}%
+  \def\sectionname{Section}
   \def\lstlistingname{Listing}%
   \gdef\annexname{Annex}
   \gdef\annexplname{Annexes}
