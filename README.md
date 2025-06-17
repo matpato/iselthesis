@@ -1,11 +1,7 @@
-<br />
-<div style="display: flex; align-items: center;">
-    <div style="flex: 1;">
-        <a href="https://isel.pt" target="_blank">
-            <img src="./Logo/01_ISEL-Logotipo-RGB_Horizontal.png" alt="ISEL logo" style="width: 400px; height: auto;">
-        </a>
-    </div>
-</div>
+<p align="center">
+    <a href="https://sulu.io/" target="_blank">
+        <img width="50%" src="https://www.isel.pt/sites/default/files/SCI/Identidade/logo_ISEL_simplificado_cor.png" alt="ISEL logo">
+    </a>
 
 [![GitHub forks](https://img.shields.io/github/forks/matpato/iselthesis.svg?style=social&label=Fork)](https://github.com/matpato/iselthesis)
 [![GitHub stars](https://img.shields.io/github/stars/matpato/iselthesis.svg?style=social&label=Star)](https://github.com/matpato/iselthesis)
@@ -209,7 +205,7 @@ If you couldn't find what you were looking for, ask for help in:
 	Matilde Pós-de-Mina Pato
 	Nuno Datia (as contributor)
 
-December, 12nd 2024
+June, 25th 2024
 
 This package and template are not official for ISEL/IPL.
 

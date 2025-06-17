@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% iselthesis.cls
+%% iselthesis.cls
 %%% ISEL/IPL Dissertation document class
 %%%
 %%% By Matilde Pós-de-Mina Pato (matilde.pato@isel.pt)
@@ -17,6 +17,8 @@
 %%% Version v2.6.2: (October 2022)
 %%% Version v3.0.: May 2024
 %%% Version v4.0: June 2024
+%%% Version v4.0.1: June 2025
+%%% Version v4.0.2: June 2025
 %%% 
 %%% This template is vaguely  adapted on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
@@ -289,7 +291,7 @@
   \setcounter{@iselthesis@cnt}{0}%	reset counter used in the name listing
   \ifthenelse{%
   	\equal{\iselthesis@opt@docdegree}{msc}%
-	  \OR\equal{\iselthesis@opt@docdegree}{bsc}%  % This line enables BSc second cover
+	\OR\equal{\iselthesis@opt@docdegree}{bsc}%  % This line enables BSc second cover
     }%
 	{
     \thispagestyle{empty}%
@@ -344,10 +346,10 @@
 
 \newdata{abstractorder}
 
+\newdata{copyrighttextstring}
 \newdata{abstractstring}
 \newdata{keywordsstring}
 
-\newdata{copyrighttextstring}
 \newdata{acknowledgmentsstring}
 \newdata{acknowledgementstr}
 
@@ -363,6 +365,8 @@
 
 \newdata{doctypestr}
 \newdata{doctypestrfont}
+
+\newdata{coursestr}
 
 \newdata{committeeorder}
 \newdata{committeeadviser}
@@ -418,7 +422,6 @@
   }{%
     }%
 }
-
 \providecommand\thecopyrightstr{%
     \thispagestyle{empty}%
     \noindent%
@@ -426,7 +429,6 @@
     \theschool(\iselthesis@opt@lang), \theuniversity(\iselthesis@opt@lang).\\%
     \thecopyrighttextstring(\iselthesis@opt@lang)%
 }
-
 % --------------------------------------------------------
 %% DEFINITIONS OF YEAR AND MONTH
 % --------------------------------------------------------
@@ -877,7 +879,7 @@
 }
 
 \newcommand{\printabstract}{% 
-    \xdef\iselthesis@tmp{\theabstractorder(\iselthesis@opt@lang)}%
+	\xdef\iselthesis@tmp{\theabstractorder(\iselthesis@opt@lang)}%
   \iteratecsvlist{\iselthesis@printabstract@lang}{\iselthesis@tmp}%
   % disables protrusion locally in the document for the forthcoming tables of contents
   \microtypesetup{protrusion=false}%
@@ -930,7 +932,7 @@
 	\InputIfFileExists{Chapters/#1}{\cleardoublepage}{ERROR: File '#1' does not exist!!!}%
 }
 
-\newcommand{\printchapters}{%
+\newcommand{\ncprintchapters}{%
 	\ifthenelse{\isundefined\iselthesis@chapter@list}{}%
 		{\forlistloop{\iselthesis@printchapter}{\iselthesis@chapter@list}}%
 }
@@ -1032,6 +1034,7 @@
   {}%
 }
 
+
 \newcommand{\iselthesis@loadallfiles}[2]{\optionlistdo{/@nc/file/#2/#1}{\iselthesisloadfile@i{##1}}}
 
 \newcommand{\iselthesisloadfile@i}[2][]{\IfFileExists{#2}{\input{#2}}{#1}}
@@ -1047,11 +1050,9 @@
 % --------------------------------------------------------
 %% Bibliography
 % --------------------------------------------------------
-
 \newcommand{\addbibfile}[1]{\addbibresource{#1}}
 
 \newcommand{\printbib}{\printbibliography}
-
 % --------------------------------------------------------
 %% Copyright page
 % --------------------------------------------------------
@@ -1067,8 +1068,6 @@
   \thecopyrightstr\par%
   \printacknowledgementsblock 
 }
-
-
 % --------------------------------------------------------
 % %% Dedicatory
 % --------------------------------------------------------
@@ -1192,9 +1191,9 @@
 \makepagestyle{iselthesis@mainmatter}
 \makeoddfoot{iselthesis@mainmatter}{}{\thepage}{}
 \makeevenfoot{iselthesis@mainmatter}{}{\thepage}{}
-%\makeheadrule{iselthesis@mainmatter}{\textwidth}{\normalrulethickness}
-%\makeevenhead{iselthesis@mainmatter}{\small\textsc{\leftmark}}{}{}
-%\makeoddhead{iselthesis@mainmatter}{}{}{\small\rightorleftmark}
+\makeheadrule{iselthesis@mainmatter}{\textwidth}{\normalrulethickness}
+% \makeevenhead{iselthesis@mainmatter}{\small\textsc{\leftmark}}{}{}
+% \makeoddhead{iselthesis@mainmatter}{}{}{\small\rightorleftmark}
 
 \makepagestyle{iselthesis@frontmatter}
 \makeoddfoot{iselthesis@frontmatter}{}{\thepage}{}
@@ -1217,14 +1216,13 @@
 %   configuration file “Config/_cover.tex”
 % --------------------------------------------------------
 \input{Config/_cover}
-
+\addbibfile{ISELthesis-files/manual-bib} 
 % --------------------------------------------------------
 %  THESIS/DISSERTATION FILES
 %   Please open and edit the appropriate
-%   configuration file “Config/_files.tex”
+%   configuration file “Config/4_files.tex”
 % --------------------------------------------------------
 \input{Config/_files}
-\addbibfile{ISELthesis-files/manual-bib} 
 
 % --------------------------------------------------------
 %  UNIVERSITY/SCHOOL SPECIFIC MATERIALS
@@ -1243,8 +1241,8 @@
 \AtBeginDocument{%
   \hypersetup{%
     pdfauthor={\thedocauthor(name)},
-    pdftitle={\thedoctitle(\iselthesis@opt@lang,main)},
-    pdfsubject={\thedoctitle(\iselthesis@opt@lang,main)}
+    pdftitle={\thedoctitle(\iselthesis@opt@coverlang,main)},
+    pdfsubject={\thedoctitle(\iselthesis@opt@coverlang,main)}
   }
 
   %--------------------------------

@@ -15,6 +15,7 @@
 \acknowledgementstr(pt):={Agradecimentos}
 
 %% Degree 
+\degreestr(bsc,pt):={Licenciatura}
 \degreestr(bsc,m,pt):={Licenciado}
 \degreestr(bsc,f,pt):={Licenciada}
 \degreestr(msc,m,pt):={Mestre}
@@ -23,6 +24,8 @@
 \degreestr(mscprep,f,pt):={Mestre}
 
 % Dissertation type
+\doctypestr(bsc,pt):={Projeto}
+\coursestr(bsc,pt):={Projeto e Seminário}
 \doctypestr(msc,dissertation,pt):={Dissertação}
 \doctypestr(mscprep,dissertation,pt):={Dissertação}
 \doctypestr(msc,project,pt):={Trabalho de Projeto}
@@ -48,8 +51,8 @@
 % --------------------------------------------------------
 
 %% BSc thesis
-\dissertationstr(bsc,pt)={Relatório do projeto realizado no âmbito de Projeto e Seminário \\[1.25ex] 
-Licenciatura em \themajorfield(\iselthesis@opt@coverlang)}
+\dissertationstr(bsc,pt)={Relatório do \thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@coverlang) realizado no âmbito de \thecoursestr(\iselthesis@opt@docdegree,\iselthesis@opt@coverlang) \\[1.25ex] 
+\thedegreestr(\iselthesis@opt@docdegree,\iselthesis@opt@coverlang) em \themajorfield(\iselthesis@opt@coverlang)}
 
 %% MSc thesis plan
 \dissertationstr(mscprep,pt)={Preparação de \thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) intermédio para obtenção do Grau de 

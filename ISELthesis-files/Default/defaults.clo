@@ -216,7 +216,7 @@
   \makebox[8cm]{\hrulefill}%
   \par\vspace{0.5ex}%
   {\fontsize{10}{10}\selectfont (#1)}%
-  \par\vspace{2ex}%
+  \par\vspace{3ex}%
 }
 
 %% Title of Dissertation
@@ -232,7 +232,7 @@
   % Degree - show ONLY for MSc, NOT for BSc
   \ifthenelse{%
   \equal{\iselthesis@opt@docdegree}{msc}%
-  \OR\equal{\iselthesis@opt@docdegree}{mscprep}}%
+ }%
     {
 	  \fontseries{mc}\fontsize{13}{13}\selectfont%
         (\thedocauthor(degree,\iselthesis@opt@coverlang))%
@@ -292,3 +292,5 @@
     \textbf{\thedatemonth \thedateyear}%
   \fi%
 }(secondcover)
+
+

@@ -15,8 +15,6 @@
 \RequirePackage{csquotes}
 \RequirePackage[english]{babel}	% Support for bilingual documents
 
-%\usepackage[a-1b,mathxmp]{pdfx}[2018/12/22]
-
 \RequirePackage{translator} % Support month name translations for pgfcalendar
 
 %%%%% Fine tuning of typesetting
@@ -49,9 +47,7 @@
 %% FOR DEMO PURPOSES ONLY --- TO BE REMOVED by final users
 \usepackage{lipsum}
 
-\newcommand{\MikTeX}{Mik\TeX}
-\newcommand{\TeXLive}{\TeX Live}
-\newcommand{\pdfLaTeX}{pdf\LaTeX}
+
 % --------------------------------------------------------
 % PACKAGE listings
 % --------------------------------------------------------
@@ -87,7 +83,6 @@
 \usepackage{float}		% Improves the interface for defining floating objects such as figures and tables
 %
 \usepackage[figure,table,lstlisting]{totalcount}
-
 
 % --------------------------------------------------------
 %% LOAD THESE PACKAGES JUST AT THE END OF THE PREAMBLE 

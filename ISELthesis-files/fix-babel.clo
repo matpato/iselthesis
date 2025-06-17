@@ -32,7 +32,6 @@
   \gdef\annexname{Annex}
   \gdef\annexplname{Annexes}
   \gdef\appendixplname{Appendices}
-  \gdef\appendixplname{Appendices}
 }
 
 
