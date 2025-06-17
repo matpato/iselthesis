@@ -1,7 +1,14 @@
-<p align="center">
-    <a href="https://sulu.io/" target="_blank">
-        <img width="50%" src="https://www.isel.pt/sites/default/files/SCI/Identidade/logo_ISEL_simplificado_cor.png" alt="ISEL logo">
-    </a>
+<br />
+<div style="display: flex; align-items: center;">
+    <div style="flex: 1;">
+        <a href="https://isel.pt" target="_blank">
+            <img src="./Logo/01_ISEL-Logotipo-RGB_Horizontal.png" alt="ISEL logo" style="width: 400px; height: auto;">
+        </a>
+    </div>
+    <div style="flex: 3; text-align: left; padding-left: 20px;">
+        <h3>JSONIFY</h3>
+    </div>
+</div>
 
 [![GitHub forks](https://img.shields.io/github/forks/matpato/iselthesis.svg?style=social&label=Fork)](https://github.com/matpato/iselthesis)
 [![GitHub stars](https://img.shields.io/github/stars/matpato/iselthesis.svg?style=social&label=Star)](https://github.com/matpato/iselthesis)
