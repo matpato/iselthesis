@@ -5,9 +5,6 @@
             <img src="./Logo/01_ISEL-Logotipo-RGB_Horizontal.png" alt="ISEL logo" style="width: 400px; height: auto;">
         </a>
     </div>
-    <div style="flex: 3; text-align: left; padding-left: 20px;">
-        <h3>JSONIFY</h3>
-    </div>
 </div>
 
 [![GitHub forks](https://img.shields.io/github/forks/matpato/iselthesis.svg?style=social&label=Fork)](https://github.com/matpato/iselthesis)
