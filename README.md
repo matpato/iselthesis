@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://sulu.io/" target="_blank">
-        <img width="50%" src="https://www.isel.pt/sites/default/files/SCI/Identidade/logo_ISEL_simplificado_cor.png" alt="ISEL logo">
+        <img width="50%" src="01_ISEL-Logotipo-RGB_Horizontal" alt="ISEL logo">
     </a>
 
 [![GitHub forks](https://img.shields.io/github/forks/matpato/iselthesis.svg?style=social&label=Fork)](https://github.com/matpato/iselthesis)
