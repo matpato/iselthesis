@@ -16,20 +16,19 @@
 %%% Version v2.6.2: (October 2022)
 %%% Version v3.0: May 2024
 %%% Version v4.0: June 2024
-%%% Version v4.0.1: September 2024
-%%% Version v4.0.2: June 2025
+%%% Version v4.1: June 2025
 %%% 
 %%% 
 %%% This template is vaguely based on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
-%%% 
+%%%
 %%% BUGS and SUGGESTIONS: please send email to "matilde.pato@isel.pt"
 %%%     or sumit a ticket in the the project web page at
 %%%     https://github.com/matpato/iselthesis
-%%% 
+%%%
 %%% CONTRIBUTERS are welcome. Please contact "matilde.pato@isel.pt"
+%%%
 %%% 
-%%%  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
 % The default option marked with (*)
@@ -41,49 +40,62 @@
   fontstyle=kpfonts,    % baskervaldx bookman charter ebgaramond fbb fourier garamond
                         % heuristica kpfonts(*) libertine mathpazo1 mathpazo2 newcent
                         % newpx newtx 
-  chapstyle=vz43,       % bianchi bluebox brotherton dash default elegant ell ger 
-                        % hansen ist jenor lyhne madsen pedersen veelo vz14 vz34 vz43(*)
+  chapstyle=isel,       % bianchi bluebox brotherton dash default  
+                        % elegant ell ger hansen isel(*) jenor lyhne 
+                        % madsen pedersen veelo vz14 vz34 vz43
   otherlistsat=front,   % front(*), back
   linkscolor=darkblue,  % darkblue, black (Set to 'black' for PRINTING)
-  printcommittee=true,  % set to 'false' for submitted versions which should not have 
-                        % the list of committee members
+  printcommittee=true,  % set to 'false' from submitted versions who should not have 
+                        % the list of committee memebers
   biblatex={            % Options for biblatex (see biblatex documentation)
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        %%% Uncomment for 'apa'-like citations
-        % backend=biber,          % must use biber as the backend (and not bibtex)
-        % natbib=true,             % compatibility with natbib (use \cite{…} or \citep{…})
-        % style=apa,               % APA style
-        % maxcitenames=2,          % use at most two names in citation
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        %%% Uncomment for 'numeric-by-order-of-citation'-like citations
-        backend=bibtex,          % use bibtex if possible
-        style=numeric-comp,      % numeric(*), alphabetic, authoryear, bwl-FU
-        sortcites=true,         % If numeric, sort cites in ascending order
-        sorting=nyt,            % none, nyt(*), ynt
-        backref=true,           % true(*), false if you don't want back referencing from citations
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        maxbibnames=99,         % Never use 'et al' in the bibliography
-        firstinits=true,        % Render all first and middle names as initials
-        hyperref=true           % Hyperlinks in citations: true(*) false
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%% uncomment for 'apa' like citations
+		% backend=biber,			% must use biber as the backend (and not bibtex)
+		% natbib=true,				% compatiblity with natbib (use \cite{…} or \citep{…})
+		% style=apa,					% APA style
+		% maxcitenames=2,			% use at most two names in citation
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%% uncomment for 'numeric-by-order-of-citation' like citations
+		% backend=bibtex,		  % use bibtex if possible
+		% style=numeric-comp, % numeric(*), alphabetic, authoryear, bwl-FU
+		% sortcites=true,     % If numeric, sort cites by crescent order
+		% sorting=none,       % none, nyt(*), ynt
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		% %%% uncomment for 'numeric-by-order-of-citation' like citations
+		backend=bibtex,		  % use bibtex if possible
+		style=numeric-comp, % numeric(*), alphabetic, authoryear, bwl-FU
+		sortcites=true,     % If numeric, sort cites by crescent order
+		sorting=nyt,        % none, nyt(*), ynt
+        backref=true,       % true(*), false if you want to back referencing from bibliographical citations
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%% uncomment for 'numeric-by-order-of-citation' like citations
+		% backend=bibtex,		  % use bibtex if possible
+		% style=alphabetic,   % numeric(*), alphabetic, authoryear, bwl-FU
+		% sorting=nyt,        % none, nyt(*), ynt
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%% other options for biblatex
+    maxbibnames=99,			% Never use 'et al' in the bibliography
+	firstinits=true,    % render all first and middle names as initials
+    hyperref=true       % Hyperlinks in citations: true(*) false
+	},
+	memoir={	            % See the 'memoir' documentation
+    a4paper,            % the paper size/format
+    11pt,               % 10pt, 11pt(*), 12pt
+    final,              % draft, final  <= Replace 'draft' with 'final' in final version
   },
-  memoir={                % See the 'memoir' documentation
-    a4paper,              % The paper size/format
-    11pt,                 % 10pt, 11pt(*), 12pt
-    final,                % draft, final  <= Replace 'draft' with 'final' in the final version
-  },
-  media=screen,           % screen(*), paper
+  media=screen,         % screen(*), paper
+          % behavior to be defined in school options based in "\iselthesis@opt@media"
+          % definitions for screen: left and right margins are equal, colored links
+          % definitions for paper: left and right margins are different, black links
 ]{iselthesis}
-
 
 % --------------------------------------------------------
 %%
 %%  BEGINING OF USER CUSTOMIZATION
 %%
-% --------------------------------------------------------
+% -------------------------------------------------------
 
-\renewcommand{\familydefault}{\sfdefault}
-\usepackage{sansmathfonts}
-\usepackage{helvet}
+
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
@@ -103,7 +115,8 @@
 \ncthesisfrontmatter    % Before the main text (TOC, etc)
 % --------------------------------------------------------
 \printcoverpage		    % The cover page
-% \printdedicatory        % Print the dedicatory (will only be printed if adequate for the document type)
+\setcounter{page}{1}   % Start from i
+\printdedicatory        % Print the dedicatory (will only be printed if adequate for the document type)
 \printacknowledgements  % Print the acknowledgments (will only be printed if adequate for the document type)
 \printquote             % Print the quote (if file exists and is adequate for the document type)
 \printstatement         % Print statement text. This file will only be considered for final documents, i.e., "msc", otherwise, it will be silently ignored
@@ -116,9 +129,10 @@
 \ncprintchapters        % Print document chapters		
 \printbib		        % Print the bibliography
 % \printotherlists 	    % If option 'otherlistsat=back', print other lists of contents according to instructions given above, otherwise do nothing
+\printgantt             % Print Gantt diagram if file exists
 
-%\ncprintappendices      % Print appendixes, if any!
-%\ncprintannexes         % Print annexes, if any!
+\ncprintappendices      % Print appendixes, if any!
+\ncprintannexes         % Print annexes, if any!
 
 % \printbackcoverpage     % Print the cover back page
 % --------------------------------------------------------

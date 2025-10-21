@@ -33,7 +33,7 @@ The template file for writing dissertations in  \LaTeX~ is organised into a main
 \begin{description}
 	\item[iselthesis] This is the main directory and includes:
 	\begin{description}
-        \item[Chapters] Directory where to put user files (text and figures). For instances, including Chapters, Appendices, Annexes, Abstracts, Glossaries, Lists of Symbols, etc. Replace them with your own. The Statement file is important for submitting the final version of the master's thesis. It contains the text in both languages (English and Portuguese). The author must choose one of these depending on whether they have written their dissertation in English or Portuguese respectively. This folder includes:
+        \item[Chapters] Directory where to put user files (text and figures). For instances, including Chapters, Dedicatory, Acknowledgments, Gantt Diagram, Appendices, Annexes\footnote{\textbf{Note}: Change the file name if you don't want to print. Like, instead of ``ganttdiagram.tex'' choose to ``ganttdiagram\_.tex'', for instance}, Abstracts, Glossaries, Lists of Symbols, etc. Replace them with your own. The ``Statement'' file is important for submitting the final version of the master's thesis. It contains the text in both languages (English and Portuguese). The author must choose one of these depending on whether they have written their dissertation in English or Portuguese respectively. This folder includes:
 		\begin{enumerate}
 		\item \textbf{scripts} Directory where you can place the code you need to insert into the text, or pseudo-code;
 		\item \textbf{img} Directory with all images of your thesis;
@@ -195,31 +195,27 @@ Let's have a look at a couple of examples:
 The present document is defined according to the following settings:
 \begin{Verbatim}[breaklines=true, breakanywhere=true]
 \documentclass[
-  docdegree=msc,       
-  doctype=dissertation, 
-  lang=en,             
-  coverlang=pt,        
-  fontstyle=kpfonts,   
-  chapstyle=vz43,    
-  otherlistsat=front,   
-  linkscolor=darkblue,  
-  printcommittee=true, 
-  biblatex={            
-    backend=bibtex,		  
-    style=numeric-comp, 
-    sortcites=true,     
-    sorting=nyt,       
-    maxbibnames=99,			
-    firstinits=true,   
-    hyperref=true,
-    backref=true,      
-},
-  memoir={	          
-    a4paper,          
-    11pt,              
-    final,            
-  },
-  media=screen,         
+  docdegree=msc,        % msc(*), mscprep, bsc
+  doctype=dissertation, % dissertation(*), project
+  lang=pt,              % en, pt(*)
+  coverlang=pt,         % defaults to main language
+  fontstyle=kpfonts,    % baskervaldx ... kpfonts(*) 
+  chapstyle=isel,       % bianchi ... isel(*) jenor vz43
+  otherlistsat=front,   % front(*), back
+  linkscolor=darkblue,  % darkblue(*), black 
+  printcommittee=true,  
+  biblatex={   % Options for biblatex (see biblatex documentation)
+	sorting=nyt,        % none, nyt(*), ynt
+        backref=true,       % true(*), false
+    maxbibnames=99,			% Never use 'et al' 
+    hyperref=true       % Hyperlinks in citations: true(*) false
+	},
+  memoir={	            % See the 'memoir' documentation
+    a4paper,            % the paper size/format
+    11pt,               % 10pt, 11pt(*), 12pt
+    final,              % draft, final  
+    },
+  media=screen,         % screen(*), paper
 ]{iselthesis}
 \end{Verbatim}
 

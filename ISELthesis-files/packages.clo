@@ -143,32 +143,28 @@
   % \RequirePackage[utf8]{inputenc}     % Format for the input file(s), see the "enc" option
 \fi
 
-\RequirePackage[%nonumberlist,
-    sort = standard,   % or, def or use
-	order = letter,	   % or, word
-    symbols,           % add symbols listing
+\RequirePackage{array}
+\RequirePackage{tabularx}
+
+\RequirePackage[%
+    sort = standard,
+    order = letter,
+    symbols,
     translate = babel,
     acronym,
-    %nogroupskip,
-	shortcuts,
-	%nonumberlist, % do not show page numbers
+    shortcuts,
     numberedsection,
-    toc]{glossaries-extra} % To create glossaries
-% \glsdisablehyper
+    toc,
+    nopostdot,          % Add this
+    % nonumberlist        % Add this if you don't want page numbers
+]{glossaries-extra}
 
-\RequirePackage{ISELthesis-files/user-sty/glossary-xltabular}%
-\setglossarystyle{xltabular}
-\setabbreviationstyle[acronym]{long-short}%
-% \GlsXtrEnablePreLocationTag{\emph{(\small p.~}}{\emph{(\small pp.~}}
-% \patchcmd{\@gls@automake@immediate}{-I xindy}{-q -I xindy}{}{}
-% \renewcommand{\gls@automake@makegloss}{makeglossaries -q}%
-% \renewcommand{\GlsXtrFormatLocationList}[1]{\emph{\small#1)}}
-% \renewcommand{\glsnamefont}[1]{\textbf{#1}}%
+\setglossarystyle{long}  % Changed from 'super' to 'long'
+\setabbreviationstyle[acronym]{long-short}
+\glssetnoexpandfield{description}
 
-% --------------------------------------------------------
-% “Process gnumberlist” option - after glossaries
-% \iftoggle{/iselthesis/gnumberlist}{}{\setupglossaries{nonumberlist}}%
-\AtEndPreamble{\@loadglossaryfiles\makenoidxglossaries}%
+% Load glossary files
+\AtEndPreamble{\@loadglossaryfiles\makenoidxglossaries}
 
 % --------------------------------------------------------
 % TIKZ
@@ -193,7 +189,7 @@
 % Add an image to the backgroung
 % Used to insert the background image in the cover page
 % --------------------------------------------------------
-\RequirePackage{eso-pic}[2015/04/20]
+\RequirePackage{eso-pic}%[2015/04/20]
 
 % --------------------------------------------------------
 % Standard configuration for user included packages
@@ -214,7 +210,32 @@
 
 \usepackage{url}
 \usepackage{xurl}
-
-% \usepackage{tabularx}   % package for tables
 \RequirePackage{longtable}
 \RequirePackage{xltabular}
+
+
+%% ------------------------------------------------------------
+%% Gantt diagram
+%% ------------------------------------------------------------
+% Comment if not needed
+\usepackage{pgfgantt}
+\definecolor{bargray}{RGB}{224,224,224}
+\definecolor{barblue}{RGB}{153,204,254}
+\definecolor{groupblue}{RGB}{51,102,254}
+\definecolor{linkred}{RGB}{165,0,33}
+\definecolor{orange}{RGB}{239,80,23}
+\definecolor{royalblue}{rgb}{0.25, 0.41, 0.88}
+
+
+% Define link types
+\newganttlinktypealias{sta-to-sta}{s-s}
+\newganttlinktypealias{fin-to-fin}{f-f}
+\newganttlinktypealias{sta-to-fin}{s-f}
+\newganttlinktypealias{fin-to-sta}{f-s}
+
+% Contains the label that you may assign to each link: \ganttlinklabel
+
+\setganttlinklabel{sta-to-sta}{s2s}
+\setganttlinklabel{fin-to-fin}{f2f}
+\setganttlinklabel{sta-to-fin}{s2f}
+\setganttlinklabel{fin-to-sta}{f2s}

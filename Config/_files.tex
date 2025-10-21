@@ -36,7 +36,7 @@
 % File with the acknowledgments text. Will only be considered for final documents,
 % i.e., "bsc" and "msc", otherwise, it will be silently ignored
 % syntax: \acknowledgementsfile{filename}
-\acknowledgementsfile{acknowledgements}
+\acknowledgementsfile{acknowledgments}
 
 %%------------------------------------------------------------
 % File with the quote text. Will only be considered for final documents,
@@ -54,7 +54,6 @@
 % Lists of Glossary, Acronyms and Symbols
 % syntax: \glossaryfile{filename} & \acronymsfile{filename}
 \glossaryfile{glossary}
-\setglossarystyle{super}
 \acronymsfile{acronyms}
 
 %%------------------------------------------------------------
@@ -70,7 +69,7 @@
 \addfile{chapter1}
 \addfile{chapter2}
 \addfile{chapter3}
-% \addfile{chapter4}
+\addfile{chapter4}
 %\addfile{chapter-last}
 
 %%------------------------------------------------------------
@@ -90,10 +89,16 @@
 \lstinputpath{Chapters/scripts}
 
 %%------------------------------------------------------------
+% Gantt diagram
+\ganttfile{ganttdiagram.tex}
+
+%%------------------------------------------------------------
 % The Table of Contents is always printed.
 % The other lists below may be commented and omitted.
 \addlisttofrontmatter{\listoffigures}	    % The List of Figures. Comment to omit.
 \addlisttofrontmatter{\listoftables} 	    % The List of Tables. Comment to omit.
 \addlisttofrontmatter{\lstlistoflistings}   % The List of Code Listings. Comment to omit.
-\addlisttofrontmatter{\glsnogroupskiptrue\setlength{\glsdescwidth}{0.8\textwidth}\printnoidxglossaries}	    % The list of glosssaries and acronyms
+\addlisttofrontmatter{\listofacronyms}      % The List of Acronyms. Comment to omit.
+% \addlisttofrontmatter{\listofsymbols}       % The List of Symbols. Comment to omit.
+\addlisttofrontmatter{\printglossarylist}   % The Glossary. Comment to omit.
 

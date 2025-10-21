@@ -4,16 +4,31 @@
 %%
 %% CUSTOMIZATION for ISEL-IPL (strings and cover)
 % ============================================================
+\typeout{NT FILE iselthesis-files/default/defaults.clo}%
+
+% Loading of fonts must be delayed until class "iselthesis" is loaded
+\AtEndPreamble{%
+  \RequirePackage{gillius2}%
+}
+
+% Cover text color
+\thesiscover(msc,textcolor):={iselpurple}
+\thesiscover(mscprep,textcolor):={iselpurple}
+\thesiscover(bsc,textcolor):={black}
+
+% Cover background images 
+\thesiscover(msc,background):={capa}
+\thesiscover(mscprep,background):={capa}
+\thesiscover(bsc,background):={subcapa}
+\thesiscover(plain,background):={}
+% Second cover background image
+\thesiscover(msc,background2):={subcapa}
+\thesiscover(mscprep,background2):={}
+\thesiscover(bsc,background2):={}
 
 % Comiittee printing order
 \committeeorder(all):={c,r}% 
 \committeeadviser(adviser):={a}
-
-% Cover background images
-\thesiscover(msc,front):={}
-\thesiscover(mscprep,front):={}
-\thesiscover(bsc,front):={}
-\thesiscover(plain,front):={}
 
 % Spine info
 \spine(logo):={logoisel}
@@ -89,7 +104,7 @@
                                    {-3.5ex plus -0.5ex minus -.2ex}%
                                    {2.3ex \@plus.2ex}%
                                    %{\s@cnamfont}
-                                   {\normalfont\Large\bfseries}}
+                                   {\color{iselpurple}\normalfont\Large\bfseries}}
 \renewcommand\subsection{\@startsection{subsection}{2}{0pt}%
                                      {-2.5ex plus -0.5ex minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
@@ -110,44 +125,19 @@
 % --------------------------------------------------------
 %% Draw the cover page: COVER 1
 % --------------------------------------------------------
+% Start of special page
 
-% LOGO
-\addcoveritem[c]{-1.15cm}{%
-  \mbox{%
-    \hspace*{0.5cm}%
-    \begin{tabular}[c]{@{}l@{}}%
-      \includegraphics[width=12cm]{Logo/01_ISEL-Logotipo-RGB_Horizontal.png}%
-    \end{tabular}%
-  }%
-}(cover)
-
-\addcoveritem[c]{-1.5cm}{%
-\ifx\@workimage\undefined
-	\noimage
-	\else
-	\ncimage{\@workimage}
-	\fi
-}(cover) 
-
-% % School
-% \addcoveritem[c]{0.5cm}{%
-%   \fontsize{16}{16}\selectfont%
-%   \textbf{\MakeUppercase{\theuniversity[\iselthesis@opt@coverlang]}}\\%
-%   \vspace{2mm}%
-%   \textbf{\MakeUppercase{\thefaculty[\iselthesis@opt@coverlang]}}%
-% }
-
-%% Title of Dissertation
-\addcoveritem[c]{-3em}{%
+% Title of Dissertation
+\addcoveritem[c]{8cm}{%
   \fontsize{17}{18}\selectfont
-  \textbf{\thedoctitle(\iselthesis@opt@coverlang,main,cover)}%
+  \bfseries\thedoctitle(\iselthesis@opt@coverlang,main,cover)%
 }(cover) 
 
 
 % Author name
-\addcoveritem[c]{1}{%
-  \fontsize{15}{14}\selectfont%
-  \textbf{\thedocauthor(name)}\\[.5ex]
+\addcoveritem[c]{2cm}{%
+  \fontsize{12}{13}\selectfont%
+  \bfseries\thedocauthor(name)\\[.5ex]
   % Degree
   % In this position only if it is a msc doc;
   \ifthenelse{%
@@ -161,36 +151,20 @@
 }(cover) 
 
 % Degree
-\addcoveritem[c]{1}{%
+\addcoveritem[c]{1.5cm}{%
   \fontsize{11}{11}\selectfont%
   \thepresentationtext%
 }(cover) 
 
 
-% Advisers
-\addcoveritem[c]{2}{%
+% Advisers - COVER 1
+\addcoveritem[c]{2cm}{%
  \setprintaffiliation{0} % [0] for surpress the affiliation and [1] for print the affiliation
  \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%\bfseries
  \fontsize{12}{12}\selectfont
   \printadvisers
   }(cover) 
 
-
-% Committee — only print the committee for the main classes
-\addcoveritem[c]{1}{%
-  \ifthenelse{%
-    \equal{\iselthesis@opt@docdegree}{bsc}%
-    \OR\equal{\iselthesis@opt@docdegree}{msc}}%
-    {
-         \setprintaffiliation{0} 
-        \committeetitlestrfont(\iselthesis@opt@coverlang)={
-        \fontsize{12}{12}\selectfont}%\bfseries
-        \committeestrfont(\iselthesis@opt@docdegree,\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%\bfseries
-        \fontsize{12}{12}\selectfont
-         \printcommittee
-  }%
-  {}%
-}(cover) 
 
 % Date
 \addcoveritem[c]{1}{%
@@ -220,7 +194,7 @@
 }
 
 %% Title of Dissertation
-\addcoveritem[c]{10em}{%
+\addcoveritem[c]{8cm}{%
   \fontsize{17}{18}\selectfont
   \textbf{\thedoctitle(\iselthesis@opt@coverlang,main,cover)}%
 }(secondcover)  
@@ -292,5 +266,4 @@
     \textbf{\thedatemonth \thedateyear}%
   \fi%
 }(secondcover)
-
 

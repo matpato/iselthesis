@@ -1,11 +1,7 @@
-<br />
-<div style="display: flex; align-items: center;">
-    <div style="flex: 1;">
-        <a href="https://isel.pt" target="_blank">
-            <img src="./Logo/01_ISEL-Logotipo-RGB_Horizontal.png" alt="ISEL logo" style="width: 400px; height: auto;">
-        </a>
-    </div>
-</div>
+<p align="center">
+    <a href="https://sulu.io/" target="_blank">
+        <img width="50%" src="https://www.isel.pt/sites/default/files/SCI/Identidade/logo_ISEL_simplificado_cor.png" alt="ISEL logo">
+    </a>
 
 [![GitHub forks](https://img.shields.io/github/forks/matpato/iselthesis.svg?style=social&label=Fork)](https://github.com/matpato/iselthesis)
 [![GitHub stars](https://img.shields.io/github/stars/matpato/iselthesis.svg?style=social&label=Star)](https://github.com/matpato/iselthesis)
@@ -15,6 +11,8 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/matpato/iselthesis/graphs/commit-activity)
 [![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg?color=green)](https://www.latex-project.org/)
 [![GitHub license](https://img.shields.io/badge/License-LaTeX%20v1.3c-green.svg)](https://www.latex-project.org/lppl/lppl-1-3c)
+
+
 ![![Last commit](https://github.com/matpato/iselthesis)](https://img.shields.io/github/last-commit/matpato/iselthesis?color=blue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 </p>
@@ -64,7 +62,7 @@ The _template.tex_ file contains the basic structure and all the chapter-files t
         lang=en,             
         coverlang=pt,        
         fontstyle=kpfonts,   
-        chapstyle=vz43,    
+        chapstyle=isel,    
         otherlistsat=front,   
         linkscolor=darkblue,  
         printcommittee=true, 
@@ -177,14 +175,14 @@ This is where you have to place all the personal stuff of your thesis in the __c
 *ISELthesis v4.0.0 is available as an [Overleaf template](https://www.overleaf.com/latex/templates/isel-thesis/jgfhgbpcfxyz).  Just select <kbd>open as template</kbd> and follow from [step 3 above](#local-install)!*
 
 1. Download the [latest version from the GitHub repository as a Zip file](https://github.com/matpato/iselthesis/archive/refs/heads/master.zip).
-2. Login to your favorite LaTeX cloud service. I recommend Overleaf but there are alternatives (these instructions apply to Overleaf  and you'll have to adapt for other providers).
+2. Login to your favorite LaTeX cloud service. I recommend Overleaf but there are alternatives (these instructions apply to Overleaf  and you will have to adapt for other providers).
 3. In the menu select <kbd>New project</kbd>-><kbd>Upload project</kbd>
 4. Upload the zip with all the "iselthesis" files.
 5. Select “*template.tex*” as the main file.
 6. Follow from [step 3 above](#local-install)
 
 *WARNING: Overleaf reduced the compile time*
-There is no way you can compile yout thesis/dissertation (using this template) within the new (20 seconds) time limit.  This means you have two options:
+There is no way you can compile your thesis/dissertation (using this template) within the new (20 s) time limit.  This means you have two options:
 * Install LaTeX in your computer and [use a the template locally](#local-install)!
 * Opt for a hassle free solution and [buy a (student) plan in Overleaf](https://www.overleaf.com/user/subscription/plans).
 
@@ -207,7 +205,7 @@ If you couldn't find what you were looking for, ask for help in:
 	Matilde Pós-de-Mina Pato
 	Nuno Datia (as contributor)
 
-June, 25th 2024
+October, 21st 2025
 
 This package and template are not official for ISEL/IPL.
 

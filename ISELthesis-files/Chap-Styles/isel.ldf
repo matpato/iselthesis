@@ -10,7 +10,7 @@
 %%%%% Configure chapters, headers, footers, and page numbering
 \RequirePackage{soul}
 
-\definecolor{iseloficialcolor}{RGB}{154,51,36}
+% \definecolor{iseloficialcolor}{RGB}{154,51,36}
 
 \undef{\iselthesis@isel@chapter}
 \newsavebox{\iselthesis@isel@chapter}
@@ -21,7 +21,7 @@
 \providecommand{\iselthesis@isel@chm}[1][2cm]{%
   \resizebox{!}{#1}{%
     \fboxsep=.75pt%
-    \color{iseloficialcolor}\thechapter%
+    \color{iselorange}\thechapter%
   }%
 }
 
@@ -29,26 +29,58 @@
   \iselthesis@isel@chm{#1}
 }
 
+% \makechapterstyle{isel}{%
+%   \renewcommand{\chapnamefont}{\normalfont\Large\scshape\raggedleft\so}%
+%   \renewcommand{\chaptitlefont}{\normalfont\huge\bfseries\scshape}%\sffamily}%
+%   % \renewcommand{\chapternamenum}{}
+%   \renewcommand{\printchaptername}{}%
+%   \renewcommand{\printchapternum}{\null\hfill\iselthesis@isel@chm[1cm]\hspace*{-5pt}\par
+%   }
+%   \renewcommand{\afterchapternum}{}%{\vspace*{-11ex}}%
+%   \renewcommand{\printchaptertitle}[1]{\color{iselorange}\chaptitlefont ##1\par}%
+%   %
+%   % \renewcommand{\partnamefont}{\chapnamefont}
+%   % \renewcommand{\parttitlefont}{\chaptitlefont}
+%   % \renewcommand{\partnamenum}{}
+%   \renewcommand{\printpartname}{}%
+%   \renewcommand{\thepart}{\Roman{part}}
+%   \renewcommand{\printpartnum}{\null\hfill\iselthesis@isel@ptm[4cm]\hspace*{14pt}\par}%
+%   % \renewcommand{\afterpartnum}{\vspace*{-11ex}}%
+%   \renewcommand{\printparttitle}[1]{\color{darkgray}\parttitlefont\raggedleft ##1\par}%
+%   \renewcommand*{\partnumfont}{\normalfont\scshape\MakeLowercase}
+% }
 
+\newif\ifNoChapNumber
 \makechapterstyle{isel}{%
-  \renewcommand{\chapnamefont}{\normalfont\Large\scshape\raggedleft\so}%
-  \renewcommand{\chaptitlefont}{\normalfont\huge\bfseries\scshape}%\sffamily}%
-  % \renewcommand{\chapternamenum}{}
-  \renewcommand{\printchaptername}{}%
-  \renewcommand{\printchapternum}{\null\hfill\iselthesis@isel@chm[1cm]\hspace*{-5pt}\par
-  }
-  \renewcommand{\afterchapternum}{}%{\vspace*{-11ex}}%
-  \renewcommand{\printchaptertitle}[1]{\color{darkgray}\chaptitlefont\raggedleft ##1\par}%
-  %
-  % \renewcommand{\partnamefont}{\chapnamefont}
-  % \renewcommand{\parttitlefont}{\chaptitlefont}
-  % \renewcommand{\partnamenum}{}
+  \renewcommand\chapternamenum{}
+  \renewcommand\printchaptername{}
+  \renewcommand\printchapternum{}
+  \renewcommand\chapnumfont{\Large\bfseries}
+  \renewcommand\chaptitlefont{\Large\bfseries\raggedright}
+  \renewcommand\printchaptertitle[1]{%
+    \ifNoChapNumber
+      \begin{tabular}{@{}p{\textwidth}}%
+        \chaptitlefont\MakeUppercase{##1}%
+      \end{tabular}%
+    \else
+      \hspace*{-1.5cm}% Move the table to the left to place number in margin
+      \color{iselorange}% Apply color once here
+       \begin{tabular}{@{}p{1.0cm}p{\dimexpr\textwidth+1.5cm-1.0cm\relax}}%
+        \chapnumfont\thechapter%
+        & \chaptitlefont\MakeUppercase{##1}%
+      \end{tabular}%
+      \par\vspace{0.05cm}%
+       \hspace*{-3cm}\noindent\textcolor{iselorange}{\rule{\dimexpr\textwidth+3cm\relax}{.5pt}}% Orange line from actual left edge
+    \fi
+    \NoChapNumberfalse%
+  }%
+  \renewcommand\printchapternonum{\NoChapNumbertrue}
+  % Part styling (keeping your original)
   \renewcommand{\printpartname}{}%
-  \renewcommand{\thepart}{\Roman{part}}
+  \renewcommand{\thepart}{\Roman{part}}%
   \renewcommand{\printpartnum}{\null\hfill\iselthesis@isel@ptm[4cm]\hspace*{14pt}\par}%
-  % \renewcommand{\afterpartnum}{\vspace*{-11ex}}%
-  \renewcommand{\printparttitle}[1]{\color{darkgray}\parttitlefont\raggedleft ##1\par}%
-  \renewcommand*{\partnumfont}{\normalfont\scshape\MakeLowercase}
+  \renewcommand{\printparttitle}[1]{\color{iselorange}\parttitlefont\raggedleft ##1\par}%
+  \renewcommand*{\partnumfont}{\normalfont\scshape\MakeLowercase}%
 }
 \chapterstyle{isel}
 

@@ -18,7 +18,7 @@
 %%% Version v3.0.: May 2024
 %%% Version v4.0: June 2024
 %%% Version v4.0.1: June 2025
-%%% Version v4.0.2: June 2025
+%%% Version v4.1: October 2025
 %%% 
 %%% This template is vaguely  adapted on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
@@ -137,15 +137,18 @@
 \RequirePackage{colortbl}
 \definecolor{darkblue}{rgb}{0.0,0.08,0.45}
 
-% \newcommand*{\ncbibsetup}[1]{%
-%   \@ifpackageloaded{biblatex}{\ClassError{iselthesis}{Please load biblatex options earlier.}{}}{\PassOptionsToPackage{#1}{biblatex}}%
-% }
+\definecolor{iselorange}{HTML}{FF3C28}
+\definecolor{iselpurple}{HTML}{5F1437}
 
-\newcommand*{\@loadglossaryfiles}{%
-  \@for\listitem:={glossary,acronym,symbols}\do{%
-    \iffileadded[\listitem]{glossaries}{\iselthesis@loadallfiles{\listitem}{glossaries}}{}%
-  }%
-}
+%cores departamentos
+\definecolor{iseldec}{HTML}{FFDC23}
+\definecolor{iseldeeea}{HTML}{37CD28}
+\definecolor{iseldeetc}{HTML}{E63264}
+\definecolor{iseldei}{HTML}{FF8C00}
+\definecolor{iseldem}{HTML}{0087FF}
+\definecolor{iseldeq}{HTML}{FF82EB}
+\definecolor{iseldf}{HTML}{BECD00}
+\definecolor{iseldf}{HTML}{64CDFF}
 
 
 \def\UrlBreaks{\do\/\do-}
@@ -258,10 +261,22 @@
 \newlength{\mpheight}%
 \newsavebox{\iselthesis@coverbox}%
 
+
 \def\printcoverpage{%
+  \begingroup  % Create a group
+  % Use textcolor key
+  \typeout{DEBUG: Getting text color for \iselthesis@opt@docdegree}%
+  \ifcsname @thesiscover@\iselthesis@opt@docdegree,textcolor@memory\endcsname%
+    \edef\temp@textcolor{\csname @thesiscover@\iselthesis@opt@docdegree,textcolor@memory\endcsname}%
+    \typeout{DEBUG: Text color: \temp@textcolor}%
+    \color{\temp@textcolor}%
+  \else%
+    \typeout{DEBUG: No textcolor found}%
+  \fi%
+  
   \thispagestyle{empty}%
   \selectthelanguage{\iselthesis@opt@coverlang}%
-
+  
   \setlength{\mpwidth}{\dimexpr%
     \paperwidth%
       -\themargin(\iselthesis@opt@docdegree,left)%
@@ -271,15 +286,30 @@
     \paperheight%
        -\themargin(\iselthesis@opt@docdegree,top)%
        -\themargin(\iselthesis@opt@docdegree,bottom)}%
+  
+  % ADD BACKGROUND FIRST, before creating the coverbox
+  \ifcsname @thesiscover@\iselthesis@opt@docdegree,background@memory\endcsname%
+    \edef\temp@coverimage{\csname @thesiscover@\iselthesis@opt@docdegree,background@memory\endcsname}%
+    \ifx\temp@coverimage\empty\else%
+      \typeout{DEBUG: Setting background: \temp@coverimage}%
+      \AddToShipoutPictureBG*{%
+        \AtPageLowerLeft{%  
+          \includegraphics[width=\paperwidth,height=\paperheight]{\temp@coverimage}%
+        }%
+      }%
+    \fi%
+  \fi%
+  
   \sbox{\iselthesis@coverbox}{%
     \parbox[t][\mpheight][t]{\mpwidth}{%
      \printcoveritems(cover)%
     }%
   }%
+  % Add foreground content
   \AddToShipoutPictureFG*{%
     \AtPageUpperLeft{%
       \put(%
-    \LenToUnit{\themargin(\iselthesis@opt@docdegree,left)},%
+        \LenToUnit{\themargin(\iselthesis@opt@docdegree,left)},%
         -\LenToUnit{\themargin(\iselthesis@opt@docdegree,top)})%
         {\usebox{\iselthesis@coverbox}}%
     }%
@@ -306,15 +336,30 @@
     \paperheight%
        -\themargin(\iselthesis@opt@docdegree,top)%
        -\themargin(\iselthesis@opt@docdegree,bottom)}%
+  
+  % ADD SECOND COVER BACKGROUND
+  \ifcsname @thesiscover@\iselthesis@opt@docdegree,background2@memory\endcsname%
+    \edef\temp@coverimage{\csname @thesiscover@\iselthesis@opt@docdegree,background2@memory\endcsname}%
+    \ifx\temp@coverimage\empty\else%
+      \typeout{DEBUG: Setting background: \temp@coverimage}%
+      \AddToShipoutPictureBG*{%
+        \AtPageLowerLeft{%  % Try LowerLeft instead
+          \includegraphics[width=\paperwidth,height=\paperheight]{\temp@coverimage}%
+        }%
+      }%
+    \fi%
+  \fi%
+  
   \sbox{\iselthesis@coverbox}{%
     \parbox[t][\mpheight][t]{\mpwidth}{%
-      \printcoveritems(secondcover)%
+     \printcoveritems(secondcover)%
     }%
   }%
+  % Add foreground content
   \AddToShipoutPictureFG*{%
     \AtPageUpperLeft{%
       \put(%
-    \LenToUnit{\themargin(\iselthesis@opt@docdegree,left)},%
+        \LenToUnit{\themargin(\iselthesis@opt@docdegree,left)},%
         -\LenToUnit{\themargin(\iselthesis@opt@docdegree,top)})%
         {\usebox{\iselthesis@coverbox}}%
     }%
@@ -324,6 +369,7 @@
   }%
   {}%
   \selectthelanguage{\iselthesis@opt@lang}%
+\endgroup  % Color reverts automatically
 }
 
 
@@ -343,7 +389,6 @@
 % --------------------------------------------------------
 %% Some definition 
 % --------------------------------------------------------
-
 \newdata{abstractorder}
 
 \newdata{copyrighttextstring}
@@ -527,17 +572,24 @@
   \listcsadd{iselthesis@committee@#1@list}{{#3, #4}}%
 }
 
-% Simplified command to print committee members
-\newcommand{\iselthesis@printcommitteeclassmembers}[1]{%
-  & \ifprintaffiliation % Check if affiliation should be printed
-    #1 \\[0.4ex]%
+
+% Unified command to print committee/adviser members (individual names) - CENTERED
+\newcommand{\iselthesis@printcommitteemember}[1]{%
+  \ifprintaffiliation % Check if affiliation should be printed
+    #1\\[0.01em]%
   \else
-    \StrBefore{#1}{,}\\[0.4ex]% Extract only the name and ignore the rest
+    \StrBefore{#1}{,}\\[0.01em]% Extract only the name and ignore the rest
   \fi
 }
 
-% Simplified command to print committee members
+% Flag to control uppercase (default: false)
+\newif\ifiselthesis@uppercasetitle
+\iselthesis@uppercasetitlefalse
+
+% Unified command to print committee/adviser members (with role titles)
 \newcommand{\iselthesis@printcommitteemembers}[1]{%
+  % #1 should be the committee type like 'a' (adviser), 'c' (president), 'r' (vowel)
+  \initcommittee{#1}%
   % Check if committee member list exists
   \ifcsname iselthesis@committee@#1@list\endcsname
     % Determine gender and total number for Portuguese language form
@@ -547,69 +599,57 @@
     \ifthenelse{\value{iselthesis@committee@#1@cnt} = 1}%
       {\def\iselthesis@tmp@total{1}}%
       {\def\iselthesis@tmp@total{2}}%
-    % Print committee member string
-    \thecommitteetitlestrfont(\iselthesis@opt@coverlang)%
-    \thecommitteestr(#1,\iselthesis@tmp@total,\iselthesis@tmp@gender,\iselthesis@opt@coverlang):%
-    % Loop through and print each committee member in the list
-    \forlistcsloop{\iselthesis@printcommitteeclassmembers}{iselthesis@committee@#1@list}%
+    % Print role title in boldface and centered (uppercase if flag is true)
+    \ifiselthesis@uppercasetitle
+      \textbf{\MakeUppercase{\thecommitteestr(#1,\iselthesis@tmp@total,\iselthesis@tmp@gender,\iselthesis@opt@coverlang)}}\\[1ex]%
+    \else
+      \textbf{\thecommitteestr(#1,\iselthesis@tmp@total,\iselthesis@tmp@gender,\iselthesis@opt@coverlang)}\\[0.2ex]%
+    \fi
+    % Loop through and print each member in the list
+    \forlistcsloop{\iselthesis@printcommitteemember}{iselthesis@committee@#1@list}%
+    \\[0.8ex]% Space after each role group
   \fi
 }
 
-% Simplified command to print committee section
-\newcommand{\printcommittee@i}{%
-\xdef\iselthesis@tmp{\thecommitteetitlestr(\iselthesis@opt@coverlang)}%
-  \begin{tabular}{ll}%
-    % Check if committee title string is empty
-    \ifx\iselthesis@tmp\@empty
-      % Do nothing if empty
-    \else
-      \thecommitteestrfont(\iselthesis@opt@coverlang)%
-      \thecommitteetitlestr(\iselthesis@opt@coverlang):\\[1ex]%
-    \fi
-    % Print all committee members
-    \xdef\iselthesis@tmp{\thecommitteeorder(all)}%
-    \iteratecsvlist{\iselthesis@printcommitteemembers}{\iselthesis@tmp}%
-  \end{tabular}%
-}
-
-
-% Simplified main command to print committee
-\newcommand{\printcommittee}{%
-  \ifthenelse{\equal{\iselthesis@opt@printcommittee}{true}}%
-    {\printcommittee@i}%
-    {}%
-}
-
-% Simplified command to print committee section
+% Unified command to print advisers section (WITH UPPERCASE)
 \newcommand{\printadvisers@i}{%
-  \begin{tabular}{ll}%
-   \ifx\iselthesis@tmp\@empty
-      % Do nothing if empty
-    \else
-      \thecommitteestrfont(\iselthesis@opt@coverlang)%
-    \fi
-    % Print all advisers members
+  \begin{tabular}{@{}c@{}}%  % Single CENTERED column
     \xdef\iselthesis@tmp{\thecommitteeadviser(adviser)}%
-    \iteratecsvlist{\iselthesis@printcommitteemembers}{\iselthesis@tmp}%
+    \iselthesis@uppercasetitletrue% Set flag to true for uppercase
+    \@for\iselthesis@committee@type:=\iselthesis@tmp\do{%
+      \expandafter\iselthesis@printcommitteemembers\expandafter{\iselthesis@committee@type}%
+    }%
+    \iselthesis@uppercasetitlefalse% Reset flag
   \end{tabular}%
 }
 
 % Command to print advisers
 \newcommand{\printadvisers}{%
-  \newbox\iselthesis@savebox%
-  \sbox\iselthesis@savebox{%
-    \begin{tabular}{@{}rl@{}}%
-      \printadvisers@i%
-     \end{tabular}%
-  }%
-  \ifdim\wd\iselthesis@savebox>\linewidth%
-    \sbox\iselthesis@savebox{%
-      \begin{tabularx}{0.99\linewidth}{@{}rX@{}}%
-      \printadvisers@i%
-      \end{tabularx}%
+  \printadvisers@i%
+}
+
+% Unified command to print committee (jury) section (WITHOUT uppercase for roles)
+\newcommand{\printcommittee@i}{%
+  \xdef\iselthesis@tmp{\thecommitteetitlestr(\iselthesis@opt@coverlang)}%
+  \begin{tabular}{@{}c@{}}%  % Single CENTERED column
+    \ifx\iselthesis@tmp\@empty
+    \else
+      % Print "JURY" in uppercase
+      \thecommitteestrfont(\iselthesis@opt@coverlang)\bfseries\MakeUppercase{\thecommitteetitlestr(\iselthesis@opt@coverlang)}\\[1ex]%
+    \fi
+    % Print all committee members (flag is false by default = regular case)
+    \xdef\iselthesis@tmporder{\thecommitteeorder(all)}%
+    \@for\iselthesis@committee@type:=\iselthesis@tmporder\do{%
+      \expandafter\iselthesis@printcommitteemembers\expandafter{\iselthesis@committee@type}%
     }%
-  \fi%
-  \noindent\usebox\iselthesis@savebox%
+  \end{tabular}%
+}
+
+% Main command to print committee
+\newcommand{\printcommittee}{%
+  \ifthenelse{\equal{\iselthesis@opt@printcommittee}{true}}%
+    {\printcommittee@i}%
+    {}%
 }
 
 \newcounter{@iselthesis@cnt}%
@@ -843,7 +883,7 @@
 			\input{Chapters/\iselthesis@statementfile}%
 	        \newpage
             \printcopyrightpage
-        %\cleardoublepage%
+        \cleardoublepage%
 		}{% ELSE
 		}%
 	}%
@@ -869,7 +909,7 @@
 \def\iselthesis@printabstract@lang#1{%
   { % Extra braces to force language changes to be local
     \setabstractlang{#1}%
-  	\edef\iselthesis@filetoinclude{Chapters/\@nameuse{iselthesis@abstractfile@#1}}%
+    \edef\iselthesis@filetoinclude{Chapters/\@nameuse{iselthesis@abstractfile@#1}}%
   	\InputIfFileExists{\iselthesis@filetoinclude}%
       {}%
       {}%
@@ -885,6 +925,13 @@
   \microtypesetup{protrusion=false}%
 }
 
+%% --------- Glossary -------------
+
+\newcommand*{\@loadglossaryfiles}{%
+  \@for\listitem:={glossary,acronym,symbols}\do{%
+    \iffileadded[\listitem]{glossaries}{\iselthesis@loadallfiles{\listitem}{glossaries}}{}%
+  }%
+}
 
 \newcommand{\glossaryfile}[1]{%
   \InputIfFileExists{Chapters/#1}{}{}
@@ -893,6 +940,39 @@
 \newcommand{\acronymsfile}[1]{%
   \InputIfFileExists{Chapters/#1}{}{}
 }%
+
+% Printing acronyms
+\newcommand{\listofacronyms}{%
+  \cleardoublepage%
+  \renewcommand{\glossarysection}[2][]{%
+    \section*{\textcolor{iselorange}{\Large\bfseries ##1}}%
+    \addcontentsline{toc}{chapter}{##1}%  % Add this line for TOC
+    \markboth{##1}{##1}%
+  }%
+  \printnoidxglossary[type=\acronymtype]%
+}
+
+% Printing symbols  
+\newcommand{\listofsymbols}{%
+  \cleardoublepage%
+  \renewcommand{\glossarysection}[2][]{%
+    \section*{\textcolor{iselorange}{\Large\bfseries ##1}}%
+    \addcontentsline{toc}{chapter}{##1}%  % Add this line for TOC
+    \markboth{##1}{##1}%
+  }%
+  \printnoidxglossary[type=symbols]%
+}
+
+% Printing glossary
+\newcommand{\printglossarylist}{%
+  \cleardoublepage%
+  \renewcommand{\glossarysection}[2][]{%
+    \section*{\textcolor{iselorange}{\Large\bfseries ##1}}%
+    \addcontentsline{toc}{chapter}{##1}%  % Add this line for TOC
+    \markboth{##1}{##1}%
+  }%
+  \printnoidxglossary[type=main]%
+}
 
 
 \newcommand*{\ncthesisfrontmatter}{%
@@ -995,8 +1075,41 @@
   }
 
 % --------------------------------------------------------
+%%  Gantt Diagram
+% --------------------------------------------------------
+
+\newcommand{\iselthesis@ganttfile}{\@empty}
+
+\newcommand{\ganttfile}[1]{%
+  \renewcommand{\iselthesis@ganttfile}{#1}%
+}
+
+\newcommand{\printgantt}{%
+  \IfFileExists{Chapters/\iselthesis@ganttfile}{%
+    \begin{landscape}
+    \centering
+    \vspace*{\fill}
+    \resizebox{1.5\textwidth}{!}{%
+      \input{Chapters/\iselthesis@ganttfile}%
+    }
+    \vfill
+    \end{landscape}
+    \cleardoublepage
+  }{}%
+}
+
+% --------------------------------------------------------
 %% Deal with optional lists in the frontmatter: listoftables, listoffigures, etc.
 % --------------------------------------------------------
+% Define a common style WITHOUT uppercase
+\newcommand{\listtitlestyle}[1]{%
+  {\color{iselorange}\Large\bfseries #1}%  % No \MakeUppercase
+}
+% Apply to each list type
+\renewcommand{\printtoctitle}[1]{\listtitlestyle{#1}}
+\renewcommand{\printloftitle}[1]{\listtitlestyle{#1}}
+\renewcommand{\printlottitle}[1]{\listtitlestyle{#1}}
+
 \newcommand{\iselthesis@printlist}[1]{%
 	#1\cleardoublepage%
 }
@@ -1051,8 +1164,17 @@
 %% Bibliography
 % --------------------------------------------------------
 \newcommand{\addbibfile}[1]{\addbibresource{#1}}
+\newcommand{\printbib}{%
+  {%
+    \renewcommand{\printchaptertitle}[1]{%
+      \Large\bfseries\textcolor{iselorange}{##1}%
+    }%
+    \chapter*{\bibname}%
+    \addcontentsline{toc}{chapter}{\bibname}% This will be black in TOC
+  }%
+  \printbibliography[heading=none]% Print bibliography without any heading (we already made it above)
+}
 
-\newcommand{\printbib}{\printbibliography}
 % --------------------------------------------------------
 %% Copyright page
 % --------------------------------------------------------
@@ -1112,7 +1234,12 @@
 % --------------------------------------------------------
 
 \newcommand{\acknowledgements}{%
-  \chapter*{\theacknowledgementstr(\iselthesis@opt@lang)}%
+  {%
+    \renewcommand{\printchaptertitle}[1]{%
+      \Large\bfseries\textcolor{iselorange}{##1}%
+    }%
+    \chapter*{\theacknowledgementstr(\iselthesis@opt@lang)}%
+  }%
 }
 
 % --------------------------------------------------------
@@ -1121,10 +1248,16 @@
 
 \newcommand{\iselthesis@keywordsstr}{}
 \newcommand{\setabstractlang}[1]{%
-	\selectthelanguage{#1}%
-  \renewcommand{\iselthesis@keywordsstr}{\thekeywordsstring(#1)}%
-	\chapter*{\theabstractstring(#1)}%
-	\rule{\textwidth}{0.2mm} ~\\[-3.5ex]%
+    \selectthelanguage{#1}%
+    \renewcommand{\iselthesis@keywordsstr}{\thekeywordsstring(#1)}%
+    % Manually place title at top
+    % \vspace*{1cm}%
+    {\textcolor{iselpurple}{\large\textbf{\thedoctitle(#1,main)}}\par}%
+    \vspace{3ex}%
+    
+    {\textcolor{iselorange}{\Large\bfseries\theabstractstring(#1)}\par}%
+    \vspace{1ex}%
+    \noindent\rule{\textwidth}{0.2mm} ~\\[-3.5ex]%
 }
 
 % --------------------------------------------------------
@@ -1140,14 +1273,14 @@
 % --------------------------------------------------------
 %% Table of contents
 % --------------------------------------------------------
-
 \setcounter{tocdepth}{2}
-
 % --------------------------------------------------------
 %% Sectioning
 % --------------------------------------------------------
-
 \maxsecnumdepth{subsubsection}
+% Customize the Table of Contents title using memoir's commands: tocheadstyle 
+%\renewcommand*{\tocheadstart}{\color{iselorange}}
+\renewcommand*{\printtoctitle}[1]{{\color{iselorange}\Large\bfseries#1}}
 
 % --------------------------------------------------------
 % Text & code style
@@ -1192,8 +1325,7 @@
 \makeoddfoot{iselthesis@mainmatter}{}{\thepage}{}
 \makeevenfoot{iselthesis@mainmatter}{}{\thepage}{}
 \makeheadrule{iselthesis@mainmatter}{\textwidth}{\normalrulethickness}
-% \makeevenhead{iselthesis@mainmatter}{\small\textsc{\leftmark}}{}{}
-% \makeoddhead{iselthesis@mainmatter}{}{}{\small\rightorleftmark}
+
 
 \makepagestyle{iselthesis@frontmatter}
 \makeoddfoot{iselthesis@frontmatter}{}{\thepage}{}

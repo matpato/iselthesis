@@ -21,6 +21,7 @@
   \def\lstlistlistingname{Índice de Listagens}%
   \def\lstlistingname{Listagem}%
   \defineshorthand{"-}{\babelhyphen{repeat}}% generates a hyphen that will repeat on a new line
+  \def\bibname{Referências bibliográficas}%
   \gdef\annexname{Anexo}
   \gdef\annexplname{Anexos}
   \gdef\appendixplname{Apêndices}

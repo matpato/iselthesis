@@ -194,7 +194,7 @@
 % BOOK OPTIONS		
 % Are passed to the main class (book)
 %
-% twoside, a4paer, ...
+% twoside, a4paper, ...
 \DeclareOptionX{memoir}{%
 	\typeout{'memoir'=#1}%
 	\PassOptionsToClass{#1}{memoir}%
@@ -226,7 +226,7 @@
     lang=en,
     coverlang=pt,
     fontstyle=arial,
-    chapstyle=vz43,
+    chapstyle=isel,
 	enc=utf8,
     otherlistsat=front,
     aftercover=false,
