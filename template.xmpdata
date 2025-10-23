@@ -1,0 +1,89 @@
+% ===========================================================
+% XMP METADATA FOR PDF/A COMPLIANCE
+% File: template.xmpdata (must match your main .tex filename)
+% ===========================================================
+
+% ===========================================================
+% IMPORTANT: Fill these with YOUR information
+% Do NOT use the \ncauthorname or \nctitle commands here!
+% ===========================================================
+
+% ===========================================================
+% REQUIRED FIELDS
+% ===========================================================
+
+% ─────────────────────────────────────────────────────────
+% AUTHOR - Use the FULL name from \ncauthorname
+% ─────────────────────────────────────────────────────────
+% If you have:     \ncauthorname(m){John Very Longname Doe}{John Doe}
+% Then write here: \Author{John Very Longname Doe}
+\Author{John Very Longname Doe}
+
+% ─────────────────────────────────────────────────────────
+% TITLE - Use the SAME title as in \nctitle(main,...)
+% ─────────────────────────────────────────────────────────
+% If you have:     \nctitle(main,en){Master Thesis Title, Project Work or Internship Report}
+% Then write here: \Title{Master Thesis Title, Project Work or Internship Report}
+\Title{Master Thesis Title, Project Work or Internship Report}
+
+% ─────────────────────────────────────────────────────────
+% KEYWORDS - Add 5-10 relevant keywords separated by \sep
+% ─────────────────────────────────────────────────────────
+% Example: \Keywords{keyword1\sep keyword2\sep keyword3}
+\Keywords{keyword1\sep keyword2\sep keyword3\sep keyword4\sep keyword5}
+
+% ─────────────────────────────────────────────────────────
+% SUBJECT - Brief description (like a mini-abstract)
+% ─────────────────────────────────────────────────────────
+% Brief description (abstract-like, 1-2 sentences)
+\Subject{Dissertation submitted in partial fulfillment of the requirements for the degree of Master degree in Computer Science and Computer Engineering}
+
+% ─────────────────────────────────────────────────────────
+% PUBLISHER - Your institution
+% ─────────────────────────────────────────────────────────
+\Publisher{Instituto Superior de Engenharia de Lisboa}
+
+% ─────────────────────────────────────────────────────────
+% PUBLICATION TYPE
+% ─────────────────────────────────────────────────────────
+\PublicationType{master thesis}
+% Options: bachelor thesis, master thesis, phd thesis, 
+%          technical report, research paper
+
+% ─────────────────────────────────────────────────────────
+% LANGUAGE - Use ISO 639-1 code
+% ─────────────────────────────────────────────────────────
+\Language{en}
+% Options: en (English), pt-PT (Portuguese), fr (French), etc.
+
+% ===========================================================
+% OPTIONAL FIELDS (uncomment to use)
+% ===========================================================
+
+% Copyright information
+\CopyrightYear{2025}
+\CopyrightOwner{Matilde Pato, ISEL-IPL}
+
+% Publication date (YYYY-MM-DD format)
+% \PublicationDate{2025-06-23}
+
+% DOI - if you have one
+% \Doi{10.xxxx/xxxxx}
+
+% License - if applicable
+% \License{CC BY-NC-SA 4.0}
+
+% Last modified date (format: D:YYYYMMDDHHmmSS+TZ'HH'mm)
+% Example: D:20250623120000+01'00' = June 23, 2025, 12:00 UTC+1
+\Lastmodified{D:20250623120000+01'00'}
+
+% ===========================================================
+% NOTES
+% ===========================================================
+% 1. DO NOT use LaTeX commands like \ncauthorname here
+% 2. DO NOT use quotes around values
+% 3. Use \sep to separate multiple keywords (not commas)
+% 4. Special characters (á, ã, ç, etc.) work automatically
+% 5. This file must be in the root of your Overleaf project
+% ===========================================================
+\end{antml:parameter>
