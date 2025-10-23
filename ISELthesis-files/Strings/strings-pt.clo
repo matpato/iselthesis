@@ -13,6 +13,7 @@
 \keywordsstring(pt):={Palavras-chave}
 \notdefined(pt):={NÃO DEFINIDO}
 \acknowledgementstr(pt):={Agradecimentos}
+\statementstring(pt):={Declaração de integridade}
 
 %% Degree 
 \degreestr(bsc,pt):={Licenciatura}

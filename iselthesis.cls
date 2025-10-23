@@ -390,6 +390,7 @@
 %% Some definition 
 % --------------------------------------------------------
 \newdata{abstractorder}
+\newdata{statementstring}
 
 \newdata{copyrighttextstring}
 \newdata{abstractstring}
@@ -871,25 +872,32 @@
 
 % --------- Statement -------------
 \newcommand{\iselthesis@statementfile}{\@empty}
-\newcommand{\statementfile}[1]{%
-  \renewcommand{\iselthesis@statementfile}{#1}%
+
+\def\statementfile[#1]#2{%
+	\expandafter\xdef\csname iselthesis@statementfile@#1\endcsname{#2}}%
+
+\def\iselthesis@printstatement@lang#1{%
+  { % Extra braces to force language changes to be local
+    \setstatementlang{#1}%
+    \edef\iselthesis@filetoinclude{Chapters/\@nameuse{iselthesis@statementfile@#1}}%
+  	\InputIfFileExists{\iselthesis@filetoinclude}%
+      {}%
+      {}%
+    \selectthelanguage{\iselthesis@opt@lang}
+  }%
 }
 
-\newcommand{\printstatement}{%
-	\IfFileExists{Chapters/\iselthesis@statementfile}{%
-		\ifthenelse{%
+\newcommand{\printstatement}{% 
+	\ifthenelse{%
 			\equal{\iselthesis@opt@docdegree}{msc}	% msc
 		}{% THEN
-			\input{Chapters/\iselthesis@statementfile}%
+			\iselthesis@printstatement@lang{\iselthesis@opt@lang}%  % <-- PASS THE LANGUAGE HERE
 	        \newpage
             \printcopyrightpage
         \cleardoublepage%
 		}{% ELSE
 		}%
-	}%
-	{}%
 }
-
 
 % --------------------------------------------------------
 %% Abstract, Acronyms and Glossary
@@ -1227,6 +1235,17 @@
     \normalfont%
     \end{minipage}%
 	\end{flushright}%
+}
+
+% --------------------------------------------------------
+%% Statement
+% --------------------------------------------------------
+
+\newcommand{\setstatementlang}[1]{% 
+    \selectthelanguage{#1}%
+    {\textcolor{iselorange}
+    { \Large\bfseries\thestatementstring(#1) }\par}%
+    \vspace{2ex}%
 }
 
 % --------------------------------------------------------

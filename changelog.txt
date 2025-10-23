@@ -17,3 +17,6 @@
 + Change orientations for print committee and adviser members 
 + Add gantt diagram
 + Change chapters format and colors
+*2025-10-23 — Version 4.1.1
++ The statement will now print only in the main language of the thesis
++ Add command available in the document scope to use @ inside the tex file

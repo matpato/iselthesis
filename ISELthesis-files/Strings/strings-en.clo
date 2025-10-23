@@ -12,7 +12,8 @@
 \abstractstring(en):={Abstract}
 \keywordsstring(en):={Keywords}
 \notdefined(en):={UNDEFINED}
-\acknowledgementstr(en):={Acknowledgements}
+\acknowledgementstr(en):={Acknowledgments}
+\statementstring(en):={Statement of integrity}
 
 %% Degree 
 \degreestr(bsc,pt):={Bacherol}
@@ -57,11 +58,11 @@ in \themajorfield(\iselthesis@opt@coverlang)}
 
 %% MSc thesis plan
 \dissertationstr(mscprep,en)={\thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) plan submitted in partial fulfillment of the requirements for the degree of\\[1.25ex]%
-\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~ in \themajorfield(\iselthesis@opt@coverlang)}
+\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~in \themajorfield(\iselthesis@opt@coverlang)}
 
 %% MSc thesis 
 \dissertationstr(msc,en)={\thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) submitted in partial fulfillment of the requirements for the degree of\\[1.25ex]%
-\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~ in \themajorfield(\iselthesis@opt@coverlang)}
+\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~in \themajorfield(\iselthesis@opt@coverlang)}
 
 % --------------------------------------------------------
 %% Acknowledgment
