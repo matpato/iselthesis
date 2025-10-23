@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://sulu.io/" target="_blank">
-        <img width="50%" src="https://www.isel.pt/sites/default/files/SCI/Identidade/logo_ISEL_simplificado_cor.png" alt="ISEL logo">
+        <img width="75%" src="Logo/01_ISEL-Logotipo-RGB_Horizontal.png" alt="ISEL logo">
     </a>
 
 [![GitHub forks](https://img.shields.io/github/forks/matpato/iselthesis.svg?style=social&label=Fork)](https://github.com/matpato/iselthesis)
@@ -23,6 +23,8 @@ Table of Contents
 
 * [Table of Contents](#table-of-contents)
   * [About](#about)
+  * [File Structure](#file-structure)
+  * [Compilation](#compilation)
   * [Getting Started](#getting-started)
     * [Configuration](#configuration)
     * [With a Local LaTeX Installation](#local-install)
@@ -40,6 +42,58 @@ This LaTeX-template might be used to write a bachelor or master thesis at the De
 It is adapted to the current style guide for bachelor and master theses in the ISEL, as outlined in [Normas de escrita e apresentação de trabalhos finais de curso](https://www.isel.pt/informacoes-academicas/normas-trabalhos-finais).
 
 This template serves both degrees as a bachelor's and master's degree. And, during the development stages of the work as final or "Preparation of BSc (MSc) dissertation". 
+
+## File Structure
+
+After completing the setup, your Overleaf project should look like this:
+
+```
+Your Overleaf Project/
+│
+├── template.tex ........................ Main thesis file
+├── template.xmpdata .................... NEW FILE 
+├── iselthesis.cls ...................... Class file 
+├── changelog.txt ....................... No changes
+├── Makefile ............................ No changes
+│
+├── Bibliography/
+│   └── bibliography.bib
+│
+├── Chapters/
+│   ├── chapter1.tex ................... Your chapters
+│   ├── chapter2.tex
+│   ├── abstract-en.tex ................ English abstract
+│   ├── abstract-pt.tex ................ Portuguese abstract
+│   └── (other chapters)
+│
+├── Config/
+│   ├── _cover.tex ..................... Your author/title here
+│   ├── _files.tex ..................... Chapter list
+│   ├── _department.tex ................ Department info
+│   └── _packages.tex .................. Custom packages
+│
+├── ISELthesis-files/
+│   ├── Default/
+│   │   └── defaults.clo
+│   ├── lang-conf.clo
+│   ├── packages.clo
+│   ├── options.clo
+│   └── (other class support files)
+│
+└── Logo/
+    ├── capa.pdf ....................... Cover background
+    ├── subcapa.pdf .................... Second cover background
+    ├── logoisel.pdf ................... ISEL logo
+    └── (other logos)
+```
+
+## Compilation Steps
+1. Ensure your .xmpdata file exists with correct metadata
+2. Compile with pdflatex:
+   $ pdflatex template.tex
+3. Run again to resolve references:
+   $ pdflatex template.tex
+4. If using bibliography, run bibtex/biber and compile again
 
 ## Getting Started
 
@@ -205,7 +259,7 @@ If you couldn't find what you were looking for, ask for help in:
 	Matilde Pós-de-Mina Pato
 	Nuno Datia (as contributor)
 
-October, 21st 2025
+October, 23rd 2025
 
 This package and template are not official for ISEL/IPL.
 

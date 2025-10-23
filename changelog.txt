@@ -20,3 +20,6 @@
 *2025-10-23 — Version 4.1.1
 + The statement will now print only in the main language of the thesis
 + Add command available in the document scope to use @ inside the tex file
+# Add template.xmpdata for the metadata file
+# Convert the template.pdf document to PDF/A-2b format
+# Delete _metadata.xmpdata file

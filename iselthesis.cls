@@ -133,6 +133,7 @@
 %% Others will be loaded later, in the file “packages.clo”
 %% And, additionaly defined by use in the file "_packages.tex"
 % --------------------------------------------------------
+
 \RequirePackage[table,svgnames]{xcolor}%
 \RequirePackage{colortbl}
 \definecolor{darkblue}{rgb}{0.0,0.08,0.45}

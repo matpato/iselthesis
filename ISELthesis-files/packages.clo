@@ -5,6 +5,19 @@
 %% Packages to be loaded
 % ============================================================
 
+% --------------------------------------------------------
+% PDF/A COMPLIANCE - Load pdfx package for PDF/A-2b conversion
+% This must be loaded BEFORE hyperref for proper PDF/A compliance
+% --------------------------------------------------------
+\PassOptionsToPackage{% 
+  , bookmarksnumbered=true%
+  , breaklinks=true%
+  , colorlinks=true%
+  , pdfdisplaydoctitle=true%
+  , unicode=true%
+}{hyperref}%
+\RequirePackage[a-2b,pdf17]{pdfx}
+
 %%%%% Configure font encoding
 \RequirePackage[T1]{fontenc}	% Use new T1 fonts
 
@@ -84,27 +97,17 @@
 %
 \usepackage[figure,table,lstlisting]{totalcount}
 
-% --------------------------------------------------------
-%% LOAD THESE PACKAGES JUST AT THE END OF THE PREAMBLE 
-%% AND BEFORE THE \BEGIN{DOCUMENT}
-% --------------------------------------------------------
+
+
 % Fixing autoref in hyperref
 \RequirePackage{ISELthesis-files/user-sty/fix-hyperref}
-
-\RequirePackage[%
-  , bookmarksnumbered=true%
-  , breaklinks=true%
-  , colorlinks=true%
-  , pdfdisplaydoctitle=true%
-  , unicode=true%
-]{hyperref}%
 \iselthesis@fixhyperref%
 % \pdfstringdefDisableCommands{%
 %   \def\\{}%
 %   \def\texttt#1{#1}%
 % }%
-\RequirePackage{bookmark}%
 
+\RequirePackage{bookmark}%
 
 % % To process the bibliography
 % % (This should be listed after the hyperref, otherwise hyperlinks in citations won't work)
