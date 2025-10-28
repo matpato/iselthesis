@@ -1277,7 +1277,7 @@
     
     {\textcolor{iselorange}{\Large\bfseries\theabstractstring(#1)}\par}%
     \vspace{1ex}%
-    \noindent\rule{\textwidth}{0.2mm} ~\\[-3.5ex]%
+    % \noindent\rule{\textwidth}{0.2mm} ~\\[-3.5ex] %% remove horizontal line
 }
 
 % --------------------------------------------------------
@@ -1287,7 +1287,7 @@
 \def\keywords{%
   \par\vskip\baselineskip\noindent{\bfseries\iselthesis@keywordsstr: }%
 }
-\def\endkeywords{~\\[2ex]\rule{\textwidth}{0.2mm}}
+% \def\endkeywords{~\\[2ex]\rule{\textwidth}{0.2mm}} %% remove horizontal line
 
 
 % --------------------------------------------------------
@@ -1344,7 +1344,7 @@
 \makepagestyle{iselthesis@mainmatter}
 \makeoddfoot{iselthesis@mainmatter}{}{\thepage}{}
 \makeevenfoot{iselthesis@mainmatter}{}{\thepage}{}
-\makeheadrule{iselthesis@mainmatter}{\textwidth}{\normalrulethickness}
+% \makeheadrule{iselthesis@mainmatter}{\textwidth}{\normalrulethickness} %% remove horizontal line
 
 
 \makepagestyle{iselthesis@frontmatter}

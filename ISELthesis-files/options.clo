@@ -216,7 +216,6 @@
   \def\iselthesis@opt@media{#1}%
 }
 
-
 % --------------------------------------------------------
 % DEFAULT OPTIONS
 % \PassOptionsToPackage{portuguese,english}{babel}
@@ -225,7 +224,7 @@
     doctype=dissertation,
     lang=en,
     coverlang=pt,
-    fontstyle=arial,
+    fontstyle=verdana,
     chapstyle=isel,
 	enc=utf8,
     otherlistsat=front,

@@ -2,7 +2,7 @@
 %% Font-Styles/scholax.ldf
 %% ISEL thesis configuration file
 %%
-%% Customization of fonts to use Linux Libertine fontset
+%% Customization of fonts to use ScholaX fontset
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \typeout{NT FILE Font-Styles/scholax.ldf}%

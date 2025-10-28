@@ -2,7 +2,7 @@
 %% Font-Styles/arial.ldf
 %% ISEL thesis configuration file
 %%
-%% Customization of fonts to use Bookman fontset
+%% Customization of fonts to use Arial fontset
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \typeout{NT FILE Font-Styles/arial.ldf}%

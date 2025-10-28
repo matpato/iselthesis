@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Font-Styles/verdana.ldf
+%% ISEL thesis configuration file
+%%
+%% This file configures DejaVu Sans as a Verdana substitute for pdfLaTeX
+%% DejaVu Sans is very similar to Verdana in appearance
+%% Compatible with pdfLaTeX, XeLaTeX, and LuaLaTeX
+%% Customization of fonts to use Verdana fontset
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Font-Styles/verdana.ldf}%
+
+\ifxeorlua{%
+  % For XeLaTeX/LuaLaTeX: Try to use real Verdana if available
+  \IfFontExistsTF{Verdana}{%
+    \setmainfont{Verdana}[
+      BoldFont       = Verdana Bold,
+      ItalicFont     = Verdana Italic,
+      BoldItalicFont = Verdana Bold Italic,
+    ]%
+  }{%
+    % Fall back to DejaVu Sans if Verdana not found
+    \setmainfont{DejaVu Sans}[
+      Scale          = 0.95,
+      BoldFont       = DejaVu Sans Bold,
+      ItalicFont     = DejaVu Sans Oblique,
+      BoldItalicFont = DejaVu Sans Bold Oblique,
+    ]%
+  }%
+}{%
+  % For pdfLaTeX: Use DejaVu Sans package
+  \RequirePackage[scaled=0.95]{DejaVuSans}%
+  \renewcommand{\familydefault}{\sfdefault}%
+}
