@@ -115,7 +115,7 @@ The _template.tex_ file contains the basic structure and all the chapter-files t
         doctype=dissertation, 
         lang=en,             
         coverlang=pt,        
-        fontstyle=kpfonts,   
+        fontstyle=verdana,   
         chapstyle=isel,    
         otherlistsat=front,   
         linkscolor=darkblue,  
