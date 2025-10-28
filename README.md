@@ -259,7 +259,7 @@ If you couldn't find what you were looking for, ask for help in:
 	Matilde Pós-de-Mina Pato
 	Nuno Datia (as contributor)
 
-October, 23rd 2025
+October, 28th 2025
 
 This package and template are not official for ISEL/IPL.
 
