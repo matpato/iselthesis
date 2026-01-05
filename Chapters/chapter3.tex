@@ -27,6 +27,8 @@ With a thesis or dissertation, the format also encompasses the names of the sect
 \item Index
 \item List of Figures
 \item List of Tables
+\item Listings
+\item List of Algorithms
 \item Nomenclature/List of Abbreviations (if exists)
 \item Glossary (if exists)
 \item Introduction
@@ -229,10 +231,30 @@ There are two different ways to place two figures/tables side-by-side.  More com
   \label{fig:figura-completa}
 \end{figure}
 
-Using the package listings you can add non-formatted text as you would do with \verb|\begin{verbatim}| but its main aim is to include the source code of any programming language within your document. If you wish to include pseudocode or algorithms see \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms_and_Pseudocode}{LaTeX/Algorithms\_ and\_Pseudocode}, as \lstlistingname ~\ref{lst:SetApp}.
+Using the package listings you can add non-formatted text as you would do with \verb|\begin{verbatim}| but its main aim is to include the source code of any programming language within your document. If you wish to include pseudo-code or algorithms see \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms_and_Pseudocode}{LaTeX/Algorithms\_ and\_Pseudocode}, as \algorithmname ~\ref{alg:cap}.
 
 %  \lstfromfile{language}{linerange}{caption}{label}{othersinsideoflstinoputlisting}{path}
 % \lstfromfile{java}{59-64}{Static method - SetApp}{SetApp}{showlines=true,morekeywords={begin,System,out,print},numbers=left, firstnumber=59}{SetApp.java}
+
+\begin{algorithm}
+\caption{An algorithm with caption}\label{alg:cap}
+\begin{algorithmic}
+\Require $n \geq 0$
+\Ensure $y = x^n$
+\State $y \gets 1$
+\State $X \gets x$
+\State $N \gets n$
+\While{$N \neq 0$}
+\If{$N$ is even}
+    \State $X \gets X \times X$
+    \State $N \gets \frac{N}{2}$  \Comment{This is a comment}
+\ElsIf{$N$ is odd}
+    \State $y \gets y \times X$
+    \State $N \gets N - 1$
+\EndIf
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
 
 \begin{minipage}{\textwidth}
 \lstset{language=R,numbers=left}
@@ -252,6 +274,7 @@ x <- c(1:100)
 y <- square(x)
 \end{lstlisting}
 \end{minipage}
+
 \section{Generating PDFs from \LaTeX~} % (fold)
 \label{sec:generating_pdfs_from_latex}
 

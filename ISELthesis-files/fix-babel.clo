@@ -20,6 +20,8 @@
   \def\listtablename{Índice de Tabelas}%
   \def\lstlistlistingname{Índice de Listagens}%
   \def\lstlistingname{Listagem}%
+  \gdef\listalgorithmname{Índice de Algoritmos}
+  \gdef\algorithmname{Algoritmo}
   \defineshorthand{"-}{\babelhyphen{repeat}}% generates a hyphen that will repeat on a new line
   \def\bibname{Referências bibliográficas}%
   \gdef\annexname{Anexo}
@@ -33,6 +35,8 @@
   \gdef\annexname{Annex}
   \gdef\annexplname{Annexes}
   \gdef\appendixplname{Appendices}
+  \gdef\listalgorithmname{List of Algorithms}
+  \gdef\algorithmname{Algorithm}%
 }
 
 

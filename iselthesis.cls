@@ -1119,18 +1119,56 @@
 \renewcommand{\printloftitle}[1]{\listtitlestyle{#1}}
 \renewcommand{\printlottitle}[1]{\listtitlestyle{#1}}
 
+
+% Configure list of algorithms to match other lists
+\AtBeginDocument{%
+  \@ifpackageloaded{algorithm}{%
+    % Redefine the list of algorithms title command
+    \renewcommand{\listalgorithmname}{List of Algorithms}%
+    % Define the formatting for algorithm entries in the list
+    \providecommand{\l@algorithm}{\@dottedtocline{1}{0em}{2.3em}}%
+  }{}%
+}
+
+% Number algorithms by chapter
+\AtBeginDocument{%
+  \@ifpackageloaded{algorithm}{%
+    \numberwithin{algorithm}{chapter}%
+  }{}%
+}
+
+% Create a wrapper for listofalgorithms with custom title styling
+\newcommand{\printlistofalgorithms}{%
+  \@ifpackageloaded{algorithm}{%
+    \cleardoublepage%
+    \begingroup%
+    % Redefine the chapter command temporarily for the list title
+    \let\oldchapter\chapter%
+    \renewcommand{\chapter}[1]{%
+      \oldchapter*{\listtitlestyle{##1}}%
+      \addcontentsline{toc}{chapter}{##1}%
+    }%
+    \listofalgorithms%
+    \let\chapter\oldchapter%
+    \endgroup%
+  }{%
+    \ClassWarning{iselthesis}{Algorithm package not loaded, skipping list of algorithms}%
+  }%
+}
+
+% Rest of your commands remain the same
 \newcommand{\iselthesis@printlist}[1]{%
-	#1\cleardoublepage%
+  #1\cleardoublepage%
 }
 
 \newcommand{\addlisttofrontmatter}[1]{%
-	\listgadd{\iselthesis@frontmatter@list}{#1}%
+  \listgadd{\iselthesis@frontmatter@list}{#1}%
 }
 
 \newcommand{\printotherlists@i}{%
-	\ifthenelse{\isundefined\iselthesis@frontmatter@list}%
+  \ifthenelse{\isundefined\iselthesis@frontmatter@list}%
     {}%
-		{\cleardoublepage%
+    {\cleardoublepage%
       \forlistloop{\iselthesis@printlist}{\iselthesis@frontmatter@list}%
     }%
   \cleardoublepage%
@@ -1138,7 +1176,7 @@
 
 \newcommand{\printotherlists}{%
   \cleardoublepage%
-   \ifthenelse{\equal{\iselthesis@opt@otherlistsat}{front}}%
+  \ifthenelse{\equal{\iselthesis@opt@otherlistsat}{front}}%
   {%
     \if@mainmatter%
     \else%
@@ -1156,6 +1194,14 @@
   {}%
 }
 
+\renewcommand{\listofalgorithms}{%
+  \cleardoublepage%
+  \phantomsection%
+  \addcontentsline{toc}{chapter}{\listalgorithmname}%
+  \listtitlestyle{\listalgorithmname}\par%  % Manual title
+  \vskip 1em%  % Add some space after title
+  \@starttoc{loa}%
+}
 
 \newcommand{\iselthesis@loadallfiles}[2]{\optionlistdo{/@nc/file/#2/#1}{\iselthesisloadfile@i{##1}}}
 
