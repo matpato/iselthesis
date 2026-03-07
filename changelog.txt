@@ -28,3 +28,16 @@
 + Change font style to verdana
 *2026-01-05 — Version 4.1.3
 + Add algorithms and pseudo-code index
+*2026-03-07 — Version 4.2
++ Added conditional specialization area in dissertationstr(msc,pt): "na Área de Especialização de" is now only printed when \ncspecialization is defined
++ Fixed whitespace before comma between major field and specialization using \unskip
++ Fixed date separator to be language-aware: uses "of" for English (coverlang=en) and "de" for Portuguese, with {} to prevent command absorbing spaces
++ Added gender-aware pronoun for document type: "este" for project, "esta" otherwise, based on \iselthesis@opt@doctype
++ Updated \input{Config/_department} to \input{Config/_institution}
++ Added \iselthesis@setcourse{} command to set course-specific data
+  (major field, department, cover images) from a single acronym
++ Removed \ncdepartment, and \ncmajorfield definitions, now handled automatically by \iselthesis@setcourse{} in _cover.tex
++ Retained only fixed institutional data (university and school names)  
++ Include logo for Biomedical Master degree
++ Added \dateday command to allow specifying the day of the month,
+  used in the agreement/statement page signature date

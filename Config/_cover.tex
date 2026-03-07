@@ -1,82 +1,79 @@
-% %!TEX root = ../template.tex
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %% Config/_cover.tex
-% %% ISEL thesis configuration file
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%!TEX root = ../template.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Config/_cover.tex
+%% ISEL thesis configuration file
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \typeout{NT FILE Config/_cover.tex}%
-
 %%==================================================================
- %%  THESIS/DISSERTATION COVER DATA
+%%  THESIS/DISSERTATION COVER DATA
 %%==================================================================
-
 % -------------------------------------------------------------------
 % AUTHOR customization
-%     Author gender, full name, abd abbreviated name
 % SYNTAX: \ncauthorname(gender){full name}{abbreviated name}
-%          Use [f] for female and [m] for male
+%         Use [f] for female and [m] for male
 % -------------------------------------------------------------------
-%%% IMPORTANT: The cover must be written in Portuguese. All information must be presented in Portuguese. Any content presented in English must be translated to comply with the rules defined by ISEL's CTC. %%% 
-
+%%% IMPORTANT: The cover must be written in Portuguese. %%%
 \ncauthorname(m){John Very Longname Doe}{John Doe}
 
 % -------------------------------------------------------------------
-% AUTHOR previous degree
-% SYNTAX: \ncauthordegree{degree}
+% COURSE SELECTION
+% Available acronyms: meic, meb, meec, ...
+% Sets: major field (pt/en), department and cover images automatically
 % -------------------------------------------------------------------
+\iselthesis@setcourse{meic}
 
+% -------------------------------------------------------------------
+% SPECIALIZATION AREA (optional - comment out if not applicable)
+% SYNTAX: \ncspecialization(lang){specialization area}
+% -------------------------------------------------------------------
+% \ncspecialization(pt){Sistemas de Informação}
+% \ncspecialization(en){Information System}
+
+% -------------------------------------------------------------------
+% AUTHOR previous degree
+% SYNTAX: \ncauthordegree(lang){degree}
+% -------------------------------------------------------------------
 \ncauthordegree(en){Graduated} 
 \ncauthordegree(pt){Licenciado}
 
 % -------------------------------------------------------------------
-
-% Thesis/Dissertation title (valid for all languages unless redefined as below)
+% Thesis/Dissertation title
 % SYNTAX: \nctitle(type,lang){title}
-%         For [type] use: [main]  for main title
-%                         [sub]   for sub-title
-%                         [spine] for a book spine version of the title
-%                                 (if omitted defaults to main title without line breaks)
+%         [type]: [main] for main title
+%                 [spine] for book spine version (defaults to main if omitted)
+% You may use "\\" to force line breaks
 % -------------------------------------------------------------------
-
-%        You may use "\\" to force line breaks
-% -------------------------------------------------------------------
-
-% Just a heads-up: at ISEL, we don't translate dissertation names, so I'd suggest keeping it in the original language.
-\nctitle(main,en){Master Thesis Title, Project Work or Internship Report}%
-\nctitle(main,pt){Master Thesis Title, Project Work or Internship Report}%
+\nctitle(main,en){Master Thesis Title, Project Work or Internship Report}
+\nctitle(main,pt){Master Thesis Title, Project Work or Internship Report}
 
 % -------------------------------------------------------------------
 % SUBMISSION DATE
 % -------------------------------------------------------------------
-
-\datemonth{Junho}
+\dateday{21}
+\datemonth{Julho}
 \dateyear{2025}
 
 % -------------------------------------------------------------------
-% ADVISER LIST customization
-%     Adviser's gender, full name, position and school
-% SYNTAX: \ncmember(role,gender){Position & Full Name}{Affiliation} 
-%         For [role] use:   [a] for adviser
-%         For [gender] use: [f] for female and [m] for male
-% use "\\&" if necessary to break the lines in the apprpriate place
-\ncmember(a,f){Prof. Doutor Elisabeth Adviser Name Doe}{ Affiliation} 
-% % you may use "\newline" to force a new line
-\ncmember(a,m){Prof. Doutor John Adviser Name Doe Male}{ Some University Somewhere}
-%\ncmember(a,m){Prof. Doutor John Doe Third Adviser Name}{Some University}
+% ADVISER LIST
+% SYNTAX: \ncmember(role,gender){Position & Full Name}{Affiliation}
+%         [role]:   [a] for adviser
+%         [gender]: [f] for female and [m] for male
+% -------------------------------------------------------------------
+\ncmember(a,f){Prof. Doctor Elisabeth Adviser Name Doe}{Affiliation}
+\ncmember(a,m){Prof. Doctor John Adviser Name Doe Male}{Some University Somewhere}
 
 % -------------------------------------------------------------------
 % COMMITTEE MEMBERS (maximum of 3 elements)
-% SYNTAX: \ncmember(role,gender){Position & Full Name}{School}
-%         For [role] use: [c] for committee chair
-%                         [r] for rapporteurs and one adviser
-%         For [gender] use: [f] for female and [m] for male
-% You may use "\\" to force line breaks
-% President of the committee
+% SYNTAX: \ncmember(role,gender){Position & Full Name}{Affiliation}
+%         [role]: [c] for committee chair
+%                 [r] for rapporteur (include one adviser here)
+%         [gender]: [f] for female and [m] for male
+% -------------------------------------------------------------------
 \ncmember(c,m){Prof. Doutor John Committee Chairperson Name Doe Male}{Some University}
-% Main Raporteur and include one Adviser in this list
 \ncmember(r,m){Prof. Doutor John Raporteur Name Doe Name}{Some University}
 \ncmember(r,f){Prof. Doutor Elisabeth Adviser Name Doe}{Some University}
 
-
-% INCLUDE IMAGE. ADD FILE IN CHAPTERS-> IMG
+% -------------------------------------------------------------------
+% COVER IMAGE (file must be in Chapters/img/)
+% -------------------------------------------------------------------
 \workimage{phdcomics}

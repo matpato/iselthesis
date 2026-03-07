@@ -1,17 +1,18 @@
-% 
-%  chapter2.tex
-%  ISELthesis
-%  
-%  Created by Matilde Pós-de-Mina Pato on 2012/10/09.
-%
+% % 
+% %  chapter2.tex
+% %  ISELthesis
+% %  
+% %  Created by Matilde Pós-de-Mina Pato on 2012/10/09.
+% %
 \chapter{ISELthesis Users Manual}
 \label{cha:users_manual}
 
-% ================
-% = Introduction =
-% ================
+% % ================
+% % = Introduction =
+% % ================
 \section{Introduction} % (fold)
 \label{sec:introduction}
+
 
 This chapter describes how to use the \LaTeX~ style \texttt{thesis{}}. This style file is a major rewrite from the most of Universities, which was in turn adapted from a style file from the FCT-UNL \cite{novathesis-manual}.  We aimed at providing an improved visual layout and, simultaneously, a \emph{very easy to use} template (aka, a  \LaTeX~ template for dummies). 
 
@@ -41,7 +42,7 @@ The template file for writing dissertations in  \LaTeX~ is organised into a main
         \item[Config] Identify the directory where you will customise your content, including setting up chapters, appendices and appendices, and entering any personal information:
 		\begin{enumerate}
 		\item \textbf{\_cover.tex} Configure the contents of the cover: e.g. title of the thesis, author's name, names of committee members (including supervisor), date and figure;
-		\item \textbf{\_department.tex} Configure school and department content: e.g. school name, department, major, etc;
+		\item \textbf{\_institution.tex} Fixed institutional data (university and school names). Only change this file if you are \textbf{not} from ISEL;
         \item \textbf{\_files.tex} Select the files for chapters, appendices, annexes, abstracts, glossaries, etc;
         \item \textbf{\_packages.tex} User customisation. Load additional packages and define your own commands to be used throughout the documentation.
 		\end{enumerate}
@@ -64,7 +65,7 @@ Again, we would like to recall that all the user \LaTeX~ files should be stored 
 \section{Package Options} % (fold)
 \label{sec:package_options}
 
-The thesis style includes the following options (see \tablename~\ref{tab:vardescription}), that must be included in the options list in the \verb|\documentclass[options]| line at the top of the \texttt{template.tex} file.
+The thesis style includes the following options (see \tablename~\ref{tab:vardescription}), that must be included in the options list in the \texttt{\textbackslash documentclass[options]} line at the top of the \texttt{template.tex} file.
 
 The list below aggregates related options in a single item. For each list, the default value is prefixed with a asterisk (*).
 
@@ -89,7 +90,7 @@ The list below aggregates related options in a single item. For each list, the d
 docdegree   &  \textbf{Document degree}: Master -- msc(*), Preparation of Master -- mscprep and Bachelor -- bsc degree. \\ \midrule
 doctype & \textbf{Type of document}: dissertation(*) or project. \\ \midrule
 lang    &  \textbf{The main language for the document}: English -- en(*) and Portuguese -- pt.  \\  \midrule
-coverlang   &  \textbf{The language to be used when typesetting the cover page}: Portuguese by default.  \\  \midrule
+coverlang   &  \textbf{The language to be used when typesetting the cover page}: English -- en(*) and Portuguese -- pt.   \\  \midrule
 fontstyle & \textbf{The font set to be used in the document}: baskervaldx bookman charter ebgaramond fbb fourier garamond heuristica kpfonts libertine mathpazo1 mathpazo2 newcent newpx newtx verdana(*) \\  \midrule
 chapstyle   & \textbf{The chapter style to be used in the document}: bianchi bluebox brotherton dash default elegant ell ger hansen isel(*) jenor lyhne madsen pedersen veelo vz14 vz34 vz43  \\  \midrule
 otherlistsat &   \textbf{Place where to put the other lists besides the table of contents}: front(*) and back. \\  \midrule
@@ -100,7 +101,7 @@ memoir  & \textbf{Customize the base class} \href{https://ctan.math.illinois.edu
 media  & \textbf{The target of the PDF}: screen(*) or paper.\\
 \bottomrule
 \end{xltabular}
-% 
+
 	
 \subsection{Language Related Options} % (fold)
 \label{sub:language_related_options}
@@ -119,7 +120,7 @@ The language option affects:
 	\item \textbf{The type of documents in the bibliography.} E.g., 'Technical Report' vs.\ 'Relatório Técnico', 'MSc Thesis' vs.\ 'Tese de Mestrado', etc.
 \end{itemize} 
 
-No mater which language you chose, you will always have the appropriate hyphenation rules according to the language at that point. You always get portuguese hyphenation rules in the 'Resumo', english hyphenation rules in the 'Abstract', and then the main language hyphenation rules for the rest of the document. If you need to force hyphenation write inside of \verb!\hyphenation{}! the hyphenated word, e.g. \\
+No mater which language you chose, you will always have the appropriate hyphenation rules according to the language at that point. You always get portuguese hyphenation rules in the 'Resumo', english hyphenation rules in the 'Abstract', and then the main language hyphenation rules for the rest of the document. If you need to force hyphenation write inside of \verb!\hyphenation{}! the hyphenated word, e.g. \\ 
 \verb!\hyphenation{op-ti-cal net-works}!.
 % section package_options (end)
 
@@ -182,17 +183,18 @@ Let's have a look at a couple of examples:
 
 \begin{itemize}
 	\item BSc graduation report, in portuguese, considering printing on screen)\\
-	\verb!documentclass[docdegree=bsc, lang=pt, media=screen]{iselthesis}!
-	\item Preparation of MSc thesis, in portuguese, with link color equal to black (I wonder why one would do this!). Note that, \verb!pt! is declared by default, so it can be omitted: \\
-	\verb!\documentclass[docdegree=mscprep, lang=pt, linkcolor=black]{iselthesis}!
+ 	\verb!documentclass[docdegree=bsc, lang=pt, media=screen]{iselthesis}!
+ 	\item Preparation of MSc thesis, in portuguese, with link color equal to black (I wonder why one would do this!). Note that, \verb!pt! is declared by default, so it can be omitted: \\
+	\verb!documentclass[docdegree=mscprep, lang=pt, linkcolor=black]{iselthesis}!
 	\item MSc's project, in english and to be printed single sided on screen. Note that, \verb!twoside! and \verb!12pt! are declared by default, so it can be omitted: \\
-	\verb!\documentclass[docdegree=msc, doctype=project, lang=en, media=screen]{iselthesis}!
+	\verb!documentclass[docdegree=msc, doctype=project, lang=en,!\\
+    \verb!media=screen]{iselthesis}!
 \end{itemize}
 
 
 The present document is defined according to the following settings:
 \begin{Verbatim}[breaklines=true, breakanywhere=true]
-\documentclass[
+documentclass[
   docdegree=msc,        % msc(*), mscprep, bsc
   doctype=dissertation, % dissertation(*), project
   lang=pt,              % en, pt(*)

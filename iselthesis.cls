@@ -477,21 +477,22 @@
     \thecopyrighttextstring(\iselthesis@opt@lang)%
 }
 % --------------------------------------------------------
-%% DEFINITIONS OF YEAR AND MONTH
+%% DEFINITIONS OF YEAR, MONTH AND DAY
 % --------------------------------------------------------
 % Date and month
+\newcommand{\thedateday}{~dateday \iselthesis@undefined}
 \newcommand{\thedatemonth}{~datemonth \iselthesis@undefined}
 \newcommand{\thedateyear}{~dateyear \iselthesis@undefined}
 
-\newcommand{\datemonth}[1]{\renewcommand{\thedatemonth}{
-     \IfInteger{#1}{\pgfcalendarmonthname{#1}}{#1}
+\newcommand{\dateday}[1]{\renewcommand{\thedateday}{#1}}
+\newcommand{\datemonth}[1]{\renewcommand{\thedatemonth}{%
+     \IfInteger{#1}{\pgfcalendarmonthname{#1}}{#1}%
      }}
 \newcommand{\dateyear}[1]{\renewcommand{\thedateyear}{#1}}
 
 % --------------------------------------------------------
 %% DEFINITIONS FOR THE REMINDER OF CUSTOMIZATION STUFF
 % --------------------------------------------------------
-
 \def\ncfield#1{\@ifstar{\iselthesisfieldifundef{#1}}{\iselthesisfield{#1}}}
 \def\iselthesisfieldifundef#1(#2)#3{\ifdatadefined{#1}(#2){}{\iselthesisfield{#1}(#2){#3}}}
 \def\iselthesisfield#1(#2)#3{\csname #1\endcsname(#2):={#3}}
@@ -1339,7 +1340,7 @@
 % --------------------------------------------------------
 %% Table of contents
 % --------------------------------------------------------
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{1}
 % --------------------------------------------------------
 %% Sectioning
 % --------------------------------------------------------
@@ -1392,7 +1393,6 @@
 \makeevenfoot{iselthesis@mainmatter}{}{\thepage}{}
 % \makeheadrule{iselthesis@mainmatter}{\textwidth}{\normalrulethickness} %% remove horizontal line
 
-
 \makepagestyle{iselthesis@frontmatter}
 \makeoddfoot{iselthesis@frontmatter}{}{\thepage}{}
 \makeevenfoot{iselthesis@frontmatter}{}{\thepage}{}
@@ -1408,25 +1408,30 @@
 % LOADING CUSTOMIZATION STUFF - part 2
 % --------------------------------------------------------
 
-% --------------------------------------------------------
-%  THESIS/DISSERTATION COVER DATA (title, author, etc)
-%   Please open and edit the appropriate
-%   configuration file “Config/_cover.tex”
-% --------------------------------------------------------
-\input{Config/_cover}
 \addbibfile{ISELthesis-files/manual-bib} 
 % --------------------------------------------------------
 %  THESIS/DISSERTATION FILES
 %   Please open and edit the appropriate
-%   configuration file “Config/4_files.tex”
+%   configuration file “Config/_files.tex”
 % --------------------------------------------------------
 \input{Config/_files}
 
 % --------------------------------------------------------
 %  UNIVERSITY/SCHOOL SPECIFIC MATERIALS
-%  configuration file “Config/_department.tex”
+%  configuration file “Config/_institution.tex”
 % --------------------------------------------------------
-\input{Config/_department}
+\input{Config/_institution}
+
+% --------------------------------------------------------
+%  COURSE DEFINITIONS
+%  All known courses and their associated data
+% --------------------------------------------------------
+\InputIfFileExists{ISELthesis-files/Default/courses.clo}{}{}
+
+% --------------------------------------------------------
+%  THESIS/DISSERTATION COVER DATA (title, author, etc)
+% --------------------------------------------------------
+\input{Config/_cover}
 
 % --------------------------------------------------------
 % ADDITIONAL PACKAGES and MACROS

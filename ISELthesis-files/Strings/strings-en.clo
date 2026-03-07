@@ -16,13 +16,12 @@
 \statementstring(en):={Statement of integrity}
 
 %% Degree 
-\degreestr(bsc,pt):={Bacherol}
-\degreestr(msc,m,en):={Master's}
-\degreestr(msc,f,en):={Master's}
-\degreestr(mscprep,m,en):={Master's}
-\degreestr(mscprep,f,en):={Master's}
-\degreestr(bsc,m,en):={Bachelor's}
-\degreestr(bsc,f,en):={Bachelor's}
+\degreestr(msc,m,en):={MSc}
+\degreestr(msc,f,en):={MSc}
+\degreestr(mscprep,m,en):={MSc}
+\degreestr(mscprep,f,en):={MSc}
+\degreestr(bsc,m,en):={BSc}
+\degreestr(bsc,f,en):={BSc}
 
 % Dissertation type
 \doctypestr(bsc,en):={Project}
@@ -42,10 +41,10 @@
 \committeestr(r,1,f,en):={Raporteur}
 \committeestr(r,2,m,en):={Raporteurs}
 \committeestr(r,2,f,en):={Raporteurs}
-\committeestr(a,1,m,en):={Adviser}
-\committeestr(a,1,f,en):={Adviser}
-\committeestr(a,2,m,en):={Advisers}
-\committeestr(a,2,f,en):={Advisers}
+\committeestr(a,1,m,en):={Supervisor}
+\committeestr(a,1,f,en):={Supervisor}
+\committeestr(a,2,m,en):={Supervisors}
+\committeestr(a,2,f,en):={Supervisors}
 
 % --------------------------------------------------------
 %% Dissertation degree
@@ -57,12 +56,24 @@
 in \themajorfield(\iselthesis@opt@coverlang)}
 
 %% MSc thesis plan
-\dissertationstr(mscprep,en)={\thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) plan submitted in partial fulfillment of the requirements for the degree of\\[1.25ex]%
-\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~in \themajorfield(\iselthesis@opt@coverlang)}
+\dissertationstr(mscprep,en)={%
+    \thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) plan submitted in partial fulfillment of the requirements for the degree of \\[1.25ex]%
+    \thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~in% 
+    \themajorfield(\iselthesis@opt@coverlang)%
+    \ifdatadefined{specialization}(\iselthesis@opt@coverlang){%
+    , in the Area of Specialization of \thespecialization(\iselthesis@opt@coverlang)%
+  }{}%
+}
 
 %% MSc thesis 
-\dissertationstr(msc,en)={\thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) submitted in partial fulfillment of the requirements for the degree of\\[1.25ex]%
-\thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~in \themajorfield(\iselthesis@opt@coverlang)}
+\dissertationstr(msc,en)={%
+    \thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) submitted to obtain the 
+    \thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang) degree~in\\[1.25ex]%   
+    \themajorfield(\iselthesis@opt@coverlang)%
+    \ifdatadefined{specialization}(\iselthesis@opt@coverlang){%
+    , in the Area of Specialization of \thespecialization(\iselthesis@opt@coverlang)%
+  }{}%
+}
 
 % --------------------------------------------------------
 %% Acknowledgment
@@ -71,4 +82,4 @@ in \themajorfield(\iselthesis@opt@coverlang)}
 \copyrighttextstring(en)={The \theschool(en) and the \theuniversity(en) have the right, perpetual and without geographical boundaries, to file and publish this dissertation through printed copies reproduced on paper or on digital form, or by any other means known or that may be invented, and to disseminate through scientific repositories and admit its copying and distribution for non-commercial, educational or research purposes, as long as credit is given to the author and editor.}
 
 
-\acknowledgmentsstring(en)={This document was created using the (pdf)\LaTeX\ processor, based in the “iselthesis” template \cite{iselthesis}, developed at the DEETC of ISEL-IPL.}
+\acknowledgmentsstring(en)={This document was created using the (pdf)\LaTeX\ processor, based in the “iselthesis” template \cite{iselthesis}, developed at the DEI of ISEL-IPL.}

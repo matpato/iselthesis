@@ -1,0 +1,117 @@
+% ============================================================
+%% courses.clo
+%% ISEL thesis configuration file
+%%
+%% CUSTOMIZATION for ISEL-IPL (masters courses available)
+% ============================================================
+% courses.clo
+\newcommand{\iselthesis@setcourse}[1]{%
+  \ifthenelse{\equal{#1}{meb}}{%
+    \ncmajorfield(pt){Engenharia Biomédica}%
+    \ncmajorfield(en){Biomedical Engineering}%
+    \ncdepartment(pt){Departamento de Engenharia Química}%
+    \ncdepartment(en){Department of Chemical Engineering}%
+    \thesiscover(msc,background):={capa-biomedica}%
+    \thesiscover(msc,background2):={subcapa-biomedica}%
+  }{%
+  \ifthenelse{\equal{#1}{mec}}{%
+    \ncmajorfield(pt){Engenharia Civil}%
+    \ncmajorfield(en){Civil Engineering}%
+    \ncdepartment(pt){Departamento de Engenharia Civil}%
+    \ncdepartment(en){Department of Civil Engineering}%
+    Civil Engineering
+    \thesiscover(msc,background):={capa}%
+    \thesiscover(msc,background2):={subcapa}%
+  }{%
+  \ifthenelse{\equal{#1}{mee}}{%
+    \ncmajorfield(pt){Engenharia Eletrotécnica}%
+    \ncmajorfield(en){Electrical Engineering}%
+    \ncdepartment(pt){Engenharia Eletrotécnica de Energia e Automação}%
+    \ncdepartment(en){Department of Electrical, Energy and Automation Engineering}%
+    \thesiscover(msc,background):={capa}%
+    \thesiscover(msc,background2):={subcapa}%
+  }{%
+ \ifthenelse{\equal{#1}{meet}}{%
+    \ncmajorfield(pt){Engenharia de Eletrónica e Telecomunicações}%
+    \ncmajorfield(en){Electronics and Telecommunications Engineering}%
+    \ncdepartment(pt){Departamento de Engenharia Eletrónica e Telecomunicações e de Computadores}%
+    \ncdepartment(en){Department of Electronics, Telecommunications and Computer Engineering}%
+    \thesiscover(msc,background):={capa}%
+    \thesiscover(msc,background2):={subcapa}%
+  }{%  
+  \ifthenelse{\equal{#1}{meic}}{%
+    \ncmajorfield(pt){Engenharia Informática e de Computadores}%
+    \ncmajorfield(en){Computer Science and Engineering}%
+    \ncdepartment(pt){Departamento de Engenharia Informática}%
+    \ncdepartment(en){Department of Computer Science and Engineering}%
+    \thesiscover(msc,background):={capa}%
+    \thesiscover(msc,background2):={subcapa}%
+  }{%
+  \ifthenelse{\equal{#1}{meim}}{%
+    \ncmajorfield(pt){Engenharia Informática e Multimédia}%
+    \ncmajorfield(en){Informatics and Multimedia Engineering}%
+    \ncdepartment(pt){Departamento de Engenharia Informática}%
+    \ncdepartment(en){Department of Computer Science and Engineering}%
+    \thesiscover(msc,background):={capa}%
+    \thesiscover(msc,background2):={subcapa}%
+  }{%
+  \ifthenelse{\equal{#1}{mmai}}{%
+    \ncmajorfield(pt){Matemática Aplicada para a Indústria}%
+    \ncmajorfield(en){Applied Mathematics for Industry}%
+    \ncdepartment(pt){Departamento de Matemática}%
+    \ncdepartment(en){Department of Mathematics}%
+    \thesiscover(msc,background):={capa}%
+    \thesiscover(msc,background2):={subcapa}%
+  }{%
+  \ifthenelse{\equal{#1}{megi}}{%
+    \ncmajorfield(pt){Engenharia e Gestão Industrial}%
+    \ncmajorfield(en){Industrial Engineering and Management}%
+    \ncdepartment(pt){Departamento de Engenharia Mecânica}%
+    \ncdepartment(en){Department of Mechanical Engineering}%
+    \thesiscover(msc,background):={capa}%
+    \thesiscover(msc,background2):={subcapa}%  
+  }{%
+  \ifthenelse{\equal{#1}{mem}}{%
+    \ncmajorfield(pt){Engenharia Mecânica}%
+    \ncmajorfield(en){Mechanical Engineering}%
+    \ncdepartment(pt){Departamento de Engenharia Mecânica}%
+    \ncdepartment(en){Department of Mechanical Engineering}%
+    \thesiscover(msc,background):={capa}%
+    \thesiscover(msc,background2):={subcapa}%    
+  }{%
+  \ifthenelse{\equal{#1}{meqa}}{%
+    \ncmajorfield(pt){Engenharia da Qualidade e Ambiente}%
+    \ncmajorfield(en){Quality and Environmental Engineering}%
+    \ncdepartment(pt){Departamento de Engenharia Química}%
+    \ncdepartment(en){Department of Chemical Engineering}%
+    \thesiscover(msc,background):={capa}%
+    \thesiscover(msc,background2):={subcapa}%  
+  }{%
+  \ifthenelse{\equal{#1}{meqb}}{%
+    \ncmajorfield(pt){Engenharia Química e Biológica}%
+    \ncmajorfield(en){Chemical and Biological Engineering}%
+    \ncdepartment(pt){Departamento de Engenharia Química}%
+    \ncdepartment(en){Department of Chemical Engineering}%
+    \thesiscover(msc,background):={capa}%
+    \thesiscover(msc,background2):={subcapa}%    
+  }{%
+  \ifthenelse{\equal{#1}{meec}}{%
+    \ncmajorfield(pt){Engenharia Eletrónica e de Computadores}%
+    \ncmajorfield(en){Electronics and Computer Engineering}%
+    \thesiscover(msc,background):={capa}%
+    \thesiscover(msc,background2):={subcapa}%
+  }{% else - unknown course
+    \ClassWarning{iselthesis}{Unknown course acronym '#1'. Please define it in courses.clo}%
+  }% close meec
+  }% close meqb
+  }% close meqa
+  }% close mem
+  }% close megi
+  }% close mmai
+  }% close meim
+  }% close meic
+  }% close meet
+  }% close mee
+  }% close mec
+  }% close meb
+}% close \newcommand

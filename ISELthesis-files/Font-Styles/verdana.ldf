@@ -29,6 +29,9 @@
   }%
 }{%
   % For pdfLaTeX: Use DejaVu Sans package
-  \RequirePackage[scaled=0.95]{DejaVuSans}%
-  \renewcommand{\familydefault}{\sfdefault}%
+  % \RequirePackage[scaled=0.95]{DejaVuSans}%
+  % \renewcommand{\familydefault}{\sfdefault}%
+  \usepackage[T1]{fontenc}
+  % \usepackage[windowsfont]{verdana}
+  \fontfamily{vna}\selectfont
 }

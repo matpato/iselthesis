@@ -17,14 +17,24 @@
 \thesiscover(bsc,textcolor):={black}
 
 % Cover background images 
-\thesiscover(msc,background):={capa}
+% NOTE: msc backgrounds are set per course in ISELthesis-files/courses.clo
+%       via \iselthesis@setcourse{} in Config/_cover.tex
 \thesiscover(mscprep,background):={capa}
 \thesiscover(bsc,background):={subcapa}
 \thesiscover(plain,background):={}
 % Second cover background image
-\thesiscover(msc,background2):={subcapa}
+\thesiscover(msc,background2):={subcapa}% fallback if course not set
 \thesiscover(mscprep,background2):={}
 \thesiscover(bsc,background2):={}
+
+% \thesiscover(msc,background):={capa}
+% \thesiscover(mscprep,background):={capa}
+% \thesiscover(bsc,background):={subcapa}
+% \thesiscover(plain,background):={}
+% % Second cover background image
+% \thesiscover(msc,background2):={subcapa}
+% \thesiscover(mscprep,background2):={}
+% \thesiscover(bsc,background2):={}
 
 % Comiittee printing order
 \committeeorder(all):={c,r}% 
@@ -88,12 +98,10 @@
 \renewcommand{\@pnumwidth}{2em}
 
 % Espaçamento entre entradas na ToC
-% \setlength{\cftbeforesectionskip}{2mm}
-% \setlength{\cftbeforesubsectionskip}{2mm}
-% \setlength{\cftbeforefigureskip}{2mm}
-% \setlength{\cftbeforelistingskip}{2mm}
-% \setlength{\cftbeforetableskip}{2mm}
-
+\setlength{\cftbeforesectionskip}{0.5em}
+\setlength{\cftbeforesubsectionskip}{0.5em}
+\setlength{\cftbeforefigureskip}{0.5em}
+\setlength{\cftbeforetableskip}{0.5em}
 
 % Define source of section, subsection, etc…
 \newbox\s@ch@@ghtb@x
@@ -172,9 +180,13 @@
   \ifdraftdoc%
     \textbf{DRAFT: \today}%
   \else%
-    \textbf{\thedatemonth \thedateyear}%
+    \ifthenelse{\equal{\iselthesis@opt@coverlang}{en}}{%
+    \textbf{\thedatemonth{}of{ }\thedateyear}%
+   }{%
+   \textbf{\thedatemonth{}de{ }\thedateyear}%
+    }%
   \fi%
-}(cover) 
+}(cover)
 
 
 % --------------------------------------------------------
@@ -263,7 +275,10 @@
   \ifdraftdoc%
     \textbf{DRAFT: \today}%
   \else%
-    \textbf{\thedatemonth \thedateyear}%
+    \ifthenelse{\equal{\iselthesis@opt@coverlang}{en}}{%
+    \textbf{\thedatemonth{}of{ }\thedateyear}%
+   }{%
+   \textbf{\thedatemonth{}de{ }\thedateyear}%
+    }%
   \fi%
 }(secondcover)
-
