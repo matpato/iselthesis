@@ -53,12 +53,12 @@
 %% BSc thesis
 \dissertationstr(bsc,en)={Report submitted in partial fulfillment of the requirements for the degree of
 \thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~ \\[1.25ex]%
-in \themajorfield(\iselthesis@opt@coverlang)}
+in{ }\themajorfield(\iselthesis@opt@coverlang)}
 
 %% MSc thesis plan
 \dissertationstr(mscprep,en)={%
     \thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) plan submitted in partial fulfillment of the requirements for the degree of \\[1.25ex]%
-    \thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~in% 
+    \thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~in{ }% 
     \themajorfield(\iselthesis@opt@coverlang)%
     \ifdatadefined{specialization}(\iselthesis@opt@coverlang){%
     , in the Area of Specialization of \thespecialization(\iselthesis@opt@coverlang)%
@@ -68,7 +68,7 @@ in \themajorfield(\iselthesis@opt@coverlang)}
 %% MSc thesis 
 \dissertationstr(msc,en)={%
     \thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) submitted to obtain the 
-    \thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang) degree~in\\[1.25ex]%   
+    \thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang) degree~in{ }\\[1.25ex]%   
     \themajorfield(\iselthesis@opt@coverlang)%
     \ifdatadefined{specialization}(\iselthesis@opt@coverlang){%
     , in the Area of Specialization of \thespecialization(\iselthesis@opt@coverlang)%

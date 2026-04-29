@@ -224,7 +224,7 @@
     doctype=dissertation,
     lang=en,
     coverlang=pt,
-    fontstyle=verdana,
+    fontstyle=Verdana,
     chapstyle=isel,
 	enc=utf8,
     otherlistsat=front,

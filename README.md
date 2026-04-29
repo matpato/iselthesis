@@ -69,12 +69,11 @@ Your Overleaf Project/
 ├── Config/
 │   ├── _cover.tex ..................... Your author/title here
 │   ├── _files.tex ..................... Chapter list
-│   ├── _institution.tex ............... University info
+│   ├── _department.tex ................ Department info
 │   └── _packages.tex .................. Custom packages
 │
 ├── ISELthesis-files/
 │   ├── Default/
-│   │   ├── courses.clo
 │   │   └── defaults.clo
 │   ├── lang-conf.clo
 │   ├── packages.clo
@@ -115,7 +114,7 @@ The _template.tex_ file contains the basic structure and all the chapter-files t
         docdegree=msc,       
         doctype=dissertation, 
         lang=en,             
-        coverlang=en,        
+        coverlang=pt,        
         fontstyle=verdana,   
         chapstyle=isel,    
         otherlistsat=front,   

@@ -49,12 +49,12 @@
 % Set margins for "normal" pages
 \margin(screen,top)={2.5cm}
 \margin(screen,bottom)={2.5cm}
-\margin(screen,left)={3.0cm}
-\margin(screen,right)={3.0cm}
-\margin(paper,top)={3.5cm}
+\margin(screen,left)={2.5cm}
+\margin(screen,right)={2.5cm}
+\margin(paper,top)={2.5cm}
 \margin(paper,bottom)={2.5cm}
 \margin(paper,left)={2.5cm}
-\margin(paper,right)={3.5cm}
+\margin(paper,right)={2.5cm}
 
 % Set margins for cover pages
 \margin(msc,top)={2.0cm}
@@ -90,9 +90,10 @@
 \frenchspacing
 
 % Remove paragraph indentation
-\setlength{\parskip}{.25\baselineskip}%
-\setlength{\parindent}{0pt}%
-
+% No extra spacing between paragraphs, 16pt indent
+\setlength{\parskip}{0pt}% .25\baselineskip
+\setlength{\parindent}{16pt}% 0pt
+\OnehalfSpacing  % already set in the class, confirm it stays
 
 % Fix space for pages with Roman numbering in the ToC
 \renewcommand{\@pnumwidth}{2em}
@@ -108,27 +109,33 @@
 \setbox\s@ch@@ghtb@x=\hbox{{\normalfont\Huge A}}
 \font\p@rtnamfont=cmbr8 at 13mm % computer modern bright
 \font\s@cnamfont=cmbr10 at \ht\s@ch@@ghtb@x % computer modern bright
-\renewcommand\section{\@startsection {section}{1}{0pt}%
-                                   {-3.5ex plus -0.5ex minus -.2ex}%
-                                   {2.3ex \@plus.2ex}%
-                                   %{\s@cnamfont}
-                                   {\color{iselpurple}\normalfont\Large\bfseries}}
+
+% Section: bold, 12pt, beringela (#5f1437 = iselpurple), Verdana
+\renewcommand\section{\@startsection{section}{1}{0pt}%
+  {-3.5ex plus -0.5ex minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\sffamily\bfseries\fontsize{12}{14}\selectfont\color{iselpurple}}}
+
+% Subsection: bold, 11pt, beringela, Verdana
 \renewcommand\subsection{\@startsection{subsection}{2}{0pt}%
-                                     {-2.5ex plus -0.5ex minus -.2ex}%
-                                     {1.5ex \@plus .2ex}%
-                                     {\normalfont\large\bfseries}}
+  {-2.5ex plus -0.5ex minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\sffamily\bfseries\fontsize{11}{13}\selectfont\color{iselpurple}}}
+
+% Subsubsection: bold, 11pt, beringela, Verdana (same level of subsection)
 \renewcommand\subsubsection{\@startsection{subsubsection}{3}{0pt}%
-                                     {-2.5ex plus -0.5ex minus -.2ex}%
-                                     {1.5ex \@plus .2ex}%
-                                     {\normalfont\normalsize\bfseries}}
+  {-2.5ex plus -0.5ex minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\sffamily\bfseries\fontsize{11}{13}\selectfont\color{iselpurple}}}
+
 \renewcommand\paragraph{\@startsection{paragraph}{4}{0pt}%
-                                    {0.25ex plus 0.5ex minus.2ex}%
-                                    {-1em}%
-                                    {\normalfont\normalsize\bfseries}}
+  {0.25ex plus 0.5ex minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
 \renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
-                                       {0.25ex plus 0.5ex minus .2ex}%
-                                       {-1em}%
-                                      {\normalfont\normalsize\bfseries}}
+   {0.25ex plus 0.5ex minus .2ex}%
+   {-1em}%
+   {\normalfont\normalsize\bfseries}}
 
 % --------------------------------------------------------
 %% Draw the cover page: COVER 1
@@ -181,9 +188,9 @@
     \textbf{DRAFT: \today}%
   \else%
     \ifthenelse{\equal{\iselthesis@opt@coverlang}{en}}{%
-    \textbf{\thedatemonth{}of{ }\thedateyear}%
+    \textbf{\thedatemonth{ }of{ }\thedateyear}%
    }{%
-   \textbf{\thedatemonth{}de{ }\thedateyear}%
+   \textbf{\thedatemonth{ }de{ }\thedateyear}%
     }%
   \fi%
 }(cover)
@@ -276,9 +283,9 @@
     \textbf{DRAFT: \today}%
   \else%
     \ifthenelse{\equal{\iselthesis@opt@coverlang}{en}}{%
-    \textbf{\thedatemonth{}of{ }\thedateyear}%
+    \textbf{\thedatemonth{ }of{ }\thedateyear}%
    }{%
-   \textbf{\thedatemonth{}de{ }\thedateyear}%
+   \textbf{\thedatemonth{ }de{ }\thedateyear}%
     }%
   \fi%
 }(secondcover)

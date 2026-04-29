@@ -37,7 +37,20 @@
 + Added \iselthesis@setcourse{} command to set course-specific data
   (major field, department, cover images) from a single acronym
 + Removed \ncdepartment, and \ncmajorfield definitions, now handled automatically by \iselthesis@setcourse{} in _cover.tex
-+ Retained only fixed institutional data (university and school names)  
++ Retained only fixed institutional data (university and school names) 
 + Include logo for Biomedical Master degree
 + Added \dateday command to allow specifying the day of the month,
   used in the agreement/statement page signature date
+*2026-04-29 — Version 4.3
++ Set Verdana as the main sans-serif font via \setsansfont{Verdana} (LuaLaTeX/XeLaTeX) with explicit Bold, Italic and BoldItalic variants; fallback to helvet for pdfLaTeX
++ Added engine detection block (\ifxetexorluatex) in packages.clo to conditionally load fontspec (LuaLaTeX/XeLaTeX) or fontenc+inputenc (pdfLaTeX)
++ Configured microtype with reduced feature set for LuaLaTeX/XeLaTeX (tracking, kerning and spacing disabled); full feature set retained for pdfLaTeX
++ Set chapter titles to bold, 14pt, uppercase, orange (iselorange), Verdana via \chapnumfont and \chaptitlefont in isel.ldf chapstyle
++ Set section titles to bold, 12pt, beringela (iselpurple), Verdana
++ Set subsection and subsubsection titles to bold, 11pt, beringela (iselpurple), Verdana
++ Removed extra paragraph spacing (\parskip=0pt) and set minimum paragraph indentation to 16pt (\parindent=16pt) in defaults.clo
++ Applied \SingleSpacing to bibliography (\printbib) of single line spacing in references
++ Applied \SingleSpacing to annexes (\iselthesis@printannex) and appendices   (\iselthesis@printappendix) via \begingroup/\endgroup blocks
++ Replaced \cleardoublepage with \clearpage globally to eliminate blank pages 
++ Added openany to memoir class options in template.tex to prevent chapters  from forcing a new right-hand page
++ Set figure and table captions to 9pt, black, Verdana (sf), with 1cm line spacing via \captionsetup in packages.clo; figures italic, tables regular weight; exact size enforced via \DeclareCaptionFont{ninept}

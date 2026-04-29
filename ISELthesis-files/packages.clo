@@ -18,30 +18,49 @@
 }{hyperref}%
 \RequirePackage[a-2b,pdf17]{pdfx}
 
-%%%%% Configure font encoding
-\RequirePackage[T1]{fontenc}	% Use new T1 fonts
-
-%%%%% Configure input encoding
-\RequirePackage{inputenc}		% Format for the input file(s), see the "enc" option
-
 %%%%% Configure multilingual language support
 \RequirePackage{csquotes}
 \RequirePackage[english]{babel}	% Support for bilingual documents
-
 \RequirePackage{translator} % Support month name translations for pgfcalendar
 
+% --------------------------------------------------------
+%% CHECK IF USING LUALATEX OR XELATEX
+% --------------------------------------------------------
+\newcommand{\ifxeorlua}{\ifboolexpr{bool{luatex} or bool{xetex}}}
+\newcommand{\ifxetexorluatex}{\iftutex}
+
+
+\ifxetexorluatex
+  \RequirePackage[no-math]{fontspec}%
+  \defaultfontfeatures{Ligatures=TeX}
+  \setsansfont{Verdana}[
+    BoldFont       = Verdana Bold,
+    ItalicFont     = Verdana Italic,
+    BoldItalicFont = Verdana Bold Italic
+  ]%
+  \renewcommand{\familydefault}{\sfdefault}%
+\else
+  \RequirePackage[T1]{fontenc}%
+  \RequirePackage[utf8]{inputenc}%
+  \IfFileExists{verdana.sty}{%
+    \RequirePackage{verdana}%
+  }{%
+    \RequirePackage[scaled]{helvet}%
+  }%
+  \renewcommand{\familydefault}{\sfdefault}%
+\fi
+
 %%%%% Fine tuning of typesetting
-\RequirePackage[%
-  babel=true,
-  activate={true,nocompatibility},  % activate={true,nocompatibility} - activate protrusion and expansion
-  final,            % final - enable microtype; use "draft" to disable  
-  tracking=true,    % tracking=true - activate this technique
-  kerning=true,     % kerning=true - activate this technique
-  spacing=true,     % spacing=true - activate this technique
-  factor=1100,      % factor=1100 - add 10% to the protrusion amount (default is 1000)
-  stretch=10,       % stretch=10 - reduce stretchability (default is 20)
-  shrink=10,        % shrink=10 - reduce shrinkability (default is 20)
-]{microtype}
+\ifxetexorluatex
+  \RequirePackage[babel=true,final,tracking=false,
+                  kerning=false,spacing=false,
+                  factor=1100,stretch=10,shrink=10]{microtype}
+\else
+  \RequirePackage[babel=true,activate={true,nocompatibility},
+                  final,tracking=true,kerning=true,spacing=true,
+                  factor=1100,stretch=10,shrink=10]{microtype}
+\fi
+
 
 %% Date and Calendar Utility Macros
 \usepackage{pgfcalendar}
@@ -90,13 +109,34 @@
 % To aggregate multiple figures in a single one with subfigures
 % Note: subfigure package does not recognise \textwidth as a number, when it is in fact a number (equivalent to the constant width of the total text block on a page). The way to resolve this is to use the more updated subcaption package
 \RequirePackage{caption,subcaption}
-\captionsetup[figure]{textfont=it,position=bottom}
+% Captions: 9pt, black, 1cm line spacing
+\captionsetup{%
+  font={small, sf},          % 9pt sans-serif (Verdana)
+  labelfont={bf, sf},        % bold label (Figure X / Table X)
+  textfont={sf},             % sans-serif text
+  format=plain,
+  labelsep=period,           % "Figure 1. Caption text"
+  justification=justified,
+  singlelinecheck=false,
+  skip=6pt,
+}
+\captionsetup[figure]{%
+  textfont={it, sf},         % italic for figure captions
+  position=bottom,
+  aboveskip=\dimexpr1cm\relax,
+  belowskip=0pt,
+}
+\captionsetup[table]{%
+  position=top,
+  aboveskip=0pt,
+  belowskip=\dimexpr1cm\relax,
+}
+
 % To have text wrapping figures
 \usepackage{wrapfig}
 \usepackage{float}		% Improves the interface for defining floating objects such as figures and tables
 %
 \usepackage[figure,table,lstlisting]{totalcount}
-
 
 
 % Fixing autoref in hyperref
@@ -129,22 +169,6 @@
 % either babel or polyglossia). New entries are defined to have a name and 
 % description (and optionally an associated symbol).
 % --------------------------------------------------------
-
-% --------------------------------------------------------
-%% CHECK IF USING LUALATEX OR XELATEX
-% --------------------------------------------------------
-
-\newcommand{\ifxeorlua}{\ifboolexpr{bool{luatex} or bool{xetex}}}
-\newcommand{\ifxetexorluatex}{\iftutex}
-
-% --------------------------------------------------------
-\ifxetexorluatex  % xelatex or lualatex
-  \RequirePackage[no-math]{fontspec}%
-  \defaultfontfeatures{Ligatures=TeX}
-\else% pdflatex
-  \RequirePackage[T1]{fontenc}          % Use new T1 fonts
-  % \RequirePackage[utf8]{inputenc}     % Format for the input file(s), see the "enc" option
-\fi
 
 \RequirePackage{array}
 \RequirePackage{tabularx}

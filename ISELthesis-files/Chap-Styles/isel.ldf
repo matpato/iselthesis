@@ -37,7 +37,9 @@
 %   \renewcommand{\printchapternum}{\null\hfill\iselthesis@isel@chm[1cm]\hspace*{-5pt}\par
 %   }
 %   \renewcommand{\afterchapternum}{}%{\vspace*{-11ex}}%
-%   \renewcommand{\printchaptertitle}[1]{\color{iselorange}\chaptitlefont ##1\par}%
+% \renewcommand{\printchaptertitle}[1]{
+%     \color{iselorange}\chaptitlefont ##1\par
+%     }%
 %   %
 %   % \renewcommand{\partnamefont}{\chapnamefont}
 %   % \renewcommand{\parttitlefont}{\chaptitlefont}
@@ -55,27 +57,26 @@
   \renewcommand\chapternamenum{}
   \renewcommand\printchaptername{}
   \renewcommand\printchapternum{}
-  \renewcommand\chapnumfont{\Large\bfseries}
-  \renewcommand\chaptitlefont{\Large\bfseries\raggedright}
+  \renewcommand\chapnumfont{\sffamily\bfseries\fontsize{14}{16}\selectfont}%
+  \renewcommand\chaptitlefont{\sffamily\bfseries\fontsize{14}{16}\selectfont\raggedright}%
   \renewcommand\printchaptertitle[1]{%
     \ifNoChapNumber
       \begin{tabular}{@{}p{\textwidth}}%
-        \chaptitlefont\MakeUppercase{##1}%
+        \color{iselorange}\chaptitlefont\MakeUppercase{##1}%
       \end{tabular}%
     \else
-      \hspace*{-1.5cm}% Move the table to the left to place number in margin
-      \color{iselorange}% Apply color once here
-       \begin{tabular}{@{}p{1.0cm}p{\dimexpr\textwidth+1.5cm-1.0cm\relax}}%
+      \hspace*{-1.5cm}%
+      \color{iselorange}%
+      \begin{tabular}{@{}p{1.0cm}p{\dimexpr\textwidth+1.5cm-1.0cm\relax}}%
         \chapnumfont\thechapter%
         & \chaptitlefont\MakeUppercase{##1}%
       \end{tabular}%
       \par\vspace{0.05cm}%
-       \hspace*{-3cm}\noindent\textcolor{iselorange}{\rule{\dimexpr\textwidth+3cm\relax}{.5pt}}% Orange line from actual left edge
+      \hspace*{-3cm}\noindent\textcolor{iselorange}{\rule{\dimexpr\textwidth+3cm\relax}{.5pt}}%
     \fi
     \NoChapNumberfalse%
   }%
   \renewcommand\printchapternonum{\NoChapNumbertrue}
-  % Part styling (keeping your original)
   \renewcommand{\printpartname}{}%
   \renewcommand{\thepart}{\Roman{part}}%
   \renewcommand{\printpartnum}{\null\hfill\iselthesis@isel@ptm[4cm]\hspace*{14pt}\par}%

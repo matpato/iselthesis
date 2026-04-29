@@ -78,11 +78,15 @@
 % --------------------------------------------------------
 %% GENERAL PURPOSE MACROS
 % --------------------------------------------------------
-% Redefine \cleardoublepage to use a really empty page…
+% Replace the existing \cleardoublepage redefinition with:
 \let\origcleardoublepage=\cleardoublepage
-\renewcommand\cleardoublepage{%
-  \newpage{\pagestyle{empty}\origcleardoublepage}%
-}
+\renewcommand\cleardoublepage{\clearpage}
+
+% % Redefine \cleardoublepage to use a really empty page…
+% \let\origcleardoublepage=\cleardoublepage
+% \renewcommand\cleardoublepage{%
+%   \newpage{\pagestyle{empty}\origcleardoublepage}%
+% }
 
 % Do some magic defining arrays :)
 \newcommand{\userData}[1]{%
@@ -140,7 +144,6 @@
 
 \definecolor{iselorange}{HTML}{FF3C28}
 \definecolor{iselpurple}{HTML}{5F1437}
-
 %cores departamentos
 \definecolor{iseldec}{HTML}{FFDC23}
 \definecolor{iseldeeea}{HTML}{37CD28}
@@ -986,30 +989,43 @@
 
 
 \newcommand*{\ncthesisfrontmatter}{%
- \frontmatter%
-  \selectthelanguage{\iselthesis@opt@lang}
+  \frontmatter%
+  \selectthelanguage{\iselthesis@opt@lang}%
   \pagestyle{iselthesis@frontmatter}%
-  \copypagestyle{chapter}{iselthesis@frontmatter}
+  \copypagestyle{chapter}{iselthesis@frontmatter}%
   \pagenumbering{roman}%
   \setlength{\headheight}{15pt}%
+  % No blank pages -- Comment if need it
+  \renewcommand{\cleardoublepage}{\clearpage}%
 }
 
+% No blank pages -- Comment if need it
 \newcommand*{\ncthesismainmatter}{%
-  % \endgroup
   \bookmarksetup{startatroot}%
-  \ifbool{@openright}{}{% openany=true
-    % Avoid cleardoublepage before "mainmatter"
-    \let\oldcleardoublepage\cleardoublepage%
-    \renewcommand{\cleardoublepage}{\clearforchapter}%
-  }%
+  \renewcommand{\cleardoublepage}{\clearpage}%  % Keep this here too
   \mainmatter%
-  \pagenumbering{arabic} %
-  \ifbool{@openright}{}{% openany=true
-    \let\cleardoublepage\oldcleardoublepage%
-  }%
+  \pagenumbering{arabic}%
   \pagestyle{iselthesis@mainmatter}%
   \ifxeorlua{}{\microtypesetup{protrusion=true}}%
 }
+
+% With blank pages - Uncomment if need it
+% \newcommand*{\ncthesismainmatter}{%
+%   % \endgroup
+%   \bookmarksetup{startatroot}%
+%   \ifbool{@openright}{}{% openany=true
+%     % Avoid cleardoublepage before "mainmatter"
+%     \let\oldcleardoublepage\cleardoublepage%
+%     \renewcommand{\cleardoublepage}{\clearforchapter}%
+%   }%
+%   \mainmatter%
+%   \pagenumbering{arabic} %
+%   \ifbool{@openright}{}{% openany=true
+%     \let\cleardoublepage\oldcleardoublepage%
+%   }%
+%   \pagestyle{iselthesis@mainmatter}%
+%   \ifxeorlua{}{\microtypesetup{protrusion=true}}%
+% }
 
 
 % --------------------------------------------------------
@@ -1042,7 +1058,10 @@
 }
 
 \newcommand{\iselthesis@printappendix}[1]{%
-	\InputIfFileExists{Chapters/#1}{\cleardoublepage}{}%
+  \begingroup%
+    \SingleSpacing%           % <-- espaçamento simples
+    \InputIfFileExists{Chapters/#1}{\cleardoublepage}{}%
+  \endgroup%
 }
 
 \newcommand*{\ncprintappendices}{%
@@ -1059,7 +1078,10 @@
 }
 
 \newcommand{\iselthesis@printannex}[1]{%
-	\InputIfFileExists{Chapters/#1}{\cleardoublepage}{}%
+    \begingroup%
+        \SingleSpacing%           % <-- Single space
+	   \InputIfFileExists{Chapters/#1}{\cleardoublepage}{}%
+    \endgroup%
 }
 
 \newcommand*{\ncprintannexes}{%
@@ -1220,6 +1242,7 @@
 %% Bibliography
 % --------------------------------------------------------
 \newcommand{\addbibfile}[1]{\addbibresource{#1}}
+
 \newcommand{\printbib}{%
   {%
     \renewcommand{\printchaptertitle}[1]{%
@@ -1228,8 +1251,11 @@
     \chapter*{\bibname}%
     \addcontentsline{toc}{chapter}{\bibname}% This will be black in TOC
   }%
-  \printbibliography[heading=none]% Print bibliography without any heading (we already made it above)
-}
+  \begingroup%
+    \SingleSpacing%           % <-- single space
+    \printbibliography[heading=none]% % Print bibliography without any heading (we already made it above)
+  \endgroup%
+}  
 
 % --------------------------------------------------------
 %% Copyright page
