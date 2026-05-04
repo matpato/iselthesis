@@ -224,7 +224,7 @@
     doctype=dissertation,
     lang=en,
     coverlang=pt,
-    fontstyle=Verdana,
+    fontstyle=verdana,
     chapstyle=isel,
 	enc=utf8,
     otherlistsat=front,
@@ -248,7 +248,7 @@
 		sortcites=true,
         backref=true,      
 	},
-	memoir={a4paper, 11pt, draft},
+	memoir={a4paper, 11pt},
     media=screen,
 }
 

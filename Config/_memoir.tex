@@ -13,11 +13,16 @@
 %%        http://tug.ctan.org/tex-archive/macros/latex/contrib/memoir/memman.pdf
 %%============================================================
 
+% --------------------------------------------------------
+% IMPORTANT: Control draft/final mode HERE, not in template.tex
+% Comment 'draft' and uncomment 'final' for final submission
+% --------------------------------------------------------
 \ncmemoirsetup{a4paper, 
-    11pt,       % A4paper with main text at 12pt
+    11pt,
+    % draft,    % <-- change to 'final' for final submission
     final,
-    openany,   % <-- add this
-    }   
+}
+
 % \ncmemoirsetup{draft}           % Two set draft mode
 % \ncmemoirsetup{letter}          % Letter paper size
 % \ncmemoirsetup{openany}         % Two print single paged

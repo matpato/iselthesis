@@ -8,33 +8,33 @@
 
 % Loading of fonts must be delayed until class "iselthesis" is loaded
 \AtEndPreamble{%
-  \RequirePackage{gillius2}%
+  \IfFileExists{ISELthesis-files/Font-Styles/\iselthesis@opt@fontstyle.ldf}{}{%
+    \RequirePackage{gillius2}%
+  }%
+}
+
+\AtBeginDocument{%
+  \hypersetup{linkcolor=\iselthesis@linkcolor}%
 }
 
 % Cover text color
 \thesiscover(msc,textcolor):={iselpurple}
 \thesiscover(mscprep,textcolor):={iselpurple}
-\thesiscover(bsc,textcolor):={black}
+\thesiscover(bsc,textcolor):={iselpurple}
 
 % Cover background images 
 % NOTE: msc backgrounds are set per course in ISELthesis-files/courses.clo
 %       via \iselthesis@setcourse{} in Config/_cover.tex
 \thesiscover(mscprep,background):={capa}
-\thesiscover(bsc,background):={subcapa}
+\thesiscover(bsc,background):={capa}
 \thesiscover(plain,background):={}
 % Second cover background image
 \thesiscover(msc,background2):={subcapa}% fallback if course not set
 \thesiscover(mscprep,background2):={}
-\thesiscover(bsc,background2):={}
-
-% \thesiscover(msc,background):={capa}
-% \thesiscover(mscprep,background):={capa}
-% \thesiscover(bsc,background):={subcapa}
-% \thesiscover(plain,background):={}
-% % Second cover background image
-% \thesiscover(msc,background2):={subcapa}
-% \thesiscover(mscprep,background2):={}
-% \thesiscover(bsc,background2):={}
+\thesiscover(bsc,background2):={subcapa}
+% Back cover background image
+\thesiscover(msc,back):={backcapa}
+\thesiscover(bsc,back):={backcapa}
 
 % Comiittee printing order
 \committeeorder(all):={c,r}% 
@@ -53,7 +53,7 @@
 \margin(screen,right)={2.5cm}
 \margin(paper,top)={2.5cm}
 \margin(paper,bottom)={2.5cm}
-\margin(paper,left)={2.5cm}
+\margin(paper,left)={3.5cm}
 \margin(paper,right)={2.5cm}
 
 % Set margins for cover pages
@@ -89,11 +89,8 @@
 %
 \frenchspacing
 
-% Remove paragraph indentation
-% No extra spacing between paragraphs, 16pt indent
-\setlength{\parskip}{0pt}% .25\baselineskip
-\setlength{\parindent}{16pt}% 0pt
-\OnehalfSpacing  % already set in the class, confirm it stays
+\setlength{\parskip}{.25\baselineskip}%
+\setlength{\parindent}{0pt}%
 
 % Fix space for pages with Roman numbering in the ToC
 \renewcommand{\@pnumwidth}{2em}
@@ -110,23 +107,18 @@
 \font\p@rtnamfont=cmbr8 at 13mm % computer modern bright
 \font\s@cnamfont=cmbr10 at \ht\s@ch@@ghtb@x % computer modern bright
 
-% Section: bold, 12pt, beringela (#5f1437 = iselpurple), Verdana
 \renewcommand\section{\@startsection{section}{1}{0pt}%
   {-3.5ex plus -0.5ex minus -.2ex}%
   {2.3ex \@plus.2ex}%
-  {\sffamily\bfseries\fontsize{12}{14}\selectfont\color{iselpurple}}}
-
-% Subsection: bold, 11pt, beringela, Verdana
+  {\iselthesis@sectionfont\bfseries\Large\color{\iselthesis@sectioncolor}}}
 \renewcommand\subsection{\@startsection{subsection}{2}{0pt}%
   {-2.5ex plus -0.5ex minus -.2ex}%
   {1.5ex \@plus .2ex}%
-  {\sffamily\bfseries\fontsize{11}{13}\selectfont\color{iselpurple}}}
-
-% Subsubsection: bold, 11pt, beringela, Verdana (same level of subsection)
+  {\iselthesis@sectionfont\bfseries\large\color{\iselthesis@subsectioncolor}}}
 \renewcommand\subsubsection{\@startsection{subsubsection}{3}{0pt}%
   {-2.5ex plus -0.5ex minus -.2ex}%
   {1.5ex \@plus .2ex}%
-  {\sffamily\bfseries\fontsize{11}{13}\selectfont\color{iselpurple}}}
+  {\iselthesis@sectionfont\bfseries\normalsize\color{\iselthesis@subsubsectioncolor}}}
 
 \renewcommand\paragraph{\@startsection{paragraph}{4}{0pt}%
   {0.25ex plus 0.5ex minus.2ex}%
@@ -148,22 +140,19 @@
   \bfseries\thedoctitle(\iselthesis@opt@coverlang,main,cover)%
 }(cover) 
 
-
-% Author name
+% Author name - COVER 1
 \addcoveritem[c]{2cm}{%
   \fontsize{12}{13}\selectfont%
-  \bfseries\thedocauthor(name)\\[.5ex]
-  % Degree
-  % In this position only if it is a msc doc;
+  \bfseries\iselthesis@printauthors%
   \ifthenelse{%
-  \equal{\iselthesis@opt@docdegree}{msc}%
-  \OR\equal{\iselthesis@opt@docdegree}{mscprep}}%
-    {
-	  \fontseries{mc}\fontsize{13}{13}\selectfont%
-        (\thedocauthor(degree,\iselthesis@opt@coverlang))%
-    }	
-{}
-}(cover) 
+    \equal{\iselthesis@opt@docdegree}{msc}%
+    \OR\equal{\iselthesis@opt@docdegree}{mscprep}}%
+  {%
+    \fontseries{mc}\fontsize{13}{13}\selectfont%
+    % Degree printed once for all authors
+    (\thedocauthor(degree,\iselthesis@opt@coverlang))%
+  }{}%
+}(cover)
 
 % Degree
 \addcoveritem[c]{1.5cm}{%
@@ -212,31 +201,42 @@
   \par\vspace{3ex}%
 }
 
+% Declare counter outside commands to avoid redefinition error
+\newcounter{iselthesis@tmp@sig}
+
+\newcommand{\iselthesis@printauthorsignaturelines}{%
+  \setcounter{iselthesis@tmp@sig}{0}%
+  \whileboolexpr{test{\ifnumless{\value{iselthesis@tmp@sig}}%
+    {\value{iselthesis@author@cnt}}}}{%
+    \stepcounter{iselthesis@tmp@sig}%
+    \par\vspace{2ex}%
+    \makebox[8cm]{\hrulefill}\\[0.5ex]%
+    {\fontsize{10}{10}\selectfont%
+      (\thedocauthor(name,\theiselthesis@tmp@sig))}%
+    \par\vspace{2ex}%
+  }%
+}
+
 %% Title of Dissertation
 \addcoveritem[c]{8cm}{%
   \fontsize{17}{18}\selectfont
   \textbf{\thedoctitle(\iselthesis@opt@coverlang,main,cover)}%
 }(secondcover)  
 
-% Author name - different for BSc vs MSc
+
+% Author name - COVER 2
 \addcoveritem[c]{1}{%
-  \fontsize{14}{14}\selectfont%
-  \textbf{\thedocauthor(name)}\\[1ex]
-  % Degree - show ONLY for MSc, NOT for BSc
-  \ifthenelse{%
-  \equal{\iselthesis@opt@docdegree}{msc}%
- }%
-    {
-	  \fontseries{mc}\fontsize{13}{13}\selectfont%
-        (\thedocauthor(degree,\iselthesis@opt@coverlang))%
-    }	
-    {}%
-  % Add signature line only for BSc
-  \ifthenelse{\equal{\iselthesis@opt@docdegree}{bsc}}{%
-    \vspace{3ex}%
-    \makebox[8cm]{\hrulefill}%
+   \ifthenelse{\equal{\iselthesis@opt@docdegree}{msc}}{%
+      \fontsize{14}{14}\selectfont%
+      \bfseries\iselthesis@printauthors%  
+    \fontseries{mc}\fontsize{13}{13}\selectfont%
+    (\thedocauthor(degree,\iselthesis@opt@coverlang))%
   }{}%
-}(secondcover)  
+  \ifthenelse{\equal{\iselthesis@opt@docdegree}{bsc}}{%
+    \vspace{2ex}%
+    \iselthesis@printauthorsignaturelines%
+  }{}
+}(secondcover)
 
 % Degree
 \addcoveritem[c]{1}{%
@@ -253,7 +253,8 @@
     \fontsize{12}{12}\selectfont
     % Create custom adviser printing with signature lines
     \ifcsname iselthesis@committee@a@list\endcsname
-      \forlistcsloop{\iselthesis@printadvisersignatureline}{iselthesis@committee@a@list}%
+        \forlistcsloop{\iselthesis@printadvisersignatureline}{iselthesis@committee@a@list}%
+      % \forlistcsloop{\iselthesis@printadvisersignatureline}{iselthesis@committee@a@list}%
     \fi
   }{%
     % MSc: Regular advisers with affiliations

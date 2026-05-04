@@ -48,9 +48,26 @@
 + Set chapter titles to bold, 14pt, uppercase, orange (iselorange), Verdana via \chapnumfont and \chaptitlefont in isel.ldf chapstyle
 + Set section titles to bold, 12pt, beringela (iselpurple), Verdana
 + Set subsection and subsubsection titles to bold, 11pt, beringela (iselpurple), Verdana
-+ Removed extra paragraph spacing (\parskip=0pt) and set minimum paragraph indentation to 16pt (\parindent=16pt) in defaults.clo
++ Removed extra paragraph spacing (\parskip=0pt) and set minimum paragraph indentation to 16pt (\parindent=16pt) in isel.ldf
 + Applied \SingleSpacing to bibliography (\printbib) of single line spacing in references
 + Applied \SingleSpacing to annexes (\iselthesis@printannex) and appendices   (\iselthesis@printappendix) via \begingroup/\endgroup blocks
 + Replaced \cleardoublepage with \clearpage globally to eliminate blank pages 
 + Added openany to memoir class options in template.tex to prevent chapters  from forcing a new right-hand page
 + Set figure and table captions to 9pt, black, Verdana (sf), with 1cm line spacing via \captionsetup in packages.clo; figures italic, tables regular weight; exact size enforced via \DeclareCaptionFont{ninept}
+*2026-05-04 — Version 4.3.1
++ Added font loading mechanism via \InputIfFileExists for Font-Styles/.ldf files
++ Added verdana.ldf with LuaLaTeX/pdfLaTeX support (helvet fallback)
++ Fixed gillius2 unconditional loading in defaults.clo
++ Added semantic color commands (\iselthesis@titlecolor, \iselthesis@subtitlecolor,
+  \iselthesis@sectioncolor, etc.) replacing hardcoded iselorange/iselpurple
++ Added \iselthesis@showtitleinabstract boolean for chapstyle versatility
++ Fixed draft/final conflict by removing memoir={} from \ExecuteOptionsX
++ Added \ifdraftdoc block to pass draft to graphicx and show \printchecklist
++ Made \cleardoublepage conditional on media option (screen=\clearpage, paper=original)
++ Made openany/openright conditional on media option in \ncsetlayout
++ Applied \SingleSpacing to bibliography, annexes and appendices
++ Moved \parskip and \parindent settings from defaults.clo to isel.ldf
++ Added multiple authors support (max 3) via iselthesis@author@list
++ Added \iselthesis@printauthorsignatureline in defaults.clo for BSc second cover
++ Added \iselthesis@linkcolor semantic command; isel.ldf sets linkcolor=black
++ Set figure and table captions to 9pt, black, Verdana (sf), 1cm line spacing

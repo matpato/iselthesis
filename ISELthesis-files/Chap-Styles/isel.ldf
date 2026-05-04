@@ -29,29 +29,6 @@
   \iselthesis@isel@chm{#1}
 }
 
-% \makechapterstyle{isel}{%
-%   \renewcommand{\chapnamefont}{\normalfont\Large\scshape\raggedleft\so}%
-%   \renewcommand{\chaptitlefont}{\normalfont\huge\bfseries\scshape}%\sffamily}%
-%   % \renewcommand{\chapternamenum}{}
-%   \renewcommand{\printchaptername}{}%
-%   \renewcommand{\printchapternum}{\null\hfill\iselthesis@isel@chm[1cm]\hspace*{-5pt}\par
-%   }
-%   \renewcommand{\afterchapternum}{}%{\vspace*{-11ex}}%
-% \renewcommand{\printchaptertitle}[1]{
-%     \color{iselorange}\chaptitlefont ##1\par
-%     }%
-%   %
-%   % \renewcommand{\partnamefont}{\chapnamefont}
-%   % \renewcommand{\parttitlefont}{\chaptitlefont}
-%   % \renewcommand{\partnamenum}{}
-%   \renewcommand{\printpartname}{}%
-%   \renewcommand{\thepart}{\Roman{part}}
-%   \renewcommand{\printpartnum}{\null\hfill\iselthesis@isel@ptm[4cm]\hspace*{14pt}\par}%
-%   % \renewcommand{\afterpartnum}{\vspace*{-11ex}}%
-%   \renewcommand{\printparttitle}[1]{\color{darkgray}\parttitlefont\raggedleft ##1\par}%
-%   \renewcommand*{\partnumfont}{\normalfont\scshape\MakeLowercase}
-% }
-
 \newif\ifNoChapNumber
 \makechapterstyle{isel}{%
   \renewcommand\chapternamenum{}
@@ -83,5 +60,41 @@
   \renewcommand{\printparttitle}[1]{\color{iselorange}\parttitlefont\raggedleft ##1\par}%
   \renewcommand*{\partnumfont}{\normalfont\scshape\MakeLowercase}%
 }
+
+% Semantic colors for this chapstyle
+\renewcommand{\iselthesis@titlecolor}{iselorange}
+\renewcommand{\iselthesis@subtitlecolor}{iselpurple}
+\renewcommand{\iselthesis@sectionfont}{\sffamily}
+\renewcommand{\iselthesis@sectioncolor}{iselpurple}
+\renewcommand{\iselthesis@subsectioncolor}{iselpurple}
+\renewcommand{\iselthesis@subsubsectioncolor}{iselpurple}
+
+\renewcommand{\iselthesis@linkcolor}{black}
+\iselthesis@showtitleinabstracttrue
+
+% Remove paragraph indentation
+% No extra spacing between paragraphs, 16pt indent
+\setlength{\parskip}{0pt}% .25\baselineskip
+\setlength{\parindent}{16pt}% 0pt
+\OnehalfSpacing  % already set in the class, confirm it stays
+
+% First paragraph after a chapter/section heading is never indented by convention, this is standard in both English and Portuguese typography.
+% \RequirePackage{indentfirst}
+
 \chapterstyle{isel}
 
+% % Section: bold, 12pt, beringela, Verdana
+% \renewcommand\section{\@startsection{section}{1}{0pt}%
+%   {-3.5ex plus -0.5ex minus -.2ex}%
+%   {2.3ex \@plus.2ex}%
+%   {\sffamily\bfseries\fontsize{12}{14}\selectfont\color{\iselthesis@sectioncolor}}}
+% % Subsection: bold, 11pt, beringela, Verdana
+% \renewcommand\subsection{\@startsection{subsection}{2}{0pt}%
+%   {-2.5ex plus -0.5ex minus -.2ex}%
+%   {1.5ex \@plus .2ex}%
+%   {\sffamily\bfseries\fontsize{11}{13}\selectfont\color{\iselthesis@sectioncolor}}}
+% % Subsubsection: bold, 11pt, beringela, Verdana
+% \renewcommand\subsubsection{\@startsection{subsubsection}{3}{0pt}%
+%   {-2.5ex plus -0.5ex minus -.2ex}%
+%   {1.5ex \@plus .2ex}%
+%   {\sffamily\bfseries\fontsize{11}{13}\selectfont\color{\iselthesis@sectioncolor}}}

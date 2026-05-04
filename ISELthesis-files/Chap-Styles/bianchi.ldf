@@ -8,3 +8,6 @@
 \typeout{NT FILE Chap-Style/bianchi.ldf}%
 %%%%% Configure chapters, headers, footers, and page numbering
 \chapterstyle{bianchi}
+% e.g. in elegant.ldf or default.ldf:
+\renewcommand{\iselthesis@titlecolor}{black}
+\renewcommand{\iselthesis@subtitlecolor}{black}

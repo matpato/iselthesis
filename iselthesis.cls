@@ -68,6 +68,48 @@
 \newcommand*{\ncmemoirsetup}[1]{\PassOptionsToClass{#1}{memoir}}
 \input{Config/_memoir}
 \LoadClass{memoir}
+\ifdraftdoc
+  \typeout{DRAFT DEBUG: draft mode is ON}%
+  \PassOptionsToPackage{draft}{graphicx}%
+  \AtBeginDocument{%
+    \ClassWarning{iselthesis}{%
+      DRAFT MODE IS ON - Cover background image will not appear.\MessageBreak
+      To enable cover image, set 'final' in Config/_memoir.tex%
+    }%
+  }%
+  % Checklist command to be called manually in template.tex
+  \newcommand{\printchecklist}{%
+  \newpage%
+  \thispagestyle{empty}%
+  \vspace*{2cm}%
+  \begin{tcolorbox}[
+    colback=white,
+    colframe=red!70!black,
+    title={\bfseries DRAFT MODE -- Read before submitting},
+    fonttitle=\large
+  ]%
+  This document is in \textbf{DRAFT MODE}.\\[1ex]
+  All images (cover background and document images) are \textbf{intentionally omitted}
+  to speed up compilation.\\[1ex]
+  When ready to submit, open \texttt{Config/\_memoir.tex} and change:\\[1ex]
+  \texttt{draft,} \quad$\rightarrow$\quad \texttt{final,}\\[2ex]
+  \textbf{Items you must complete manually:}
+  \begin{itemize}
+    \item Acknowledgments written (if applicable)
+    \item Integrity declaration (Anexo III) signed by author
+    \item Abstract in Portuguese (max 300 words, 3--5 keywords)
+    \item Abstract in English (max 300 words, 3--5 keywords)
+    \item No footnotes used --- \texttt{\textbackslash footnote\{\}} is forbidden
+    \item Body text max 150 pages (excluding references and annexes)
+    \item Final submission must be PDF/A format
+  \end{itemize}
+  \end{tcolorbox}%
+    }%
+\else
+  \typeout{DRAFT DEBUG: draft mode is OFF - final}%
+  \newcommand{\printchecklist}{}% do nothing in final mode
+\fi
+
 \OnehalfSpacing% One-and-half spacing
 
 \newcolumntype{L}{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
@@ -79,14 +121,14 @@
 %% GENERAL PURPOSE MACROS
 % --------------------------------------------------------
 % Replace the existing \cleardoublepage redefinition with:
-\let\origcleardoublepage=\cleardoublepage
-\renewcommand\cleardoublepage{\clearpage}
+% \let\origcleardoublepage=\cleardoublepage
+% \renewcommand\cleardoublepage{\clearpage}
 
 % % Redefine \cleardoublepage to use a really empty page…
-% \let\origcleardoublepage=\cleardoublepage
-% \renewcommand\cleardoublepage{%
-%   \newpage{\pagestyle{empty}\origcleardoublepage}%
-% }
+\let\origcleardoublepage=\cleardoublepage
+\renewcommand\cleardoublepage{%
+  \newpage{\pagestyle{empty}\origcleardoublepage}%
+}
 
 % Do some magic defining arrays :)
 \newcommand{\userData}[1]{%
@@ -154,6 +196,14 @@
 \definecolor{iseldf}{HTML}{BECD00}
 \definecolor{iseldf}{HTML}{64CDFF}
 
+% % Semantic colors - can be overridden in chapstyle .ldf files
+\newcommand{\iselthesis@titlecolor}{black}
+\newcommand{\iselthesis@subtitlecolor}{black}
+\newcommand{\iselthesis@linkcolor}{darkblue}
+\newcommand{\iselthesis@sectionfont}{\normalfont}
+\newcommand{\iselthesis@sectioncolor}{black}
+\newcommand{\iselthesis@subsectioncolor}{black}
+\newcommand{\iselthesis@subsubsectioncolor}{black}
 
 \def\UrlBreaks{\do\/\do-}
 
@@ -376,19 +426,30 @@
 \endgroup  % Color reverts automatically
 }
 
-
 \newcommand{\printbackcoverpage}{%
-  \ifexists{thesiscover}[\iselthesis@opt@docdegree,back]{
-    \cleardoublepage%
-    \thispagestyle{empty}%
-    ~
-    \clearpage%
-    \thispagestyle{empty}%
-    %\coverbackground[\@nameuse{thesiscover\iselthesis@opt@docdegree,back}]
-    ~% This space is important here so that the cover page is not empty anymore!
-    \cleardoublepage%
-    \selectthelanguage{\iselthesis@opt@lang}%
-  }
+  \ifexists{thesiscover}[\iselthesis@opt@docdegree,back]{%
+    \edef\temp@backcover{\csname @thesiscover@\iselthesis@opt@docdegree,back@memory\endcsname}%
+    \IfFileExists{Logo/\temp@backcover.pdf}{%
+      \def\temp@backcoverext{pdf}}{%
+    \IfFileExists{Logo/\temp@backcover.png}{%
+      \def\temp@backcoverext{png}}{%
+      \def\temp@backcoverext{}}}%
+    \ifx\temp@backcoverext\@empty%
+      \ClassWarning{iselthesis}{%
+        Back cover file 'Logo/\temp@backcover' not found (.pdf or .png),
+        \MessageBreak skipping back cover page%
+      }%
+    \else%
+      \cleardoublepage%
+      \thispagestyle{empty}%
+      ~
+      \clearpage%
+      \thispagestyle{empty}%
+      ~%
+      \cleardoublepage%
+      \selectthelanguage{\iselthesis@opt@lang}%
+    \fi%
+  }%
 }
 % --------------------------------------------------------
 %% Some definition 
@@ -475,9 +536,24 @@
 \providecommand\thecopyrightstr{%
     \thispagestyle{empty}%
     \noindent%
-    Copyright\textcopyright\ \thedocauthor(name), %
+    Copyright\textcopyright\ \iselthesis@printauthorscopyright, %
     \theschool(\iselthesis@opt@lang), \theuniversity(\iselthesis@opt@lang).\\%
     \thecopyrighttextstring(\iselthesis@opt@lang)%
+}
+
+\ifcsname c@iselthesis@copy@cnt\endcsname\else
+  \newcounter{iselthesis@copy@cnt}%
+\fi
+
+\newcommand{\iselthesis@printauthorscopyright}{%
+  \setcounter{iselthesis@copy@cnt}{0}%
+  \whileboolexpr{test{\ifnumless{\value{iselthesis@copy@cnt}}%
+    {\value{iselthesis@author@cnt}}}}{%
+    \stepcounter{iselthesis@copy@cnt}%
+    \thedocauthor(name,\theiselthesis@copy@cnt)%
+    \ifnumless{\value{iselthesis@copy@cnt}}%
+      {\value{iselthesis@author@cnt}}{, }{}%
+  }%
 }
 % --------------------------------------------------------
 %% DEFINITIONS OF YEAR, MONTH AND DAY
@@ -532,14 +608,45 @@
 \docauthor(gender):={Author Gender}
 \docauthor(degree,\iselthesis@opt@coverlang):={Author Previous Degree}
 
-\def\ncauthorname(#1)#2#3{% [m|f]{Long name}{Short name}
-  \docauthor(gender):={#1}%
-  \docauthor(name):={\uppercase{#2}}\hypersetup{pdfauthor={#2}}%
-  \docauthor(name,short):={#3}}
+% \def\ncauthorname(#1)#2#3{% [m|f]{Long name}{Short name}
+%   \docauthor(gender):={#1}%
+%   \docauthor(name):={\uppercase{#2}}\hypersetup{pdfauthor={#2}}%
+%   \docauthor(name,short):={#3}}
 
-\def\ncauthordegree(#1)#2{
-  \docauthor(degree,#1):={#2}
-  }
+% Multiple authors support (max 3) - default is MSc (single author)
+\newcounter{iselthesis@author@cnt}
+\setcounter{iselthesis@author@cnt}{0}
+
+\def\ncauthorname(#1)#2#3{%
+  \stepcounter{iselthesis@author@cnt}%
+  \docauthor(gender,\theiselthesis@author@cnt):={#1}%
+  \docauthor(name,\theiselthesis@author@cnt):={\uppercase{#2}}%
+  \docauthor(name,short,\theiselthesis@author@cnt):={#3}%
+  % Keep first author as default for backward compatibility
+  % MSc typically has only one author
+  \ifnum\value{iselthesis@author@cnt}=1%
+    \docauthor(name):={\uppercase{#2}}%
+    \docauthor(name,short):={#3}%
+    \docauthor(gender):={#1}%
+    \hypersetup{pdfauthor={#2}}%
+  \fi%
+}
+
+\def\ncauthordegree(#1)#2{%
+  \docauthor(degree,#1):={#2}%
+}
+
+% \def\ncauthordegree(#1)#2{%
+%   \docauthor(degree,#1):={#2}%
+%   % Store degree for all authors for backward compatibility
+%   \newcounter{iselthesis@tmp@deg}%
+%   \setcounter{iselthesis@tmp@deg}{1}%
+%   \whileboolexpr{test{\ifnumless{\value{iselthesis@tmp@deg}}%
+%     {\value{iselthesis@author@cnt}}}}{%
+%     \stepcounter{iselthesis@tmp@deg}%
+%     \docauthor(degree,\theiselthesis@tmp@deg,#1):={#2}%
+%   }%
+% }
  
 % --------------------------------------------------------
 %% NEW definition for COMMITTEE & ADVISERS with lists
@@ -617,6 +724,20 @@
   \fi
 }
 
+% Declare counter outside commands
+\ifcsname c@iselthesis@tmp@cnt\endcsname\else
+  \newcounter{iselthesis@tmp@cnt}%
+\fi
+
+\newcommand{\iselthesis@printauthors}{%
+  \setcounter{iselthesis@tmp@cnt}{0}%   % just reset it, don't recreate it
+  \whileboolexpr{test{\ifnumless{\value{iselthesis@tmp@cnt}}%
+    {\value{iselthesis@author@cnt}}}}{%
+    \stepcounter{iselthesis@tmp@cnt}%
+    \thedocauthor(name,\theiselthesis@tmp@cnt)\\[.5ex]%
+  }%
+}
+
 % Unified command to print advisers section (WITH UPPERCASE)
 \newcommand{\printadvisers@i}{%
   \begin{tabular}{@{}c@{}}%  % Single CENTERED column
@@ -681,7 +802,13 @@
     {\themargin(\iselthesis@opt@media,right)}%
     {*}%
     \checkandfixthelayout%
-    \ifequal{iselthesis@opt@media}{paper}{\openright}{}%
+    % \ifequal{iselthesis@opt@media}{paper}{\openright}{}%
+    % In \ncsetlayout or \AtEndPreamble in iselthesis.cls:
+    \ifthenelse{\equal{\iselthesis@opt@media}{screen}}{%
+      \openany%
+    }{%
+      \openright%
+    }%
 }
 
 \newcommand*{\setpdftexpagesize}{%
@@ -802,6 +929,9 @@
 %% Including chapters and similars
 % --------------------------------------------------------
 
+\renewcommand{\iselthesis@titlecolor}{black}
+\renewcommand{\iselthesis@subtitlecolor}{black}
+
 % --------- Dedicatory -------------
 \newcommand{\@dedicatoryfile}{\@empty}
 
@@ -907,6 +1037,8 @@
 % --------------------------------------------------------
 %% Abstract, Acronyms and Glossary
 % --------------------------------------------------------
+\newif\ifiselthesis@showtitleinabstract
+\iselthesis@showtitleinabstractfalse
 
 \@setabstractorder
 \ifdatadefined{abstractorder}(en){}{%
@@ -958,35 +1090,32 @@
 \newcommand{\listofacronyms}{%
   \cleardoublepage%
   \renewcommand{\glossarysection}[2][]{%
-    \section*{\textcolor{iselorange}{\Large\bfseries ##1}}%
-    \addcontentsline{toc}{chapter}{##1}%  % Add this line for TOC
+    \section*{\textcolor{\iselthesis@titlecolor}{\Large\bfseries ##1}}%
+    \addcontentsline{toc}{chapter}{##1}%
     \markboth{##1}{##1}%
   }%
   \printnoidxglossary[type=\acronymtype]%
 }
 
-% Printing symbols  
 \newcommand{\listofsymbols}{%
   \cleardoublepage%
   \renewcommand{\glossarysection}[2][]{%
-    \section*{\textcolor{iselorange}{\Large\bfseries ##1}}%
-    \addcontentsline{toc}{chapter}{##1}%  % Add this line for TOC
+    \section*{\textcolor{\iselthesis@titlecolor}{\Large\bfseries ##1}}%
+    \addcontentsline{toc}{chapter}{##1}%
     \markboth{##1}{##1}%
   }%
   \printnoidxglossary[type=symbols]%
 }
 
-% Printing glossary
 \newcommand{\printglossarylist}{%
   \cleardoublepage%
   \renewcommand{\glossarysection}[2][]{%
-    \section*{\textcolor{iselorange}{\Large\bfseries ##1}}%
-    \addcontentsline{toc}{chapter}{##1}%  % Add this line for TOC
+    \section*{\textcolor{\iselthesis@titlecolor}{\Large\bfseries ##1}}%
+    \addcontentsline{toc}{chapter}{##1}%
     \markboth{##1}{##1}%
   }%
   \printnoidxglossary[type=main]%
 }
-
 
 \newcommand*{\ncthesisfrontmatter}{%
   \frontmatter%
@@ -996,13 +1125,21 @@
   \pagenumbering{roman}%
   \setlength{\headheight}{15pt}%
   % No blank pages -- Comment if need it
-  \renewcommand{\cleardoublepage}{\clearpage}%
+  % In \ncthesisfrontmatter and \ncthesismainmatter:
+    \ifthenelse{\equal{\iselthesis@opt@media}{screen}}{%
+      \renewcommand{\cleardoublepage}{\clearpage}%
+    }{}%
+  % \renewcommand{\cleardoublepage}{\clearpage}%
 }
 
 % No blank pages -- Comment if need it
 \newcommand*{\ncthesismainmatter}{%
   \bookmarksetup{startatroot}%
-  \renewcommand{\cleardoublepage}{\clearpage}%  % Keep this here too
+  % \renewcommand{\cleardoublepage}{\clearpage}%  % Keep this here too
+  % In \ncthesisfrontmatter and \ncthesismainmatter:
+  \ifthenelse{\equal{\iselthesis@opt@media}{screen}}{%
+      \renewcommand{\cleardoublepage}{\clearpage}%
+    }{}%
   \mainmatter%
   \pagenumbering{arabic}%
   \pagestyle{iselthesis@mainmatter}%
@@ -1134,14 +1271,14 @@
 %% Deal with optional lists in the frontmatter: listoftables, listoffigures, etc.
 % --------------------------------------------------------
 % Define a common style WITHOUT uppercase
+% Define a common style WITHOUT uppercase
 \newcommand{\listtitlestyle}[1]{%
-  {\color{iselorange}\Large\bfseries #1}%  % No \MakeUppercase
+  {\color{\iselthesis@titlecolor}\Large\bfseries #1}%
 }
 % Apply to each list type
 \renewcommand{\printtoctitle}[1]{\listtitlestyle{#1}}
 \renewcommand{\printloftitle}[1]{\listtitlestyle{#1}}
 \renewcommand{\printlottitle}[1]{\listtitlestyle{#1}}
-
 
 % Configure list of algorithms to match other lists
 \AtBeginDocument{%
@@ -1246,16 +1383,16 @@
 \newcommand{\printbib}{%
   {%
     \renewcommand{\printchaptertitle}[1]{%
-      \Large\bfseries\textcolor{iselorange}{##1}%
+      \Large\bfseries\textcolor{\iselthesis@titlecolor}{##1}%
     }%
     \chapter*{\bibname}%
-    \addcontentsline{toc}{chapter}{\bibname}% This will be black in TOC
+    \addcontentsline{toc}{chapter}{\bibname}%
   }%
   \begingroup%
-    \SingleSpacing%           % <-- single space
-    \printbibliography[heading=none]% % Print bibliography without any heading (we already made it above)
+    \SingleSpacing%
+    \printbibliography[heading=none]%
   \endgroup%
-}  
+}
 
 % --------------------------------------------------------
 %% Copyright page
@@ -1317,19 +1454,17 @@
 
 \newcommand{\setstatementlang}[1]{% 
     \selectthelanguage{#1}%
-    {\textcolor{iselorange}
+    {\textcolor{\iselthesis@titlecolor}%
     { \Large\bfseries\thestatementstring(#1) }\par}%
     \vspace{2ex}%
 }
-
 % --------------------------------------------------------
 %% Acknowledgements
 % --------------------------------------------------------
-
 \newcommand{\acknowledgements}{%
   {%
     \renewcommand{\printchaptertitle}[1]{%
-      \Large\bfseries\textcolor{iselorange}{##1}%
+      \Large\bfseries\textcolor{\iselthesis@titlecolor}{##1}%
     }%
     \chapter*{\theacknowledgementstr(\iselthesis@opt@lang)}%
   }%
@@ -1343,14 +1478,12 @@
 \newcommand{\setabstractlang}[1]{%
     \selectthelanguage{#1}%
     \renewcommand{\iselthesis@keywordsstr}{\thekeywordsstring(#1)}%
-    % Manually place title at top
-    % \vspace*{1cm}%
-    {\textcolor{iselpurple}{\large\textbf{\thedoctitle(#1,main)}}\par}%
-    \vspace{3ex}%
-    
-    {\textcolor{iselorange}{\Large\bfseries\theabstractstring(#1)}\par}%
+    \ifiselthesis@showtitleinabstract
+      {\textcolor{\iselthesis@subtitlecolor}{\large\textbf{\thedoctitle(#1,main)}}\par}%
+      \vspace{3ex}%
+    \fi
+    {\textcolor{\iselthesis@titlecolor}{\Large\bfseries\theabstractstring(#1)}\par}%
     \vspace{1ex}%
-    % \noindent\rule{\textwidth}{0.2mm} ~\\[-3.5ex] %% remove horizontal line
 }
 
 % --------------------------------------------------------
@@ -1371,9 +1504,6 @@
 %% Sectioning
 % --------------------------------------------------------
 \maxsecnumdepth{subsubsection}
-% Customize the Table of Contents title using memoir's commands: tocheadstyle 
-%\renewcommand*{\tocheadstart}{\color{iselorange}}
-\renewcommand*{\printtoctitle}[1]{{\color{iselorange}\Large\bfseries#1}}
 
 % --------------------------------------------------------
 % Text & code style
@@ -1382,23 +1512,16 @@
 \InputIfFileExists{ISELthesis-files/Chap-Styles/\iselthesis@opt@chapstyle.ldf}{}{}
 
 % --------------------------------------------------------
+% Font style
+% --------------------------------------------------------
+% Load the selected font style          <-- add this line
+\InputIfFileExists{ISELthesis-files/Font-Styles/\iselthesis@opt@fontstyle.ldf}{}{}
+
+% --------------------------------------------------------
 % Check if a font file exists
 \newcommand*{\nccheckfont}[2]{%
   \IfFileExists{ISELthesis-files/Font-Styles/#1}{}%
     {\ClassError{iselthesis}{Missing font “#1”! Please download from: “#2” and copy it to “ISELthesis-files/Font-Styles/#1”}{Please download from: “#2” and copy it to “ISELthesis-files/Font-Styles/#1”}}%
-}
-
-
-% --------------------------------------------------------
-% Load and Helvetica-like font as the default SF font
-\newcommand*{\LoadHelveticaLikeFont}{%
-  \IfFileExists{inter.sty}%
-    {\RequirePackage{inter}}%
-  {\IfFileExists{helvet.sty}%
-    {\RequirePackage{helvet}}%
-  {\IfFileExists{gillius2.sty}%
-    {\RequirePackage{gillius2}}%
-    {\ClassWarning{iselthesis}{Could not find a suitable Sans Serif font… using the default!}}}}%
 }
 
 \RequirePackage[hyperref=auto,defernumbers=true]{biblatex}%

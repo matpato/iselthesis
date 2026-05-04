@@ -10,28 +10,39 @@
 
 \typeout{NT FILE Font-Styles/verdana.ldf}%
 
-\ifxeorlua{%
-  % For XeLaTeX/LuaLaTeX: Try to use real Verdana if available
+\ifdefined\directlua
   \IfFontExistsTF{Verdana}{%
     \setmainfont{Verdana}[
       BoldFont       = Verdana Bold,
       ItalicFont     = Verdana Italic,
-      BoldItalicFont = Verdana Bold Italic,
+      BoldItalicFont = Verdana Bold Italic
+    ]%
+    \setsansfont{Verdana}[
+      BoldFont       = Verdana Bold,
+      ItalicFont     = Verdana Italic,
+      BoldItalicFont = Verdana Bold Italic
     ]%
   }{%
-    % Fall back to DejaVu Sans if Verdana not found
-    \setmainfont{DejaVu Sans}[
-      Scale          = 0.95,
-      BoldFont       = DejaVu Sans Bold,
-      ItalicFont     = DejaVu Sans Oblique,
-      BoldItalicFont = DejaVu Sans Bold Oblique,
+    \setmainfont{verdana}[
+      Path           = ISELthesis-files/Font-Styles/verdana/,
+      Extension      = .ttf,
+      BoldFont       = verdanab,
+      ItalicFont     = verdanai,
+      BoldItalicFont = verdanaz
+    ]%
+    \setsansfont{verdana}[
+      Path           = ISELthesis-files/Font-Styles/verdana/,
+      Extension      = .ttf,
+      BoldFont       = verdanab,
+      ItalicFont     = verdanai,
+      BoldItalicFont = verdanaz
     ]%
   }%
-}{%
-  % For pdfLaTeX: Use DejaVu Sans package
-  % \RequirePackage[scaled=0.95]{DejaVuSans}%
-  % \renewcommand{\familydefault}{\sfdefault}%
-  \usepackage[T1]{fontenc}
-  % \usepackage[windowsfont]{verdana}
-  \fontfamily{vna}\selectfont
-}
+\else
+  \IfFileExists{uarial.sty}{%
+    \RequirePackage{uarial}%
+  }{%
+    \RequirePackage[scaled=0.95]{helvet}%
+  }%
+  \renewcommand{\familydefault}{\sfdefault}%
+\fi

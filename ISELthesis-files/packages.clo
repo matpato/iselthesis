@@ -26,28 +26,17 @@
 % --------------------------------------------------------
 %% CHECK IF USING LUALATEX OR XELATEX
 % --------------------------------------------------------
+\RequirePackage{iftex}
 \newcommand{\ifxeorlua}{\ifboolexpr{bool{luatex} or bool{xetex}}}
 \newcommand{\ifxetexorluatex}{\iftutex}
 
-
+% % Always load encoding support for pdfLaTeX
 \ifxetexorluatex
   \RequirePackage[no-math]{fontspec}%
   \defaultfontfeatures{Ligatures=TeX}
-  \setsansfont{Verdana}[
-    BoldFont       = Verdana Bold,
-    ItalicFont     = Verdana Italic,
-    BoldItalicFont = Verdana Bold Italic
-  ]%
-  \renewcommand{\familydefault}{\sfdefault}%
 \else
   \RequirePackage[T1]{fontenc}%
   \RequirePackage[utf8]{inputenc}%
-  \IfFileExists{verdana.sty}{%
-    \RequirePackage{verdana}%
-  }{%
-    \RequirePackage[scaled]{helvet}%
-  }%
-  \renewcommand{\familydefault}{\sfdefault}%
 \fi
 
 %%%%% Fine tuning of typesetting
@@ -73,12 +62,15 @@
 \usepackage{paralist}		% To enable customizble enumerates
 
 %% IMPORTANT (consider removing/commenting)
-\usepackage[textsize=footnotesize]{todonotes}	% To register TODO notes in the text
+\usepackage[textsize=footnotesize,disable]{todonotes}	% To register TODO notes in the text
 \setlength{\marginparwidth}{3.25cm}
 
 %% FOR DEMO PURPOSES ONLY --- TO BE REMOVED by final users
 \usepackage{lipsum}
 
+\ifdraftdoc
+  \PassOptionsToPackage{draft}{graphicx}%
+\fi
 
 % --------------------------------------------------------
 % PACKAGE listings
@@ -131,7 +123,19 @@
   aboveskip=0pt,
   belowskip=\dimexpr1cm\relax,
 }
-
+\captionsetup[lstlisting]{%
+  font={small, sf},
+  labelfont={bf, sf},
+  textfont={sf},
+  format=plain,
+  labelsep=period,
+  justification=justified,
+  singlelinecheck=false,
+  skip=6pt,
+  position=bottom,
+  aboveskip=6pt,
+  belowskip=6pt,
+}
 % To have text wrapping figures
 \usepackage{wrapfig}
 \usepackage{float}		% Improves the interface for defining floating objects such as figures and tables

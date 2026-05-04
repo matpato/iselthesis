@@ -12,6 +12,7 @@
     \ncdepartment(pt){Departamento de Engenharia Química}%
     \ncdepartment(en){Department of Chemical Engineering}%
     \thesiscover(msc,background):={capa-biomedica}%
+    \thesiscover(mscprep,background):={capa-biomedica}%
     \thesiscover(msc,background2):={subcapa-biomedica}%
   }{%
   \ifthenelse{\equal{#1}{mec}}{%

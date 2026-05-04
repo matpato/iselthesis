@@ -19,9 +19,6 @@
 %%% Version v4.1: June 2025
 %%% 
 %%% 
-%%% This template is vaguely based on a template from the
-%%%     Universidade Nova de Lisboa (NOT OFFICIAL)
-%%%
 %%% BUGS and SUGGESTIONS: please send email to "matilde.pato@isel.pt"
 %%%     or sumit a ticket in the the project web page at
 %%%     https://github.com/matpato/iselthesis
@@ -79,10 +76,10 @@
     hyperref=true       % Hyperlinks in citations: true(*) false
 	},
 	memoir={	            % See the 'memoir' documentation
-    a4paper,            % the paper size/format
-    11pt,               % 10pt, 11pt(*), 12pt
-    final,              % draft, final  <= Replace 'draft' with 'final' in final version
-  },
+        a4paper,            % the paper size/format
+        11pt,               % 10pt, 11pt(*), 12pt
+        % draft/final is controlled in Config/_memoir.tex, NOT here
+     },
   media=screen,         % screen(*), paper
           % behavior to be defined in school options based in "\iselthesis@opt@media"
           % definitions for screen: left and right margins are equal, colored links
@@ -94,7 +91,9 @@
 %%  BEGINING OF USER CUSTOMIZATION
 %%
 % -------------------------------------------------------
-
+% \usepackage{draftwatermark}
+% \SetWatermarkText{DRAFT}
+% \SetWatermarkScale{1}
 
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
 %%==== DANGER ==== DANGER ==== DANGER ==== DANGER ==== DANGER ====
@@ -111,6 +110,7 @@
 
 %% Begining of document
 \begin{document}
+\printchecklist   % Only shows in draft mode
 
 % --------------------------------------------------------
 \ncthesisfrontmatter    % Before the main text (TOC, etc)
@@ -135,7 +135,7 @@
 \ncprintappendices      % Print appendixes, if any!
 \ncprintannexes         % Print annexes, if any!
 
-% \printbackcoverpage     % Print the cover back page
+\printbackcoverpage     % Print the cover back page
 % --------------------------------------------------------
 %% End of document
 % --------------------------------------------------------

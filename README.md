@@ -37,7 +37,7 @@ Table of Contents
 
 ## About
 
-This LaTeX-template might be used to write a bachelor or master thesis at the Department of Electronical Engineering, Telecommunications and Computers (DEETC) and Department of Computer Science and Engineering (DEI) at [Lisbon School of Engineering](https://www.isel.pt) of Polytechnic Institute of Lisbon. It is based on the fabulous [“*novathesis*” LaTeX template](https://joaomlourenco.github.io/novathesis/) style template of João Lourenço. 
+This LaTeX-template might be used to write a bachelor or master thesis at the Department of Electronical Engineering, Telecommunications and Computers (DEETC) and Department of Computer Science and Engineering (DEI) at [Lisbon School of Engineering](https://www.isel.pt) of Polytechnic Institute of Lisbon. 
 
 It is adapted to the current style guide for bachelor and master theses in the ISEL, as outlined in [Normas de escrita e apresentação de trabalhos finais de curso](https://www.isel.pt/informacoes-academicas/normas-trabalhos-finais).
 
@@ -133,7 +133,6 @@ The _template.tex_ file contains the basic structure and all the chapter-files t
         memoir={	          
             a4paper,          
             11pt,              
-            final,            
         },
         media=screen,         
         ]{iselthesis}
@@ -259,7 +258,7 @@ If you couldn't find what you were looking for, ask for help in:
 	Matilde Pós-de-Mina Pato
 	Nuno Datia (as contributor)
 
-April, 29th 2026
+May, 04th 2026
 
 This package and template are not official for ISEL/IPL.
 
