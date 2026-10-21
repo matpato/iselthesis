@@ -1,25 +1,31 @@
 %!TEX root = ../template.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% abstrac-en.tex
+%% abstract-en.tex
 %% ISEL thesis document file
 %%
 %% Abstract in English
+%% (Replace this text with your own abstract)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The dissertation must contain two versions of the abstract, one in the same language as the main text, another in a different language.  The package assumes that the two languages under consideration are always Portuguese and English.
+\textbf{This document is both the ISEL \LaTeX{} template for bachelor's project reports and master's dissertations, and its user manual. If you only read this page, read the three rules below:}
 
-The package will sort the abstracts in the appropriate order. This means that the first abstract will be in the same language as the main text, followed by the abstract in the other language, and then followed by the main text. For example, if the dissertation is written in Portuguese, first will come the summary in Portuguese and then in English, followed by the main text in Portuguese. If the dissertation is written in English, first will come the summary in English and then in Portuguese, followed by the main text in English.
+\bigskip
+\noindent%
+\fcolorbox{iselorange}{white}{%
+\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+\begin{enumerate}
+	\item \textbf{Compile with LuaLaTeX}, not pdfLaTeX. Only then is the Verdana font required by the ISEL guidelines used.
+	\item \textbf{Edit only} the \texttt{Config} folder (options, cover and list of files), the \texttt{Chapters} folder (text and images) and the \texttt{bibliography.bib} file.
+	\item \textbf{Do not change} \texttt{template.tex}, \texttt{iselthesis.cls} or the \texttt{ISELthesis-files} folder.
+\end{enumerate}
+\end{minipage}%
+}
 
-The abstract should not exceed one page and should answer the following questions:
+\bigskip
+Details are in Chapter~\ref{cha:users_manual} (structure and options) and Chapter~\ref{cha:a_short_latex_tutorial_with_examples} (compiling and examples).
 
-The format of your abstract will depend on the discipline in which you are working. However, all abstracts generally cover the following five sections:
-\begin{itemize}
-	\item The purpose of the research (what’s it about and why’s that important)
-	\item The methodology (how you carried out the research)
-	\item The key research findings (what answers you found)
-	\item The implications of these findings (what these answers mean)
-\end{itemize}
-\textbf{Maximum of words: 300}
-% Palavras-chave do resumo em Inglês
+\textbf{About the abstract.} The template places the abstract in the main language of the document first, followed by the abstract in the other language (English or Portuguese). The abstract must not exceed \textbf{one page or 300 words}, and should answer four questions: \textbf{what is the problem}, \textbf{why is it interesting}, \textbf{what is the solution}, and \textbf{what follows from the solution}.
+
+% Keywords of the abstract in English
 \begin{keywords}
-Keywords (in English) \ldots -- minimum of 3 (three)
-\end{keywords} 
+Keywords (in English) \ldots -- at least 3 (three)
+\end{keywords}

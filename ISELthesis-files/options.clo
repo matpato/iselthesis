@@ -217,41 +217,43 @@
 }
 
 % --------------------------------------------------------
-% DEFAULT OPTIONS
-% \PassOptionsToPackage{portuguese,english}{babel}
+% User-facing setup command (used in Config/_options.tex)
+\newcommand{\iselthesissetup}[1]{\ExecuteOptionsX{#1}}
+
+% --------------------------------------------------------
+% INSTITUTIONAL DEFAULTS (not meant to be changed by students)
 \ExecuteOptionsX{%
-	docdegree=msc,
-    doctype=dissertation,
-    lang=en,
-    coverlang=pt,
-    fontstyle=verdana,
-    chapstyle=isel,
-	enc=utf8,
-    otherlistsat=front,
-    aftercover=false,
-    linkscolor=darkgray,
-    printcommittee=true,
-	spine=false,
-	biblatex={%
-		% sorting=nyt,%
-		% style=alphabetic,%
-		% labelyear=false,%
-		style=numeric,
-		maxalphanames=2,
-		defernumbers=true,%
-		maxbibnames=20,%
-		maxcitenames=2,%
-		mincitenames=1,%
-		firstinits=true,% will render all first and middle names as initials
-		uniquename=init,%
-		% dashed=false,%
-		sortcites=true,
-        backref=true,      
-	},
-	memoir={a4paper, 11pt},
-    media=screen,
+  docdegree=msc,
+  doctype=dissertation,
+  lang=en,
+  coverlang=pt,
+  fontstyle=verdana,
+  chapstyle=isel,
+  enc=utf8,
+  otherlistsat=front,
+  aftercover=false,
+  linkscolor=darkblue,
+  printcommittee=true,
+  spine=false,
+  biblatex={%
+    backend=bibtex,
+    style=numeric-comp,
+    sortcites=true,
+    sorting=nyt,
+    backref=true,
+    maxbibnames=99,
+    firstinits=true,
+    hyperref=true,
+  },
+  media=screen,
 }
 
 % --------------------------------------------------------
-% PROCESSING OPTIONS
+% Options given in \documentclass[...] (if any)
 \ProcessOptionsX\relax
+
+% --------------------------------------------------------
+% USER CONFIGURATION: loaded last, so it wins
+\InputIfFileExists{Config/_options}{}{%
+  \ClassWarning{iselthesis}{Config/_options.tex not found; using defaults}}
+

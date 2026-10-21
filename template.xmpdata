@@ -1,89 +1,34 @@
 % ===========================================================
-% XMP METADATA FOR PDF/A COMPLIANCE
-% File: template.xmpdata (must match your main .tex filename)
+% template.xmpdata -- PDF/A METADATA
+% The name must match the main file (template.tex -> template.xmpdata)
+%
+% Fill in YOUR data. It must match Config/_cover.tex.
+% Plain text only: do NOT use LaTeX commands such as \ncauthorname
+% or \nctitle, do NOT use quotes, and separate items with \sep.
 % ===========================================================
 
-% ===========================================================
-% IMPORTANT: Fill these with YOUR information
-% Do NOT use the \ncauthorname or \nctitle commands here!
-% ===========================================================
+% Author: full name, as in \ncauthorname in Config/_cover.tex
+% (several authors: \Author{Name One\sep Name Two})
+\Author{Author Full Name}
 
-% ===========================================================
-% REQUIRED FIELDS
-% ===========================================================
+% Title: the same title as \nctitle(main,...) in Config/_cover.tex
+\Title{Title of the Dissertation or Project Report}
 
-% ─────────────────────────────────────────────────────────
-% AUTHOR - Use the FULL name from \ncauthorname
-% ─────────────────────────────────────────────────────────
-% If you have:     \ncauthorname(m){John Very Longname Doe}{John Doe}
-% Then write here: \Author{John Very Longname Doe}
-\Author{John Very Longname Doe}
+% Keywords: the same as in your abstract (at least 3)
+\Keywords{keyword1\sep keyword2\sep keyword3}
 
-% ─────────────────────────────────────────────────────────
-% TITLE - Use the SAME title as in \nctitle(main,...)
-% ─────────────────────────────────────────────────────────
-% If you have:     \nctitle(main,en){Master Thesis Title, Project Work or Internship Report}
-% Then write here: \Title{Master Thesis Title, Project Work or Internship Report}
-\Title{Master Thesis Title, Project Work or Internship Report}
+% Subject: degree and course
+\Subject{Dissertation submitted for the Master's degree in Computer Science and Computer Engineering}
 
-% ─────────────────────────────────────────────────────────
-% KEYWORDS - Add 5-10 relevant keywords separated by \sep
-% ─────────────────────────────────────────────────────────
-% Example: \Keywords{keyword1\sep keyword2\sep keyword3}
-\Keywords{keyword1\sep keyword2\sep keyword3\sep keyword4\sep keyword5}
-
-% ─────────────────────────────────────────────────────────
-% SUBJECT - Brief description (like a mini-abstract)
-% ─────────────────────────────────────────────────────────
-% Brief description (abstract-like, 1-2 sentences)
-\Subject{Dissertation submitted in partial fulfillment of the requirements for the degree of Master degree in Computer Science and Computer Engineering}
-
-% ─────────────────────────────────────────────────────────
-% PUBLISHER - Your institution
-% ─────────────────────────────────────────────────────────
-\Publisher{Instituto Superior de Engenharia de Lisboa}
-
-% ─────────────────────────────────────────────────────────
-% PUBLICATION TYPE
-% ─────────────────────────────────────────────────────────
+% Publication type: bachelor thesis | master thesis
 \PublicationType{master thesis}
-% Options: bachelor thesis, master thesis, phd thesis, 
-%          technical report, research paper
 
-% ─────────────────────────────────────────────────────────
-% LANGUAGE - Use ISO 639-1 code
-% ─────────────────────────────────────────────────────────
+% Language: en (English) | pt-PT (Portuguese) -- same as lang in Config/_options.tex
 \Language{en}
-% Options: en (English), pt-PT (Portuguese), fr (French), etc.
 
-% ===========================================================
-% OPTIONAL FIELDS (uncomment to use)
-% ===========================================================
+% Copyright: year of submission and YOUR name
+\CopyrightYear{2026}
+\CopyrightOwner{Author Full Name}
 
-% Copyright information
-\CopyrightYear{2025}
-\CopyrightOwner{Matilde Pato, ISEL-IPL}
-
-% Publication date (YYYY-MM-DD format)
-% \PublicationDate{2025-06-23}
-
-% DOI - if you have one
-% \Doi{10.xxxx/xxxxx}
-
-% License - if applicable
-% \License{CC BY-NC-SA 4.0}
-
-% Last modified date (format: D:YYYYMMDDHHmmSS+TZ'HH'mm)
-% Example: D:20250623120000+01'00' = June 23, 2025, 12:00 UTC+1
-\Lastmodified{D:20250623120000+01'00'}
-
-% ===========================================================
-% NOTES
-% ===========================================================
-% 1. DO NOT use LaTeX commands like \ncauthorname here
-% 2. DO NOT use quotes around values
-% 3. Use \sep to separate multiple keywords (not commas)
-% 4. Special characters (á, ã, ç, etc.) work automatically
-% 5. This file must be in the root of your Overleaf project
-% ===========================================================
-\end{antml:parameter>
+% Institution (do not change)
+\Publisher{Instituto Superior de Engenharia de Lisboa}

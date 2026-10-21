@@ -49,6 +49,14 @@
 \ProvidesClass{iselthesis}[2024-05-30 iselthesis template]
 \NeedsTeXFormat{LaTeX2e}[2020-02-02]
 
+% --------------------------------------------------------
+% PDF version for PDF/A (pdfx): must be set before any PDF object is written
+% --------------------------------------------------------
+\ifdefined\pdfvariable
+  \pdfvariable majorversion=1 \pdfvariable minorversion=7  % LuaLaTeX
+\else\ifdefined\pdfminorversion
+  \pdfminorversion=7                                      % pdfLaTeX
+\fi\fi
 
 % --------------------------------------------------------
 % Save these definitions asap, to be used later in the “\annex” command,
@@ -61,60 +69,68 @@
 
 % --------------------------------------------------------
 %%  MEMOIR CUSTOMIZATION AND LOADING
-%%      Please open and edit the appropriate
-%%       configuration file “Config/_memoir.tex”
 % --------------------------------------------------------
-
 \newcommand*{\ncmemoirsetup}[1]{\PassOptionsToClass{#1}{memoir}}
 \input{Config/_memoir}
 \LoadClass{memoir}
+
+\RequirePackage{etoolbox}   % for \AtEndPreamble (does not write PDF objects)
+
 \ifdraftdoc
-  \typeout{DRAFT DEBUG: draft mode is ON}%
   \PassOptionsToPackage{draft}{graphicx}%
+  \AtEndPreamble{\RequirePackage{tcolorbox}}% after pdfx, not before
   \AtBeginDocument{%
     \ClassWarning{iselthesis}{%
-      DRAFT MODE IS ON - Cover background image will not appear.\MessageBreak
-      To enable cover image, set 'final' in Config/_memoir.tex%
+      DRAFT MODE IS ON: images in the text are not shown, the second\MessageBreak
+      cover is omitted and overfull lines are marked with black bars.\MessageBreak
+      For the version to submit, set 'final' in Config/_memoir.tex%
     }%
   }%
-  % Checklist command to be called manually in template.tex
+  % Checklist: shown only in draft mode (call once in template.tex)
   \newcommand{\printchecklist}{%
-  \newpage%
-  \thispagestyle{empty}%
-  \vspace*{2cm}%
-  \begin{tcolorbox}[
-    colback=white,
-    colframe=red!70!black,
-    title={\bfseries DRAFT MODE -- Read before submitting},
-    fonttitle=\large
-  ]%
-  This document is in \textbf{DRAFT MODE}.\\[1ex]
-  All images (cover background and document images) are \textbf{intentionally omitted}
-  to speed up compilation.\\[1ex]
-  When ready to submit, open \texttt{Config/\_memoir.tex} and change:\\[1ex]
-  \texttt{draft,} \quad$\rightarrow$\quad \texttt{final,}\\[2ex]
-  \textbf{Items you must complete manually:}
-  \begin{itemize}
-    \item Acknowledgments written (if applicable)
-    \item Integrity declaration (Anexo III) signed by author
-    \item Abstract in Portuguese (max 300 words, 3--5 keywords)
-    \item Abstract in English (max 300 words, 3--5 keywords)
-    \item No footnotes used --- \texttt{\textbackslash footnote\{\}} is forbidden
-    \item Body text max 150 pages (excluding references and annexes)
-    \item Final submission must be PDF/A format
-  \end{itemize}
-  \end{tcolorbox}%
-    }%
+    \clearpage
+    \thispagestyle{empty}%
+    \vspace*{2cm}%
+    \begin{tcolorbox}[
+      colback=white,
+      colframe=iselorange,
+      title={\bfseries DRAFT MODE -- Read before submitting},
+      fonttitle=\large
+    ]
+    This document is in \textbf{draft mode}: images in the text are
+    replaced by boxes, the second cover is omitted and overfull lines
+    are marked with black bars, to speed up compilation and help you
+    find layout problems.\par\medskip
+    When ready to submit, open \texttt{Config/\_memoir.tex} and change
+    \texttt{draft} $\rightarrow$ \texttt{final}.\par\medskip
+    \textbf{Before submitting, check:}
+    \begin{itemize}
+      \item Abstracts in Portuguese and English: max.\ 300 words, at least 3 keywords
+      \item Acknowledgements written (if applicable)
+    \ifthenelse{\equal{\iselthesis@opt@docdegree}{msc}}{%
+      \item Date of the integrity declaration set in \texttt{Config/\_cover.tex}
+            (\texttt{\textbackslash dateday}, \texttt{\textbackslash datemonth}, \texttt{\textbackslash dateyear})
+      }{}%
+      \item Body text up to 150 pages (excluding references, appendices and annexes)
+      \item Footnotes avoided
+      \item Compiled with LuaLaTeX (Verdana listed in the PDF fonts)
+      \item The PDF is already PDF/A --- do not re-save it with another tool
+    \end{itemize}
+    \end{tcolorbox}
+    \clearpage
+  }%
 \else
-  \typeout{DRAFT DEBUG: draft mode is OFF - final}%
-  \newcommand{\printchecklist}{}% do nothing in final mode
+  \newcommand{\printchecklist}{}% final mode: nothing
 \fi
 
+
 \OnehalfSpacing% One-and-half spacing
+
 
 \newcolumntype{L}{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
 \newcolumntype{C}{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}X}
 \newcolumntype{R}{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}X}
+
 
 
 % --------------------------------------------------------
@@ -242,6 +258,7 @@
 \def\workimage#1{ \gdef\@workimage{#1} }
 
 
+
 % --------------------------------------------------------
 % Trim spaces around argument
 \RequirePackage{ISELthesis-files/user-sty/fix-profiling}
@@ -316,50 +333,51 @@
 \newsavebox{\iselthesis@coverbox}%
 
 
+% --------------------------------------------------------
+% \printcoverpage  -- replace the whole definition in iselthesis.cls
+%   - 1st cover: background always shown (also in draft mode)
+%   - 2nd cover: only for msc/bsc, and NOT in draft mode
+% --------------------------------------------------------
 \def\printcoverpage{%
-  \begingroup  % Create a group
-  % Use textcolor key
-  \typeout{DEBUG: Getting text color for \iselthesis@opt@docdegree}%
+  \begingroup
+  % Cover text colour
   \ifcsname @thesiscover@\iselthesis@opt@docdegree,textcolor@memory\endcsname%
     \edef\temp@textcolor{\csname @thesiscover@\iselthesis@opt@docdegree,textcolor@memory\endcsname}%
-    \typeout{DEBUG: Text color: \temp@textcolor}%
     \color{\temp@textcolor}%
-  \else%
-    \typeout{DEBUG: No textcolor found}%
   \fi%
-  
+
   \thispagestyle{empty}%
   \selectthelanguage{\iselthesis@opt@coverlang}%
-  
+
   \setlength{\mpwidth}{\dimexpr%
     \paperwidth%
       -\themargin(\iselthesis@opt@docdegree,left)%
       -\themargin(\iselthesis@opt@docdegree,right)}%
-  
+
   \setlength{\mpheight}{\dimexpr%
     \paperheight%
        -\themargin(\iselthesis@opt@docdegree,top)%
        -\themargin(\iselthesis@opt@docdegree,bottom)}%
-  
-  % ADD BACKGROUND FIRST, before creating the coverbox
+
+  % ------------------------------------------------------
+  % FIRST COVER: background (draft=false -> shown also in draft mode)
   \ifcsname @thesiscover@\iselthesis@opt@docdegree,background@memory\endcsname%
     \edef\temp@coverimage{\csname @thesiscover@\iselthesis@opt@docdegree,background@memory\endcsname}%
     \ifx\temp@coverimage\empty\else%
-      \typeout{DEBUG: Setting background: \temp@coverimage}%
       \AddToShipoutPictureBG*{%
-        \AtPageLowerLeft{%  
-          \includegraphics[width=\paperwidth,height=\paperheight]{\temp@coverimage}%
+        \AtPageLowerLeft{%
+          \includegraphics[draft=false,width=\paperwidth,height=\paperheight]{\temp@coverimage}%
         }%
       }%
     \fi%
   \fi%
-  
+
+  % FIRST COVER: contents
   \sbox{\iselthesis@coverbox}{%
     \parbox[t][\mpheight][t]{\mpwidth}{%
      \printcoveritems(cover)%
     }%
   }%
-  % Add foreground content
   \AddToShipoutPictureFG*{%
     \AtPageUpperLeft{%
       \put(%
@@ -370,60 +388,52 @@
   }%
   ~% This space is important here so that the cover page is not empty anymore!
   \cleardoublepage%
-  %% Print second cover page if is MSc
+
+  % ------------------------------------------------------
+  % SECOND COVER: only msc/bsc, and not in draft mode
+  \ifdraftdoc\else
   \@printcommitteeauxtrue
-  \setcounter{@iselthesis@cnt}{0}%	reset counter used in the name listing
+  \setcounter{@iselthesis@cnt}{0}% reset counter used in the name listing
   \ifthenelse{%
-  	\equal{\iselthesis@opt@docdegree}{msc}%
-	\OR\equal{\iselthesis@opt@docdegree}{bsc}%  % This line enables BSc second cover
-    }%
-	{
+    \equal{\iselthesis@opt@docdegree}{msc}%
+    \OR\equal{\iselthesis@opt@docdegree}{bsc}%
+  }{%
     \thispagestyle{empty}%
     \selectthelanguage{\iselthesis@opt@coverlang}%
 
-  \setlength{\mpwidth}{\dimexpr%
-    \paperwidth%
-      -\themargin(\iselthesis@opt@docdegree,left)%
-      -\themargin(\iselthesis@opt@docdegree,right)}%
-  
-  \setlength{\mpheight}{\dimexpr%
-    \paperheight%
-       -\themargin(\iselthesis@opt@docdegree,top)%
-       -\themargin(\iselthesis@opt@docdegree,bottom)}%
-  
-  % ADD SECOND COVER BACKGROUND
-  \ifcsname @thesiscover@\iselthesis@opt@docdegree,background2@memory\endcsname%
-    \edef\temp@coverimage{\csname @thesiscover@\iselthesis@opt@docdegree,background2@memory\endcsname}%
-    \ifx\temp@coverimage\empty\else%
-      \typeout{DEBUG: Setting background: \temp@coverimage}%
-      \AddToShipoutPictureBG*{%
-        \AtPageLowerLeft{%  % Try LowerLeft instead
-          \includegraphics[width=\paperwidth,height=\paperheight]{\temp@coverimage}%
+    % SECOND COVER: background
+    \ifcsname @thesiscover@\iselthesis@opt@docdegree,background2@memory\endcsname%
+      \edef\temp@coverimage{\csname @thesiscover@\iselthesis@opt@docdegree,background2@memory\endcsname}%
+      \ifx\temp@coverimage\empty\else%
+        \AddToShipoutPictureBG*{%
+          \AtPageLowerLeft{%
+            \includegraphics[width=\paperwidth,height=\paperheight]{\temp@coverimage}%
+          }%
         }%
-      }%
+      \fi%
     \fi%
-  \fi%
-  
-  \sbox{\iselthesis@coverbox}{%
-    \parbox[t][\mpheight][t]{\mpwidth}{%
-     \printcoveritems(secondcover)%
+
+    % SECOND COVER: contents
+    \sbox{\iselthesis@coverbox}{%
+      \parbox[t][\mpheight][t]{\mpwidth}{%
+       \printcoveritems(secondcover)%
+      }%
     }%
-  }%
-  % Add foreground content
-  \AddToShipoutPictureFG*{%
-    \AtPageUpperLeft{%
-      \put(%
-        \LenToUnit{\themargin(\iselthesis@opt@docdegree,left)},%
-        -\LenToUnit{\themargin(\iselthesis@opt@docdegree,top)})%
-        {\usebox{\iselthesis@coverbox}}%
+    \AddToShipoutPictureFG*{%
+      \AtPageUpperLeft{%
+        \put(%
+          \LenToUnit{\themargin(\iselthesis@opt@docdegree,left)},%
+          -\LenToUnit{\themargin(\iselthesis@opt@docdegree,top)})%
+          {\usebox{\iselthesis@coverbox}}%
+      }%
     }%
-  }%
-	  ~% This space is important here so that the cover page is not empty anymore!
-	  \cleardoublepage%
-  }%
-  {}%
+    ~% This space is important here so that the cover page is not empty anymore!
+    \cleardoublepage%
+  }{}%
+  \fi% end \ifdraftdoc
+
   \selectthelanguage{\iselthesis@opt@lang}%
-\endgroup  % Color reverts automatically
+  \endgroup
 }
 
 \newcommand{\printbackcoverpage}{%
@@ -451,6 +461,7 @@
     \fi%
   }%
 }
+
 % --------------------------------------------------------
 %% Some definition 
 % --------------------------------------------------------
@@ -1182,7 +1193,7 @@
 
 % --------------------------------------------------------
 %% Appendixes and Annexes
-% --------------------------------------------------------
+% --------------------------------------------------------ncprintappendices
 \RequirePackage{appendix}
 % --------- Appendix -------------
 \renewcommand*{\addappheadtotoc}{%

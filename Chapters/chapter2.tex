@@ -3,6 +3,7 @@
 % %  ISELthesis
 % %  
 % %  Created by Matilde Pós-de-Mina Pato on 2012/10/09.
+% %  Revised in 2026: document options moved to Config/_options.tex
 % %
 \chapter{ISELthesis Users Manual}
 \label{cha:users_manual}
@@ -13,13 +14,14 @@
 \section{Introduction} % (fold)
 \label{sec:introduction}
 
+This chapter describes how to use the \LaTeX{} class \texttt{iselthesis}. This class is a major rewrite of templates used in several universities, which were in turn adapted from the FCT-UNL template \cite{novathesis-manual}. We aimed at providing an improved visual layout and, simultaneously, a \emph{very easy to use} template (aka, a \LaTeX{} template for dummies).
 
-This chapter describes how to use the \LaTeX~ style \texttt{thesis{}}. This style file is a major rewrite from the most of Universities, which was in turn adapted from a style file from the FCT-UNL \cite{novathesis-manual}.  We aimed at providing an improved visual layout and, simultaneously, a \emph{very easy to use} template (aka, a  \LaTeX~ template for dummies). 
+The main design principle is simple: \textbf{you never edit the main file \texttt{template.tex} nor the class files}. Everything you need to change (document type, language, title, author, chapters, \ldots) is set in the small configuration files inside the \texttt{Config} directory.
 
-% \noindent%
+\noindent%
 \fbox{%
-\begin{minipage}{\linewidth}
-	The first main rule you must know is that \textbf{you must} specify the encoding of your text files. A simple \emph{rule of thumb} is: if you are using Windows add 'latin1' to the list of package options; if you are using other systems, such as Linux or Mac OSx, add 'utf8' to the list of package options.
+\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+	\textbf{Text encoding.} All your \texttt{.tex} and \texttt{.bib} files \textbf{must} be saved in \textbf{UTF-8}. This is the default in all modern editors (Overleaf, TeXstudio, VS Code, TeXShop, \ldots). If accented characters (e.g., ``ç'', ``ã'') appear wrong in the PDF, check the encoding of the file in your editor.
 \end{minipage}%
 }
 % section introduction (end)
@@ -30,148 +32,208 @@ This chapter describes how to use the \LaTeX~ style \texttt{thesis{}}. This styl
 \section{Folder Structure} % (fold)
 \label{sec:folder_structure}
 
-The template file for writing dissertations in  \LaTeX~ is organised into a main directory, a set of files and sub-directories:
-\begin{description}
-	\item[iselthesis] This is the main directory and includes:
-	\begin{description}
-        \item[Chapters] Directory where to put user files (text and figures). For instances, including Chapters, Dedicatory, Acknowledgments, Gantt Diagram, Appendices, Annexes\footnote{\textbf{Note}: Change the file name if you don't want to print. Like, instead of ``ganttdiagram.tex'' choose to ``ganttdiagram\_.tex'', for instance}, Abstracts, Glossaries, Lists of Symbols, etc. Replace them with your own. The ``Statement'' file is important for submitting the final version of the master's thesis. It contains the text in both languages (English and Portuguese). The author must choose one of these depending on whether they have written their dissertation in English or Portuguese respectively. This folder includes:
-		\begin{enumerate}
-		\item \textbf{scripts} Directory where you can place the code you need to insert into the text, or pseudo-code;
-		\item \textbf{img} Directory with all images of your thesis;
-		\end{enumerate}
-        \item[Config] Identify the directory where you will customise your content, including setting up chapters, appendices and appendices, and entering any personal information:
-		\begin{enumerate}
-		\item \textbf{\_cover.tex} Configure the contents of the cover: e.g. title of the thesis, author's name, names of committee members (including supervisor), date and figure;
-		\item \textbf{\_institution.tex} Fixed institutional data (university and school names). Only change this file if you are \textbf{not} from ISEL;
-        \item \textbf{\_files.tex} Select the files for chapters, appendices, annexes, abstracts, glossaries, etc;
-        \item \textbf{\_packages.tex} User customisation. Load additional packages and define your own commands to be used throughout the documentation.
-		\end{enumerate}
-		\item[Logo] Directory with Faculty logos;
-		\item[Scripts] Directory with useful bash scripts, e.g., for cleaning all temporary files;
-		\item \textbf{alpha-pt.bst} A file with bibliography names in portuguese, e.g., 'Relatório Técnico' e 'Tese de Mestrado' instead of 'Technical Report' and 'Master Thesis'. This file is used automatically if Portuguese is selected as the main language (see below);
-		\item[template.tex] The main file. You should run  \LaTeX~ in this one. Please refrain from changing the file content outside of the well defined area;
-		\item[bibliography.bib] The bib file. An easy way to find to import citation into \texttt{bibtex} is select option \texttt{Show links to import citation into
-Bib\-Tex} in \href{http://scholar.google.pt/scholar_settings?hl=en&as_sdt=0,5}{\texttt{Scholar google settings}}.
-		\item[iselthesis.cls] The  \LaTeX~ class file for the thesis{} style. {\color{red}This file should not be changed}, unless you're ready to play with fire! :)
-	\end{description}
-\end{description}
+The template is organised into a main directory (\texttt{iselthesis}) with the files and sub-directories listed in \tablename~\ref{tab:folders}. The last column tells you whether you are expected to edit each item.
 
-Again, we would like to recall that all the user \LaTeX~ files should be stored in the \verb!iselthesis! directory, and all the images in \verb!iselthesis/Chapters/img! directory.\todo[inline]{Yet another note!}
-% section folder_structure (end)
+\newcommand{\edityes}{\textbf{\color{ForestGreen}yes}}
+\newcommand{\editno}{\textbf{\color{red}no}}
 
-% ===================
-% = Package options =
-% ===================
-\section{Package Options} % (fold)
-\label{sec:package_options}
-
-The thesis style includes the following options (see \tablename~\ref{tab:vardescription}), that must be included in the options list in the \texttt{\textbackslash documentclass[options]} line at the top of the \texttt{template.tex} file.
-
-The list below aggregates related options in a single item. For each list, the default value is prefixed with a asterisk (*).
-
-\begin{xltabular}{\linewidth}{ >{\bfseries}l   X }
-\caption{Description of options used in this document}
-\label{tab:vardescription}                                  
-\addtocounter{table}{-1}                  \\
+\begin{xltabular}{\linewidth}{ >{\ttfamily}l X c }
+\caption{Folders and files of the template}
+\label{tab:folders} \\
     \toprule
-\textbf{Options} & \textbf{Definition and values}  \\
+\textbf{\sffamily Item} & \textbf{Content} & \textbf{Edit?} \\
     \midrule
 \endfirsthead
-\caption[]{Description of options used in this document (Cont.)} \\
+\caption[]{Folders and files of the template (Cont.)} \\
     \toprule
-\textbf{Options} & \textbf{Definition and values}      \\
+\textbf{\sffamily Item} & \textbf{Content} & \textbf{Edit?} \\
     \midrule
 \endhead
-    \multicolumn{2}{r}{\footnotesize\textit{Continue on the next page}}
+    \multicolumn{3}{r}{\footnotesize\textit{Continued on the next page}}
+\endfoot
+    \bottomrule
+\endlastfoot
+% ---------------------------------------------------------
+\multicolumn{3}{l}{\color{iselorange}\bfseries Your content} \\
+Chapters/ & Your text files: chapters, abstracts, acknowledgements, statement, glossaries, Gantt diagram, appendices, annexes, etc. Replace the examples with your own. & \edityes \\
+Chapters/img/ & All the images of your document. & \edityes \\
+Chapters/scripts/ & Code or pseudo-code to be included in the text. & \edityes \\
+bibliography.bib & Your bibliographic references (see below). & \edityes \\
+\midrule
+% ---------------------------------------------------------
+\multicolumn{3}{l}{\color{iselorange}\bfseries Configuration (folder \texttt{Config/})} \\
+/\_options.tex & Document options: degree, type, language, media, etc. (Section~\ref{sec:document_options}). & \edityes \\
+/\_cover.tex & Cover contents: title, author, advisers, committee, date. & \edityes \\
+/\_files.tex & Which files are included: chapters, abstracts, appendices, etc. & \edityes \\
+/\_memoir.tex & Paper size, font size and \texttt{draft}/\texttt{final} mode. & \edityes \\
+/\_packages.tex & Your own packages and commands. & \edityes \\
+/\_institution.tex & University and school names. & only if not ISEL \\
+template.xmpdata & PDF/A metadata: author, title, keywords, language. Must match \texttt{Config/\_cover.tex}. & \edityes \\
+\midrule
+% ---------------------------------------------------------
+\multicolumn{3}{l}{\color{iselorange}\bfseries Template (do not edit)} \\
+template.tex & The main file: run LuaLaTeX on this one. & \editno \\
+iselthesis.cls & The class file. & \editno \\
+ISELthesis-files/ & Internal files of the class. \textbf{None of them should be changed}: & \editno \\
+\quad Chap-Styles/ & Chapter heading styles. & \editno \\
+\quad Default/ & Institutional defaults: cover layout, margins, colours, section styles (\texttt{defaults.clo}) and course definitions (\texttt{courses.clo}). & \editno \\
+\quad Font-Styles/ & Font configuration and the Verdana font files. & \editno \\
+\quad Strings/ & Fixed texts of the template in English and Portuguese (cover, abstract, statement, etc.). & \editno \\
+\quad user-sty/ & Auxiliary packages used by the class. & \editno \\
+\quad fix-babel.clo & Corrections to the \texttt{babel} translations. & \editno \\
+\quad lang-conf.clo & Configuration of the supported languages. & \editno \\
+\quad manual-bib.bib & References cited in this manual. & \editno \\
+\quad options.clo & Definition of the document options and their defaults. & \editno \\
+\quad packages.clo & Packages loaded by the class. & \editno \\
+\quad version.sty & Version of the template. & \editno \\
+Logo/ & Institutional logos and cover backgrounds. & \editno \\
+Scripts/ & Utility scripts, e.g., to clean temporary files. & \editno \\
+\end{xltabular}
+
+A few notes:
+\begin{itemize}
+	\item \textbf{Excluding a file.} To leave a file out of the document, remove it from \texttt{Config/\_files.tex}, or rename it (e.g., \texttt{ganttdiagram\_.tex} instead of \texttt{ganttdiagram.tex}).
+	\item \textbf{Statement.} The statement file is required for the final version of the master's dissertation (\texttt{docdegree=msc}). It exists in English and Portuguese; the one matching the main language of the document is used.
+	\item \textbf{References.} An easy way to obtain BibTeX entries is to enable \texttt{Show links to import citation into Bib\-TeX} in the \href{http://scholar.google.pt/scholar_settings?hl=en&as_sdt=0,5}{Google Scholar settings}.
+\end{itemize}
+
+Again, we would like to recall that all your \LaTeX{} files should be stored in the \verb!Chapters! directory, and all the images in the \verb!Chapters/img! directory.
+% section folder_structure (end)
+
+% ====================
+% = Document options =
+% ====================
+\section{Document Options} % (fold)
+\label{sec:document_options}
+
+The document options are \textbf{not} given in the \texttt{\textbackslash documentclass[\ldots]} line of \texttt{template.tex}. Instead, they are set in the file \texttt{Config/\_options.tex}, using the command \texttt{\textbackslash iselthesissetup}:
+
+\begin{Verbatim}[breaklines=true, breakanywhere=true]
+\iselthesissetup{
+  docdegree      = msc,          % msc, mscprep, bsc
+  doctype        = dissertation, % dissertation, project
+  lang           = en,           % en, pt
+  coverlang      = en,           % en, pt
+  printcommittee = true,         % true, false
+  media          = screen,       % screen, paper
+  linkscolor     = darkblue,     % darkblue, black
+}
+\end{Verbatim}
+
+Any option omitted from this file keeps its default value. Options are applied in the following order, and the last one wins:
+\begin{enumerate}
+	\item the institutional defaults (in \texttt{ISELthesis-files/options.clo});
+	\item options given in \texttt{\textbackslash documentclass[\ldots]}, if any (kept only for compatibility with older versions of the template);
+	\item the options in \texttt{Config/\_options.tex}.
+\end{enumerate}
+
+Some options are fixed by the institution, to guarantee that all documents follow the ISEL graphic guidelines, and should not be changed: the font (Verdana, or a similar sans-serif font), the chapter style (\texttt{isel}), the place of the lists of figures and tables (\texttt{front}) and the bibliography style (numeric, \texttt{biblatex}).
+
+Table~\ref{tab:vardescription} lists the available options. For each option, the default value is marked with an asterisk (*).
+
+\begin{xltabular}{\linewidth}{ >{\bfseries}l X l }
+\caption{Description of the document options}
+\label{tab:vardescription}                  \\
+    \toprule
+\textbf{Option} & \textbf{Definition and values} & \textbf{Set in} \\
+    \midrule
+\endfirsthead
+\caption[]{Description of the document options (Cont.)} \\
+    \toprule
+\textbf{Option} & \textbf{Definition and values} & \textbf{Set in} \\
+    \midrule
+\endhead
+    \multicolumn{3}{r}{\footnotesize\textit{Continued on the next page}}
 \endfoot
     \bottomrule
 \endlastfoot
 % table body
-docdegree   &  \textbf{Document degree}: Master -- msc(*), Preparation of Master -- mscprep and Bachelor -- bsc degree. \\ \midrule
-doctype & \textbf{Type of document}: dissertation(*) or project. \\ \midrule
-lang    &  \textbf{The main language for the document}: English -- en(*) and Portuguese -- pt.  \\  \midrule
-coverlang   &  \textbf{The language to be used when typesetting the cover page}: English -- en(*) and Portuguese -- pt.   \\  \midrule
-fontstyle & \textbf{The font set to be used in the document}: baskervaldx bookman charter ebgaramond fbb fourier garamond heuristica kpfonts libertine mathpazo1 mathpazo2 newcent newpx newtx verdana(*) \\  \midrule
-chapstyle   & \textbf{The chapter style to be used in the document}: bianchi bluebox brotherton dash default elegant ell ger hansen isel(*) jenor lyhne madsen pedersen veelo vz14 vz34 vz43  \\  \midrule
-otherlistsat &   \textbf{Place where to put the other lists besides the table of contents}: front(*) and back. \\  \midrule
-linkscolor & \textbf{The color for all the hyperlinks in the PDF file}: darkblue, black (Set to 'black' for PRINTING). \\ \midrule
-printcommittee &  \textbf{List of the committee members}: set to 'false' from submitted versions who should not have the list of committee members.   \\ \midrule
-biblatex  & \textbf{Customize} \href{https://ctan.org/pkg/biblatex?lang=en}{\texttt{biblatex}}, the bibliography management system used in this class: list of options.  \\ \midrule
-memoir  & \textbf{Customize the base class} \href{https://ctan.math.illinois.edu/macros/latex/contrib/memoir/memman.pdf}{\texttt{memoir}}: list of options.  \\ \midrule
-media  & \textbf{The target of the PDF}: screen(*) or paper.\\
-\bottomrule
+docdegree   & \textbf{Document degree}: master's dissertation -- msc(*), preparation of the master's dissertation -- mscprep, and bachelor's report -- bsc. & \texttt{\_options.tex} \\ \midrule
+doctype & \textbf{Type of document}: dissertation(*) or project. & \texttt{\_options.tex} \\ \midrule
+lang    & \textbf{Main language of the document}: English -- en(*) or Portuguese -- pt. & \texttt{\_options.tex} \\ \midrule
+coverlang   & \textbf{Language of the cover pages}: English -- en or Portuguese -- pt(*). & \texttt{\_options.tex} \\ \midrule
+printcommittee & \textbf{Print the list of committee members} on the second cover: true(*) or false. Set to false in submitted versions, before the committee is appointed. & \texttt{\_options.tex} \\ \midrule
+media  & \textbf{Target of the PDF}: screen(*) or paper (see Section~\ref{sub:printing}). & \texttt{\_options.tex} \\ \midrule
+linkscolor & \textbf{Colour of the hyperlinks in the PDF}: darkblue(*) or black (set to black for printing). & \texttt{\_options.tex} \\ \midrule
+memoir  & \textbf{Options of the base class} \href{https://ctan.org/pkg/memoir}{\texttt{memoir}}: a4paper, 11pt, draft or final. Set with \texttt{\textbackslash ncmemoirsetup\{\ldots\}}. & \texttt{\_memoir.tex} \\ \midrule
+fontstyle & \textbf{Font of the document}: Verdana (fixed by the institution). & fixed \\ \midrule
+chapstyle   & \textbf{Chapter style}: isel (fixed by the institution). & fixed \\ \midrule
+otherlistsat & \textbf{Place of the other lists} (figures, tables, \ldots): front (fixed by the institution). & fixed \\ \midrule
+biblatex  & \textbf{Options of} \href{https://ctan.org/pkg/biblatex}{\texttt{biblatex}}: numeric style, sorted by name/year/title, with back references (fixed by the institution). & fixed \\
 \end{xltabular}
 
-	
 \subsection{Language Related Options} % (fold)
 \label{sub:language_related_options}
 
-You must choose the main language for the document. The available options are:
+You must choose the main language of the document (option \texttt{lang}). The available values are:
 
 \begin{enumerate}
-	\item \textbf{pt} --- The document is written in Portuguese (with a small abstract in English).
-	\item \textbf{en} --- The document is written in English (with a small abstract in Portuguese).
+	\item \textbf{en} --- The document is written in English (with an abstract in Portuguese).
+	\item \textbf{pt} --- The document is written in Portuguese (with an abstract in English).
 \end{enumerate}
 
 The language option affects:
 \begin{itemize}
-	\item \textbf{The order of the summaries.} At first the abstract in the main language and then in the foreign language. This means that if your main language for the document in english, you will see first the abstract (in english) and then the 'resumo' (in portuguese). If you switch the main language for the document, it will also automatically switch the order of the summaries.
-	\item \textbf{The names for document sectioning.} E.g., 'Chapter' vs.\ 'Capítulo', 'Table of Contents' vs.\ 'Índice', 'Figure' vs.\ 'Figura', etc.
-	\item \textbf{The type of documents in the bibliography.} E.g., 'Technical Report' vs.\ 'Relatório Técnico', 'MSc Thesis' vs.\ 'Tese de Mestrado', etc.
-\end{itemize} 
+	\item \textbf{The order of the abstracts.} First the abstract in the main language and then the one in the other language. If the main language is English, you will see first the ``Abstract'' and then the ``Resumo''. If you switch the main language, the order is switched automatically.
+	\item \textbf{The names of the document parts.} E.g., ``Chapter'' vs.\ ``Capítulo'', ``Contents'' vs.\ ``Índice'', ``Figure'' vs.\ ``Figura'', etc.
+	\item \textbf{The labels in the bibliography.} E.g., ``Technical Report'' vs.\ ``Relatório Técnico'', ``MSc Thesis'' vs.\ ``Tese de Mestrado'', etc.
+\end{itemize}
 
-No mater which language you chose, you will always have the appropriate hyphenation rules according to the language at that point. You always get portuguese hyphenation rules in the 'Resumo', english hyphenation rules in the 'Abstract', and then the main language hyphenation rules for the rest of the document. If you need to force hyphenation write inside of \verb!\hyphenation{}! the hyphenated word, e.g. \\ 
-\verb!\hyphenation{op-ti-cal net-works}!.
-% section package_options (end)
+The option \texttt{coverlang} sets the language of the cover pages independently of the main language. In most cases it should be the same as \texttt{lang}.
+
+No matter which language you choose, you will always have the appropriate hyphenation rules for the language in use at each point: Portuguese rules in the ``Resumo'', English rules in the ``Abstract'', and the main language rules in the rest of the document. If you need to force the hyphenation of a word, write it inside \verb!\hyphenation{}! in \texttt{Config/\_packages.tex}, e.g., \verb!\hyphenation{op-ti-cal net-works}!.
+% subsection language_related_options (end)
 
 \subsection{Class of Text} % (fold)
 \label{sub:class_of_text}
 
-You must choose the class of text for the document. The available options are:
+You must choose the class of text for the document (option \texttt{docdegree}). The available values are:
 
 \begin{enumerate}
-	\item \textbf{bsc} --- BSc graduation report.
-	\item \textbf{mscprep} --- Preparation of MSc dissertation. This is a preliminary report graduate students at ISEL/IPL must prepare to conclude the first semester of the two-semesters MSc work. The files specified by 
+	\item \textbf{bsc} --- Bachelor's (BSc) project report. The second cover page includes signature lines for the author and the advisers.
+	\item \textbf{mscprep} --- Preparation of the MSc dissertation. This is a preliminary report that ISEL/IPL master's students prepare to conclude the first semester of the two-semester MSc work. The files specified by 
 	\begin{inparaenum}
-	\item \verb!\dedicatoryfile! and 
-	\item \verb!\acknowledgmentsfile! 
+		\item \verb!\dedicatoryfile!,
+		\item \verb!\acknowledgementsfile! and
+		\item \verb!\quotefile!
 	\end{inparaenum}
-	are ignored, even if present, for this class of document.
-	\item \textbf{msc} --- MSc dissertation.
+	are ignored, even if present, for this class of document. There is no second cover page.
+	\item \textbf{msc} --- MSc dissertation. Includes a second cover page with the advisers and the committee, and the statement and copyright pages.
 \end{enumerate}
-%% subsection class_of_text (end)
-%
-%% ============
-%% = Printing =
-%% ============
+% subsection class_of_text (end)
+
+% ============
+% = Printing =
+% ============
 \subsection{Printing} % (fold)
 \label{sub:printing}
 
-You must choose how your document will be printed. The available options are:
+You must choose the target media of your document (option \texttt{media}). The available values are:
 
 \begin{enumerate}
-\item \textbf{media}(*) --- Single side page printing, and
-\item \textbf{paper} --- Double sided page printing.
+	\item \textbf{screen}(*) --- For reading on screen: left and right margins are equal and hyperlinks are coloured;
+	\item \textbf{paper} --- For printing: left and right margins are different (wider binding margin) and hyperlinks are black.
 \end{enumerate}
 
-The article 50th, of Decree-Law No. 115/2013, requires the deposit of a digital copy of doctoral thesis and master's dissertations in a repository that is part of the RCAAP  repository\footnote{Repositórios Científicos de Acesso Aberto de Portugal}, \url{https://www.rcaap.pt}.  This deposit aims to preserve scientific work, as well as providing Open Access to scientific production is not restricted object or embargo.
+Article 50 of Decree-Law No.~115/2013 requires the deposit of a digital copy of doctoral theses and master's dissertations in a repository that is part of RCAAP\footnote{Repositórios Científicos de Acesso Aberto de Portugal}, \url{https://www.rcaap.pt}. This deposit aims to preserve scientific work and to provide Open Access to scientific production that is not subject to restrictions or embargo.
 
-For the reason explained above, we include the option to format your thesis in a way that presents well on screen and/or on paper. But always remember that your work will be stored in the RCAAP portal in electronic format.
+For this reason, we include the option to format your document so that it presents well on screen and/or on paper. But always remember that your work will be stored in the RCAAP portal in electronic format.
 % subsection printing (end)
 
+% ===================
+% = Draft and final =
+% ===================
+\subsection{Draft and Final Versions} % (fold)
+\label{ssec:draft_final}
 
-% =================
-% = Text encoding =
-% =================
-\subsection{Text Encoding} % (fold)
-\label{ssec:text_encoding}
+The options of the base class \texttt{memoir} are set in \texttt{Config/\_memoir.tex}:
 
-You must choose the font size for your document. The available options are:
-\begin{enumerate}
-	\item \textbf{latin1} --- Use Latin-1 (\href{http://en.wikipedia.org/wiki/ISO/IEC_8859-1}{ISO 8859-1}) encoding.  Most probably you should use this option if you use Windows;
-	\item \textbf{utf8} --- Use \href{http://en.wikipedia.org/wiki/UTF-8}{UTF8} encoding.    Most probably you should use this option if you are not using Windows.
-\end{enumerate}
-% subsection font_size (end)
+\begin{Verbatim}[breaklines=true, breakanywhere=true]
+\ncmemoirsetup{a4paper,11pt,final}   % draft | final
+\end{Verbatim}
+
+While writing, you may use \texttt{draft}: the cover shows ``DRAFT'' and the current date. Replace it with \texttt{final} for the version you submit.
+% subsection draft_final (end)
 
 % ============
 % = Examples =
@@ -179,51 +241,41 @@ You must choose the font size for your document. The available options are:
 \subsection{Examples} % (fold)
 \label{ssec:examples}
 
-Let's have a look at a couple of examples:
+Let's have a look at a few examples of \texttt{Config/\_options.tex}:
 
 \begin{itemize}
-	\item BSc graduation report, in portuguese, considering printing on screen)\\
- 	\verb!documentclass[docdegree=bsc, lang=pt, media=screen]{iselthesis}!
- 	\item Preparation of MSc thesis, in portuguese, with link color equal to black (I wonder why one would do this!). Note that, \verb!pt! is declared by default, so it can be omitted: \\
-	\verb!documentclass[docdegree=mscprep, lang=pt, linkcolor=black]{iselthesis}!
-	\item MSc's project, in english and to be printed single sided on screen. Note that, \verb!twoside! and \verb!12pt! are declared by default, so it can be omitted: \\
-	\verb!documentclass[docdegree=msc, doctype=project, lang=en,!\\
-    \verb!media=screen]{iselthesis}!
+	\item BSc project report, in Portuguese, to be read on screen:
+\begin{Verbatim}
+\iselthesissetup{docdegree=bsc, lang=pt, coverlang=pt}
+\end{Verbatim}
+	\item Preparation of the MSc dissertation, in Portuguese, with black links:
+\begin{Verbatim}
+\iselthesissetup{docdegree=mscprep, lang=pt, coverlang=pt,
+                 linkscolor=black}
+\end{Verbatim}
+	\item MSc project, in English, to be printed on paper:
+\begin{Verbatim}
+\iselthesissetup{docdegree=msc, doctype=project, lang=en,
+                 coverlang=en, media=paper, linkscolor=black}
+\end{Verbatim}
 \end{itemize}
 
-
-The present document is defined according to the following settings:
+The present document uses the following \texttt{Config/\_options.tex}:
 \begin{Verbatim}[breaklines=true, breakanywhere=true]
-documentclass[
-  docdegree=msc,        % msc(*), mscprep, bsc
-  doctype=dissertation, % dissertation(*), project
-  lang=pt,              % en, pt(*)
-  coverlang=pt,         % defaults to main language
-  fontstyle=verdana,    % baskervaldx ... verdana(*) 
-  chapstyle=isel,       % bianchi ... isel(*) jenor vz43
-  otherlistsat=front,   % front(*), back
-  linkscolor=darkblue,  % darkblue(*), black 
-  printcommittee=true,  
-  biblatex={   % Options for biblatex (see biblatex documentation)
-	sorting=nyt,        % none, nyt(*), ynt
-        backref=true,       % true(*), false
-    maxbibnames=99,			% Never use 'et al' 
-    hyperref=true       % Hyperlinks in citations: true(*) false
-	},
-  memoir={	            % See the 'memoir' documentation
-    a4paper,            % the paper size/format
-    11pt,               % 10pt, 11pt(*), 12pt
-    final,              % draft, final  
-    },
-  media=screen,         % screen(*), paper
-]{iselthesis}
+\iselthesissetup{
+  docdegree      = msc,
+  doctype        = dissertation,
+  lang           = pt,
+  coverlang      = pt,
+  printcommittee = true,
+  media          = screen,
+  linkscolor     = darkblue,
+}
 \end{Verbatim}
-
 % subsection examples (end)
 	
-\section{How to Write Using \texttt{LaTeX}} % (fold)
+\section{How to Write Using \LaTeX} % (fold)
 \label{sec:how_to_write_using_latex}
 
-Please have a look at Chapter~\ref{cha:a_short_latex_tutorial_with_examples}, where you may find many examples of \href{http://tobi.oetiker.ch/lshort/lshort.pdf}{\LaTeX} constructs, such as sectioning, inserting figures and tables, writing equations, theorems and algorithms, exhibit code listings, etc.
-
-%% section how_to_write_using_latex (end)
+Please have a look at Chapter~\ref{cha:a_short_latex_tutorial_with_examples}, where you may find many examples of \href{http://tobi.oetiker.ch/lshort/lshort.pdf}{\LaTeX} constructs, such as sectioning, inserting figures and tables, writing equations, theorems and algorithms, code listings, etc.
+% section how_to_write_using_latex (end)

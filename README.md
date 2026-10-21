@@ -1,267 +1,205 @@
 <p align="center">
-    <a href="https://sulu.io/" target="_blank">
+    <a href="https://www.isel.pt" target="_blank">
         <img width="75%" src="Logo/01_ISEL-Logotipo-RGB_Horizontal.png" alt="ISEL logo">
     </a>
+</p>
+
+<p align="center">
 
 [![GitHub forks](https://img.shields.io/github/forks/matpato/iselthesis.svg?style=social&label=Fork)](https://github.com/matpato/iselthesis)
 [![GitHub stars](https://img.shields.io/github/stars/matpato/iselthesis.svg?style=social&label=Star)](https://github.com/matpato/iselthesis)
 [![GitHub watchers](https://img.shields.io/github/watchers/matpato/iselthesis.svg?style=social&label=Watch)](https://github.com/matpato/iselthesis)
-[![GitHub followers](https://img.shields.io/github/followers/matpato.svg?style=social&label=Follow)](https://github.com/matpato/iselthesis)
+[![GitHub followers](https://img.shields.io/github/followers/matpato.svg?style=social&label=Follow)](https://github.com/matpato)
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/matpato/iselthesis/graphs/commit-activity)
 [![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg?color=green)](https://www.latex-project.org/)
-[![GitHub license](https://img.shields.io/badge/License-LaTeX%20v1.3c-green.svg)](https://www.latex-project.org/lppl/lppl-1-3c)
-
-
-![![Last commit](https://github.com/matpato/iselthesis)](https://img.shields.io/github/last-commit/matpato/iselthesis?color=blue)
+[![Last commit](https://img.shields.io/github/last-commit/matpato/iselthesis?color=blue)](https://github.com/matpato/iselthesis/commits)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 </p>
+
+> [!IMPORTANT]
+> **Three rules — read these even if you read nothing else:**
+> 1. **Compile with LuaLaTeX**, not pdfLaTeX. Only LuaLaTeX uses the Verdana font required by ISEL. With pdfLaTeX the document still compiles, but with the wrong font.
+> 2. **Edit only** the `Config/` and `Chapters/` folders and your `.bib` file.
+> 3. **Do not change** `template.tex`, `iselthesis.cls` or anything in `ISELthesis-files/`.
 
 <!-- TOC BEGIN -->
 Table of Contents
 =================
 
-* [Table of Contents](#table-of-contents)
-  * [About](#about)
-  * [File Structure](#file-structure)
-  * [Compilation](#compilation)
-  * [Getting Started](#getting-started)
-    * [Configuration](#configuration)
-    * [With a Local LaTeX Installation](#local-install)
-    * [With a Remote Cloud\-based Service](#cloud-service)
-  * [Getting Help](#getting-help)
-    * [Problems and Difficulties](#problems-and-difficulties)
-    * [Suggestions, Bugs and Feature Requests](#suggestions-bugs-and-feature-requests)
-  * [Authors](#authors)
+* [About](#about)
+* [File Structure](#file-structure)
+* [Getting Started](#getting-started)
+  * [Step 1 — Get the template](#step-1)
+  * [Step 2 — Select LuaLaTeX](#step-2)
+  * [Step 3 — Configure your document](#step-3)
+  * [Step 4 — Write your content](#step-4)
+  * [Step 5 — Compile](#step-5)
+* [Getting Help](#getting-help)
+* [Authors](#authors)
+* [License](#license)
 <!-- TOC END -->
 
 ## About
 
-This LaTeX-template might be used to write a bachelor or master thesis at the Department of Electronical Engineering, Telecommunications and Computers (DEETC) and Department of Computer Science and Engineering (DEI) at [Lisbon School of Engineering](https://www.isel.pt) of Polytechnic Institute of Lisbon. 
+This LaTeX template is used to write bachelor's project reports and master's dissertations at the Department of Electronic Engineering, Telecommunications and Computers (DEETC) and the Department of Computer Science and Engineering (DEI) of the [Lisbon School of Engineering (ISEL)](https://www.isel.pt), Polytechnic Institute of Lisbon.
 
-It is adapted to the current style guide for bachelor and master theses in the ISEL, as outlined in [Normas de escrita e apresentação de trabalhos finais de curso](https://www.isel.pt/informacoes-academicas/normas-trabalhos-finais).
+It follows the ISEL style guide, [Normas de escrita e apresentação de trabalhos finais de curso](https://www.isel.pt/informacoes-academicas/normas-trabalhos-finais), and supports three types of document:
 
-This template serves both degrees as a bachelor's and master's degree. And, during the development stages of the work as final or "Preparation of BSc (MSc) dissertation". 
+| `docdegree` | Document |
+|:-----------:|:---------|
+| `bsc`       | Bachelor's project report |
+| `mscprep`   | Preparation of the master's dissertation (end of the 1st semester) |
+| `msc`       | Master's dissertation (final version) |
+
+The compiled `template.pdf` is also the **user manual** of the template: Chapter 2 describes the structure and options, and Chapter 3 the compilation and many LaTeX examples.
 
 ## File Structure
 
-After completing the setup, your Overleaf project should look like this:
-
 ```
-Your Overleaf Project/
+iselthesis/
 │
-├── template.tex ........................ Main thesis file
-├── template.xmpdata .................... NEW FILE 
-├── iselthesis.cls ...................... Class file 
-├── changelog.txt ....................... No changes
-├── Makefile ............................ No changes
+├── template.tex ................. Main file — compile this one        ✗ do not edit
+├── template.xmpdata ............. PDF/A metadata (author, title…)      ✓ edit
+├── iselthesis.cls ............... Class file                          ✗ do not edit
+├── Makefile
+├── changelog.txt
+│
+├── Config/ ...................... YOUR SETTINGS                       ✓ edit
+│   ├── _options.tex ............. Degree, language, media, link colour
+│   ├── _cover.tex ............... Title, author, advisers, committee, date
+│   ├── _files.tex ............... Which chapters, abstracts, appendices… to include
+│   ├── _memoir.tex .............. Paper size, font size, draft/final
+│   ├── _packages.tex ............ Your own packages and commands
+│   └── _institution.tex ......... University/school names (only if not ISEL)
+│
+├── Chapters/ .................... YOUR CONTENT                        ✓ edit
+│   ├── abstract-en.tex
+│   ├── abstract-pt.tex
+│   ├── chapter1.tex …
+│   ├── img/ ..................... Your images
+│   └── scripts/ ................. Code to include in the text
 │
 ├── Bibliography/
-│   └── bibliography.bib
+│   └── bibliography.bib ......... Your references                     ✓ edit
 │
-├── Chapters/
-│   ├── chapter1.tex ................... Your chapters
-│   ├── chapter2.tex
-│   ├── abstract-en.tex ................ English abstract
-│   ├── abstract-pt.tex ................ Portuguese abstract
-│   └── (other chapters)
+├── ISELthesis-files/ ............ Internal class files                ✗ do not edit
+│   ├── Chap-Styles/  Default/  Font-Styles/  Strings/  user-sty/
+│   └── fix-babel.clo  lang-conf.clo  options.clo  packages.clo  …
 │
-├── Config/
-│   ├── _cover.tex ..................... Your author/title here
-│   ├── _files.tex ..................... Chapter list
-│   ├── _department.tex ................ Department info
-│   └── _packages.tex .................. Custom packages
-│
-├── ISELthesis-files/
-│   ├── Default/
-│   │   └── defaults.clo
-│   ├── lang-conf.clo
-│   ├── packages.clo
-│   ├── options.clo
-│   └── (other class support files)
-│
-└── Logo/
-    ├── capa.pdf ....................... Cover background
-    ├── subcapa.pdf .................... Second cover background
-    ├── logoisel.pdf ................... ISEL logo
-    └── (other logos)
+└── Logo/ ........................ Logos and cover backgrounds         ✗ do not edit
 ```
-
-## Compilation Steps
-1. Ensure your .xmpdata file exists with correct metadata
-2. Compile with pdflatex:
-   $ pdflatex template.tex
-3. Run again to resolve references:
-   $ pdflatex template.tex
-4. If using bibliography, run bibtex/biber and compile again
 
 ## Getting Started
 
-In the following, we explain how to actually use, i.e. add content and compile, the thesis template to create a nice and shiny PDF file that will please your supervisor.
+### Step 1 — Get the template <a name="step-1"></a>
 
-### Configuration
+Choose one:
 
-The LaTeX template can be modified and configured easily using a very limited number of files, namely in _Config_ and _Chapters_ folders, and _template.tex_-file. Only use these two directories and one file to modify your LaTeX thesis. Please _DO NOT_ modify the actual LaTeX code for your thesis (as this becomes quite complex and consumes a lot of time). 
+* **Overleaf (cloud):** open the [ISELthesis template on Overleaf](https://www.overleaf.com/latex/templates/isel-thesis/jgfhgbpcfxyz) and select <kbd>Open as Template</kbd>. Alternatively, download the [Zip file](https://github.com/matpato/iselthesis/archive/refs/heads/master.zip), then <kbd>New Project</kbd> → <kbd>Upload Project</kbd>, and make sure `template.tex` is the main document.
+* **Local installation:** install a LaTeX distribution — [TeX Live](https://www.tug.org/texlive/) (Windows/Linux), [MacTeX](https://www.tug.org/mactex/) (macOS) or [MiKTeX](https://miktex.org) — and get the template:
+  ```
+  git clone --depth=1 https://github.com/matpato/iselthesis.git
+  ```
+  or download the [Zip file](https://github.com/matpato/iselthesis/archive/refs/heads/master.zip).
 
-Please find a brief description of the various configuration options below:
+> [!WARNING]
+> Overleaf's free plan has a short compile-time limit, and a full dissertation may exceed it. If that happens, use a local installation or an Overleaf student plan.
 
-#### template.tex
+### Step 2 — Select LuaLaTeX <a name="step-2"></a>
 
-The _template.tex_ file contains the basic structure and all the chapter-files that contain the actual content of your thesis. Thus, you have to modify this file in order to configure some basic stuff like the language of your thesis here: 
+Most editors use pdfLaTeX by default, so **change the compiler once**:
+
+| Editor | Where |
+|:-------|:------|
+| Overleaf | Menu → Settings → Compiler → **LuaLaTeX** |
+| TeXstudio | Options → Configure TeXstudio → Build → Default Compiler → **LuaLaTeX** |
+| VS Code (LaTeX Workshop) | Recipe **latexmk (lualatex)** |
+| TeXShop | Typeset menu in the toolbar → **LuaLaTeX** |
+
+The Verdana font files are included in `ISELthesis-files/Font-Styles/` — there is nothing to install. Just make sure that folder is uploaded/copied with the rest of the template.
+
+### Step 3 — Configure your document <a name="step-3"></a>
+
+All settings live in the `Config/` folder. You **never** need to edit `template.tex`.
+
+**`Config/_options.tex`** — the type and language of your document:
+
+```latex
+\iselthesissetup{
+  docdegree      = msc,          % msc, mscprep, bsc
+  doctype        = dissertation, % dissertation, project
+  lang           = en,           % en, pt
+  coverlang      = en,           % en, pt
+  printcommittee = true,         % false before the committee is appointed
+  media          = screen,       % screen, paper
+  linkscolor     = darkblue,     % darkblue, black (for printing)
+}
+```
+
+**`Config/_memoir.tex`** — paper and draft/final mode:
+
+```latex
+\ncmemoirsetup{a4paper,11pt,final}   % use draft while writing
+```
+
+**`Config/_cover.tex`** — your title, name, advisers, committee and date.
+
+**`template.xmpdata`** — the PDF/A metadata (author, title, keywords, language). Use plain text and the **same** title and name as in `_cover.tex`.
+
+The font, chapter style and bibliography style are fixed by the institution and cannot be changed.
+
+### Step 4 — Write your content <a name="step-4"></a>
+
+* **Abstracts:** write them in `Chapters/abstract-pt.tex` and `Chapters/abstract-en.tex`. Both are required; the one in the main language is printed first. Maximum one page / 300 words each, with at least 3 keywords.
+* **Chapters:** put each chapter in its own file in `Chapters/` and list it in `Config/_files.tex`. The same file lists appendices, annexes, glossaries, etc.
+* **Images:** put them in `Chapters/img/`. Use PDF (preferably vector), PNG or JPEG. EPS is not supported by LuaLaTeX.
+* **References:** add them to `Bibliography/bibliography.bib`. Google Scholar can export BibTeX entries (enable it in Scholar settings).
+
+### Step 5 — Compile <a name="step-5"></a>
+
+In your editor, just press compile (with LuaLaTeX selected). From the command line:
 
 ```
-    \documentclass[
-        docdegree=msc,       
-        doctype=dissertation, 
-        lang=en,             
-        coverlang=pt,        
-        fontstyle=verdana,   
-        chapstyle=isel,    
-        otherlistsat=front,   
-        linkscolor=darkblue,  
-        printcommittee=true, 
-        biblatex={            
-            backend=bibtex,		  
-            style=numeric-comp, 
-            sortcites=true,     
-            sorting=nyt,       
-            maxbibnames=99,			
-            firstinits=true,   
-            hyperref=true,
-            backref=true,      
-        },
-        memoir={	          
-            a4paper,          
-            11pt,              
-        },
-        media=screen,         
-        ]{iselthesis}
+latexmk -lualatex template
 ```
 
-#### Writing abstracts
+or manually:
 
-Every thesis has to have two abstracts; one in Portuguese and one in English. Thus, there are two abstract files included in the _template.tex_-file. Boths files, called _abstract-en.tex_ for the English abstract and _abstract-pt.tex_ for the Portuguese abstract, are located in the _Chapters_ directory.
+```
+lualatex template
+bibtex   template
+lualatex template
+lualatex template
+```
 
-You have to modify both these files and place your abstract text in _abstract-en.tex_ and _abstract-pt.tex_ respectively.
+The result is `template.pdf`. To check the font, open *File → Properties → Fonts* in your PDF viewer: **Verdana** must be listed.
 
-#### Adding content
+The Makefile provides shortcuts on Linux/macOS:
 
-By default, the thesis template, i.e. the _template.tex_-file, contains (includes) some default content files for chapters and appendix from the _Chapters_-directory. You have to add, or remove in _Config/_ __files.tex_ your own files. Please note that it is best practice to put all your content in separate files.
-
-##### Bibliographies
-
-By default all bibliographies that can be referenced in the thesis are put into the _bibliography.bib_ file in the _Bibliography_ directory of the LaTeX sources. However, if you want to use additional bibliography files, you may add them.
-
-##### Language
-
-The default language of your thesis is English. If you want to switch to Portuguese, you have to modify the language selection `lang=en` option.
-
-##### Personal data
-
-This is where you have to place all the personal stuff of your thesis in the __cover.tex_-file.
-
-
-### With a Local LaTeX Installation <a name="local-install"></a>
-
-*[See below](#cloud-service) for alternatives to a local LaTeX installation*
-
-*See [minimal installation](https://en.wikibooks.org/wiki/LaTeX/Installation#Minimal_installation) for instructions on how to build/use a minimal installation of LaTeX, which is just enough to compile the template successfully*
-
-1. Download LaTeX:
-   * **Windows:** install [TeX-Live](https://www.tug.org/texlive/) or [MikTeX](https://miktex.org).
-   * **Linux:** install [TeX-Live](https://www.tug.org/texlive/) or [MikTeX](https://miktex.org).
-   * **macOS:** install [MacTeX](https://www.tug.org/mactex/) (a macOS version of [TeX-Live](https://www.tug.org/texlive/)) or [MikTeX](https://miktex.org).
-2. Download `iselthesis` by either:
-   * Cloning the [GitHub repository](https://github.com/matpato/iselthesis) with <kbd>git clone --depth=1 https://github.com/matpato/iselthesis.git</kbd>; or
-   * Downloading the [latest version from the GitHub repository as a Zip file](https://github.com/matpato/iselthesis/archive/refs/heads/master.zip)
-3. Compile the document with you favorite LaTeX processor (pdfLaTeX, XeLaTeX or LuaLaTeX):
-   * The main file is named `template.tex`.
-   * Either load it in your favorite [LaTeX text editor](https://en.wikipedia.org/wiki/Comparison_of_TeX_editors). In addition, the thesis template repository contains a Makefile that allows you to compile the thesis template using the _make_ tool available on most Unix and Linux systems. Simply type:
-    
-    ```
-    $ make
-    ```  
-    to compile the LaTeX code into a PDF-file. Moreover, you may use
-
-    ```
-    $ make clean
-    ```
-
-    to remove all temporary files, which are produced during the compilation process. Finally,
-
-    ```
-    $ make tar [| zip]
-    ```
-
-    generates a `tar-package` or `zip-package` file, which contains all the source files of your LaTeX code. In case you need to create a PDF-version with embedded fonts you may use
-
-    ```
-    $ make pdf
-    ```
-
-    finally, to open the pdf you can use
-
-    ```
-    $ make v view
-    ```
-
-   * LaTeX will create the file `template.pdf`, which you may open with your favorite PDF viewer.
-
-4. TODO: The ISELthesis template ships with two Dockerfiles that create [Docker](https://www.docker.com/) container used to compile the LaTeX code. One container - built by the [Dockerfile.ci]() Docker file - is used by the CI to compile the thesis template and check its integrity at every commit. The other one - created by the [Dockerfile.local](). Docker file - might be used to build the Docker container that allows to compile the LaTeX code on your local machine without the need to install any LaTeX files. 	
-5. Edit the files in the “*Config*” folder:
-
-| File                 | Contents                                                                                             |
-|:--------------------:|:-----------------------------------------------------------------------------------------------------|
-| `_cover.tex`         | Configure cover contents (e.g., author's name, thesis/dissertation title, advisers, committee, etc)  |
-| `_department.tex`    | Configure school and department content: e.g. school name, department, major field, etc.             |
-| `_files.tex`         | Configure the files for chapters, appendices, annexes, etc.                                          |
-| `_memoir.tex`        | Options specific for the memoir package. Don't touch this file unless you know what you are doing!   |
-| `_packages.tex`      | Configure additional packages and commands                                                           |
-
-5. Recompile de document
-6. You're done with a beautifully formatted thesis/dissertation!
-
-### With a Remote Cloud-based Service <a name="cloud-service"></a>
-
-*[See above](#local-install) for using a local installation of LaTeX*
-
-*ISELthesis v4.0.0 is available as an [Overleaf template](https://www.overleaf.com/latex/templates/isel-thesis/jgfhgbpcfxyz).  Just select <kbd>open as template</kbd> and follow from [step 3 above](#local-install)!*
-
-1. Download the [latest version from the GitHub repository as a Zip file](https://github.com/matpato/iselthesis/archive/refs/heads/master.zip).
-2. Login to your favorite LaTeX cloud service. I recommend Overleaf but there are alternatives (these instructions apply to Overleaf  and you will have to adapt for other providers).
-3. In the menu select <kbd>New project</kbd>-><kbd>Upload project</kbd>
-4. Upload the zip with all the "iselthesis" files.
-5. Select “*template.tex*” as the main file.
-6. Follow from [step 3 above](#local-install)
-
-*WARNING: Overleaf reduced the compile time*
-There is no way you can compile your thesis/dissertation (using this template) within the new (20 s) time limit.  This means you have two options:
-* Install LaTeX in your computer and [use a the template locally](#local-install)!
-* Opt for a hassle free solution and [buy a (student) plan in Overleaf](https://www.overleaf.com/user/subscription/plans).
+| Command | Action |
+|:--------|:-------|
+| `make` | Compile the PDF |
+| `make clean` | Remove temporary files |
+| `make tar` / `make zip` | Package the source files |
+| `make v` / `make view` | Open the PDF |
 
 ## Getting Help
 
-### Problems and Difficulties
-
-Check the [wiki](https://github.com/matpato/iselthesis/wiki) and have some hope!
-If you couldn't find what you were looking for, ask for help in:
-
-* The [GitHub Discussions page](https://github.com/matpato/iselthesis/discussions) (only EN please) at https://github.com/matpato/iselthesis/discussions.
- 
-### Suggestions, Bugs and Feature Requests
-
-* Do you have a suggestion? Please add it to the [wiki](https://github.com/matpato/iselthesis/wiki) and help other users!
-* Did you find a bug? Please [open an issue](https://github.com/matpato/iselthesis/issues). Thanks!
+* **Problems?** Check the [wiki](https://github.com/matpato/iselthesis/wiki), then ask in [GitHub Discussions](https://github.com/matpato/iselthesis/discussions) (English, please).
+* **Found a bug?** Please [open an issue](https://github.com/matpato/iselthesis/issues).
+* **Suggestion?** Add it to the [wiki](https://github.com/matpato/iselthesis/wiki) to help other users.
 
 ## Authors
 
-	Matilde Pós-de-Mina Pato
-	Nuno Datia (as contributor)
+* Matilde Pós-de-Mina Pato
+* Nuno Datia (contributor)
 
-May, 04th 2026
+October 2026
 
-This package and template are not official for ISEL/IPL.
+*This package and template are not official for ISEL/IPL.*
 
-# License
+## License
 
 [MIT](https://choosealicense.com/licenses/mit/)

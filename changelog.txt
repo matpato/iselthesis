@@ -1,73 +1,86 @@
-*2024-06-24 — Version 4.0.0 — Template renamed to ISEL thesis (iselthesis)
-+ add Statement file for master's dissertation
-+ add option 'printcommittee' (default=true) to inhibit printing the committee (when it should be printed)
-+ add 2 covers page for final master's dissertation. The second include the affiliation of the committee, the first don't need it. The author must add all information
-+ add different kinds of chapters 
-+ add new font styles
-+ New option: *otherlistsat=front|back* to print the other lists (figures, tables, etc) after the TOC or just before the appendixes
-+ Split file “lang-text.clo”: now it contains only main language settings. The language-dependent strings now are in separate files “strings-<LANG>.clo”
-+ add support for both Appendixes and Annexes.
-*2024-09-17 — Version 4.0.1
-+ Computer Modern Bright fonts do not support details and special characters. For this reason, the font of the sections is modified in the defaults.clo file
-*2024-09-26 — Version 4.0.1
-+ Add Copyright and fix some minor errors.
-*2025-10-21 — Version 4.1
-+ Change cover and second-cover (include pdf as background)
-+ Remove image in the cover
-+ Change orientations for print committee and adviser members 
-+ Add gantt diagram
-+ Change chapters format and colors
-*2025-10-23 — Version 4.1.1
-+ The statement will now print only in the main language of the thesis
-+ Add command available in the document scope to use @ inside the tex file
-# Add template.xmpdata for the metadata file
-# Convert the template.pdf document to PDF/A-2b format
-# Delete _metadata.xmpdata file
-*2025-10-23 — Version 4.1.2
-+ Remove horizontal lines in all chapters page
-+ Change font style to verdana
-*2026-01-05 — Version 4.1.3
-+ Add algorithms and pseudo-code index
-*2026-03-07 — Version 4.2
-+ Added conditional specialization area in dissertationstr(msc,pt): "na Área de Especialização de" is now only printed when \ncspecialization is defined
-+ Fixed whitespace before comma between major field and specialization using \unskip
-+ Fixed date separator to be language-aware: uses "of" for English (coverlang=en) and "de" for Portuguese, with {} to prevent command absorbing spaces
-+ Added gender-aware pronoun for document type: "este" for project, "esta" otherwise, based on \iselthesis@opt@doctype
-+ Updated \input{Config/_department} to \input{Config/_institution}
-+ Added \iselthesis@setcourse{} command to set course-specific data
-  (major field, department, cover images) from a single acronym
-+ Removed \ncdepartment, and \ncmajorfield definitions, now handled automatically by \iselthesis@setcourse{} in _cover.tex
-+ Retained only fixed institutional data (university and school names) 
-+ Include logo for Biomedical Master degree
-+ Added \dateday command to allow specifying the day of the month,
-  used in the agreement/statement page signature date
-*2026-04-29 — Version 4.3
-+ Set Verdana as the main sans-serif font via \setsansfont{Verdana} (LuaLaTeX/XeLaTeX) with explicit Bold, Italic and BoldItalic variants; fallback to helvet for pdfLaTeX
-+ Added engine detection block (\ifxetexorluatex) in packages.clo to conditionally load fontspec (LuaLaTeX/XeLaTeX) or fontenc+inputenc (pdfLaTeX)
-+ Configured microtype with reduced feature set for LuaLaTeX/XeLaTeX (tracking, kerning and spacing disabled); full feature set retained for pdfLaTeX
-+ Set chapter titles to bold, 14pt, uppercase, orange (iselorange), Verdana via \chapnumfont and \chaptitlefont in isel.ldf chapstyle
-+ Set section titles to bold, 12pt, beringela (iselpurple), Verdana
-+ Set subsection and subsubsection titles to bold, 11pt, beringela (iselpurple), Verdana
-+ Removed extra paragraph spacing (\parskip=0pt) and set minimum paragraph indentation to 16pt (\parindent=16pt) in isel.ldf
-+ Applied \SingleSpacing to bibliography (\printbib) of single line spacing in references
-+ Applied \SingleSpacing to annexes (\iselthesis@printannex) and appendices   (\iselthesis@printappendix) via \begingroup/\endgroup blocks
-+ Replaced \cleardoublepage with \clearpage globally to eliminate blank pages 
-+ Added openany to memoir class options in template.tex to prevent chapters  from forcing a new right-hand page
-+ Set figure and table captions to 9pt, black, Verdana (sf), with 1cm line spacing via \captionsetup in packages.clo; figures italic, tables regular weight; exact size enforced via \DeclareCaptionFont{ninept}
+ISELthesis — Changelog
+
+*2026-10-21 — Version 4.3.2
+Configuration
++ Document options moved from \documentclass[...] to Config/_options.tex,
+  set with the new \iselthesissetup{...} command; template.tex is now just
+  \documentclass{iselthesis} and no longer needs to be edited
++ Option precedence: defaults (options.clo) -> \documentclass -> Config/_options.tex
++ memoir options (a4paper, 11pt, draft/final) set only in Config/_memoir.tex
+  via \ncmemoirsetup (the memoir={} key was applied after memoir was loaded)
+Compilation
++ LuaLaTeX is now the required engine (Verdana font); pdfLaTeX compiles
+  with a Helvetica-like fallback
+Documentation
++ Abstracts (PT/EN) rewritten: purpose of the template and the three
+  essential rules (LuaLaTeX, edit only Config/Chapters, do not touch
+  the class files)
++ Chapter 2: options described via Config/_options.tex; folder structure
+  as a table with an "Edit?" column, including ISELthesis-files contents;
++ Chapter 3: LuaLaTeX warning box; compilation section rewritten
+  (lualatex/bibtex, latexmk, editor settings, font check); expected
+  document structure as a three-column table; removed latex/DVI/EPS content
++ README rewritten: three rules at the top, step-by-step setup,
+  updated file tree and compilation instructions
+
 *2026-05-04 — Version 4.3.1
-+ Added font loading mechanism via \InputIfFileExists for Font-Styles/.ldf files
-+ Added verdana.ldf with LuaLaTeX/pdfLaTeX support (helvet fallback)
-+ Fixed gillius2 unconditional loading in defaults.clo
-+ Added semantic color commands (\iselthesis@titlecolor, \iselthesis@subtitlecolor,
-  \iselthesis@sectioncolor, etc.) replacing hardcoded iselorange/iselpurple
-+ Added \iselthesis@showtitleinabstract boolean for chapstyle versatility
-+ Fixed draft/final conflict by removing memoir={} from \ExecuteOptionsX
-+ Added \ifdraftdoc block to pass draft to graphicx and show \printchecklist
-+ Made \cleardoublepage conditional on media option (screen=\clearpage, paper=original)
-+ Made openany/openright conditional on media option in \ncsetlayout
-+ Applied \SingleSpacing to bibliography, annexes and appendices
-+ Moved \parskip and \parindent settings from defaults.clo to isel.ldf
-+ Added multiple authors support (max 3) via iselthesis@author@list
-+ Added \iselthesis@printauthorsignatureline in defaults.clo for BSc second cover
-+ Added \iselthesis@linkcolor semantic command; isel.ldf sets linkcolor=black
-+ Set figure and table captions to 9pt, black, Verdana (sf), 1cm line spacing
++ Font loading via Font-Styles/*.ldf files; added verdana.ldf
++ Semantic colour commands replace hardcoded iselorange/iselpurple
++ \cleardoublepage and openany/openright depend on the media option
+  (screen = no blank pages, paper = original behaviour)
++ Draft mode passes draft to graphicx and shows \printchecklist;
+  fixed draft/final conflict in \ExecuteOptionsX
++ Support for up to 3 authors, with signature lines on the BSc second cover
++ Fixed unconditional loading of gillius2; \parskip/\parindent moved to isel.ldf
+
+*2026-04-29 — Version 4.3
++ Verdana as main font (fontspec for LuaLaTeX/XeLaTeX, helvet fallback
+  for pdfLaTeX); engine detection and microtype settings per engine
++ New heading styles: chapters 14pt bold uppercase orange; sections 12pt
+  and subsections 11pt bold purple
++ Captions 9pt, black, Verdana (figures italic, tables regular)
++ Paragraphs: no extra spacing, 16pt indentation
++ Single spacing in bibliography, appendices and annexes
++ No blank pages (\clearpage instead of \cleardoublepage, openany)
+
+*2026-03-07 — Version 4.2
++ Course data (major field, department, cover images) set from a single
+  acronym with \iselthesis@setcourse{}; \ncdepartment and \ncmajorfield removed
++ Config/_department.tex replaced by Config/_institution.tex
+  (university and school names only)
++ Cover text: optional specialization area, language-aware date
+  ("of"/"de"), gender-aware pronoun for project/dissertation
++ New \dateday command for the statement signature date
++ Logo for the Biomedical Engineering master's degree
+
+*2026-01-05 — Version 4.1.3
++ List of algorithms (pseudo-code index)
+
+*2025-10-23 — Version 4.1.2
++ Removed horizontal lines from chapter pages
++ Font changed to Verdana
+
+*2025-10-23 — Version 4.1.1
++ Statement printed only in the main language
++ PDF output converted to PDF/A-2b; metadata in template.xmpdata
+  (replaces _metadata.xmpdata)
++ Command to use @ inside .tex files
+
+*2025-10-21 — Version 4.1
++ Covers use PDF backgrounds; cover image removed
++ New layout for advisers and committee on the covers
++ Gantt diagram
++ New chapter format and colours
+
+*2024-09 — Version 4.0.1
++ Section font changed in defaults.clo (Computer Modern Bright lacked special characters)
++ Copyright page added; minor fixes
+
+*2024-06-24 — Version 4.0.0 — Template renamed to ISEL thesis (iselthesis)
++ Statement page for the master's dissertation
++ Two cover pages for the final dissertation (the second with committee affiliations)
++ New option printcommittee (default true) to omit the committee
++ New option otherlistsat=front|back for the lists of figures, tables, etc.
++ Support for both appendices and annexes
++ New chapter styles and font styles
++ Language strings split into separate files (strings-<LANG>.clo)

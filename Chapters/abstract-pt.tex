@@ -1,29 +1,31 @@
 %!TEX root = ../template.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% abstrac-pt.tex
+%% abstract-pt.tex
 %% ISEL thesis document file
 %%
 %% Abstract in Portuguese
+%% (Replace this text with your own abstract)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Independentemente da língua em que está escrita a dissertação, é necessário um resumo na língua do texto principal e um resumo noutra língua.  Assume-se que as duas línguas em questão serão sempre o Português e o Inglês.
+Este documento é, ao mesmo tempo, o \emph{template} \LaTeX{} do ISEL para relatórios de projeto de licenciatura e dissertações de mestrado, e o respetivo manual de utilização. Se ler apenas esta página, leia as três regras seguintes:
 
-O \emph{template} colocará automaticamente em primeiro lugar o resumo na língua do texto principal e depois o resumo na outra língua.  Por exemplo, se a dissertação está escrita em Português, primeiro aparecerá o resumo em Português, depois em Inglês, seguido do texto principal em Português. Se a dissertação está escrita em Inglês, primeiro aparecerá o resumo em Inglês, depois em Português, seguido do texto principal em Inglês.
+\bigskip
+\noindent%
+\fcolorbox{iselorange}{white}{%
+\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+\begin{enumerate}
+	\item \textbf{Compile com LuaLaTeX}, e não com pdfLaTeX. Só assim é usada a fonte Verdana exigida pelas normas do ISEL.
+	\item \textbf{Edite apenas} a pasta \texttt{Config} (opções, capa e lista de ficheiros), a pasta \texttt{Chapters} (texto e imagens) e o ficheiro \texttt{bibliography.bib}.
+	\item \textbf{Não altere} o \texttt{template.tex}, o \texttt{iselthesis.cls} nem a pasta \texttt{ISELthesis-files}.
+\end{enumerate}
+\end{minipage}%
+}
 
-O resumo não deve exceder uma página e deve responder às seguintes questões:
-\begin{itemize}
-% What's the problem?
-	\item Qual é o problema?
-% Why is it interesting?
-	\item Porque é que ele é interessante?
-% What's the solution?
-	\item Qual é a solução?
-% What follows from the solution?
-	\item O que resulta (implicações) da solução?
-\end{itemize}
+\bigskip
+Os detalhes estão no Capítulo~\ref{cha:users_manual} (estrutura e opções) e no Capítulo~\ref{cha:a_short_latex_tutorial_with_examples} (compilação e exemplos).
 
-\textbf{Máximo de palavras: 300}
+\textbf{Sobre o resumo.} O \emph{template} coloca primeiro o resumo na língua principal do documento e depois o resumo na outra língua (Português ou Inglês). O resumo não deve exceder \textbf{uma página nem 300 palavras}, e deve responder a quatro questões: \textbf{qual é o problema}, \textbf{porque é interessante}, \textbf{qual é a solução} e o que \textbf{resulta dessa solução}.
+
 % Palavras-chave do resumo em Português
 \begin{keywords}
 Palavras-chave (em Português) \ldots -- mínimo de 3 (três)
 \end{keywords}
-% to add an extra black line

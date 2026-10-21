@@ -1,17 +1,44 @@
 % 
 %  chapter1.tex
-%  ThesisISEL
+%  ISELthesis
 %  
 %  Created by Matilde Pós-de-Mina Pato on 2012/10/09.
+%  Revised in 2026 (version 4.3.2)
 %
 \chapter{Introduction}
 \label{cha:introduction}
 
-This package is distributed under GPLv3 License. If you have questions or \todo{A marginpar note!} doubts concerning the guarantees, rights and duties of those who use packages under GPLv3 License, please read \url{http://www.gnu.org/licenses/gpl.html}.
+This document is the \LaTeX{} template for bachelor's project reports and master's dissertations at the Lisbon School of Engineering (ISEL), Polytechnic University of Lisbon. It follows the ISEL style guide \emph{Normas de escrita e apresentação de trabalhos finais de curso}, and it is also its own user manual: the PDF you are reading was produced by the template, and its source files are examples you can learn from and replace with your own text.
 
-\todo[inline]{A a note in a line by itself.}
+\section{Before You Start}
+\label{sec:before_you_start}
 
-Please note that 
+\noindent%
+\fcolorbox{iselorange}{white}{%
+\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+\begin{enumerate}
+	\item \textbf{Compile with LuaLaTeX}, not pdfLaTeX, so that the Verdana font required by ISEL is used (Chapter~\ref{cha:a_short_latex_tutorial_with_examples}).
+	\item \textbf{Edit only} the \texttt{Config} and \texttt{Chapters} folders and your bibliography file (Chapter~\ref{cha:users_manual}).
+	\item \textbf{Do not change} \texttt{template.tex}, \texttt{iselthesis.cls} or the \texttt{ISELthesis-files} folder.
+\end{enumerate}
+\end{minipage}%
+}
+
+\section{Organisation of this Document}
+\label{sec:organisation}
+
+\begin{itemize}
+	\item \textbf{Chapter~\ref{cha:users_manual}} describes the folders and files of the template, the document options and how to configure your document.
+	\item \textbf{Chapter~\ref{cha:a_short_latex_tutorial_with_examples}} explains how to compile the document and shows examples of common \LaTeX{} constructs: figures, tables, glossaries, algorithms, code listings and citations.
+\end{itemize}
+
+\section{License and Status}
+\label{sec:license}
+
+This template is distributed under the \href{https://opensource.org/licenses/MIT}{MIT License}.
+
 \begin{center}
-	\textbf{\large this package and template are not official for ISEL/IPL}.
+	\textbf{\large This package and template are not official for ISEL/UPL.}
 \end{center}
+
+Bugs and suggestions are welcome at \url{https://github.com/matpato/iselthesis}.

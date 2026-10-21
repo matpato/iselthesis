@@ -22,7 +22,6 @@
   \def\lstlistingname{Listagem}%
   \gdef\listalgorithmname{Índice de Algoritmos}
   \gdef\algorithmname{Algoritmo}
-  \gdef\ALG@name{Algoritmo}
   \defineshorthand{"-}{\babelhyphen{repeat}}% generates a hyphen that will repeat on a new line
   \def\bibname{Referências bibliográficas}%
   \gdef\annexname{Anexo}
