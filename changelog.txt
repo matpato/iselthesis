@@ -8,20 +8,62 @@ Configuration
 + Option precedence: defaults (options.clo) -> \documentclass -> Config/_options.tex
 + memoir options (a4paper, 11pt, draft/final) set only in Config/_memoir.tex
   via \ncmemoirsetup (the memoir={} key was applied after memoir was loaded)
++ Font, chapter style, otherlistsat and biblatex style fixed by the
+  institution in options.clo
 Compilation
 + LuaLaTeX is now the required engine (Verdana font); pdfLaTeX compiles
   with a Helvetica-like fallback
++ Verdana loaded from the bundled files in ISELthesis-files/Font-Styles/
++ PDF version set to 1.7 at the top of the class, before any PDF object is
+  written (fixes the pdfx error "Cannot change the \pdfminorversion")
+Draft mode
++ etoolbox loaded right after memoir; tcolorbox loaded with \AtEndPreamble
+  (after pdfx), so draft mode no longer breaks PDF/A
++ Checklist (\printchecklist) shown as the first page in draft mode only;
+  updated items (abstracts, page limit, integrity declaration date,
+  LuaLaTeX, PDF/A)
++ First cover background always shown (draft=false); second cover omitted
+  in draft mode
++ Draft warning message updated
+Courses (courses.clo)
++ New \iselthesis@setcovers{<first>}{<second>} sets the cover backgrounds
+  for bsc, mscprep and msc at once; applied to all courses
++ DEETC (meet): course name depends on docdegree -- bachelor's
+  "Electronics, Telecommunications and Computer Engineering" (bsc) or
+  master's "Electronics and Telecommunications Engineering" (msc/mscprep);
+  leetc and meec kept as hidden aliases
++ The same acronym is used for bachelor's and master's documents
+PDF/A metadata
++ \jobname.xmpdata generated automatically from Config/_cover.tex and
+  Config/_options.tex at every compilation (template.xmpdata locally,
+  output.xmpdata on Overleaf); students no longer edit it
++ Subject built automatically from docdegree, doctype, lang and course
++ New \nckeywords{a, b, c} in Config/_cover.tex for the PDF keywords
+  (commas converted to \sep)
++ All authors (up to 3) included in Author and Copyright
++ Fixed invalid \CopyrightYear/\CopyrightOwner (now \Copyright and \Copyrighted)
++ Removed \hypersetup{pdfauthor, pdftitle, pdfsubject}, which overrode the
+  PDF/A metadata (pdfx now sets them from the .xmpdata file)
+Authors
++ \ncauthorname stores the plain name of each author (name,plain)
++ Fixed \setcounter{iselthesis@author@cnt} without value
++ Removed duplicated \docauthor(gender) assignment
 Documentation
++ Chapter 1 rewritten: purpose, three essential rules, organisation of the
+  manual, license (MIT) and status
 + Abstracts (PT/EN) rewritten: purpose of the template and the three
   essential rules (LuaLaTeX, edit only Config/Chapters, do not touch
   the class files)
-+ Chapter 2: options described via Config/_options.tex; folder structure
-  as a table with an "Edit?" column, including ISELthesis-files contents;
++ Chapter 2: options via Config/_options.tex; folder structure as a table
+  with an "Edit?" column; new section on cover data, course acronyms,
+  keywords and PDF metadata; draft/final mode described
 + Chapter 3: LuaLaTeX warning box; compilation section rewritten
   (lualatex/bibtex, latexmk, editor settings, font check); expected
   document structure as a three-column table; removed latex/DVI/EPS content
-+ README rewritten: three rules at the top, step-by-step setup,
-  updated file tree and compilation instructions
++ README rewritten: three rules at the top, step-by-step setup, course
+  acronyms, generated metadata, "Before submitting" checklist and
+  "How to Cite" section
++ New requirements.txt with the LaTeX packages needed by the template
 
 *2026-05-04 — Version 4.3.1
 + Font loading via Font-Styles/*.ldf files; added verdana.ldf

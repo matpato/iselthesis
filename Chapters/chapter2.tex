@@ -3,10 +3,13 @@
 % %  ISELthesis
 % %  
 % %  Created by Matilde Pós-de-Mina Pato on 2012/10/09.
-% %  Revised in 2026: document options moved to Config/_options.tex
+% %  Revised in 2026 (version 4.3.2)
 % %
 \chapter{ISELthesis Users Manual}
 \label{cha:users_manual}
+
+\newcommand{\edityes}{\textbf{\color{ForestGreen}yes}}
+\newcommand{\editno}{\textbf{\color{red}no}}
 
 % % ================
 % % = Introduction =
@@ -19,9 +22,9 @@ This chapter describes how to use the \LaTeX{} class \texttt{iselthesis}. This c
 The main design principle is simple: \textbf{you never edit the main file \texttt{template.tex} nor the class files}. Everything you need to change (document type, language, title, author, chapters, \ldots) is set in the small configuration files inside the \texttt{Config} directory.
 
 \noindent%
-\fbox{%
+\fcolorbox{iselorange}{white}{%
 \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
-	\textbf{Text encoding.} All your \texttt{.tex} and \texttt{.bib} files \textbf{must} be saved in \textbf{UTF-8}. This is the default in all modern editors (Overleaf, TeXstudio, VS Code, TeXShop, \ldots). If accented characters (e.g., ``ç'', ``ã'') appear wrong in the PDF, check the encoding of the file in your editor.
+	\textbf{Text encoding.} All your \texttt{.tex} and \texttt{.bib} files \textbf{must} be saved in \textbf{UTF-8}. This is the default in all modern editors (Overleaf, TeXstudio, TeXmaker, VS Code, TeXShop, \ldots). If accented characters (e.g., ``ç'', ``ã'') appear wrong in the PDF, check the encoding of the file in your editor.
 \end{minipage}%
 }
 % section introduction (end)
@@ -33,9 +36,6 @@ The main design principle is simple: \textbf{you never edit the main file \textt
 \label{sec:folder_structure}
 
 The template is organised into a main directory (\texttt{iselthesis}) with the files and sub-directories listed in \tablename~\ref{tab:folders}. The last column tells you whether you are expected to edit each item.
-
-\newcommand{\edityes}{\textbf{\color{ForestGreen}yes}}
-\newcommand{\editno}{\textbf{\color{red}no}}
 
 \begin{xltabular}{\linewidth}{ >{\ttfamily}l X c }
 \caption{Folders and files of the template}
@@ -55,24 +55,24 @@ The template is organised into a main directory (\texttt{iselthesis}) with the f
 \endlastfoot
 % ---------------------------------------------------------
 \multicolumn{3}{l}{\color{iselorange}\bfseries Your content} \\
-Chapters/ & Your text files: chapters, abstracts, acknowledgements, statement, glossaries, Gantt diagram, appendices, annexes, etc. Replace the examples with your own. & \edityes \\
+Chapters/ & Your text files: chapters, abstracts, acknowledgements, glossaries, Gantt diagram, appendices, annexes, etc. Replace the examples with your own. & \edityes \\
 Chapters/img/ & All the images of your document. & \edityes \\
 Chapters/scripts/ & Code or pseudo-code to be included in the text. & \edityes \\
-bibliography.bib & Your bibliographic references (see below). & \edityes \\
+Bibliography/ & Your bibliographic references (\texttt{bibliography.bib}). & \edityes \\
 \midrule
 % ---------------------------------------------------------
-\multicolumn{3}{l}{\color{iselorange}\bfseries Configuration (folder \texttt{Config/})} \\
-/\_options.tex & Document options: degree, type, language, media, etc. (Section~\ref{sec:document_options}). & \edityes \\
-/\_cover.tex & Cover contents: title, author, advisers, committee, date. & \edityes \\
-/\_files.tex & Which files are included: chapters, abstracts, appendices, etc. & \edityes \\
-/\_memoir.tex & Paper size, font size and \texttt{draft}/\texttt{final} mode. & \edityes \\
-/\_packages.tex & Your own packages and commands. & \edityes \\
-/\_institution.tex & University and school names. & only if not ISEL \\
-template.xmpdata & PDF/A metadata: author, title, keywords, language. Must match \texttt{Config/\_cover.tex}. & \edityes \\
+\multicolumn{3}{l}{\color{iselorange}\bfseries Configuration} \\
+Config/\_options.tex & Document options: degree, type, language, media, etc. (Section~\ref{sec:document_options}). & \edityes \\
+Config/\_cover.tex & Cover data: authors, title, course, advisers, committee, dates and keywords (Section~\ref{sec:cover_data}). & \edityes \\
+Config/\_files.tex & Which files are included: chapters, abstracts, appendices, etc. & \edityes \\
+Config/\_memoir.tex & Paper size, font size and \texttt{draft}/\texttt{final} mode. & \edityes \\
+Config/\_packages.tex & Your own packages and commands. & \edityes \\
+Config/\_institution.tex & University and school names. & only if not ISEL \\
 \midrule
 % ---------------------------------------------------------
 \multicolumn{3}{l}{\color{iselorange}\bfseries Template (do not edit)} \\
 template.tex & The main file: run LuaLaTeX on this one. & \editno \\
+template.xmpdata & PDF/A metadata. \textbf{Generated automatically} from \texttt{Config/\_cover.tex} at every compilation. & \editno \\
 iselthesis.cls & The class file. & \editno \\
 ISELthesis-files/ & Internal files of the class. \textbf{None of them should be changed}: & \editno \\
 \quad Chap-Styles/ & Chapter heading styles. & \editno \\
@@ -93,11 +93,9 @@ Scripts/ & Utility scripts, e.g., to clean temporary files. & \editno \\
 A few notes:
 \begin{itemize}
 	\item \textbf{Excluding a file.} To leave a file out of the document, remove it from \texttt{Config/\_files.tex}, or rename it (e.g., \texttt{ganttdiagram\_.tex} instead of \texttt{ganttdiagram.tex}).
-	\item \textbf{Statement.} The statement file is required for the final version of the master's dissertation (\texttt{docdegree=msc}). It exists in English and Portuguese; the one matching the main language of the document is used.
+	\item \textbf{Integrity declaration.} For the final master's dissertation (\texttt{docdegree=msc}) the integrity declaration (statement page) is filled in automatically, in the main language of the document. You only need to set its date in \texttt{Config/\_cover.tex} (Section~\ref{sec:cover_data}).
 	\item \textbf{References.} An easy way to obtain BibTeX entries is to enable \texttt{Show links to import citation into Bib\-TeX} in the \href{http://scholar.google.pt/scholar_settings?hl=en&as_sdt=0,5}{Google Scholar settings}.
 \end{itemize}
-
-Again, we would like to recall that all your \LaTeX{} files should be stored in the \verb!Chapters! directory, and all the images in the \verb!Chapters/img! directory.
 % section folder_structure (end)
 
 % ====================
@@ -127,13 +125,13 @@ Any option omitted from this file keeps its default value. Options are applied i
 	\item the options in \texttt{Config/\_options.tex}.
 \end{enumerate}
 
-Some options are fixed by the institution, to guarantee that all documents follow the ISEL graphic guidelines, and should not be changed: the font (Verdana, or a similar sans-serif font), the chapter style (\texttt{isel}), the place of the lists of figures and tables (\texttt{front}) and the bibliography style (numeric, \texttt{biblatex}).
+Some options are fixed by the institution, to guarantee that all documents follow the ISEL graphic guidelines, and should not be changed: the font (Verdana), the chapter style (\texttt{isel}), the place of the lists of figures and tables (\texttt{front}) and the bibliography style (numeric, \texttt{biblatex}).
 
-Table~\ref{tab:vardescription} lists the available options. For each option, the default value is marked with an asterisk (*).
+\tablename~\ref{tab:vardescription} lists the available options. For each option, the default value is marked with an asterisk (*).
 
 \begin{xltabular}{\linewidth}{ >{\bfseries}l X l }
 \caption{Description of the document options}
-\label{tab:vardescription}                  \\
+\label{tab:vardescription} \\
     \toprule
 \textbf{Option} & \textbf{Definition and values} & \textbf{Set in} \\
     \midrule
@@ -174,14 +172,15 @@ You must choose the main language of the document (option \texttt{lang}). The av
 
 The language option affects:
 \begin{itemize}
-	\item \textbf{The order of the abstracts.} First the abstract in the main language and then the one in the other language. If the main language is English, you will see first the ``Abstract'' and then the ``Resumo''. If you switch the main language, the order is switched automatically.
+	\item \textbf{The order of the abstracts.} First the abstract in the main language and then the one in the other language.
 	\item \textbf{The names of the document parts.} E.g., ``Chapter'' vs.\ ``Capítulo'', ``Contents'' vs.\ ``Índice'', ``Figure'' vs.\ ``Figura'', etc.
 	\item \textbf{The labels in the bibliography.} E.g., ``Technical Report'' vs.\ ``Relatório Técnico'', ``MSc Thesis'' vs.\ ``Tese de Mestrado'', etc.
+	\item \textbf{The PDF metadata} (title and language of the document).
 \end{itemize}
 
 The option \texttt{coverlang} sets the language of the cover pages independently of the main language. In most cases it should be the same as \texttt{lang}.
 
-No matter which language you choose, you will always have the appropriate hyphenation rules for the language in use at each point: Portuguese rules in the ``Resumo'', English rules in the ``Abstract'', and the main language rules in the rest of the document. If you need to force the hyphenation of a word, write it inside \verb!\hyphenation{}! in \texttt{Config/\_packages.tex}, e.g., \verb!\hyphenation{op-ti-cal net-works}!.
+No matter which language you choose, you will always have the appropriate hyphenation rules for the language in use at each point. If you need to force the hyphenation of a word, write it inside \verb!\hyphenation{}! in \texttt{Config/\_packages.tex}, e.g., \verb!\hyphenation{op-ti-cal net-works}!.
 % subsection language_related_options (end)
 
 \subsection{Class of Text} % (fold)
@@ -190,7 +189,7 @@ No matter which language you choose, you will always have the appropriate hyphen
 You must choose the class of text for the document (option \texttt{docdegree}). The available values are:
 
 \begin{enumerate}
-	\item \textbf{bsc} --- Bachelor's (BSc) project report. The second cover page includes signature lines for the author and the advisers.
+	\item \textbf{bsc} --- Bachelor's (BSc) project report. The second cover page includes signature lines for the authors and the advisers. Up to three authors are supported.
 	\item \textbf{mscprep} --- Preparation of the MSc dissertation. This is a preliminary report that ISEL/IPL master's students prepare to conclude the first semester of the two-semester MSc work. The files specified by 
 	\begin{inparaenum}
 		\item \verb!\dedicatoryfile!,
@@ -198,7 +197,7 @@ You must choose the class of text for the document (option \texttt{docdegree}). 
 		\item \verb!\quotefile!
 	\end{inparaenum}
 	are ignored, even if present, for this class of document. There is no second cover page.
-	\item \textbf{msc} --- MSc dissertation. Includes a second cover page with the advisers and the committee, and the statement and copyright pages.
+	\item \textbf{msc} --- MSc dissertation. Includes a second cover page with the advisers and the committee, the integrity declaration and the copyright page.
 \end{enumerate}
 % subsection class_of_text (end)
 
@@ -211,13 +210,11 @@ You must choose the class of text for the document (option \texttt{docdegree}). 
 You must choose the target media of your document (option \texttt{media}). The available values are:
 
 \begin{enumerate}
-	\item \textbf{screen}(*) --- For reading on screen: left and right margins are equal and hyperlinks are coloured;
-	\item \textbf{paper} --- For printing: left and right margins are different (wider binding margin) and hyperlinks are black.
+	\item \textbf{screen}(*) --- For reading on screen: left and right margins are equal, hyperlinks are coloured and there are no blank pages;
+	\item \textbf{paper} --- For printing: left and right margins are different (wider binding margin), hyperlinks are black and chapters start on a right-hand page.
 \end{enumerate}
 
-Article 50 of Decree-Law No.~115/2013 requires the deposit of a digital copy of doctoral theses and master's dissertations in a repository that is part of RCAAP\footnote{Repositórios Científicos de Acesso Aberto de Portugal}, \url{https://www.rcaap.pt}. This deposit aims to preserve scientific work and to provide Open Access to scientific production that is not subject to restrictions or embargo.
-
-For this reason, we include the option to format your document so that it presents well on screen and/or on paper. But always remember that your work will be stored in the RCAAP portal in electronic format.
+Article 50 of Decree-Law No.~115/2013 requires the deposit of a digital copy of doctoral theses and master's dissertations in a repository that is part of RCAAP\footnote{Repositórios Científicos de Acesso Aberto de Portugal}, \url{https://www.rcaap.pt}. This deposit aims to preserve scientific work and to provide Open Access to scientific production that is not subject to restrictions or embargo. For this reason, the template always produces a \textbf{PDF/A} file, the archival format required by repositories.
 % subsection printing (end)
 
 % ===================
@@ -229,10 +226,19 @@ For this reason, we include the option to format your document so that it presen
 The options of the base class \texttt{memoir} are set in \texttt{Config/\_memoir.tex}:
 
 \begin{Verbatim}[breaklines=true, breakanywhere=true]
-\ncmemoirsetup{a4paper,11pt,final}   % draft | final
+\ncmemoirsetup{a4paper,11pt,draft}   % draft | final
 \end{Verbatim}
 
-While writing, you may use \texttt{draft}: the cover shows ``DRAFT'' and the current date. Replace it with \texttt{final} for the version you submit.
+While writing, use \texttt{draft}. Compilation is faster and helps you find layout problems:
+\begin{itemize}
+	\item the first page of the PDF is a \textbf{checklist} of everything you must verify before submitting;
+	\item the first cover is shown (with its background), but the second cover is omitted;
+	\item images in the text are replaced by boxes with the file name;
+	\item lines that are too long (overfull) are marked with black bars;
+	\item the cover shows ``DRAFT'' and the current date.
+\end{itemize}
+
+Replace \texttt{draft} with \texttt{final} for the version you submit. The checklist disappears and the document is complete.
 % subsection draft_final (end)
 
 % ============
@@ -259,23 +265,99 @@ Let's have a look at a few examples of \texttt{Config/\_options.tex}:
                  coverlang=en, media=paper, linkscolor=black}
 \end{Verbatim}
 \end{itemize}
-
-The present document uses the following \texttt{Config/\_options.tex}:
-\begin{Verbatim}[breaklines=true, breakanywhere=true]
-\iselthesissetup{
-  docdegree      = msc,
-  doctype        = dissertation,
-  lang           = pt,
-  coverlang      = pt,
-  printcommittee = true,
-  media          = screen,
-  linkscolor     = darkblue,
-}
-\end{Verbatim}
 % subsection examples (end)
-	
+% section document_options (end)
+
+% ==============
+% = Cover data =
+% ==============
+\section{Cover Data and PDF Metadata} % (fold)
+\label{sec:cover_data}
+
+All the personal data of your document is set in \texttt{Config/\_cover.tex}. It is used in the covers, in the integrity declaration, in the copyright page and in the PDF metadata. \textbf{You write it only once.}
+
+\subsection{Authors, Title and Course} % (fold)
+\label{ssec:authors_title_course}
+
+\begin{Verbatim}[breaklines=true, breakanywhere=true]
+% Author: (m|f){Full name}{Short name} -- repeat for up to 3 authors (BSc)
+\ncauthorname(m){John Very Longname Doe}{John Doe}
+
+% Title in both languages (use \\ to break the line on the cover)
+\nctitle(main,en){Title of the Dissertation}
+\nctitle(main,pt){Título da Dissertação}
+
+% Course (acronym from the table of course acronyms)
+\iselthesis@setcourse{meic}
+\end{Verbatim}
+
+The course acronym sets the name of the course, the department and the cover images automatically. \tablename~\ref{tab:courses} lists the available acronyms. The same acronym is used for bachelor's and master's documents: with \texttt{docdegree=bsc} the cover automatically refers to the bachelor's degree, so there is no separate acronym for bachelor's courses.
+
+\begin{xltabular}{\linewidth}{ >{\ttfamily}l X }
+\caption{Course acronyms}
+\label{tab:courses} \\
+    \toprule
+\textbf{\sffamily Acronym} & \textbf{Course} \\
+    \midrule
+\endfirsthead
+\caption[]{Course acronyms (Cont.)} \\
+    \toprule
+\textbf{\sffamily Acronym} & \textbf{Course} \\
+    \midrule
+\endhead
+    \multicolumn{2}{r}{\footnotesize\textit{Continued on the next page}}
+\endfoot
+    \bottomrule
+\endlastfoot
+meb   & Biomedical Engineering \\
+mec   & Civil Engineering \\
+mee   & Electrical Engineering \\
+meet  & Electronics and Telecommunications Engineering \newline (with \texttt{docdegree=bsc}: Electronics, Telecommunications and Computer Engineering) \\
+meic  & Computer Science and Computer Engineering \\
+meim  & Informatics and Multimedia Engineering \\
+megi  & Industrial Engineering and Management \\
+mem   & Mechanical Engineering \\
+meqa  & Quality and Environmental Engineering \\
+meqb  & Chemical and Biological Engineering \\
+mmai  & Applied Mathematics for Industry \\
+\end{xltabular}
+% subsection authors_title_course (end)
+
+\subsection{Advisers, Committee and Dates} % (fold)
+\label{ssec:advisers_committee_dates}
+
+\begin{Verbatim}[breaklines=true, breakanywhere=true]
+% (role,gender){Name}{Affiliation}
+%   role: a = adviser, c = president, r = member
+\ncmember(a,f){Name of the Adviser}{ISEL}
+\ncmember(c,m){Name of the President}{ISEL}
+\ncmember(r,f){Name of the Member}{University}
+
+% Date of the cover and of the integrity declaration
+\dateday{30}
+\datemonth{6}
+\dateyear{2026}
+\end{Verbatim}
+
+The committee is printed only on the second cover of the final MSc dissertation, and only if \texttt{printcommittee=true}.
+% subsection advisers_committee_dates (end)
+
+\subsection{Keywords and PDF Metadata} % (fold)
+\label{ssec:keywords_metadata}
+
+\begin{Verbatim}[breaklines=true, breakanywhere=true]
+% Keywords for the PDF metadata (comma-separated, same as in the abstract)
+\nckeywords{keyword1, keyword2, keyword3}
+\end{Verbatim}
+
+The template produces a \textbf{PDF/A} file, which includes metadata: author, title, subject, keywords, language and copyright. This metadata is \textbf{generated automatically} from \texttt{Config/\_cover.tex} and \texttt{Config/\_options.tex}; you do not need to edit any other file.
+
+The metadata is written during one compilation and included in the PDF in the next one. Since a complete build always compiles more than once, this is transparent. To confirm, open the PDF and check \emph{File} $\rightarrow$ \emph{Properties}: the title, author, subject and keywords must match your data.
+% subsection keywords_metadata (end)
+% section cover_data (end)
+
 \section{How to Write Using \LaTeX} % (fold)
 \label{sec:how_to_write_using_latex}
 
-Please have a look at Chapter~\ref{cha:a_short_latex_tutorial_with_examples}, where you may find many examples of \href{http://tobi.oetiker.ch/lshort/lshort.pdf}{\LaTeX} constructs, such as sectioning, inserting figures and tables, writing equations, theorems and algorithms, code listings, etc.
+Please have a look at Chapter~\ref{cha:a_short_latex_tutorial_with_examples}, where you may find how to compile the document and many examples of \href{http://tobi.oetiker.ch/lshort/lshort.pdf}{\LaTeX} constructs, such as sectioning, inserting figures and tables, writing equations, theorems and algorithms, code listings, etc.
 % section how_to_write_using_latex (end)
