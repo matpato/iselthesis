@@ -43,7 +43,7 @@ Table of Contents
 
 ## About
 
-This LaTeX template is used to write bachelor's project reports and master's dissertations at the Department of Electronic Engineering, Telecommunications and Computers (DEETC) and the Department of Computer Science and Engineering (DEI) of the [Lisbon School of Engineering (ISEL)](https://www.isel.pt), Polytechnic Institute of Lisbon.
+This LaTeX template is used to write bachelor's project reports and master's dissertations at the Department of Electronic Engineering, Telecommunications and Computers (DEETC) and the Department of Computer Science Engineering (DEI) of the [Lisbon School of Engineering (ISEL)](https://www.isel.pt), Polytechnic Institute of Lisbon.
 
 It follows the ISEL style guide, [Normas de escrita e apresentação de trabalhos finais de curso](https://www.isel.pt/informacoes-academicas/normas-trabalhos-finais), and supports three types of document:
 
@@ -199,6 +199,25 @@ The Makefile provides shortcuts on Linux/macOS:
 October 2026
 
 *This package and template are not official for ISEL/IPL.*
+
+## How to Cite
+
+If you use this template, please cite it as:
+
+> M. P. M. Pato and N. Datia, *ISELthesis: LaTeX template for bachelor's and master's theses at ISEL*, version 4.3.2, 2026. Available: https://github.com/matpato/iselthesis
+
+BibTeX:
+
+```bibtex
+@misc{iselthesis,
+  author       = {Pato, Matilde P{\'o}s-de-Mina and Datia, Nuno},
+  title        = {{ISELthesis}: {LaTeX} template for bachelor's and master's theses at {ISEL}},
+  year         = {2026},
+  version      = {4.3.2},
+  howpublished = {\url{https://github.com/matpato/iselthesis}},
+  note         = {Accessed: <date>}
+}
+```
 
 ## License
 
