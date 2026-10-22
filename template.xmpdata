@@ -27,8 +27,8 @@
 \Language{en}
 
 % Copyright: year of submission and YOUR name
-\CopyrightYear{2026}
-\CopyrightOwner{Author Full Name}
+\Copyright{Copyright (c) 2026 Author Full Name}
+\Copyrighted{True}
 
 % Institution (do not change)
 \Publisher{Instituto Superior de Engenharia de Lisboa}
