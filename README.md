@@ -65,6 +65,7 @@ iselthesis/
 ├── iselthesis.cls ............... Class file                          ✗ do not edit
 ├── Makefile
 ├── changelog.txt
+├── requirements.txt ............. Names of all packages used by the template
 │
 ├── Config/ ...................... YOUR SETTINGS                       ✓ edit
 │   ├── _options.tex ............. Degree, language, media, link colour
