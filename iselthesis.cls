@@ -615,32 +615,44 @@
 % --------------------------------------------------------
 \newdata{docauthor}
 \docauthor(name):={Author Name}
+\docauthor(name,plain):={Author Name}
 \docauthor(name,short):={Author Short Name}
 \docauthor(gender):={Author Gender}
 \docauthor(degree,\iselthesis@opt@coverlang):={Author Previous Degree}
-
-% \def\ncauthorname(#1)#2#3{% [m|f]{Long name}{Short name}
-%   \docauthor(gender):={#1}%
-%   \docauthor(name):={\uppercase{#2}}\hypersetup{pdfauthor={#2}}%
-%   \docauthor(name,short):={#3}}
 
 % Multiple authors support (max 3) - default is MSc (single author)
 \newcounter{iselthesis@author@cnt}
 \setcounter{iselthesis@author@cnt}{0}
 
-\def\ncauthorname(#1)#2#3{%
+% Author lists for the PDF/A metadata (filled by \ncauthorname)
+\def\iselthesis@xmpauthors{Author Name}%     Name One\sep Name Two ...
+\def\iselthesis@xmpcopyright{Author Name}%   Name One, Name Two ...
+
+
+\def\ncauthorname(#1)#2#3{% [m|f]{Long name}{Short name}
   \stepcounter{iselthesis@author@cnt}%
+  \gdef\iselthesis@xmpauthors{#2}%           % <-- NEW
+  \gdef\iselthesis@xmpcopyright{#2, ISEL}%   % <-- NEW
   \docauthor(gender,\theiselthesis@author@cnt):={#1}%
   \docauthor(name,\theiselthesis@author@cnt):={\uppercase{#2}}%
+  \docauthor(name,plain,\theiselthesis@author@cnt):={#2}%
   \docauthor(name,short,\theiselthesis@author@cnt):={#3}%
+  % Lists for the PDF/A metadata
+  \ifnum\value{iselthesis@author@cnt}=1
+    \gdef\iselthesis@xmpauthors{#2}%
+    \gdef\iselthesis@xmpcopyright{#2}%
+  \else
+    \g@addto@macro\iselthesis@xmpauthors{\noexpand\sep\space #2}%
+    \g@addto@macro\iselthesis@xmpcopyright{, #2}%
+  \fi
   % Keep first author as default for backward compatibility
-  % MSc typically has only one author
-  \ifnum\value{iselthesis@author@cnt}=1%
-    \docauthor(name):={\uppercase{#2}}%
-    \docauthor(name,short):={#3}%
+  \ifnum\value{iselthesis@author@cnt}=1
     \docauthor(gender):={#1}%
+    \docauthor(name):={\uppercase{#2}}%
+    \docauthor(name,plain):={#2}%
+    \docauthor(name,short):={#3}%
     \hypersetup{pdfauthor={#2}}%
-  \fi%
+  \fi
 }
 
 \def\ncauthordegree(#1)#2{%
@@ -1046,42 +1058,9 @@
 }
 
 % --------------------------------------------------------
-%% Abstract, Acronyms and Glossary
+%% Acronyms and Glossary
 % --------------------------------------------------------
-\newif\ifiselthesis@showtitleinabstract
-\iselthesis@showtitleinabstractfalse
 
-\@setabstractorder
-\ifdatadefined{abstractorder}(en){}{%
-  \abstractorder(en):={en,pt}
-}
-\ifdatadefined{abstractorder}(\iselthesis@opt@lang){}{%
-  \abstractorder(\iselthesis@opt@lang):={\iselthesis@opt@lang,en}
-}
-
-\def\abstractfile[#1]#2{%
-	\expandafter\xdef\csname iselthesis@abstractfile@#1\endcsname{#2}}%
-
-\def\iselthesis@printabstract@lang#1{%
-  { % Extra braces to force language changes to be local
-    \setabstractlang{#1}%
-    \edef\iselthesis@filetoinclude{Chapters/\@nameuse{iselthesis@abstractfile@#1}}%
-  	\InputIfFileExists{\iselthesis@filetoinclude}%
-      {}%
-      {}%
-    \selectthelanguage{\iselthesis@opt@lang}
-    \cleardoublepage%
-  }%
-}
-
-\newcommand{\printabstract}{% 
-	\xdef\iselthesis@tmp{\theabstractorder(\iselthesis@opt@lang)}%
-  \iteratecsvlist{\iselthesis@printabstract@lang}{\iselthesis@tmp}%
-  % disables protrusion locally in the document for the forthcoming tables of contents
-  \microtypesetup{protrusion=false}%
-}
-
-%% --------- Glossary -------------
 
 \newcommand*{\@loadglossaryfiles}{%
   \@for\listitem:={glossary,acronym,symbols}\do{%
@@ -1097,36 +1076,31 @@
   \InputIfFileExists{Chapters/#1}{}{}
 }%
 
-% Printing acronyms
-\newcommand{\listofacronyms}{%
-  \cleardoublepage%
+
+% Common heading for glossary lists
+\newcommand{\iselthesis@setglssection}{%
   \renewcommand{\glossarysection}[2][]{%
     \section*{\textcolor{\iselthesis@titlecolor}{\Large\bfseries ##1}}%
     \addcontentsline{toc}{chapter}{##1}%
     \markboth{##1}{##1}%
   }%
-  \printnoidxglossary[type=\acronymtype]%
 }
 
-\newcommand{\listofsymbols}{%
-  \cleardoublepage%
-  \renewcommand{\glossarysection}[2][]{%
-    \section*{\textcolor{\iselthesis@titlecolor}{\Large\bfseries ##1}}%
-    \addcontentsline{toc}{chapter}{##1}%
-    \markboth{##1}{##1}%
-  }%
-  \printnoidxglossary[type=symbols]%
+% Print one glossary type on a new page -- only if it has used entries
+\newcommand{\iselthesis@printgls}[1]{%
+  \ifcsundef{@glsref@#1}%
+    {\ClassWarning{iselthesis}{Glossary '#1' is empty -- not printed}}%
+    {\clearpage
+     \begingroup
+       \iselthesis@setglssection
+       \printnoidxglossary[type=#1]%
+       \par\vspace{-\parskip}%
+     \endgroup}%
 }
 
-\newcommand{\printglossarylist}{%
-  \cleardoublepage%
-  \renewcommand{\glossarysection}[2][]{%
-    \section*{\textcolor{\iselthesis@titlecolor}{\Large\bfseries ##1}}%
-    \addcontentsline{toc}{chapter}{##1}%
-    \markboth{##1}{##1}%
-  }%
-  \printnoidxglossary[type=main]%
-}
+\newcommand{\listofacronyms}{\iselthesis@printgls{\acronymtype}}
+\newcommand{\listofsymbols}{\iselthesis@printgls{symbols}}
+\newcommand{\printglossarylist}{\iselthesis@printgls{main}}
 
 \newcommand*{\ncthesisfrontmatter}{%
   \frontmatter%
@@ -1482,8 +1456,75 @@
 }
 
 % --------------------------------------------------------
-%% Abstract
+%% Abstract & Keywords
 % --------------------------------------------------------
+
+\def\iselthesis@curabstractlang{\iselthesis@opt@lang}
+
+
+\newif\ifiselthesis@showtitleinabstract
+\iselthesis@showtitleinabstractfalse
+
+\@setabstractorder
+\ifdatadefined{abstractorder}(en){}{%
+  \abstractorder(en):={en,pt}
+}
+\ifdatadefined{abstractorder}(\iselthesis@opt@lang){}{%
+  \abstractorder(\iselthesis@opt@lang):={\iselthesis@opt@lang,en}
+}
+
+\def\abstractfile[#1]#2{%
+	\expandafter\xdef\csname iselthesis@abstractfile@#1\endcsname{#2}}%
+
+\def\iselthesis@printabstract@lang#1{%
+  { % Extra braces to force language changes to be local
+      \def\iselthesis@curabstractlang{#1}%      % <-- NEW
+
+    \setabstractlang{#1}%
+    \edef\iselthesis@filetoinclude{Chapters/\@nameuse{iselthesis@abstractfile@#1}}%
+  	\InputIfFileExists{\iselthesis@filetoinclude}%
+      {}%
+      {}%
+    \selectthelanguage{\iselthesis@opt@lang}
+    \cleardoublepage%
+  }%
+}
+
+\newcommand{\printabstract}{% 
+	\xdef\iselthesis@tmp{\theabstractorder(\iselthesis@opt@lang)}%
+  \iteratecsvlist{\iselthesis@printabstract@lang}{\iselthesis@tmp}%
+  % disables protrusion locally in the document for the forthcoming tables of contents
+  \microtypesetup{protrusion=false}%
+}
+
+% -------------- Keywords ------------------------------
+\def\keywords{%
+    \par\vskip\baselineskip\noindent{\bfseries\iselthesis@keywordsstr: }%
+}
+% % \def\endkeywords{~\\[2ex]\rule{\textwidth}{0.2mm}} %% remove horizontal line
+
+
+\def\iselthesis@keywords{}           % \def (not \newcommand), so \ifx...\@empty works
+\def\iselthesis@xmpauthors{}
+\def\iselthesis@xmpcopyright{}
+
+% \nckeywords{k1, k2}        -> main language
+% \nckeywords[pt]{k1, k2}    -> specific language
+\newcommand{\nckeywords}[2][]{%
+  \ifstrempty{#1}%
+    {\csgdef{iselthesis@keywords@\iselthesis@opt@lang}{#2}%
+     \gdef\iselthesis@keywords{#2}}%
+    {\csgdef{iselthesis@keywords@#1}{#2}%
+     \ifdefstring{\iselthesis@opt@lang}{#1}{\gdef\iselthesis@keywords{#2}}{}}%
+}
+
+% \printkeywords inside an abstract file: prints the keywords
+% for that abstract's language, with the translated label
+\newcommand{\printkeywords}{%
+  \edef\iselthesis@tmplang{\iselthesis@curabstractlang}%
+  \ifcsdef{iselthesis@keywords@\iselthesis@tmplang}%
+    {\keywords\csuse{iselthesis@keywords@\iselthesis@tmplang}\par}{}%
+}
 
 \newcommand{\iselthesis@keywordsstr}{}
 \newcommand{\setabstractlang}[1]{%
@@ -1496,15 +1537,6 @@
     {\textcolor{\iselthesis@titlecolor}{\Large\bfseries\theabstractstring(#1)}\par}%
     \vspace{1ex}%
 }
-
-% --------------------------------------------------------
-%% Keywords
-% --------------------------------------------------------
-
-\def\keywords{%
-  \par\vskip\baselineskip\noindent{\bfseries\iselthesis@keywordsstr: }%
-}
-% \def\endkeywords{~\\[2ex]\rule{\textwidth}{0.2mm}} %% remove horizontal line
 
 
 % --------------------------------------------------------
@@ -1588,6 +1620,12 @@
 % --------------------------------------------------------
 \InputIfFileExists{ISELthesis-files/Default/courses.clo}{}{}
 
+% % --------------------------------------------------------
+% % Keywords (set by the student in Config/_cover.tex)
+% % --------------------------------------------------------
+% \def\iselthesis@keywords{}
+% \newcommand{\nckeywords}[1]{\def\iselthesis@keywords{#1}}
+
 % --------------------------------------------------------
 %  THESIS/DISSERTATION COVER DATA (title, author, etc)
 % --------------------------------------------------------
@@ -1602,12 +1640,11 @@
 
 
 \AtBeginDocument{%
-  \hypersetup{%
-    pdfauthor={\thedocauthor(name)},
-    pdftitle={\thedoctitle(\iselthesis@opt@coverlang,main)},
-    pdfsubject={\thedoctitle(\iselthesis@opt@coverlang,main)}
-  }
-
+  % \hypersetup{%
+  %   pdfauthor={\thedocauthor(name)},
+  %   pdftitle={\thedoctitle(\iselthesis@opt@coverlang,main)},
+  %   pdfsubject={\thedoctitle(\iselthesis@opt@coverlang,main)}
+  % }
   %--------------------------------
   % If subcaptin is laoded, let it hand handle subfigures
   % otherwise use memoir subfigures
@@ -1615,6 +1652,62 @@
   \newcommand{\@nccite}[1]{\ifdef{\parencite}{\parencite{#1}}{\cite{#1}}}
   \makeatother
 }
+
+
+% --------------------------------------------------------
+% Subject strings: <docdegree>@<lang>, followed by the major field
+% --------------------------------------------------------
+\@namedef{iselthesis@xmpsubj@bsc@en}{Bachelor's project report in }
+\@namedef{iselthesis@xmpsubj@bsc@pt}{Relatório de projeto de licenciatura em }
+\@namedef{iselthesis@xmpsubj@mscprep@en}{Preparation of the master's dissertation in }
+\@namedef{iselthesis@xmpsubj@mscprep@pt}{Preparação da dissertação de mestrado em }
+\@namedef{iselthesis@xmpsubj@msc@en}{Dissertation for the master's degree in }
+\@namedef{iselthesis@xmpsubj@msc@pt}{Dissertação para obtenção do grau de Mestre em }
+\@namedef{iselthesis@xmpsubj@mscproject@en}{Project report for the master's degree in }
+\@namedef{iselthesis@xmpsubj@mscproject@pt}{Relatório de projeto para obtenção do grau de Mestre em }
+
+% --------------------------------------------------------
+% PDF/A METADATA: generate \jobname.xmpdata (read by pdfx on the next run)
+% --------------------------------------------------------
+\newwrite\iselthesis@xmpout
+\AtBeginDocument{%
+  \begingroup
+    \let\\\space
+    % Language
+    \ifthenelse{\equal{\iselthesis@opt@lang}{pt}}%
+      {\def\iselthesis@xmplang{pt-PT}}{\def\iselthesis@xmplang{en}}%
+    % Publication type and subject key
+    \ifthenelse{\equal{\iselthesis@opt@docdegree}{bsc}}%
+      {\def\iselthesis@xmptype{bachelor thesis}}%
+      {\def\iselthesis@xmptype{master thesis}}%
+    \edef\iselthesis@xmpkey{\iselthesis@opt@docdegree}%
+    \ifthenelse{\equal{\iselthesis@opt@docdegree}{msc}\AND
+                \equal{\iselthesis@opt@doctype}{project}}%
+      {\def\iselthesis@xmpkey{mscproject}}{}%
+    % Keywords: commas -> \sep
+    \StrSubstitute{\iselthesis@keywords}{,}{\string\sep}[\iselthesis@xmpkw]%
+    % Write the file
+    \immediate\openout\iselthesis@xmpout=\jobname.xmpdata
+    \immediate\write\iselthesis@xmpout{%
+      \@percentchar\space Generated automatically by iselthesis -- do not edit^^J%
+      \noexpand\Author{\iselthesis@xmpauthors}^^J%
+      \noexpand\Title{\thedoctitle(\iselthesis@opt@lang,main)}^^J%
+      \noexpand\Subject{%
+        \csname iselthesis@xmpsubj@\iselthesis@xmpkey @\iselthesis@opt@lang\endcsname
+        \themajorfield(\iselthesis@opt@lang)}^^J%
+      \ifx\iselthesis@keywords\@empty\else
+        \noexpand\Keywords{\iselthesis@xmpkw}^^J%
+      \fi
+      \noexpand\Language{\iselthesis@xmplang}^^J%
+      \noexpand\PublicationType{\iselthesis@xmptype}^^J%
+      \noexpand\Publisher{Instituto Superior de Engenharia de Lisboa}^^J%
+      \noexpand\Copyright{Copyright (c) \thedateyear\space\iselthesis@xmpcopyright}^^J%
+      \noexpand\Copyrighted{True}%
+    }%
+    \immediate\closeout\iselthesis@xmpout
+  \endgroup
+}
+
 
 % --------------------------------------------------------
 %% Deal with ISELthesis options and configuration files
