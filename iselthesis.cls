@@ -1487,6 +1487,7 @@
 
 \newcommand{\iselthesis@keywordsstr}{}
 \newcommand{\setabstractlang}[1]{%
+    \def\iselthesis@curabstractlang{#1}%   % <-- NEW
     \selectthelanguage{#1}%
     \renewcommand{\iselthesis@keywordsstr}{\thekeywordsstring(#1)}%
     \ifiselthesis@showtitleinabstract
@@ -1505,7 +1506,19 @@
   \par\vskip\baselineskip\noindent{\bfseries\iselthesis@keywordsstr: }%
 }
 % \def\endkeywords{~\\[2ex]\rule{\textwidth}{0.2mm}} %% remove horizontal line
+% \nckeywords{k1, k2, k3} -- use inside each abstract file;
+% the language is detected automatically
+\newcommand{\nckeywords}[1]{%
+  \csgdef{iselthesis@keywords@\iselthesis@curabstractlang}{#1}%
+  \keywords#1\par
+}
 
+% \printkeywords{pt} or \printkeywords{en} -- reuse anywhere
+\newcommand{\printkeywords}[1]{%
+  \ifcsdef{iselthesis@keywords@#1}%
+    {\csuse{iselthesis@keywords@#1}}%
+    {\iselthesis@undefined}%
+}
 
 % --------------------------------------------------------
 %% Table of contents

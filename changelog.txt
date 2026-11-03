@@ -1,5 +1,9 @@
 ISELthesis — Changelog
 
+*2026-11-03 — Version 4.3.3
++ `\nckeywords{...}` command for abstract files. It detects the abstract's language automatically, prints the matching label ("Palavras-chave:" / "Keywords:") and stores the keywords per language.
++ `\printkeywords{<lang>}` to reuse the stored keywords elsewhere in the document (e.g. `\printkeywords{en}`).
++ Fixed `Undefined control sequence \nckeywords` error when compiling abstracts written for earlier versions of the template.
 *2026-10-21 — Version 4.3.2
 Configuration
 + Document options moved from \documentclass[...] to Config/_options.tex,
