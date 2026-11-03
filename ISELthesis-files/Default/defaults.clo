@@ -1,0 +1,292 @@
+% ============================================================
+%% defaults.clo
+%% ISEL thesis configuration file
+%%
+%% CUSTOMIZATION for ISEL-IPL (strings and cover)
+% ============================================================
+\typeout{NT FILE iselthesis-files/default/defaults.clo}%
+
+% Loading of fonts must be delayed until class "iselthesis" is loaded
+\AtEndPreamble{%
+  \IfFileExists{ISELthesis-files/Font-Styles/\iselthesis@opt@fontstyle.ldf}{}{%
+    \RequirePackage{gillius2}%
+  }%
+}
+
+\AtBeginDocument{%
+  \hypersetup{linkcolor=\iselthesis@linkcolor}%
+}
+
+% Cover text color
+\thesiscover(msc,textcolor):={iselpurple}
+\thesiscover(mscprep,textcolor):={iselpurple}
+\thesiscover(bsc,textcolor):={iselpurple}
+
+% Cover background images 
+% NOTE: msc backgrounds are set per course in ISELthesis-files/courses.clo
+%       via \iselthesis@setcourse{} in Config/_cover.tex
+\thesiscover(mscprep,background):={capa}
+\thesiscover(bsc,background):={capa}
+\thesiscover(plain,background):={}
+% Second cover background image
+\thesiscover(msc,background2):={subcapa}% fallback if course not set
+\thesiscover(mscprep,background2):={}
+\thesiscover(bsc,background2):={subcapa}
+% Back cover background image
+\thesiscover(msc,back):={backcapa}
+\thesiscover(bsc,back):={backcapa}
+
+% Comiittee printing order
+\committeeorder(all):={c,r}% 
+\committeeadviser(adviser):={a}
+
+% Spine info
+\spine(logo):={logoisel}
+\spine(author)={\thedocauthor(name)}
+\spine(title)={\thedoctitle(\iselthesis@opt@coverlang,main)}
+\spine(date)={\dateyear}
+
+% Set margins for "normal" pages
+\margin(screen,top)={2.5cm}
+\margin(screen,bottom)={2.5cm}
+\margin(screen,left)={2.5cm}
+\margin(screen,right)={2.5cm}
+\margin(paper,top)={2.5cm}
+\margin(paper,bottom)={2.5cm}
+\margin(paper,left)={3.5cm}
+\margin(paper,right)={2.5cm}
+
+% Set margins for cover pages
+\margin(msc,top)={2.0cm}
+\margin(msc,bottom)={1.5cm}
+\margin(msc,left)={2.5cm}
+\margin(msc,right)={2.5cm}
+\margin(mscprep,top)={2.0cm}
+\margin(mscprep,bottom)={1.5cm}
+\margin(mscprep,left)={2.5cm}
+\margin(mscprep,right)={2.5cm}
+\margin(bsc,top)={2.0cm}
+\margin(bsc,bottom)={1.5cm}
+\margin(bsc,left)={2.5cm}
+\margin(bsc,right)={2.5cm}
+\margin(plain,top)={2.0cm}
+\margin(plain,bottom)={1.5cm}
+\margin(plain,left)={2.5cm}
+\margin(plain,right)={2.5cm}
+
+
+%%============================================================
+%% ISEL guidelines:
+% The pages should be numbered consecutively at the bottom centre of the page.
+%%============================================================
+\makepagestyle{iselthesis@myvf} 
+\makeoddfoot{iselthesis@myvf}{}{\thepage}{} 
+\makeevenfoot{iselthesis@myvf}{}{\thepage}{} 
+\makeheadrule{iselthesis@myvf}{\textwidth}{\normalrulethickness} 
+\makeevenhead{iselthesis@myvf}{\small\textsc{\leftmark}}{}{} 
+\makeoddhead{iselthesis@myvf}{}{}{\small\textsc{\rightmark}}
+\pagestyle{iselthesis@myvf}
+%
+\frenchspacing
+
+\setlength{\parskip}{.25\baselineskip}%
+\setlength{\parindent}{0pt}%
+
+% Fix space for pages with Roman numbering in the ToC
+\renewcommand{\@pnumwidth}{2em}
+
+% Espaçamento entre entradas na ToC
+\setlength{\cftbeforesectionskip}{0.5em}
+\setlength{\cftbeforesubsectionskip}{0.5em}
+\setlength{\cftbeforefigureskip}{0.5em}
+\setlength{\cftbeforetableskip}{0.5em}
+
+% Define source of section, subsection, etc…
+\newbox\s@ch@@ghtb@x
+\setbox\s@ch@@ghtb@x=\hbox{{\normalfont\Huge A}}
+\font\p@rtnamfont=cmbr8 at 13mm % computer modern bright
+\font\s@cnamfont=cmbr10 at \ht\s@ch@@ghtb@x % computer modern bright
+
+\renewcommand\section{\@startsection{section}{1}{0pt}%
+  {-3.5ex plus -0.5ex minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\iselthesis@sectionfont\bfseries\Large\color{\iselthesis@sectioncolor}}}
+\renewcommand\subsection{\@startsection{subsection}{2}{0pt}%
+  {-2.5ex plus -0.5ex minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\iselthesis@sectionfont\bfseries\large\color{\iselthesis@subsectioncolor}}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{0pt}%
+  {-2.5ex plus -0.5ex minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\iselthesis@sectionfont\bfseries\normalsize\color{\iselthesis@subsubsectioncolor}}}
+
+\renewcommand\paragraph{\@startsection{paragraph}{4}{0pt}%
+  {0.25ex plus 0.5ex minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+   {0.25ex plus 0.5ex minus .2ex}%
+   {-1em}%
+   {\normalfont\normalsize\bfseries}}
+
+% --------------------------------------------------------
+%% Draw the cover page: COVER 1
+% --------------------------------------------------------
+% Start of special page
+
+% Title of Dissertation
+\addcoveritem[c]{8cm}{%
+  \fontsize{17}{18}\selectfont
+  \bfseries\thedoctitle(\iselthesis@opt@coverlang,main,cover)%
+}(cover) 
+
+% Author name - COVER 1
+\addcoveritem[c]{2cm}{%
+  \fontsize{12}{13}\selectfont%
+  \bfseries\iselthesis@printauthors%
+  \ifthenelse{%
+    \equal{\iselthesis@opt@docdegree}{msc}%
+    \OR\equal{\iselthesis@opt@docdegree}{mscprep}}%
+  {%
+    \fontseries{mc}\fontsize{13}{13}\selectfont%
+    % Degree printed once for all authors
+    (\thedocauthor(degree,\iselthesis@opt@coverlang))%
+  }{}%
+}(cover)
+
+% Degree
+\addcoveritem[c]{1.5cm}{%
+  \fontsize{11}{11}\selectfont%
+  \thepresentationtext%
+}(cover) 
+
+
+% Advisers - COVER 1
+\addcoveritem[c]{2cm}{%
+ \setprintaffiliation{0} % [0] for surpress the affiliation and [1] for print the affiliation
+ \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%\bfseries
+ \fontsize{12}{12}\selectfont
+  \printadvisers
+  }(cover) 
+
+
+% Date
+\addcoveritem[c]{1}{%
+  \fontsize{11}{11}\selectfont%
+  \ifdraftdoc%
+    \textbf{DRAFT: \today}%
+  \else%
+    \ifthenelse{\equal{\iselthesis@opt@coverlang}{en}}{%
+    \textbf{\thedatemonth{ }of{ }\thedateyear}%
+   }{%
+   \textbf{\thedatemonth{ }de{ }\thedateyear}%
+    }%
+  \fi%
+}(cover)
+
+
+% --------------------------------------------------------
+%% Draw the cover page: COVER 2 (MSc only - original version)
+%% For BSc: Add signature lines to secondcover items
+% --------------------------------------------------------
+
+% --------------------------------------------------------
+%% Helper command for BSc adviser signature lines
+% --------------------------------------------------------
+\newcommand{\iselthesis@printadvisersignatureline}[1]{%
+  \par\noindent
+  \makebox[8cm]{\hrulefill}%
+  \par\vspace{0.5ex}%
+  {\fontsize{10}{10}\selectfont (#1)}%
+  \par\vspace{3ex}%
+}
+
+% Declare counter outside commands to avoid redefinition error
+\newcounter{iselthesis@tmp@sig}
+
+\newcommand{\iselthesis@printauthorsignaturelines}{%
+  \setcounter{iselthesis@tmp@sig}{0}%
+  \whileboolexpr{test{\ifnumless{\value{iselthesis@tmp@sig}}%
+    {\value{iselthesis@author@cnt}}}}{%
+    \stepcounter{iselthesis@tmp@sig}%
+    \par\vspace{2ex}%
+    \makebox[8cm]{\hrulefill}\\[0.5ex]%
+    {\fontsize{10}{10}\selectfont%
+      (\thedocauthor(name,\theiselthesis@tmp@sig))}%
+    \par\vspace{2ex}%
+  }%
+}
+
+%% Title of Dissertation
+\addcoveritem[c]{8cm}{%
+  \fontsize{17}{18}\selectfont
+  \textbf{\thedoctitle(\iselthesis@opt@coverlang,main,cover)}%
+}(secondcover)  
+
+
+% Author name - COVER 2
+\addcoveritem[c]{1}{%
+   \ifthenelse{\equal{\iselthesis@opt@docdegree}{msc}}{%
+      \fontsize{14}{14}\selectfont%
+      \bfseries\iselthesis@printauthors%  
+    \fontseries{mc}\fontsize{13}{13}\selectfont%
+    (\thedocauthor(degree,\iselthesis@opt@coverlang))%
+  }{}%
+  \ifthenelse{\equal{\iselthesis@opt@docdegree}{bsc}}{%
+    \vspace{2ex}%
+    \iselthesis@printauthorsignaturelines%
+  }{}
+}(secondcover)
+
+% Degree
+\addcoveritem[c]{1}{%
+  \fontsize{11}{11}\selectfont%
+  \thepresentationtext%
+}(secondcover)  
+
+% Advisers - different for BSc (with signatures) vs MSc (with affiliations)
+\addcoveritem[c]{2}{%
+  \ifthenelse{\equal{\iselthesis@opt@docdegree}{bsc}}{%
+    % BSc: Advisers with signature lines - use existing adviser data
+    \setprintaffiliation{0} % Don't print affiliations for BSc signatures
+    \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%
+    \fontsize{12}{12}\selectfont
+    % Create custom adviser printing with signature lines
+    \ifcsname iselthesis@committee@a@list\endcsname
+        \forlistcsloop{\iselthesis@printadvisersignatureline}{iselthesis@committee@a@list}%
+      % \forlistcsloop{\iselthesis@printadvisersignatureline}{iselthesis@committee@a@list}%
+    \fi
+  }{%
+    % MSc: Regular advisers with affiliations
+    \setprintaffiliation{1} % Print affiliations for MSc
+    \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%
+    \fontsize{12}{12}\selectfont
+    \printadvisers
+  }%
+}(secondcover)  
+
+% Committee — only for MSc
+\addcoveritem[c]{1}{%
+  \ifthenelse{\equal{\iselthesis@opt@docdegree}{msc}}{%
+    \setprintaffiliation{1} 
+    \committeetitlestrfont(\iselthesis@opt@coverlang)={
+    \fontsize{12}{12}\selectfont}%
+    \committeestrfont(\iselthesis@opt@coverlang)={\fontsize{13}{13}\selectfont}%
+    \fontsize{12}{12}\selectfont
+     \printcommittee
+  }{}%
+}(secondcover)  
+
+% Date
+\addcoveritem[c]{1}{%
+  \fontsize{11}{11}\selectfont%
+  \ifdraftdoc%
+    \textbf{DRAFT: \today}%
+  \else%
+    \ifthenelse{\equal{\iselthesis@opt@coverlang}{en}}{%
+    \textbf{\thedatemonth{ }of{ }\thedateyear}%
+   }{%
+   \textbf{\thedatemonth{ }de{ }\thedateyear}%
+    }%
+  \fi%
+}(secondcover)

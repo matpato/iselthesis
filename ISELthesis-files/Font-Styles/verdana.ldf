@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Font-Styles/verdana.ldf
+%% ISEL thesis configuration file
+%%
+%% This file configures DejaVu Sans as a Verdana substitute for pdfLaTeX
+%% DejaVu Sans is very similar to Verdana in appearance
+%% Compatible with pdfLaTeX, XeLaTeX, and LuaLaTeX
+%% Customization of fonts to use Verdana fontset
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Font-Styles/verdana.ldf}%
+
+\ifdefined\directlua
+  \IfFontExistsTF{Verdana}{%
+    \setmainfont{Verdana}[
+      BoldFont       = Verdana Bold,
+      ItalicFont     = Verdana Italic,
+      BoldItalicFont = Verdana Bold Italic
+    ]%
+    \setsansfont{Verdana}[
+      BoldFont       = Verdana Bold,
+      ItalicFont     = Verdana Italic,
+      BoldItalicFont = Verdana Bold Italic
+    ]%
+  }{%
+    \setmainfont{verdana}[
+      Path           = ISELthesis-files/Font-Styles/verdana/,
+      Extension      = .ttf,
+      BoldFont       = verdanab,
+      ItalicFont     = verdanai,
+      BoldItalicFont = verdanaz
+    ]%
+    \setsansfont{verdana}[
+      Path           = ISELthesis-files/Font-Styles/verdana/,
+      Extension      = .ttf,
+      BoldFont       = verdanab,
+      ItalicFont     = verdanai,
+      BoldItalicFont = verdanaz
+    ]%
+  }%
+\else
+  \IfFileExists{uarial.sty}{%
+    \RequirePackage{uarial}%
+  }{%
+    \RequirePackage[scaled=0.95]{helvet}%
+  }%
+  \renewcommand{\familydefault}{\sfdefault}%
+\fi

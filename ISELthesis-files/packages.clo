@@ -1,0 +1,272 @@
+% ============================================================
+%% packages.clo
+%% ISEL thesis configuration file
+%%
+%% Packages to be loaded
+% ============================================================
+
+% --------------------------------------------------------
+% PDF/A COMPLIANCE - Load pdfx package for PDF/A-2b conversion
+% This must be loaded BEFORE hyperref for proper PDF/A compliance
+% --------------------------------------------------------
+\PassOptionsToPackage{% 
+  , bookmarksnumbered=true%
+  , breaklinks=true%
+  , colorlinks=true%
+  , pdfdisplaydoctitle=true%
+  , unicode=true%
+}{hyperref}%
+\RequirePackage[a-2b,pdf17]{pdfx}
+
+%%%%% Configure multilingual language support
+\RequirePackage{csquotes}
+\RequirePackage[english]{babel}	% Support for bilingual documents
+\RequirePackage{translator} % Support month name translations for pgfcalendar
+
+% --------------------------------------------------------
+%% CHECK IF USING LUALATEX OR XELATEX
+% --------------------------------------------------------
+\RequirePackage{iftex}
+\newcommand{\ifxeorlua}{\ifboolexpr{bool{luatex} or bool{xetex}}}
+\newcommand{\ifxetexorluatex}{\iftutex}
+
+% % Always load encoding support for pdfLaTeX
+\ifxetexorluatex
+  \RequirePackage[no-math]{fontspec}%
+  \defaultfontfeatures{Ligatures=TeX}
+\else
+  \RequirePackage[T1]{fontenc}%
+  \RequirePackage[utf8]{inputenc}%
+\fi
+
+%%%%% Fine tuning of typesetting
+\ifxetexorluatex
+  \RequirePackage[babel=true,final,tracking=false,
+                  kerning=false,spacing=false,
+                  factor=1100,stretch=10,shrink=10]{microtype}
+\else
+  \RequirePackage[babel=true,activate={true,nocompatibility},
+                  final,tracking=true,kerning=true,spacing=true,
+                  factor=1100,stretch=10,shrink=10]{microtype}
+\fi
+
+
+%% Date and Calendar Utility Macros
+\usepackage{pgfcalendar}
+
+%%%%% Better support for calculations
+\RequirePackage{xstring}
+
+%% VERY IMPORTANT
+\usepackage{booktabs}		% Beautiful simple tables
+\usepackage{paralist}		% To enable customizble enumerates
+
+%% IMPORTANT (consider removing/commenting)
+\usepackage[textsize=footnotesize,disable]{todonotes}	% To register TODO notes in the text
+\setlength{\marginparwidth}{3.25cm}
+
+%% FOR DEMO PURPOSES ONLY --- TO BE REMOVED by final users
+\usepackage{lipsum}
+
+\ifdraftdoc
+  \PassOptionsToPackage{draft}{graphicx}%
+\fi
+
+% --------------------------------------------------------
+% PACKAGE listings
+% --------------------------------------------------------
+
+% To process lists and other stuff
+\RequirePackage{etoolbox}
+
+% The ‘listings’ package is loaded at the beginning of a LATEX file in the preamble
+% Here is an example of my \lset{} declaration for ‘R’ code. 
+% Then, after having including this (also in the preamble), I simply include my external ‘R’ files. 
+% They can be included using an:
+% \include{ } - like interface to the external files;
+% by using the command \lstinputlisting{./code.R} to include the code from the file code.R which % is located in the same directory as the ‘LATEX’ source file.
+%
+% --------------------------------------------------------
+
+\usepackage{listings}
+% listings package provides a key called inputpath for specifying a path where \lstinputlisting should search for source files.
+\newcommand*\lstinputpath[1]{\lstset{inputpath=#1}}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+
+% --------------------------------------------------------
+% PACKAGE subcaption, float, figures, totalcount
+% --------------------------------------------------------
+
+% To aggregate multiple figures in a single one with subfigures
+% Note: subfigure package does not recognise \textwidth as a number, when it is in fact a number (equivalent to the constant width of the total text block on a page). The way to resolve this is to use the more updated subcaption package
+\RequirePackage{caption,subcaption}
+% Captions: 9pt, black, 1cm line spacing
+\captionsetup{%
+  font={small, sf},          % 9pt sans-serif (Verdana)
+  labelfont={bf, sf},        % bold label (Figure X / Table X)
+  textfont={sf},             % sans-serif text
+  format=plain,
+  labelsep=period,           % "Figure 1. Caption text"
+  justification=justified,
+  singlelinecheck=false,
+  skip=6pt,
+}
+\captionsetup[figure]{%
+  textfont={it, sf},         % italic for figure captions
+  position=bottom,
+  aboveskip=\dimexpr1cm\relax,
+  belowskip=0pt,
+}
+\captionsetup[table]{%
+  position=top,
+  aboveskip=0pt,
+  belowskip=\dimexpr1cm\relax,
+}
+\captionsetup[lstlisting]{%
+  font={small, sf},
+  labelfont={bf, sf},
+  textfont={sf},
+  format=plain,
+  labelsep=period,
+  justification=justified,
+  singlelinecheck=false,
+  skip=6pt,
+  position=bottom,
+  aboveskip=6pt,
+  belowskip=6pt,
+}
+% To have text wrapping figures
+\usepackage{wrapfig}
+\usepackage{float}		% Improves the interface for defining floating objects such as figures and tables
+%
+\usepackage[figure,table,lstlisting]{totalcount}
+
+
+% Fixing autoref in hyperref
+\RequirePackage{ISELthesis-files/user-sty/fix-hyperref}
+\iselthesis@fixhyperref%
+% \pdfstringdefDisableCommands{%
+%   \def\\{}%
+%   \def\texttt#1{#1}%
+% }%
+
+\RequirePackage{bookmark}%
+
+% % To process the bibliography
+% % (This should be listed after the hyperref, otherwise hyperlinks in citations won't work)
+% \RequirePackage{biblatex}
+% \DeclareLanguageMapping{english}{american-apa}
+% \DeclareLanguageMapping{portuguese}{portuguese-apa}
+
+% --------------------------------------------------------
+% PACKAGE algorithm and algpseudocode
+% --------------------------------------------------------
+\usepackage{algorithm}
+% \usepackage{algorithmicx}
+\usepackage{algpseudocode}
+
+% --------------------------------------------------------
+% PACKAGE glossaries
+% The glossaries package supports acronyms and multiple glossaries, and has 
+% provision for operation in several languages (using the facilities of 
+% either babel or polyglossia). New entries are defined to have a name and 
+% description (and optionally an associated symbol).
+% --------------------------------------------------------
+
+\RequirePackage{array}
+\RequirePackage{tabularx}
+
+\RequirePackage[%
+    sort = standard,
+    order = letter,
+    symbols,
+    translate = babel,
+    acronym,
+    shortcuts,
+    numberedsection,
+    toc,
+    nopostdot,          % Add this
+    % nonumberlist        % Add this if you don't want page numbers
+]{glossaries-extra}
+
+\setglossarystyle{long}  % Changed from 'super' to 'long'
+\setabbreviationstyle[acronym]{long-short}
+\glssetnoexpandfield{description}
+
+% Load glossary files
+\AtEndPreamble{\@loadglossaryfiles\makenoidxglossaries}
+
+% --------------------------------------------------------
+% TIKZ
+\RequirePackage{tikz}
+
+% --------------------------------------------------------
+% Configure Graphics
+% --------------------------------------------------------
+\RequirePackage[nobeamer]{graphbox} % improved version of "graphicx"
+\DeclareGraphicsExtensions{.pdf,.png,.tif,.jpg,.eps}
+% Put here the path of your images
+\graphicspath{{./Chapters/img}{/Chapters/img}}
+\providecommand*\appendtographicspath[1]{\xappto\Ginput@path{#1}}
+\providecommand*\prependtographicspath[1]{\xpreto\Ginput@path{#1}}
+
+%%%%% Options to sans serif fonts (will be loaded later)
+\PassOptionsToPackage{scaled=0.95}{inter}
+\PassOptionsToPackage{scaled=0.95}{helvet}
+\PassOptionsToPackage{scaled=0.95}{gillius2}
+
+% --------------------------------------------------------
+% Add an image to the backgroung
+% Used to insert the background image in the cover page
+% --------------------------------------------------------
+\RequirePackage{eso-pic}%[2015/04/20]
+
+% --------------------------------------------------------
+% Standard configuration for user included packages
+% --------------------------------------------------------
+\usepackage{ISELthesis-files/user-sty/code}
+
+\usepackage[nodayofweek]{datetime}
+
+% --------------------------------------------------------
+% PACKAGE pdfpages and pdflscape
+% --------------------------------------------------------
+\usepackage{pdfpages}   % include pdf file
+% The pdflscape package adds PDF support to the landscape environment of package lscape, by setting the PDF/Rotate page attribute.
+\usepackage{pdflscape}
+%
+% \providecommand{\apashortdash}{-}
+\RequirePackage{ctable}
+
+\usepackage{url}
+\usepackage{xurl}
+\RequirePackage{longtable}
+\RequirePackage{xltabular}
+
+
+%% ------------------------------------------------------------
+%% Gantt diagram
+%% ------------------------------------------------------------
+% Comment if not needed
+\usepackage{pgfgantt}
+\definecolor{bargray}{RGB}{224,224,224}
+\definecolor{barblue}{RGB}{153,204,254}
+\definecolor{groupblue}{RGB}{51,102,254}
+\definecolor{linkred}{RGB}{165,0,33}
+\definecolor{orange}{RGB}{239,80,23}
+\definecolor{royalblue}{rgb}{0.25, 0.41, 0.88}
+
+
+% Define link types
+\newganttlinktypealias{sta-to-sta}{s-s}
+\newganttlinktypealias{fin-to-fin}{f-f}
+\newganttlinktypealias{sta-to-fin}{s-f}
+\newganttlinktypealias{fin-to-sta}{f-s}
+
+% Contains the label that you may assign to each link: \ganttlinklabel
+
+\setganttlinklabel{sta-to-sta}{s2s}
+\setganttlinklabel{fin-to-fin}{f2f}
+\setganttlinklabel{sta-to-fin}{s2f}
+\setganttlinklabel{fin-to-sta}{f2s}

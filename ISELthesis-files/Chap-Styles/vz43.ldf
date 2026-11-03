@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chap-Styles/vz43.ldf
+%% ISEL thesis configuration file
+%%
+%% Customization for the VZ43 chapter style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Chap-Styles/vz43.ldf}%
+
+%%%%% Configure chapters, headers, footers, and page numbering
+
+\newif\ifNoChapNumber
+\providecommand\Vlines{%
+  \def\VL{\rule[-1cm]{1pt}{3cm}\hspace{1mm}\relax}
+  {\color{darkgray}\VL\VL\VL\VL\VL\VL\VL}
+}
+\setlength\midchapskip{0pt}
+\makechapterstyle{VZ43}{%
+  \renewcommand\chapternamenum{}
+  \renewcommand\printchaptername{}
+  \renewcommand\printchapternum{}
+  \renewcommand\chapnumfont{\Huge\bfseries\centering}
+  \renewcommand\chaptitlefont{\Huge\bfseries\raggedright} %raggedright
+  \renewcommand\printchaptertitle[1]{%
+    \ifNoChapNumber
+      \begin{tabular}{@{}p{\textwidth}}%
+        \chaptitlefont ##1%
+      \end{tabular}%
+    \else
+    \Vlines\hspace*{-2.5em}%
+    \begin{tabular}{@{}p{1cm} p{\textwidth-3cm}}%
+      \ifNoChapNumber\relax\else%
+      \colorbox{darkgray}{\color{white}%
+        \makebox[.8cm]{\chapnumfont\strut \thechapter}}
+      \fi%
+      & \chaptitlefont ##1%
+    \end{tabular}%
+    \fi
+    \NoChapNumberfalse%
+  }
+  \renewcommand\printchapternonum{\NoChapNumbertrue}
+}
+\chapterstyle{VZ43}

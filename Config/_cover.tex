@@ -1,0 +1,83 @@
+%!TEX root = ../template.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Config/_cover.tex
+%% ISEL thesis configuration file
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\typeout{NT FILE Config/_cover.tex}%
+%%==================================================================
+%%  THESIS/DISSERTATION COVER DATA
+%%==================================================================
+% -------------------------------------------------------------------
+% AUTHOR customization
+% SYNTAX: \ncauthorname(gender){full name}{abbreviated name}
+%         Use [f] for female and [m] for male
+% -------------------------------------------------------------------
+%%% IMPORTANT: The cover must be written in Portuguese. %%%
+%\ncauthorname(m){John Very Longname Doe}{John Doe}
+ \ncauthorname(f){Jane Very Longname Doe}{Jane Doe}
+
+% -------------------------------------------------------------------
+% COURSE SELECTION
+% Available acronyms: meic, meb, meec, meet, ...
+% Sets: major field (pt/en), department and cover images automatically
+% -------------------------------------------------------------------
+\iselthesis@setcourse{meic}
+
+% -------------------------------------------------------------------
+% SPECIALIZATION AREA (optional - comment out if not applicable)
+% SYNTAX: \ncspecialization(lang){specialization area}
+% -------------------------------------------------------------------
+% \ncspecialization(pt){Sistemas de Informação}
+% \ncspecialization(en){Information System}
+
+% -------------------------------------------------------------------
+% AUTHOR previous degree
+% SYNTAX: \ncauthordegree(lang){degree}
+% -------------------------------------------------------------------
+\ncauthordegree(en){Graduated} 
+\ncauthordegree(pt){Licenciado}
+
+% -------------------------------------------------------------------
+% Thesis/Dissertation title
+% SYNTAX: \nctitle(type,lang){title}
+%         [type]: [main] for main title
+%                 [spine] for book spine version (defaults to main if omitted)
+% You may use "\\" to force line breaks
+% -------------------------------------------------------------------
+\nctitle(main,en){Master Thesis Title, Project Work or Internship Report}
+\nctitle(main,pt){Título da dissertação de mestrado, trabalho de projeto ou relatório de estágio}
+
+% Keywords for the PDF metadata (comma-separated, same as in the abstract)
+\nckeywords{keyword1, keyword2, keyword3}
+
+% -------------------------------------------------------------------
+% SUBMISSION DATE
+% -------------------------------------------------------------------
+\dateday{30}
+\datemonth{July}
+\dateyear{2026}
+
+% -------------------------------------------------------------------
+% ADVISER LIST
+% SYNTAX: \ncmember(role,gender){Position & Full Name}{Affiliation}
+%         [role]:   [a] for adviser
+%         [gender]: [f] for female and [m] for male
+% -------------------------------------------------------------------
+\ncmember(a,f){PhD Alice Adviser Name Doe}{Affiliation}
+\ncmember(a,m){PhD Bob Adviser Name Doe}{Some University Somewhere}
+
+% -------------------------------------------------------------------
+% COMMITTEE MEMBERS (maximum of 3 elements)
+% SYNTAX: \ncmember(role,gender){Position & Full Name}{Affiliation}
+%         [role]: [c] for committee chair
+%                 [r] for rapporteur (include one adviser here)
+%         [gender]: [f] for female and [m] for male
+% -------------------------------------------------------------------
+\ncmember(c,m){PhD John Committee Chairperson Name Doe}{Some University}
+\ncmember(r,f){PhD Eve Raporteur Name Doe}{Some University}
+\ncmember(r,f){PhD Carol Adviser Name Doe}{Some University}
+
+% -------------------------------------------------------------------
+% COVER IMAGE (file must be in Chapters/img/)
+% -------------------------------------------------------------------
+\workimage{phdcomics}

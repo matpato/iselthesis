@@ -1,0 +1,103 @@
+\begin{ganttchart}[
+    x unit=1.4cm, 
+    y unit title=1cm, 
+    y unit chart=1.5cm,
+    hgrid style/.style={draw=black!5, line width=.75pt},
+    vgrid={*2{draw=black!5, line width=.75pt}},
+    today=24,
+    today rule/.style={draw=black!64,
+      dash pattern=on 3.5pt off 4.5pt, line width=1.5pt},
+    today label={\normalsize\bfseries Today},              % AQUI: tamanho da etiqueta "Today"
+    title/.style={draw=none, fill=iselpurple},
+    title label font=\sffamily\bfseries\Large\color{white},  % AQUI: tamanho do título principal
+    title label anchor/.style={below=-9pt},
+    include title in canvas=true,
+    bar top shift=0.05, 
+    bar height=0.5,
+    bar label font=\large\color{black!70},                   % AQUI: tamanho do texto das barras/tarefas
+    bar label anchor/.style={left=2cm},
+    bar/.style={fill=black!63},
+    bar incomplete/.style={fill=barblue},
+    bar label node/.append style={align=left},
+    bar progress label font=\normalsize\color{black!70},      % AQUI: tamanho do texto de progresso
+    progress label text={#1\% complete},
+    group incomplete/.style={fill=groupblue},
+    group top shift=-0.1, 
+    group left shift=0.0,
+    group right shift=0,
+    group height=0.4,
+    group peaks tip position=0,
+    group label anchor/.style={left=.6cm},
+    group label font=\large,                                % AQUI: tamanho do texto dos grupos
+    group progress label font=\bfseries\normalsize,         % AQUI: tamanho do texto de progresso dos grupos
+    link/.style={-latex, line width=1.5pt, linkred},
+    link label font=\normalsize\bfseries,                   % AQUI: tamanho do texto dos links
+    link label node/.append style={below left=-2pt and 0pt}
+]{1}{24}
+
+% ----------------------------------------------------------------------------
+% Title
+% \gantttitle{2024}{7}
+% \gantttitle{2025}{41}\\
+% \ganttalignnewline % Adds a blank row (hides background)
+% \gantttitle[
+%     title left shift=-1, % Moves "Week" left
+%     title/.style={fill=white} % Forces white background
+% ]{\bfseries\large\color{black}Week:}{0}
+\gantttitle{2025}{24}\\
+\gantttitle[title label node/.append style={below left=-9pt and 8pt}	 ]{\bfseries\Large\color{black}Week:\quad}{0}  % AQUI: tamanho do texto "Week:"
+
+\gantttitlelist{8, ..., 16}{1}
+\gantttitle{Easter}{1}
+\gantttitlelist{18, ..., 30}{1}
+\gantttitle{Finish}{1}
+% \gantttitlelist{36, ..., 40}{1}\\
+
+% ----------------------------------------------------------------------------
+% Highlight Break Periods
+\ganttbar[name=Easter,bar/.style={fill=bargray, draw=bargray, opacity=0.6},bar height=12.50,bar top shift=0.4]{}{10}{10}
+\ganttbar[name=Finish,bar/.style={fill=bargray, draw=bargray, opacity=0.6},bar height=12.50, bar top shift=0.4]{}{24}{24} \\
+
+% ----------------------------------------------------------------------------
+% Group 1: Problem Definition
+\ganttgroup[progress=100]{\textbf{1}: Proposal}{1}{3} \\
+\ganttbar{\textbf{1.1} Define Research Problem}{1}{3} \\ 
+\ganttbar{\textbf{1.2} Conduct Literature Review}{2}{3} \\
+    [grid] 
+
+% ----------------------------------------------------------------------------
+% Group 2: Methodology
+\ganttgroup[progress=100]{\textbf{2}: Tasks}{4}{11} \\    
+\ganttbar{\textbf{2.1} Access datasets}{4}{4} \\
+\ganttbar{\textbf{2.2} Package Python}{5}{11} \\
+%\ganttbar[progress=80, name=WBS2C]{\textbf{2.3} Study Knowledge Graphs}{10}{25} \\   
+[grid] 
+
+% ----------------------------------------------------------------------------
+% Group 3: Development
+\ganttgroup[progress=100]{\textbf{3}: Beta version}{12}{17} \\
+\ganttbar{\textbf{3.1} Build Knowledge Graph}{12}{17} \\
+%\ganttbar[progress=0, name=WBS3C]{\textbf{3.3} Build Knowledge Graph}{22}{35} \\
+%\ganttbar[progress=20, name=WBS3D]{\textbf{3.4} Develop Web App}{18}{40} \\
+    [grid] 
+
+% ----------------------------------------------------------------------------
+% Group 4: Evaluation
+\ganttgroup[progress=100]{\textbf{4}: Final Version}{18}{24} \\
+
+\ganttbar{\textbf{4.1} Knowledge Graph Analysis}{18}{22} \\
+\ganttbar{\textbf{4.2} Improvements}{23}{24} \\
+    [grid] 
+
+% ----------------------------------------------------------------------------
+% Group 5: Written Exposition
+%\ganttgroup[progress=30]{\textbf{5}: Written Exposition}{2}{48} \\
+%\ganttmilestone[]{Thesis Alpha Version}{40}\\
+%\ganttmilestone[]{Thesis Beta Version}{45}\\
+%\ganttmilestone[]{Final Thesis Submission}{48}\\
+%\ganttbar[progress=90, name=WBS5A]{\textbf{5.1} Write Methodology}{15}{30}\\
+%\ganttbar[progress=0, name=WBS5B]{\textbf{5.2} Document Results}{20}{36}\\
+%\ganttbar[progress=0, name=WBS5C]{\textbf{5.3} Final Writing and Submission}{41}{48}\\ 
+% ----------------------------------------------------------------------------
+
+\end{ganttchart}

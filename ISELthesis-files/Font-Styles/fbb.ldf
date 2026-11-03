@@ -1,0 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Font-Styles/fbb.ldf
+%% ISEL thesis configuration file
+%%
+%% Customization of fonts to use Bembo-like fontset
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage[full]{textcomp}
+\RequirePackage[sups,osf]{fbb} % osf (or tosf) for text, not math
+\RequirePackage[scaled=.95]{cabin} % sans serif
+\RequirePackage[varqu,varl]{inconsolata} % sans serif typewriter
+\RequirePackage[libertine,bigdelims,vvarbb]{newtxmath} % bb from STIX
+\RequirePackage[cal=boondoxo]{mathalfa} % mathcal

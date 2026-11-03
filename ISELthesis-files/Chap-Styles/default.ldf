@@ -1,0 +1,10 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chap-Styles/default.ldf
+%% ISEL thesis configuration file
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE Chap-Styles/default.ldf}%
+
+%%%%% Configure chapters, headers, footers, and page numbering
+\chapterstyle{default}

@@ -1,0 +1,90 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% strings-pt.clo
+%% ISEL thesis configuration file
+%%
+%% Costumization for language depedent strings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------
+%% Portuguese - strings
+% --------------------------------------------------------
+
+\abstractstring(pt):={Resumo}
+\keywordsstring(pt):={Palavras-chave}
+\notdefined(pt):={NÃO DEFINIDO}
+\acknowledgementstr(pt):={Agradecimentos}
+\statementstring(pt):={Declaração de integridade}
+
+%% Degree 
+\degreestr(bsc,pt):={Licenciatura}
+\degreestr(bsc,m,pt):={Licenciado}
+\degreestr(bsc,f,pt):={Licenciada}
+\degreestr(msc,m,pt):={Mestre}
+\degreestr(msc,f,pt):={Mestre}
+\degreestr(mscprep,m,pt):={Mestre}
+\degreestr(mscprep,f,pt):={Mestre}
+
+% Dissertation type
+\doctypestr(bsc,pt):={Projeto}
+\coursestr(bsc,pt):={Projeto e Seminário}
+\doctypestr(msc,dissertation,pt):={Dissertação}
+\doctypestr(mscprep,dissertation,pt):={Dissertação}
+\doctypestr(msc,project,pt):={Trabalho de Projeto}
+\doctypestr(mscprep,project,pt):={Trabalho de Projeto}
+
+% Committee fields
+\committeetitlestr(pt):={Júri}
+\committeestr(c,1,m,pt):={Presidente}
+\committeestr(c,1,f,pt):={Presidente}
+\committeestr(c,2,m,pt):={Presidentes}
+\committeestr(c,2,f,pt):={Presidentes}
+\committeestr(r,1,m,pt):={Vogal}
+\committeestr(r,1,f,pt):={Vogal}
+\committeestr(r,2,m,pt):={Vogais}
+\committeestr(r,2,f,pt):={Vogais}
+\committeestr(a,1,m,pt):={Orientador}
+\committeestr(a,1,f,pt):={Orientadora}
+\committeestr(a,2,m,pt):={Orientadores}
+\committeestr(a,2,f,pt):={Orientadoras}
+
+% --------------------------------------------------------
+%% Dissertation degree
+% --------------------------------------------------------
+
+%% BSc thesis
+\dissertationstr(bsc,pt)={Relatório do \thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@coverlang) realizado no âmbito de \thecoursestr(\iselthesis@opt@docdegree,\iselthesis@opt@coverlang) \\[1.25ex] 
+\thedegreestr(\iselthesis@opt@docdegree,\iselthesis@opt@coverlang) em \themajorfield(\iselthesis@opt@coverlang)}
+
+%% MSc thesis plan
+\dissertationstr(mscprep,pt)={Preparação de 
+    \thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang)%
+    \ifthenelse{\equal{\iselthesis@opt@doctype}{project}}{%
+      ~intermédio%
+    }{%
+      ~intermédia%
+    }%
+    ~para obtenção do grau de 
+    \thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang) em \\[1.25ex]%
+    \themajorfield(\iselthesis@opt@coverlang)%
+    \ifdatadefined{specialization}(\iselthesis@opt@coverlang){%
+      \unskip, na Área de Especialização de \thespecialization(\iselthesis@opt@coverlang)%
+    }{}%
+}
+
+%% MSc thesis
+\dissertationstr(msc,pt)={%
+    \thedoctypestr(\iselthesis@opt@docdegree,\iselthesis@opt@doctype,\iselthesis@opt@coverlang) para obtenção do grau de 
+    \thedegreestr(\iselthesis@opt@docdegree,\expanded{\thedocauthor(gender)},\iselthesis@opt@coverlang)~em \\[1.25ex]%
+    \themajorfield(\iselthesis@opt@coverlang)%
+    \ifdatadefined{specialization}(\iselthesis@opt@coverlang){%
+    , na Área de Especialização de \thespecialization(\iselthesis@opt@coverlang)%
+  }{}%
+}
+% --------------------------------------------------------
+%% Acknowledgment
+% --------------------------------------------------------
+
+\copyrighttextstring(pt)={O \theschool(en) e o \theuniversity(en) têm o direito, perpétuo e sem limites geográficos, de arquivar e publicar esta dissertação através de exemplares impressos reproduzidos em papel ou de forma digital, ou por qualquer outro meio conhecido ou que venha a ser inventado, e de a divulgar através de repositórios científicos e de admitir a sua cópia e distribuição com objetivos educacionais ou de investigação, não comerciais, desde que seja dado crédito ao autor e editor.}
+
+
+\acknowledgmentsstring(pt)={Este documento foi gerado utilizando o processador (pdf)\LaTeX, com base no template ``iselthesis'' \cite{iselthesis} desenvolvido no DEI do ISEL-UPL}

@@ -1,0 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Font-Styles/heuristica.ldf
+%% ISEL thesis configuration file
+%%
+%% Customization of fonts to use Heuristica fontset
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{textcomp}
+\RequirePackage[osf,scaled=.95]{heuristica} % osf for text, not math
+\RequirePackage{cabin} % sans serif
+\RequirePackage[varqu,varl]{inconsolata} % sans serif typewriter
+\RequirePackage[utopia,bigdelims,vvarbb]{newtxmath} % bb from STIX
+\RequirePackage[cal=boondoxo]{mathalfa} % mathcal
