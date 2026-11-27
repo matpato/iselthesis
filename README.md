@@ -232,22 +232,24 @@ October 2026
 
 *This package and template are not official for ISEL/UPL.*
 
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+
 ## How to Cite
 
 If you use this template, please cite it as:
 
-> Matilde Pato and N. Datia, *ISELthesis: LaTeX template for bachelor's and master's theses at ISEL*, version 4.3.2, 2026. Available: https://github.com/matpato/iselthesis
-
-BibTeX:
+> Pato, Matilde & Datia, Nuno (2026). *ISELthesis: An unofficial LaTeX template for ISEL theses and reports* (Version 4.3.3) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.XXXXXXX
 
 ```bibtex
-@misc{iselthesis,
-  author       = {Pato, Matilde and Datia, Nuno},
-  title        = {{ISELthesis}: \LaTeX\ template for bachelor's and master's theses at {ISEL}},
-  year         = {2026},
-  version      = {4.3.2},
-  howpublished = {\url{https://github.com/matpato/iselthesis}},
-  note         = {Accessed: <date>}
+@software{pato_datia_iselthesis_2026,
+  author    = {Pato, Matilde and Datia, Nuno},
+  title     = {{ISELthesis}: An unofficial {LaTeX} template for {ISEL} theses and reports},
+  year      = {2026},
+  version   = {4.3.3},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.XXXXXXX},
+  url       = {https://doi.org/10.5281/zenodo.XXXXXXX}
 }
 ```
 

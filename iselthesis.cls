@@ -19,6 +19,8 @@
 %%% Version v4.0: June 2024
 %%% Version v4.0.1: June 2025
 %%% Version v4.1: October 2025
+%%% (...)
+%%% Version v4.3.3: November 2026
 %%% 
 %%% This template is vaguely  adapted on a template from the
 %%%     Universidade Nova de Lisboa (NOT OFFICIAL)
@@ -46,7 +48,7 @@
 %%% WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
 %============================================================
 
-\ProvidesClass{iselthesis}[2024-05-30 iselthesis template]
+\ProvidesClass{iselthesis}[2026/11/27 v4.3.3 ISEL thesis template (unofficial)]
 \NeedsTeXFormat{LaTeX2e}[2020-02-02]
 
 % --------------------------------------------------------
