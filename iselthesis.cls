@@ -48,8 +48,12 @@
 %%% WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
 %============================================================
 
-\ProvidesClass{iselthesis}[2026/11/27 v4.3.3 ISEL thesis template (unofficial)]
 \NeedsTeXFormat{LaTeX2e}[2020-02-02]
+\input{ISELthesis-files/version.sty}
+\edef\iselthesis@provides{%
+  \noexpand\ProvidesClass{iselthesis}%
+    [\iselthesisdate\space v\iselthesisversion\space ISEL thesis template (unofficial)]}
+\iselthesis@provides
 
 % --------------------------------------------------------
 % PDF version for PDF/A (pdfx): must be set before any PDF object is written

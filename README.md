@@ -228,7 +228,7 @@ The Makefile provides shortcuts on Linux/macOS:
 * Matilde Pós-de-Mina Pato
 * Nuno Datia (contributor)
 
-October 2026
+November 2026
 
 *This package and template are not official for ISEL/UPL.*
 
