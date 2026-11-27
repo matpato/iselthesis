@@ -1,0 +1,12 @@
+{
+  "title": "ISELthesis: An unofficial LaTeX template for ISEL theses and reports",
+  "upload_type": "software",
+  "version": "4.3.3",
+  "license": "MIT",
+  "creators": [
+    {"name": "Pato, Matilde", "affiliation": "Instituto Superior de Engenharia de Lisboa", "orcid": "0000-0001-8976-7651"},
+    {"name": "Datia, Nuno", "affiliation": "Instituto Superior de Engenharia de Lisboa", "orcid": "0000-0003-1600-0227"}
+  ],
+  "keywords": ["LaTeX", "thesis template", "dissertation", "document class", "ISEL", "Instituto Politécnico de Lisboa"],
+  "description": "Unofficial LaTeX document class and template for BSc reports and MSc dissertations at ISEL, following ISEL's typesetting guidelines."
+}
