@@ -231,9 +231,9 @@ The Makefile provides shortcuts on Linux/macOS:
 November 2026
 
 *This package and template are not official for ISEL/UPL.*
+10.5281/zenodo.24600683
 
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24600683.svg)](https://doi.org/10.5281/zenodo.24600683)
 
 ## How to Cite
 
@@ -248,8 +248,8 @@ If you use this template, please cite it as:
   year      = {2026},
   version   = {4.3.3},
   publisher = {Zenodo},
-  doi       = {10.5281/zenodo.XXXXXXX},
-  url       = {https://doi.org/10.5281/zenodo.XXXXXXX}
+  doi       = {10.5281/zenodo.24600683},
+  url       = {https://doi.org/10.5281/zenodo.24600683}
 }
 ```
 
